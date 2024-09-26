@@ -1,0 +1,8 @@
+.idea/**
+.vscode/**
+*.DS_Store
+node_modules/
+build/
+dist/
+coverage/
+./packages/bi/src/sensors.ts

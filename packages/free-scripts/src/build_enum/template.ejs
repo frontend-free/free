@@ -1,0 +1,42 @@
+import React from 'react';
+import { Tag } from 'antd';
+
+<%Object.keys(enums).forEach(function(enumName){%>
+// --- <%= enumName %>
+
+export enum Enum<%= enumName %> {
+  <% Object.keys(enums[enumName]).forEach(function(enumItemName){ %><%= enumItemName%> = '<%= enumItemName%>',
+  <% }); %>
+}
+
+export const valueEnum<%= enumName %> = {
+  <% Object.keys(enums[enumName]).forEach(function(enumItemName){ %>
+  [Enum<%= enumName %>.<%= enumItemName %>]: {
+    text: '<%=enums[enumName][enumItemName].text%>',<% if(enums[enumName][enumItemName].status) {%>
+    status:  '<%= enums[enumName][enumItemName].status %>',<%}%><% if(enums[enumName][enumItemName].color) {%>
+    color:  '<%= enums[enumName][enumItemName].color %>'
+    <%}%>
+  },
+  <% }); %>
+}
+
+export const list<%= enumName %> = Object.keys(valueEnum<%= enumName %>).map((key) => {
+  const item = valueEnum<%= enumName %>[key];
+
+  return {
+    value: key,
+    label: item.text,
+  };
+});
+
+export function Tag<%= enumName %>(props: { value?: Enum<%= enumName %> | string }) {
+  const item = props.value && valueEnum<%= enumName %>[props.value]
+
+  if(item){
+    return <Tag color={item.color}>{item.text}</Tag>;
+  }
+
+  return null;
+}
+
+<% }); %>

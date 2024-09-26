@@ -1,0 +1,19 @@
+{
+  "name": "@fe-free/commit-lint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@commitlint/config-conventional": "^17.8.0"
+  },
+  "peerDependencies": {
+    "@commitlint/cli": "^17.8.0"
+  }
+}

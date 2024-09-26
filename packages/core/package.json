@@ -1,0 +1,42 @@
+{
+  "name": "@fe-free/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/plots": "^2.2.5",
+    "@codemirror/language": "^6.10.3",
+    "@codemirror/view": "^6.33.0",
+    "@fe-free/tool": "workspace:*",
+    "@lezer/highlight": "^1.2.1",
+    "@uiw/codemirror-themes": "^4.23.2",
+    "@uiw/react-codemirror": "^4.23.2",
+    "ace-builds": "^1.33.1",
+    "ahooks": "^3.7.8",
+    "axios": "^1.6.5",
+    "classnames": "^2.5.1",
+    "dayjs": "~1.11.10",
+    "lodash-es": "^4.17.21",
+    "react-ace": "^11.0.1",
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.16.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "vanilla-jsoneditor": "^0.23.1",
+    "zustand": "^4.5.4"
+  },
+  "peerDependencies": {
+    "@ant-design/pro-components": "^2.7.15",
+    "antd": "^5.20.0",
+    "react": "^18.2.0"
+  }
+}

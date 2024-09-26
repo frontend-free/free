@@ -1,0 +1,11 @@
+.idea/
+/dist/
+node_modules/
+*.log
+.DS_Store
+packages/**/coverage
+packages/**/dist
+.dumi/tmp
+.dumi/tmp-test
+.dumi/tmp-production
+docs-dist

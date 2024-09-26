@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [[
+    "@fe-free/core",
+    "@fe-free/tool"
+  ], [
+    "@fe-free/commit-lint",
+    "@fe-free/eslint-config-base",
+    "@fe-free/style-lint"
+  ]],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch"
+}

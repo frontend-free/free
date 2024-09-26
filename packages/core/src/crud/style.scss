@@ -1,0 +1,10 @@
+.crud-detail {
+  // 查看情况下隐藏 FormItem 的 extra
+  &.crud-detail-hide-extra {
+    .ant-form-item {
+      .ant-form-item-extra {
+        display: none;
+      }
+    }
+  }
+}
