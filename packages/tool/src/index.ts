@@ -1,1 +1,1 @@
-export { pinyin, pinyinFilter, pinyinMatch } from './pinyin';
+export { pinyin, pinyinFilter, pinyinMatch, pinyinMatchWithoutFirstLetter } from './pinyin';

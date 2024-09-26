@@ -8,7 +8,8 @@
   ], [
     "@fe-free/commit-lint",
     "@fe-free/eslint-config-base",
-    "@fe-free/style-lint"
+    "@fe-free/style-lint",
+    "@fe-free/free-scripts"
   ]],
   "linked": [],
   "access": "public",

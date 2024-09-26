@@ -34,4 +34,17 @@ function pinyinMatch(value: string, filterText: string) {
   );
 }
 
-export { pinyinFilter, pinyinMatch };
+function pinyinMatchWithoutFirstLetter(value: string, filterText: string) {
+  let w = value;
+  // 兼容
+  if (!isString(w)) {
+    w = '';
+  }
+  w = w.toLowerCase();
+  // 全拼集合
+  const normal = map(pinyin(w), (value) => value[0]).join('');
+
+  return w.indexOf(filterText) > -1 || normal.indexOf(filterText) > -1;
+}
+
+export { pinyinFilter, pinyinMatch, pinyinMatchWithoutFirstLetter };
