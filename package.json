@@ -19,6 +19,7 @@
     "changeset": "changeset",
     "release": "changeset version; git add .; git commit -m 'chore: changeset Version Packages';",
     "release:publish": "git push origin main:main; changeset publish;",
+    "sync": "node ./scripts/sync.js",
     "ci:docs": "dumi build",
     "yalc_publish": "node ./scripts/yalc_publish.js",
     "clean": "rm -rf pnpm-lock.yaml node_modules **/*/node_modules .dumi/tmp",
