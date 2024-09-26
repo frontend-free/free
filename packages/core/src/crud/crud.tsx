@@ -34,6 +34,8 @@ interface CRUDProps {
   readProps?: {
     /** 文本 */
     operateText?: string;
+    /** 打开方式, action 为 read_detail 有效 */
+    target?: '_blank';
   };
 
   /** 删除接口 */
@@ -172,7 +174,10 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
               />
             )}
             {actions.includes('read_detail') && (
-              <Link to={`${location.pathname}/detail/${record[detailIdIndex || 'id']}`}>
+              <Link
+                to={`${location.pathname}/detail/${record[detailIdIndex || 'id']}`}
+                target={readProps?.target}
+              >
                 {readProps?.operateText || '查看'}
               </Link>
             )}

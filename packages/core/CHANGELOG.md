@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.0.3
+
+### Patch Changes
+
+- feat: 优化 crud
+  - @fe-free/tool@1.0.3
+
 ## 1.0.2
 
 ### Patch Changes
