@@ -1,30 +1,31 @@
 import React from 'react';
 import { Tag } from 'antd';
 
-<%Object.keys(enums).forEach(function(enumName){%>
+<% Object.keys(enums).forEach(function(enumName){
+  const enumItem = enums[enumName]; %>
 // --- <%= enumName %>
 
 export enum Enum<%= enumName %> {
-  <% Object.keys(enums[enumName]).forEach(function(enumItemName){ %><%= enumItemName%> = '<%= enumItemName%>',
+  <% Object.keys(enumItem).forEach(function(key){ 
+%>  <%= key %> = <% if(enumItem[key].value !== undefined){ %><%= enumItem[key].value %><% } else { %>'<%= key %>'<% } %>,
   <% }); %>
 }
 
 export const valueEnum<%= enumName %> = {
-  <% Object.keys(enums[enumName]).forEach(function(enumItemName){ %>
-  [Enum<%= enumName %>.<%= enumItemName %>]: {
-    text: '<%=enums[enumName][enumItemName].text%>',<% if(enums[enumName][enumItemName].status) {%>
-    status:  '<%= enums[enumName][enumItemName].status %>',<%}%><% if(enums[enumName][enumItemName].color) {%>
-    color:  '<%= enums[enumName][enumItemName].color %>'
+  <% Object.keys(enumItem).forEach(function(key){ %>
+  [Enum<%= enumName %>.<%= key %>]: {
+    text: '<%=enumItem[key].text%>',<% if(enumItem[key].status) {%>
+    status:  '<%= enumItem[key].status %>',<%}%><% if(enumItem[key].color) {%>
+    color:  '<%= enumItem[key].color %>'
     <%}%>
-  },
-  <% }); %>
+  },<% }); %>
 }
 
 export const list<%= enumName %> = Object.keys(valueEnum<%= enumName %>).map((key) => {
   const item = valueEnum<%= enumName %>[key];
 
   return {
-    value: key,
+    value: item.value !== undefined ? item.value : key,
     label: item.text,
   };
 });
