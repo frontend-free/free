@@ -9,6 +9,8 @@ toc: content
 
 ## customValueTypeMap
 
+配置 customValueTypeMap
+
 ```tsx | pure
 import { customValueTypeMap } from '@fe-free/core';
 import { ProConfigProvider } from '@ant-design/pro-components';
@@ -23,6 +25,8 @@ export default Demo;
 ```
 
 ## CustomValueTypeEnum
+
+使用
 
 ```tsx | pure
 enum CustomValueTypeEnum {
@@ -48,6 +52,7 @@ async function fakeRequest() {
     timeNumber: +dayjs('2024-10-01 10:00:00'),
     dateStr: `2024-10-01`,
     dateNumber: +dayjs('2024-10-01'),
+    seconds: Math.abs(+dayjs('2024-10-01') / 1000),
     jsonText: JSON.stringify({ name: 'hello world hello world hello world' }),
   }));
 
@@ -85,6 +90,12 @@ const Table = () => {
     {
       title: '日期 number',
       dataIndex: 'dateNumber',
+      valueType: CustomValueTypeEnum.CustomDateAndDateRange,
+      search: true,
+    },
+    {
+      title: '秒数',
+      dataIndex: 'seconds',
       valueType: CustomValueTypeEnum.CustomDateAndDateRange,
       search: true,
     },

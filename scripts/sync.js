@@ -5,5 +5,5 @@ const sh = require('shelljs');
 fse.readdirSync('./packages').forEach((dir) => {
   const p = path.resolve('./packages', dir);
   const pkg = require(path.resolve(p, 'package.json'));
-  sh.exec(`cd ${p}; npx cnpm sync ${pkg.name}`);
+  sh.exec(`cd ${p}; cnpm sync ${pkg.name}`);
 });

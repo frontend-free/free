@@ -1,5 +1,16 @@
 # @fe-free/core
 
+## 1.1.0
+
+### Minor Changes
+
+- feat: 优化 date
+
+### Patch Changes
+
+- Updated dependencies
+  - @fe-free/tool@1.1.0
+
 ## 1.0.3
 
 ### Patch Changes

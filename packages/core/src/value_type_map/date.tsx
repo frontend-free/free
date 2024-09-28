@@ -1,15 +1,7 @@
 import React from 'react';
 import { ProFormDateRangePicker } from '@ant-design/pro-components';
 import dayjs from 'dayjs';
-import { isString } from 'lodash-es';
-
-function getDayjs(text: string | number) {
-  if (isString(text) && /^\d+$/.test(text as string)) {
-    return dayjs(parseInt(text as string));
-  }
-  // 其他都可以 dayjs
-  return dayjs(text);
-}
+import { getDayjs } from '@fe-free/tool';
 
 const renderMap = {
   dateTime: (text) => {
