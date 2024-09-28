@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.1.1
+
+### Patch Changes
+
+- fix: 调整 crud props
+  - @fe-free/tool@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes

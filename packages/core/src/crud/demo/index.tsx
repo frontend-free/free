@@ -45,7 +45,7 @@ const Normal = () => {
         columns,
         request: fakeRequest,
       }}
-      deleteByRecord={fakeDeleteByRecord}
+      requestDeleteByRecord={fakeDeleteByRecord}
       deleteProps={{
         nameIndex: 'name',
       }}
@@ -309,7 +309,7 @@ const CustomText = () => {
       readProps={{
         operateText: '查看啦',
       }}
-      deleteByRecord={fakeDeleteByRecord}
+      requestDeleteByRecord={fakeDeleteByRecord}
       deleteProps={{
         nameIndex: 'name',
         operateText: '删除啦',

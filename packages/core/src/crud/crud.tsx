@@ -39,7 +39,7 @@ interface CRUDProps {
   };
 
   /** 删除接口 */
-  deleteByRecord?: (record) => Promise<any>;
+  requestDeleteByRecord?: (record) => Promise<any>;
   /** 删除相关 */
   deleteProps?: {
     /** 显示名称索引 */
@@ -89,7 +89,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     createButton,
     operateColumnProps,
     readProps,
-    deleteByRecord,
+    requestDeleteByRecord,
     deleteProps,
     detailIdIndex,
     detailForm,
@@ -138,16 +138,16 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
   const getHandleDelete = useCallback(
     (record) => {
       return () => {
-        if (deleteByRecord) {
-          return deleteByRecord(record).then(() => {
+        if (requestDeleteByRecord) {
+          return requestDeleteByRecord(record).then(() => {
             actionRef.current?.reload();
           });
         }
 
-        throw new Error('没有传 deleteByRecord');
+        throw new Error('没有传 requestDeleteByRecord');
       };
     },
-    [deleteByRecord]
+    [requestDeleteByRecord]
   );
 
   const handleReload = useCallback(() => {
@@ -218,17 +218,18 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
 
     return tableProps.columns as TableProps['columns'];
   }, [
-    actions,
-    readProps?.operateText,
-    deleteProps,
-    detailIdIndex,
-    detailProps,
-    getHandleDelete,
-    handleReload,
-    tableProps.columns,
-    location.pathname,
     operateColumnProps,
+    actions,
+    tableProps.columns,
+    handleReload,
+    readProps?.operateText,
+    readProps?.target,
+    detailProps,
+    location.pathname,
+    detailIdIndex,
     updateProps?.operateText,
+    deleteProps,
+    getHandleDelete,
   ]);
 
   const toolBarRender = useCallback(

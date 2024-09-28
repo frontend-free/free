@@ -95,26 +95,25 @@ type CrudAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
 interface CRUDProps {
   actions: CrudAction[];
 
-  /** 表格相关 */
-  tableProps: TableProps;
-
   /** 新建按钮，默认新建 */
   createButton?: ReactNode;
 
+  /** 表格相关 */
+  tableProps: TableProps;
   operateColumnProps?: {
     width?: number;
     /** 扩展操作区域 */
     moreOperator?: (record) => ReactNode;
   };
-
   readProps?: {
     /** 文本 */
     operateText?: string;
+    /** 打开方式, action 为 read_detail 有效 */
+    target?: '_blank';
   };
 
   /** 删除接口 */
-  deleteById?: ({ id, ids }) => Promise<any>;
-  deleteByRecord?: (record) => Promise<any>;
+  requestDeleteByRecord?: (record) => Promise<any>;
   /** 删除相关 */
   deleteProps?: {
     /** 显示名称索引 */
@@ -131,9 +130,8 @@ interface CRUDProps {
   detailFormInstance?: ProFormInstance;
 
   /** 新增接口 */
-  requestAdd?: (values) => Promise<any>;
-
-  addProps?: {
+  requestCreate?: (values) => Promise<any>;
+  createProps?: {
     /** 成功文案 */
     successText?: string | (() => string);
   };
@@ -148,12 +146,9 @@ interface CRUDProps {
   };
 
   /** 获取详情接口 */
-  requestGetById?: ({ id }) => Promise<any>;
-
-  /** 获取详情接口，非 id 的时候 */
   requestGetByRecord?: (record) => Promise<any>;
 
-  /** 跳转到详情的 id 所以，默认 id */
+  /** 跳转到详情的索引 ，默认 id */
   detailIdIndex?: string;
 }
 
