@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.1.2
+
+### Patch Changes
+
+- fix: curd 调整
+  - @fe-free/tool@1.1.2
+
 ## 1.1.1
 
 ### Patch Changes

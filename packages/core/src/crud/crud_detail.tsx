@@ -123,12 +123,9 @@ function CRUDDetail(props: CRUDDetailProps) {
       if (id) {
         setLoading(true);
 
-        let res;
-        if (requestGetByRecord) {
-          res = await requestGetByRecord(record);
-        }
+        const d = await requestGetByRecord?.(record);
 
-        form?.setFieldsValue(res.data.data);
+        form?.setFieldsValue(d);
 
         setLoading(false);
       }

@@ -82,11 +82,7 @@ async function fakeGetByRecord(record) {
 
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({
-        data: {
-          data: fakeData.find((item) => item.id === record.id),
-        },
-      });
+      resolve(fakeData.find((item) => item.id === record.id));
     }, 1000);
   });
 }
