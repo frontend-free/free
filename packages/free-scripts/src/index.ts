@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 import { buildApi } from './build_api';
-import { buildEnum } from './build_enum';
+import { buildCode } from './build_code';
 import packageJSON from '../package.json';
 
 const program = new Command();
@@ -17,10 +17,10 @@ program
   .action(buildApi);
 
 program
-  .command('build_enum')
-  .description('根据枚举生成代码')
-  .option('-i, --input <input>', 'enum 配置文件')
-  .option('-o, --output <output>', '输出 /enum 的目录')
-  .action(buildEnum);
+  .command('build_code')
+  .description('生成代码')
+  .option('-i, --input <input>', 'code_config 配置文件，提供 export { enums } ')
+  .option('-o, --output <output>', '输出 enums.tsx 的目录')
+  .action(buildCode);
 
 program.parse(process.argv);

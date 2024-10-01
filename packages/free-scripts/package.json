@@ -1,13 +1,13 @@
 {
   "name": "@fe-free/free-scripts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "bin": {
     "free-scripts": "dist/index.js"
   },
   "scripts": {
-    "build": "rm -rf ./dist; tsc; cp ./src/build_enum/template.ejs ./dist/build_enum",
+    "build": "rm -rf ./dist; tsc; cp ./src/build_code/template.ejs ./dist/build_code",
     "prepublishOnly": "npm run build"
   },
   "keywords": [],

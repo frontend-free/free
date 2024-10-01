@@ -16,11 +16,11 @@ program
   .action(buildApi);
 
 program
-  .command('build_enum')
-  .description('根据枚举生成代码')
-  .option('-i, --input <input>', 'enum 配置文件')
-  .option('-o, --output <output>', '输出 /enum 的目录')
-  .action(buildEnum);
+  .command('build_code')
+  .description('生成代码')
+  .option('-i, --input <input>', 'code_config 配置文件，提供 export { enums } ')
+  .option('-o, --output <output>', '输出 enums.tsx 的目录')
+  .action(buildCode);
 ```
 
 ## free-scripts build_api
@@ -52,7 +52,7 @@ import { iotBaseApi } from '@lib/api';
 iotBaseApi.thing.thingModelMainPageByParam({});
 ```
 
-## free-scripts build_enum
+## free-scripts build_code
 
 后端接口会有枚举，提现在代码上是联合类型。
 
