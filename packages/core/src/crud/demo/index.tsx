@@ -62,7 +62,7 @@ const Normal = () => {
         </>
       )}
       requestGetByRecord={fakeGetByRecord}
-      requestCreate={fakeCreate}
+      requestCreateByValues={fakeCreate}
       requestUpdateById={fakeUpdateById}
     />
   );
@@ -142,7 +142,7 @@ function Ref() {
         </>
       )}
       requestGetByRecord={fakeGetByRecord}
-      requestCreate={fakeCreate}
+      requestCreateByValues={fakeCreate}
       requestUpdateById={fakeUpdateById}
     />
   );
@@ -326,7 +326,7 @@ const CustomText = () => {
         </>
       )}
       requestGetByRecord={fakeGetByRecord}
-      requestCreate={fakeCreate}
+      requestCreateByValues={fakeCreate}
       createProps={{
         successText: '新建成功啦',
       }}

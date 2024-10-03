@@ -56,7 +56,7 @@ interface CRUDProps {
   detailFormInstance?: ProFormInstance;
 
   /** 新增接口 */
-  requestCreate?: (values) => Promise<any>;
+  requestCreateByValues?: (values) => Promise<any>;
   createProps?: {
     /** 成功文案 */
     successText?: string | (() => string);
@@ -95,7 +95,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     detailForm,
     requestGetByRecord,
     createProps,
-    requestCreate,
+    requestCreateByValues,
     updateProps,
     requestUpdateById,
     detailFormInstance,
@@ -118,7 +118,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     () => ({
       detailForm,
       requestGetByRecord,
-      requestCreate,
+      requestCreateByValues,
       requestUpdateById,
       detailFormInstance,
       createProps,
@@ -127,7 +127,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     [
       detailForm,
       requestGetByRecord,
-      requestCreate,
+      requestCreateByValues,
       requestUpdateById,
       detailFormInstance,
       createProps,

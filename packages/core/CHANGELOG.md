@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.1.4
+
+### Patch Changes
+
+- feat: requestCreate 调整成 requestCreateByValues
+  - @fe-free/tool@1.1.4
+
 ## 1.1.3
 
 ### Patch Changes

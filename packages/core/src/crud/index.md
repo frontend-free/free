@@ -130,7 +130,7 @@ interface CRUDProps {
   detailFormInstance?: ProFormInstance;
 
   /** 新增接口 */
-  requestCreate?: (values) => Promise<any>;
+  requestCreateByValues?: (values) => Promise<any>;
   createProps?: {
     /** 成功文案 */
     successText?: string | (() => string);

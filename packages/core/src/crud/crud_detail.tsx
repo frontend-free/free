@@ -20,7 +20,7 @@ interface CRUDDetailProps
     CRUDProps,
     | 'requestGetByRecord'
     | 'createProps'
-    | 'requestCreate'
+    | 'requestCreateByValues'
     | 'updateProps'
     | 'requestUpdateById'
     | 'detailForm'
@@ -44,7 +44,7 @@ function CRUDDetail(props: CRUDDetailProps) {
     detailForm,
     requestGetByRecord,
     createProps,
-    requestCreate,
+    requestCreateByValues,
     updateProps,
     requestUpdateById,
     detailFormInstance,
@@ -57,8 +57,8 @@ function CRUDDetail(props: CRUDDetailProps) {
     async (values) => {
       try {
         let result;
-        if (action === 'create' && requestCreate) {
-          result = await requestCreate(values);
+        if (action === 'create' && requestCreateByValues) {
+          result = await requestCreateByValues(values);
 
           let content = '新建成功';
           if (createProps?.successText) {
@@ -106,7 +106,7 @@ function CRUDDetail(props: CRUDDetailProps) {
         }, 10);
       }
     },
-    [action, requestCreate, requestUpdateById, onSuccess, createProps, id, updateProps]
+    [action, requestCreateByValues, requestUpdateById, onSuccess, createProps, id, updateProps]
   );
 
   const handleOpenChange = useCallback(
