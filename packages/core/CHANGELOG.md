@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.1.6
+
+### Patch Changes
+
+- fix: curd operate show logic
+  - @fe-free/tool@1.1.6
+
 ## 1.1.5
 
 ### Patch Changes

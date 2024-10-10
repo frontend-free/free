@@ -208,7 +208,8 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
       actions.includes('read') ||
       actions.includes('read_detail') ||
       actions.includes('update') ||
-      actions.includes('delete')
+      actions.includes('delete') ||
+      operateColumnProps?.moreOperator
     ) {
       return [
         ...(tableProps.columns || tableProps.columns || []),
