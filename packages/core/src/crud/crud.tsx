@@ -28,8 +28,10 @@ interface CRUDProps {
   tableProps: TableProps;
   operateColumnProps?: {
     width?: number;
-    /** 扩展操作区域 */
+    /** 扩展操作区域，再其他操作之前 */
     moreOperator?: (record) => ReactNode;
+    /** 扩展操作区域，在其他操作之后 */
+    moreOperatorAfter?: (record) => ReactNode;
   };
   readProps?: {
     /** 文本 */
@@ -199,6 +201,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
                 onDelete={getHandleDelete(record)}
               />
             )}
+            {operateColumnProps?.moreOperatorAfter && operateColumnProps.moreOperatorAfter(record)}
           </Space>
         );
       },
@@ -209,7 +212,8 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
       actions.includes('read_detail') ||
       actions.includes('update') ||
       actions.includes('delete') ||
-      operateColumnProps?.moreOperator
+      operateColumnProps?.moreOperator ||
+      operateColumnProps?.moreOperatorAfter
     ) {
       return [
         ...(tableProps.columns || tableProps.columns || []),
