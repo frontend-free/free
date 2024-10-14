@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.1.8
+
+### Patch Changes
+
+- feat: export CRUDDetail
+  - @fe-free/tool@1.1.8
+
 ## 1.1.7
 
 ### Patch Changes

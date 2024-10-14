@@ -1,5 +1,5 @@
-export { CRUD, useDelete, OperateDelete } from './crud';
-export type { CRUDProps, CRUDMethods } from './crud';
+export { CRUD, useDelete, OperateDelete, CRUDDetail } from './crud';
+export type { CRUDProps, CRUDMethods, CRUDDetailProps } from './crud';
 
 export { ProFormJSON, ProFormJavascript, proFormSelectSearchProps } from './form';
 

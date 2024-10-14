@@ -188,3 +188,4 @@ function CRUDDetail(props: CRUDDetailProps) {
 }
 
 export { CRUDDetail };
+export type { CRUDDetailProps };
