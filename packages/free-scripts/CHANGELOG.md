@@ -1,5 +1,7 @@
 # @fe-free/free-scripts
 
+## 1.1.0
+
 ## 1.0.3
 
 ### Patch Changes
