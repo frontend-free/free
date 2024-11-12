@@ -4,6 +4,7 @@
   "commit": false,
   "fixed": [[
     "@fe-free/core",
+    "@fe-free/mini",
     "@fe-free/tool"
   ], [
     "@fe-free/commit-lint",
