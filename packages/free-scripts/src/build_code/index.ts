@@ -5,6 +5,7 @@ import path from 'path';
 interface Options {
   input?: string;
   output?: string;
+  template?: string;
 }
 
 function buildCode(options: Options) {
@@ -22,7 +23,9 @@ function buildCode(options: Options) {
 
   const { enums } = require(path.resolve(options.input));
 
-  const temp = fs.readFileSync(path.resolve(__dirname, './template.ejs')).toString();
+  const temp = fs
+    .readFileSync(path.resolve(__dirname, `./template/${options.template || 'pure'}.ejs`))
+    .toString();
   const result = ejs.render(temp, { enums });
 
   fs.writeFileSync(path.resolve(outputDir, './enums.tsx'), result);

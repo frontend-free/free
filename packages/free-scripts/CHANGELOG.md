@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.2.0
+
+### Minor Changes
+
+- feat: free-scripts 增加模板选择
+
 ## 1.1.0
 
 ## 1.0.3
