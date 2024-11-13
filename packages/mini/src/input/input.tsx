@@ -1,6 +1,6 @@
 import { AtInput } from 'taro-ui';
 import classNames from 'classnames';
-import './index.css';
+import './index.scss';
 import type { AtInputProps } from 'taro-ui/types/input';
 import type { CSSProperties } from 'react';
 import { memo } from 'react';

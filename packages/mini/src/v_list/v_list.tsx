@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import { FixedSizeList } from 'react-window';
 import { useSize } from 'ahooks';
-import { Text } from '..';
+import { Text } from '../text';
 import { AtIcon } from 'taro-ui';
 
 type Value = string | number;

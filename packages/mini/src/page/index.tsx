@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 import { AtNavBar } from 'taro-ui';
 import Taro from '@tarojs/taro';
 import { AtActivityIndicator } from 'taro-ui';
-import { Text } from '..';
+import { Text } from '../text';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { useCallback } from 'react';

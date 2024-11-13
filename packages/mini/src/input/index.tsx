@@ -1,4 +1,4 @@
-import { InputCaptcha, type InputCaptchaProps } from './input_captcha';
-import { Input, type InputProps } from './input';
-
-export { Input, InputCaptcha, type InputProps, type InputCaptchaProps };
+export * from './input';
+export type * from './input';
+export * from './input_captcha';
+export type * from './input_captcha';

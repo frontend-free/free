@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components';
-import { VList } from './index';
+import { VList } from './v_list';
 import type { VListProps } from './v_list';
 import type { VListDataItem } from './v_list';
 import { Input } from '../input';
@@ -35,7 +35,7 @@ const VListSelect = <V extends string | number, D extends VListDataItem<D> = any
     onClick?.(clickValue, item);
 
     if (multiple) {
-      const newValue = xor(value, [clickValue]);
+      const newValue = xor(value as V[], [clickValue]) as V[];
       onChange?.(newValue, item);
     } else {
       onChange?.(clickValue as V, item);
@@ -86,7 +86,7 @@ const VListSelect = <V extends string | number, D extends VListDataItem<D> = any
         <VList
           {...rest}
           data={filteredData}
-          onClick={handleClick}
+          onClick={handleClick as any}
           renderLabel={handleRenderLabel}
         />
       </View>

@@ -1,6 +1,6 @@
 import { AtModal, AtModalAction, AtModalContent, AtModalHeader } from 'taro-ui';
 import type { AtModalProps } from 'taro-ui/types/modal';
-import { ComponentRoot } from '..';
+import { ComponentRoot } from '../component_root';
 import type { ReactNode } from 'react';
 import { Button } from '@tarojs/components';
 import { View } from '@tarojs/components';
