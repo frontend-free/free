@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.2.2
+
+### Patch Changes
+
+- fix: 修复 VList
+
 ## 1.2.1
 
 ### Patch Changes

@@ -1,11 +1,12 @@
+import React, { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import { useRef, useMemo, useCallback, memo } from 'react';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
-import { FixedSizeList } from 'react-window';
 import { useSize } from 'ahooks';
 import { Text } from '../text';
 import { AtIcon } from 'taro-ui';
+import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list/react';
 
 type Value = string | number;
 
@@ -29,13 +30,13 @@ interface VListProps<D extends VListDataItem<D>> {
   itemSize?: number;
 }
 
-const RowItem = memo(({ item, renderLabel }: any) => {
-  return renderLabel({ item });
-});
+const ItemDataContext = createContext<any>({});
 
-const Row = memo(({ index, style, data }: any) => {
-  const { renderLabel, onClick } = data;
-  const item = data.data[index];
+const Row = memo(({ id, index }: any) => {
+  const itemData = useContext(ItemDataContext);
+
+  const { renderLabel, onClick, data } = itemData;
+  const item = data[index];
 
   const handleClick = useCallback(() => {
     onClick?.(item.value, item);
@@ -45,12 +46,11 @@ const Row = memo(({ index, style, data }: any) => {
 
   return (
     <View
-      key={item.value}
-      style={style}
-      className={classNames('flex flex-col justify-center overflow-hidden')}
+      id={id}
+      className={classNames('flex h-full flex-col justify-center overflow-hidden')}
       onClick={handleClick}
     >
-      <RowItem item={item} renderLabel={renderLabel} />
+      {renderLabel({ item })}
     </View>
   );
 });
@@ -71,8 +71,20 @@ function defaultRenderLabel<D extends VListDataItem<D>>({ item }: { item: D }) {
   );
 }
 
+const InnerElementTypeElementType = (props: any) => {
+  return (
+    <View
+      {...props}
+      style={{
+        ...props.style,
+        pointerEvents: 'auto',
+      }}
+    />
+  );
+};
+
 const VList = memo(<D extends VListDataItem<D> = any>(props: VListProps<D>) => {
-  const ref = useRef<FixedSizeList>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const size = useSize(ref);
 
@@ -89,17 +101,19 @@ const VList = memo(<D extends VListDataItem<D> = any>(props: VListProps<D>) => {
 
   return (
     <View ref={ref} className="z-10 h-full max-h-full">
-      {size && (
-        <FixedSizeList
-          height={size.height}
-          itemCount={props.data.length}
-          itemSize={props.itemSize || defaultItemSize}
-          itemData={itemData}
-          overscanCount={3}
-        >
-          {Row}
-        </FixedSizeList>
-      )}
+      <ItemDataContext.Provider value={itemData}>
+        {size && (
+          <VirtualList
+            height={size.height}
+            width="100%"
+            itemCount={props.data.length}
+            itemSize={props.itemSize || defaultItemSize}
+            itemData={props.data}
+            item={Row}
+            innerElementType={InnerElementTypeElementType}
+          />
+        )}
+      </ItemDataContext.Provider>
     </View>
   );
 });
