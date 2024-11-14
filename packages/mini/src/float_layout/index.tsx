@@ -48,14 +48,16 @@ const FloatLayoutClick = forwardRef<FloatLayoutClickRef, FloatLayoutClickProps>(
         >
           {children}
         </View>
-        <FloatLayout
-          {...layoutProps}
-          isOpened={isOpened}
-          onClose={(e) => {
-            setIsOpened(false);
-            layoutProps.onClose?.(e);
-          }}
-        />
+        {isOpened && (
+          <FloatLayout
+            {...layoutProps}
+            isOpened={isOpened}
+            onClose={(e) => {
+              setIsOpened(false);
+              layoutProps.onClose?.(e);
+            }}
+          />
+        )}
       </>
     );
   }

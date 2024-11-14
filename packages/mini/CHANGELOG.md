@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.2.3
+
+### Patch Changes
+
+- perf: 优化 FloatLayout
+
 ## 1.2.2
 
 ### Patch Changes
