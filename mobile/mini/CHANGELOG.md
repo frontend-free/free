@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.2.4
+
+### Patch Changes
+
+- feat: empty
+
 ## 1.2.3
 
 ### Patch Changes
