@@ -1,6 +1,6 @@
 import './fix_taro_ui.scss';
 
-export * from './method';
+export * from './mini';
 
 export * from './button';
 export type * from './button';

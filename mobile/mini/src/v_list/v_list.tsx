@@ -7,6 +7,7 @@ import { useSize } from 'ahooks';
 import { Text } from '../text';
 import { AtIcon } from 'taro-ui';
 import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list/react';
+import { Mini } from '../mini';
 
 type Value = string | number;
 
@@ -97,12 +98,18 @@ const VList = memo(<D extends VListDataItem<D> = any>(props: VListProps<D>) => {
   }, [props.data, props.renderLabel, props.onClick]);
 
   const hasDesc = props.data.find((item) => !!item.description);
-  const defaultItemSize = hasDesc ? 57 : 40;
+
+  const defaultItemSize = props.data.length
+    ? hasDesc
+      ? Mini.transformToPx(114)
+      : Mini.transformToPx(80)
+    : 0;
 
   return (
     <View ref={ref} className="z-10 h-full max-h-full">
       <ItemDataContext.Provider value={itemData}>
-        {size && (
+        {/* defaultItemSize 有值才渲染，否则 变动导致渲染错位 */}
+        {size && defaultItemSize && (
           <VirtualList
             height={size.height}
             width="100%"
