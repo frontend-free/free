@@ -1,3 +1,4 @@
+import './index.scss';
 import { View } from '@tarojs/components';
 import { AtNavBar } from 'taro-ui';
 import Taro from '@tarojs/taro';
@@ -56,7 +57,7 @@ const Page = (props: PageProps) => {
   }, []);
 
   return (
-    <View className={classNames('flex h-full flex-col', props.className)}>
+    <View className={classNames('mini-page flex h-full flex-col', props.className)}>
       <AtNavBar
         title={props.title}
         leftIconType={props.hideBack ? '' : 'chevron-left'}
@@ -65,6 +66,7 @@ const Page = (props: PageProps) => {
       {props.top && <View>{props.top}</View>}
       <View className="flex-1 overflow-y-auto">{content}</View>
       {props.bottom && <View>{props.bottom}</View>}
+      <View className="mini-page-safe-are" />
     </View>
   );
 };

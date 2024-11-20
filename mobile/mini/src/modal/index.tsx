@@ -5,13 +5,13 @@ import type { ReactNode } from 'react';
 import { Button } from '@tarojs/components';
 import { View } from '@tarojs/components';
 
-interface ModalProps extends Omit<AtModalProps, 'isOpened' | 'closeOnClickOverlay' | 'content'> {
+interface ModalProps extends Omit<AtModalProps, 'isOpened' | 'content'> {
   content?: string | ReactNode;
 }
 
 const Modal = (props: ModalProps) => {
   return (
-    <AtModal isOpened closeOnClickOverlay {...props} title={undefined} content={undefined}>
+    <AtModal isOpened closeOnClickOverlay={false} {...props} title={undefined} content={undefined}>
       {props.title && <AtModalHeader>{props.title}</AtModalHeader>}
       <AtModalContent>{props.content || props.children}</AtModalContent>
       <AtModalAction>

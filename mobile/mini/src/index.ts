@@ -1,4 +1,4 @@
-import './fix_taro_ui.scss';
+import './index.scss';
 
 export * from './mini';
 

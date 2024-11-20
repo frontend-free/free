@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.2.6
+
+### Patch Changes
+
+- feat: mini
+
 ## 1.2.5
 
 ### Patch Changes
