@@ -66,7 +66,7 @@ const Page = (props: PageProps) => {
       {props.top && <View>{props.top}</View>}
       <View className="flex-1 overflow-y-auto">{content}</View>
       {props.bottom && <View>{props.bottom}</View>}
-      <View className="mini-page-safe-are" />
+      <View className="mini-page-safe-area" />
     </View>
   );
 };
