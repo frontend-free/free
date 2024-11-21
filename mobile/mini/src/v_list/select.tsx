@@ -7,7 +7,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { useDebounce } from 'ahooks';
 import { Text } from '../text';
 import { AtButton, AtIcon } from 'taro-ui';
-import { xor } from 'lodash-es';
+import { isString, xor } from 'lodash-es';
 
 interface VListSelectProps<V extends string | number, D extends VListDataItem<D>>
   extends VListProps<D> {
@@ -19,16 +19,38 @@ interface VListSelectProps<V extends string | number, D extends VListDataItem<D>
   onOK?: () => void;
 }
 
+function defaultFilter<D>(search: string, item: VListDataItem<D>) {
+  if (!search) {
+    return true;
+  }
+
+  if (isString(item.label)) {
+    return item.label.includes(search);
+  }
+
+  return true;
+}
+
 const VListSelect = <V extends string | number, D extends VListDataItem<D> = any>(
   props: VListSelectProps<V, D>
 ) => {
-  const { multiple, value, onChange, search, filter, onOK, data, onClick, renderLabel, ...rest } =
-    props;
+  const {
+    multiple,
+    value,
+    onChange,
+    search,
+    filter = defaultFilter,
+    onOK,
+    data,
+    onClick,
+    renderLabel,
+    ...rest
+  } = props;
   const [searchText, setSearchText] = useState('');
   const debouncedSearchText = useDebounce(searchText, { wait: 500 });
 
   const filteredData = useMemo(() => {
-    return data.filter((item) => (filter ? filter(debouncedSearchText, item) : true));
+    return data.filter((item) => filter(debouncedSearchText, item));
   }, [data, filter, debouncedSearchText]);
 
   const handleClick = (clickValue: string | number, item: D) => {

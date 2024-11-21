@@ -109,7 +109,7 @@ const VList = memo(<D extends VListDataItem<D> = any>(props: VListProps<D>) => {
     <View ref={ref} className="z-10 h-full max-h-full">
       <ItemDataContext.Provider value={itemData}>
         {/* defaultItemSize 有值才渲染，否则 变动导致渲染错位 */}
-        {size && defaultItemSize && (
+        {!!size && !!defaultItemSize && (
           <VirtualList
             height={size.height}
             width="100%"
