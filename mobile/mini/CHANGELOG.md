@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.3.2
+
+### Patch Changes
+
+- feat: mini page
+
 ## 1.3.1
 
 ### Patch Changes

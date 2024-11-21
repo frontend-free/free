@@ -12,6 +12,7 @@ import { isString } from 'lodash-es';
 interface PageProps {
   title?: string;
   hideBack?: boolean;
+  hideSafeArea?: boolean;
   top?: React.ReactNode;
   bottom?: React.ReactNode;
   children?: React.ReactNode | ReactNode[];
@@ -66,7 +67,7 @@ const Page = (props: PageProps) => {
       {props.top && <View>{props.top}</View>}
       <View className="flex-1 overflow-y-auto">{content}</View>
       {props.bottom && <View>{props.bottom}</View>}
-      <View className="mini-page-safe-area" />
+      {!props.hideSafeArea && <View className="mini-page-safe-area" />}
     </View>
   );
 };
