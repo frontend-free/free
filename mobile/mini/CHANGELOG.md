@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.3.1
+
+### Patch Changes
+
+- feat: some
+
 ## 1.3.0
 
 ### Minor Changes
