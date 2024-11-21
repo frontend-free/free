@@ -2,7 +2,7 @@ import { memo, type ReactNode } from 'react';
 import { View } from '@tarojs/components';
 import { AtList, AtListItem } from 'taro-ui';
 import './index.scss';
-import type { AtListProps } from 'taro-ui/types/list';
+import type { AtListItemProps, AtListProps } from 'taro-ui/types/list';
 import classNames from 'classnames';
 import { Text } from '../text';
 import { isNumber } from 'lodash-es';
@@ -42,7 +42,21 @@ const List = (props) => {
   );
 };
 
-List.Item = AtListItem;
+interface ListItemProps extends Omit<AtListItemProps, 'title'> {
+  title?: string | ReactNode;
+  required?: boolean;
+}
+
+const ListItem = ({ required, title, ...rest }: ListItemProps) => {
+  return (
+    <AtListItem
+      {...rest}
+      title={required ? <View className="mini-required">{title}</View> : (title as any)}
+    />
+  );
+};
+
+List.Item = ListItem;
 List.Title = ListTitle;
 
 interface ListDescriptionProps extends Pick<ListProps, 'size' | 'title'> {
@@ -101,3 +115,4 @@ const ListDescription = (props: ListDescriptionProps) => {
 List.Description = ListDescription;
 
 export { List };
+export type { ListProps, ListItemProps };

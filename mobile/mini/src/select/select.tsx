@@ -1,6 +1,6 @@
-import { Picker } from '@tarojs/components';
+import { Picker, View } from '@tarojs/components';
 import { useMemo } from 'react';
-import { AtListItem } from 'taro-ui';
+import { List } from '../list';
 
 interface SelectItem {
   label: string;
@@ -13,10 +13,11 @@ interface SelectProps {
   onChange?: (value?: string | number, item?: SelectItem) => void;
   title?: string;
   placeholder?: string;
+  required?: boolean;
 }
 
 function Select(props: SelectProps) {
-  const { options, value, onChange, title, placeholder } = props;
+  const { options, value, onChange, title, placeholder, required } = props;
 
   const { valueMap, range } = useMemo(() => {
     const valueMap = {};
@@ -39,7 +40,8 @@ function Select(props: SelectProps) {
         onChange?.(item?.value, item);
       }}
     >
-      <AtListItem
+      <List.Item
+        required={required}
         title={title}
         extraText={(value ? valueMap[value]?.label : '') || placeholder || '请选择'}
       />
