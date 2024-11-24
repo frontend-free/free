@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: add picker
+
 ## 1.3.2
 
 ### Patch Changes
