@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.1
+
+### Patch Changes
+
+- fix: radio picker 的 options 应该是必须的
+
 ## 1.4.0
 
 ### Minor Changes

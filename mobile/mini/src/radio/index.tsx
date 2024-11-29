@@ -3,7 +3,7 @@ import { AtRadio } from 'taro-ui';
 import type { AtRadioProps } from 'taro-ui/types/radio';
 
 interface RadioProps<T> extends Omit<AtRadioProps<T>, 'value' | 'onClick' | 'options'> {
-  options?: {
+  options: {
     label: string | ReactNode;
     value: T;
     desc?: string;
@@ -17,7 +17,7 @@ const Radio = <T extends string | number>(props: RadioProps<T>) => {
   return (
     <AtRadio
       {...props}
-      options={props?.options as any}
+      options={props.options as any}
       value={props.value}
       onClick={(value) => props.onChange?.(value)}
     />

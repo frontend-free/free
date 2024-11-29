@@ -7,7 +7,7 @@ interface PickerItem {
 }
 
 interface PickerProps {
-  options?: PickerItem[];
+  options: PickerItem[];
   value?: string | number;
   onChange?: (value?: string | number, item?: PickerItem) => void;
   children?: React.ReactNode;
@@ -20,12 +20,12 @@ function Picker(props: PickerProps) {
     const valueMap = {};
     const range: string[] = [];
 
-    options?.forEach((item) => {
+    options.forEach((item) => {
       valueMap[item.value] = item;
       range.push(item.label);
     });
 
-    return { range, value: options?.findIndex((item) => item.value === value) };
+    return { range, value: options.findIndex((item) => item.value === value) };
   }, [options]);
 
   return (
@@ -34,7 +34,7 @@ function Picker(props: PickerProps) {
       value={tPickerProps.value}
       range={tPickerProps.range}
       onChange={(v) => {
-        const item = options![v.detail.value];
+        const item = options[v.detail.value];
         onChange?.(item?.value, item);
       }}
     >
