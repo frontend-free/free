@@ -65,6 +65,7 @@ interface ListDescriptionProps extends Pick<ListProps, 'size' | 'title'> {
     value?: string | number | ReactNode;
     desc?: string;
     onClick?: (e: any) => void;
+    access?: boolean;
     /** 复制值，为 true 时复制 value，为 string时复制 copy */
     copy?: string | boolean;
   }[];
@@ -105,6 +106,7 @@ const ListDescription = (props: ListDescriptionProps) => {
             extraText={extraText as any}
             note={item.desc}
             onClick={handleClick}
+            arrow={item.access ? 'right' : undefined}
           />
         );
       })}

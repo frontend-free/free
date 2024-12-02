@@ -59,18 +59,18 @@ Modal.show = (props: ModalProps) => {
 
 Modal.alert = (props: ModalProps) => {
   return Modal.show({
+    confirmText: '确定',
     ...props,
     content: <View className="text-center">{props.content}</View>,
-    confirmText: '确定',
   });
 };
 
 Modal.confirm = (props: ModalProps) => {
   return Modal.show({
-    ...props,
-    content: <View className="text-center">{props.content}</View>,
     confirmText: '确定',
     cancelText: '取消',
+    ...props,
+    content: <View className="text-center">{props.content}</View>,
   });
 };
 

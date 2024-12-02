@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.2
+
+### Patch Changes
+
+- fix: mini
+
 ## 1.4.1
 
 ### Patch Changes
