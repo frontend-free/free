@@ -23,7 +23,6 @@ interface ListProps extends AtListProps {
   title?: string;
   size?: 'small';
   responseWidth?: boolean;
-  extraTextDefaultColor?: boolean;
 }
 const List = (props: ListProps) => {
   return (
@@ -32,7 +31,6 @@ const List = (props: ListProps) => {
       <View
         className={classNames('mini-list', {
           'mini-list-response-width': props.responseWidth,
-          'mini-list-extra-text-default-color': props.extraTextDefaultColor,
           'mini-list-size-small': props.size === 'small',
         })}
       >
@@ -45,12 +43,16 @@ const List = (props: ListProps) => {
 interface ListItemProps extends Omit<AtListItemProps, 'title'> {
   title?: string | ReactNode;
   required?: boolean;
+  extraTextDefaultColor?: boolean;
 }
 
-const ListItem = ({ required, title, ...rest }: ListItemProps) => {
+const ListItem = ({ required, title, extraTextDefaultColor, ...rest }: ListItemProps) => {
   return (
     <AtListItem
       {...rest}
+      className={classNames('mini-list-item', {
+        'mini-list-item-extra-text-default-color': extraTextDefaultColor,
+      })}
       title={required ? <View className="mini-required">{title}</View> : (title as any)}
     />
   );
@@ -73,7 +75,7 @@ interface ListDescriptionProps extends Pick<ListProps, 'size' | 'title'> {
 
 const ListDescription = (props: ListDescriptionProps) => {
   return (
-    <List title={props.title} size={props.size} responseWidth extraTextDefaultColor>
+    <List title={props.title} size={props.size} responseWidth>
       {props.items.map((item, index) => {
         let extraText = item.value;
 
@@ -107,6 +109,7 @@ const ListDescription = (props: ListDescriptionProps) => {
             note={item.desc}
             onClick={handleClick}
             arrow={item.access ? 'right' : undefined}
+            extraTextDefaultColor
           />
         );
       })}

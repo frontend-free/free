@@ -15,7 +15,12 @@ function Select(props: SelectProps) {
 
   return (
     <Picker options={options} value={value} onChange={onChange}>
-      <List.Item required={required} title={title} extraText={label || placeholder || '请选择'} />
+      <List.Item
+        required={required}
+        title={title}
+        extraText={label || placeholder || '请选择'}
+        extraTextDefaultColor={!!label}
+      />
     </Picker>
   );
 }
