@@ -25,7 +25,7 @@ interface ListProps extends AtListProps {
   responseWidth?: boolean;
   extraTextDefaultColor?: boolean;
 }
-const List = (props) => {
+const List = (props: ListProps) => {
   return (
     <View>
       {props.title && <ListTitle title={props.title} />}
