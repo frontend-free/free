@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { Text } from '../text';
 import { isNumber } from 'lodash-es';
 import SvgCopy from '../assets/copy.svg';
-import Taro from '@tarojs/taro';
+import { setClipboardData } from '@tarojs/taro';
 import { Svg } from '../svg';
 
 const ListTitle = memo<{ title: string; right?: ReactNode }>((props) => {
@@ -85,7 +85,7 @@ const ListDescription = (props: ListDescriptionProps) => {
 
         const handleClick = (e: any) => {
           if (item.copy) {
-            Taro.setClipboardData({
+            setClipboardData({
               data: item.copy === true ? item.value!.toString() : item.copy,
             });
           }

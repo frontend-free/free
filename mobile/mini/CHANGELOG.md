@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.5
+
+### Patch Changes
+
+- fix: bug of Taro.xxx
+
 ## 1.4.4
 
 ### Patch Changes
