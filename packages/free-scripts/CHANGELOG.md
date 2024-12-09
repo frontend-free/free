@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.2.1
+
+### Patch Changes
+
+- feat: build_code
+
 ## 1.2.0
 
 ### Minor Changes
