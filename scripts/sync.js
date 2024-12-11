@@ -11,4 +11,5 @@ function sync(pkgDirs) {
 }
 
 sync('./packages');
+sync('./common');
 sync('./mobile');
