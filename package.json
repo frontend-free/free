@@ -42,6 +42,7 @@
     "@fe-free/commit-lint": "workspace:^",
     "@fe-free/eslint-config-base": "workspace:^",
     "@fe-free/style-lint": "workspace:^",
+    "@fe-free/x6": "workspace:^",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.2.3",
     "@types/react": "^17.0.2",
