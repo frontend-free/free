@@ -1,11 +1,11 @@
 import type { Node } from '@antv/x6';
 import { Graph } from '@antv/x6';
 import AntV from './images/antv.png';
+import { EnumOrganizerGraphNodeType } from './types';
 
-console.log(AntV);
-
-const flowNode: Node.Metadata = {
+const startNode: Node.Metadata = {
   inherit: 'rect',
+  label: '开始',
   width: 100,
   height: 50,
   markup: [
@@ -40,4 +40,4 @@ const flowNode: Node.Metadata = {
   },
 };
 
-Graph.registerNode('flow-node', flowNode, true);
+Graph.registerNode(EnumOrganizerGraphNodeType.START, startNode, true);

@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
-import { FlowGraphApp } from '@fe-free/x6';
+import { Organizer, EnumOrganizerGraphNodeType, EnumOrganizerGraphEdgeType } from '@fe-free/x6';
 
 const Demo = () => {
-  const handleReady = useCallback((flowGraph) => {
-    const node1 = flowGraph.addNode({
-      shape: 'flow-node',
+  const handleReady = useCallback((organizerGraph) => {
+    const node1 = organizerGraph.addNode({
+      shape: EnumOrganizerGraphNodeType.START,
       x: 40,
       y: 40,
       label: 'hello',
@@ -13,15 +13,15 @@ const Demo = () => {
       },
     });
 
-    const node2 = flowGraph.addNode({
-      shape: 'flow-node',
+    const node2 = organizerGraph.addNode({
+      shape: EnumOrganizerGraphNodeType.START,
       x: 160,
       y: 180,
       label: 'world',
     });
 
-    flowGraph.addEdge({
-      shape: 'flow-edge',
+    organizerGraph.addEdge({
+      shape: EnumOrganizerGraphEdgeType.CUSTOM,
       source: node1.id,
       target: node2.id,
       label: 'x6',
@@ -30,7 +30,7 @@ const Demo = () => {
 
   return (
     <div className="h-screen w-screen">
-      <FlowGraphApp onReady={handleReady} />
+      <Organizer onReady={handleReady} />
     </div>
   );
 };

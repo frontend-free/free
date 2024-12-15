@@ -13,14 +13,18 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21",
     "@antv/x6": "^2.18.1",
     "@antv/x6-plugin-clipboard": "^2.1.6",
     "@antv/x6-plugin-history": "^2.2.4",
     "@antv/x6-plugin-keyboard": "^2.2.3",
     "@antv/x6-plugin-selection": "^2.2.2",
     "@antv/x6-plugin-snapline": "^2.1.7",
-    "@antv/x6-plugin-stencil": "^2.1.5"
+    "@antv/x6-plugin-stencil": "^2.1.5",
+    "classnames": "^2.5.1",
+    "lodash-es": "^4.17.21"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }

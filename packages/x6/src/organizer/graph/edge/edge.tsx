@@ -1,7 +1,8 @@
 import type { Edge } from '@antv/x6';
 import { Graph } from '@antv/x6';
+import { EnumOrganizerGraphEdgeType } from './types';
 
-const flowEdge: Edge.Metadata = {
+const customEdge: Edge.Metadata = {
   inherit: 'edge',
   attrs: {
     line: {
@@ -11,4 +12,4 @@ const flowEdge: Edge.Metadata = {
   },
 };
 
-Graph.registerEdge('flow-edge', flowEdge, true);
+Graph.registerEdge(EnumOrganizerGraphEdgeType.CUSTOM, customEdge, true);

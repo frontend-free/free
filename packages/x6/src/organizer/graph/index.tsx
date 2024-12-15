@@ -4,11 +4,13 @@ import { Clipboard } from '@antv/x6-plugin-clipboard';
 import { Selection } from '@antv/x6-plugin-selection';
 import { Keyboard } from '@antv/x6-plugin-keyboard';
 import { History } from '@antv/x6-plugin-history';
-import { Stencil } from '@antv/x6-plugin-stencil';
-
+import type { Stencil } from '@antv/x6-plugin-stencil';
 import { KeyCommand } from './helper';
-import './node';
-import './edge';
+
+import { EnumOrganizerGraphNodeType } from './node';
+import { EnumOrganizerGraphEdgeType } from './edge';
+
+import { initStencil } from './stencil';
 
 function commonOption(): Graph.Options {
   return {
@@ -41,58 +43,15 @@ function commonOption(): Graph.Options {
   };
 }
 
-const commonAttrs = {
-  body: {
-    fill: '#fff',
-    stroke: '#8f8f8f',
-    strokeWidth: 1,
-  },
-};
-
-function stencilLoad({ graph, stencil }) {
-  const n1 = graph.createNode({
-    shape: 'rect',
-    x: 40,
-    y: 40,
-    width: 80,
-    height: 40,
-    label: 'rect',
-    attrs: commonAttrs,
-  });
-
-  const n2 = graph.createNode({
-    shape: 'circle',
-    x: 180,
-    y: 40,
-    width: 40,
-    height: 40,
-    label: 'circle',
-    attrs: commonAttrs,
-  });
-
-  const n3 = graph.createNode({
-    shape: 'ellipse',
-    x: 280,
-    y: 40,
-    width: 80,
-    height: 40,
-    label: 'ellipse',
-    attrs: commonAttrs,
-  });
-
-  stencil.load([n1, n2], 'group1');
-  stencil.load([n3], 'group2');
-}
-
-interface FlowGraphOptions {
+interface OrganizerGraphOptions {
   stencilContainer: HTMLElement;
 }
 
-class FlowGraph extends Graph {
+class OrganizerGraph extends Graph {
   stencilContainer: HTMLElement;
   stencil: Stencil | null = null;
 
-  constructor(options: Graph.Options, otherOptions: FlowGraphOptions) {
+  constructor(options: Graph.Options, otherOptions: OrganizerGraphOptions) {
     super({
       ...commonOption(),
       ...options,
@@ -104,7 +63,8 @@ class FlowGraph extends Graph {
     this.pCommonEvent();
 
     // 初始化侧边栏
-    this.pStencil();
+    // this.pStencil();
+    initStencil({ graph: this, container: this.stencilContainer });
 
     // 画布容纳所有元素
     this.zoomToFit({ maxScale: 1 });
@@ -176,28 +136,7 @@ class FlowGraph extends Graph {
       }
     });
   }
-
-  private pStencil() {
-    this.stencil = new Stencil({
-      title: 'Stencil xxx',
-      target: this,
-      search(cell, keyword) {
-        return cell.shape.indexOf(keyword) !== -1;
-      },
-      placeholder: 'Search by shape name',
-      notFoundText: 'Not Found',
-      collapsable: true,
-      stencilGraphHeight: 0,
-      groups: [
-        { name: 'group1', title: 'Group 1' },
-        { name: 'group2', title: 'Group 2' },
-      ],
-    });
-
-    this.stencilContainer.appendChild(this.stencil.container);
-
-    stencilLoad({ graph: this, stencil: this.stencil });
-  }
 }
 
-export { FlowGraph };
+export { OrganizerGraph };
+export { EnumOrganizerGraphNodeType, EnumOrganizerGraphEdgeType };
