@@ -7,7 +7,5 @@ packages/**/coverage
 packages/**/dist
 common/**/dist
 mobile/**/dist
-.dumi/tmp
-.dumi/tmp-test
-.dumi/tmp-production
 docs-dist
+*storybook.log
