@@ -7,8 +7,8 @@ import { History } from '@antv/x6-plugin-history';
 import type { Stencil } from '@antv/x6-plugin-stencil';
 import { KeyCommand } from './helper';
 
-import { EnumOrganizerGraphNodeType } from './node';
-import { EnumOrganizerGraphEdgeType } from './edge';
+import { EnumOrganizerGraphNodeType } from './types';
+import { EnumOrganizerGraphEdgeType } from './types';
 
 import { initStencil } from './stencil';
 

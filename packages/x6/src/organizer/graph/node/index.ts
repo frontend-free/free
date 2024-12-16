@@ -1,4 +1,4 @@
-import { EnumOrganizerGraphNodeType } from './types';
 import './node';
+import { defaultNodeConfig } from './helper';
 
-export { EnumOrganizerGraphNodeType };
+export { defaultNodeConfig };

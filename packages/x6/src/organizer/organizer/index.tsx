@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { OrganizerGraph } from '../graph';
 import type { CSSProperties } from 'react';
 import cn from 'classnames';
@@ -9,8 +9,21 @@ interface OrganizerProps {
   onReady?: (organizerGraph: OrganizerGraph) => void;
 }
 
-function Organizer(props: OrganizerProps) {
+const useFunction = ({ ref, refOrganizerGraph }) => {
+  useImperativeHandle(ref, () => ({
+    toJSON: () => {
+      if (!refOrganizerGraph.current) {
+        throw new Error('OrganizerGraph is not initialized');
+      }
+      return refOrganizerGraph.current?.toJSON();
+    },
+  }));
+};
+
+const Organizer = forwardRef((props: OrganizerProps, ref) => {
   const { onReady } = props;
+
+  const refOrganizerGraph = useRef<OrganizerGraph | null>(null);
   const refDom = useRef<HTMLDivElement | null>(null);
   const refStencil = useRef<HTMLDivElement | null>(null);
 
@@ -38,9 +51,13 @@ function Organizer(props: OrganizerProps) {
       refReady.current(organizerGraph);
     }
 
+    refOrganizerGraph.current = organizerGraph;
+
     // @ts-ignore
-    window.__x6_instances__ = [organizerGraph];
+    window.__x6_instances__ = organizerGraph;
   }, []);
+
+  useFunction({ ref, refOrganizerGraph });
 
   return (
     <div className={cn('flex h-full w-full', props.className)} style={props.style}>
@@ -50,6 +67,6 @@ function Organizer(props: OrganizerProps) {
       </div>
     </div>
   );
-}
+});
 
 export { Organizer };

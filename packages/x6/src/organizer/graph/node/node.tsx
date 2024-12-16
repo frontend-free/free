@@ -1,43 +1,40 @@
 import type { Node } from '@antv/x6';
-import { Graph } from '@antv/x6';
-import AntV from './images/antv.png';
-import { EnumOrganizerGraphNodeType } from './types';
+import type { Graph } from '@antv/x6';
+import { defaultNodeConfig } from './helper';
+import { EnumOrganizerGraphNodeType } from '../types';
+import { register } from '@antv/x6-react-shape';
+import { DefaultNode } from './helper';
+import Icon, { HomeOutlined } from '@ant-design/icons';
+import { ReactComponent as SvgHome } from './svg/home.svg';
 
-const startNode: Node.Metadata = {
-  inherit: 'rect',
-  label: '开始',
-  width: 100,
-  height: 50,
-  markup: [
-    {
-      tagName: 'rect', // 标签名称
-      selector: 'body', // 选择器
-    },
-    {
-      tagName: 'image',
-      selector: 'img',
-    },
-    {
-      tagName: 'text',
-      selector: 'label',
-    },
-  ],
-  attrs: {
-    body: {
-      stroke: '#8f8f8f',
-      strokeWidth: 1,
-      fill: '#fff',
-      rx: 6,
-      ry: 6,
-    },
-    img: {
-      'xlink:href': AntV,
-      width: 16,
-      height: 16,
-      x: 12,
-      y: 15,
-    },
-  },
+const Start = (props: { node: Node; graph: Graph }) => {
+  const { node, graph } = props;
+
+  return <DefaultNode node={node} graph={graph} />;
 };
 
-Graph.registerNode(EnumOrganizerGraphNodeType.START, startNode, true);
+register({
+  shape: EnumOrganizerGraphNodeType.START,
+  width: defaultNodeConfig.width,
+  height: defaultNodeConfig.height,
+  effect: ['data'],
+  component: Start,
+  data: {
+    title: '开始',
+    icon: <HomeOutlined />,
+    iconBg: '#296dff',
+  },
+});
+
+register({
+  shape: EnumOrganizerGraphNodeType.END,
+  width: defaultNodeConfig.width,
+  height: defaultNodeConfig.height,
+  effect: ['data'],
+  component: Start,
+  data: {
+    title: '结束',
+    icon: <Icon component={SvgHome} />,
+    iconBg: '#f79009',
+  },
+});
