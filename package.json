@@ -32,6 +32,7 @@
     "@ant-design/pro-components": "^2.7.15",
     "@fe-free/core": "workspace:^",
     "@fe-free/tool": "workspace:^",
+    "@fe-free/x6": "workspace:^",
     "antd": "^5.20.0",
     "dayjs": "~1.11.10",
     "react": "^18.2.0",
@@ -44,7 +45,6 @@
     "@fe-free/commit-lint": "workspace:^",
     "@fe-free/eslint-config-base": "workspace:^",
     "@fe-free/style-lint": "workspace:^",
-    "@fe-free/x6": "workspace:^",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-onboarding": "^8.4.7",
@@ -72,6 +72,7 @@
     "storybook": "^8.4.7",
     "stylelint": "^15.7.0",
     "tailwindcss": "^3.4.16",
-    "typescript": "^5.1.2"
+    "typescript": "^5.1.2",
+    "vite-plugin-svgr": "^4.3.0"
   }
 }

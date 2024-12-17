@@ -31,7 +31,7 @@ const Demo = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen">
+    <div className="h-full w-full flex flex-col">
       <div className="p-2 flex gap-2">
         <Button
           onClick={() => {

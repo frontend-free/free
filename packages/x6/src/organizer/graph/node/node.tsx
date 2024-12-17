@@ -5,7 +5,7 @@ import { EnumOrganizerGraphNodeType } from '../types';
 import { register } from '@antv/x6-react-shape';
 import { DefaultNode } from './helper';
 import Icon, { HomeOutlined } from '@ant-design/icons';
-import { ReactComponent as SvgHome } from './svg/home.svg';
+import SvgHome from './svg/home.svg?react';
 
 const Start = (props: { node: Node; graph: Graph }) => {
   const { node, graph } = props;

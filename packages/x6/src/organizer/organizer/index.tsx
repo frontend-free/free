@@ -70,3 +70,4 @@ const Organizer = forwardRef((props: OrganizerProps, ref) => {
 });
 
 export { Organizer };
+export type { OrganizerProps };
