@@ -1,7 +1,10 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { OrganizerGraph } from '../graph';
 import type { CSSProperties } from 'react';
 import cn from 'classnames';
+import type { Node } from '@antv/x6';
+import { Setting } from './setting';
+import { Operate } from './operate';
 
 interface OrganizerProps {
   className?: string;
@@ -23,9 +26,12 @@ const useFunction = ({ ref, refOrganizerGraph }) => {
 const Organizer = forwardRef((props: OrganizerProps, ref) => {
   const { onReady } = props;
 
-  const refOrganizerGraph = useRef<OrganizerGraph | null>(null);
   const refDom = useRef<HTMLDivElement | null>(null);
   const refStencil = useRef<HTMLDivElement | null>(null);
+
+  const refOrganizerGraph = useRef<OrganizerGraph | null>(null);
+
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   // 规避 onReady 闭包问题
   const refReady = useRef(onReady);
@@ -47,6 +53,13 @@ const Organizer = forwardRef((props: OrganizerProps, ref) => {
       }
     );
 
+    organizerGraph.on('node:selected', (event) => {
+      setSelectedNode(event.node);
+    });
+    organizerGraph.on('node:unselected', () => {
+      setSelectedNode(null);
+    });
+
     if (refReady.current) {
       refReady.current(organizerGraph);
     }
@@ -62,8 +75,14 @@ const Organizer = forwardRef((props: OrganizerProps, ref) => {
   return (
     <div className={cn('flex h-full w-full', props.className)} style={props.style}>
       <div ref={refStencil} className="relative h-full w-[300px]" />
-      <div className="h-full flex-1">
+      <div className="h-full flex-1 relative">
         <div ref={refDom} />
+        <div className="absolute top-2 right-2 height-[32px]">
+          <Operate />
+        </div>
+        <div className="absolute top-[50px] right-2 bottom-2">
+          {selectedNode && <Setting node={selectedNode} onClose={() => setSelectedNode(null)} />}
+        </div>
       </div>
     </div>
   );

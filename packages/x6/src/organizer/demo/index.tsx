@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Organizer, EnumOrganizerGraphNodeType, EnumOrganizerGraphEdgeType } from '@fe-free/x6';
+import { Organizer, EnumOrganizerGraphNodeType } from '@fe-free/x6';
 import { Button } from 'antd';
 
 const Demo = () => {
@@ -8,26 +8,17 @@ const Demo = () => {
   const handleReady = useCallback((organizerGraph) => {
     const node1 = organizerGraph.addNode({
       shape: EnumOrganizerGraphNodeType.START,
-      x: 10,
+      x: -300,
       y: 40,
-      label: '开始',
-      data: {
-        name: 'This is data of name',
-      },
     });
 
-    // const node2 = organizerGraph.addNode({
-    //   shape: EnumOrganizerGraphNodeType.START,
-    //   x: 160,
-    //   y: 180,
-    // });
+    organizerGraph.addNode({
+      shape: EnumOrganizerGraphNodeType.END,
+      x: -100,
+      y: 40,
+    });
 
-    // organizerGraph.addEdge({
-    //   shape: EnumOrganizerGraphEdgeType.CUSTOM,
-    //   source: node1.id,
-    //   target: node2.id,
-    //   label: 'x6',
-    // });
+    organizerGraph.select(node1.id);
   }, []);
 
   return (
@@ -37,6 +28,7 @@ const Demo = () => {
           onClick={() => {
             const json = refOrganizer.current?.toJSON();
             console.log(json);
+            console.log(JSON.stringify(json, null, 2));
           }}
         >
           toJSON()

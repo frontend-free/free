@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.7.15",
     "@antv/x6": "^2.18.1",
     "@antv/x6-plugin-clipboard": "^2.1.6",
     "@antv/x6-plugin-history": "^2.2.4",
@@ -22,6 +23,8 @@
     "@antv/x6-plugin-snapline": "^2.1.7",
     "@antv/x6-plugin-stencil": "^2.1.5",
     "@antv/x6-react-shape": "^2.2.3",
+    "@antv/xflow": "^2.1.13",
+    "antd": "^5.20.0",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21"
   },

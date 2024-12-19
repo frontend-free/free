@@ -21,7 +21,7 @@ function DefaultNode(props: DefaultNodeProps) {
   return (
     <div
       className={cn(
-        'border border-gray-400 border-solid p-2 bg-white rounded-md flex items-center gap-2',
+        'border border-slate-200 border-solid p-2 bg-white rounded-md flex items-center gap-2',
         className
       )}
       style={style}
