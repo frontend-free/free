@@ -5,7 +5,7 @@ import { EnumOrganizerGraphNodeType } from '../graph/types';
 import { GraphContext } from './context';
 import { useContext, useEffect, useRef } from 'react';
 
-const stencilGraphWidth = 300;
+const stencilGraphWidth = 200;
 
 function initStencil({ graph, container }: { graph: Graph; container: HTMLElement }) {
   const stencil = new Stencil({
@@ -51,7 +51,7 @@ function initStencil({ graph, container }: { graph: Graph; container: HTMLElemen
         ...node,
         x: 10,
         y: y,
-        width: stencilGraphWidth - 20,
+        width: defaultNodeConfig.width,
         height: defaultNodeConfig.height,
       });
     });

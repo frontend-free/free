@@ -4,7 +4,8 @@ import { Clipboard } from '@antv/x6-plugin-clipboard';
 import { Selection } from '@antv/x6-plugin-selection';
 import { Keyboard } from '@antv/x6-plugin-keyboard';
 import { History } from '@antv/x6-plugin-history';
-import { KeyCommand, defaultNodeConfig } from './helper';
+import { KeyCommand } from './helper';
+import { defaultNodeConfig } from './node/helper';
 
 import { EnumOrganizerGraphNodeType } from './types';
 import { EnumOrganizerGraphEdgeType } from './types';
@@ -22,7 +23,10 @@ function commonOption(): Graph.Options {
     // 移动
     panning: true,
     // 缩放
-    mousewheel: true,
+    mousewheel: {
+      enabled: true,
+      modifiers: ['ctrl', 'meta'],
+    },
     // 背景
     background: {
       color: '#F2F7FA',
@@ -84,6 +88,7 @@ function initGraph(options: Graph.Options) {
   // 历史记录
   graph.use(new History({ enabled: true }));
 
+  // 删除
   graph.bindKey(KeyCommand.DELETE, () => {
     const cells = graph.getSelectedCells();
 
@@ -127,8 +132,6 @@ function initGraph(options: Graph.Options) {
     }
   });
 
-  // 画布容纳所有元素
-  graph.zoomToFit({ maxScale: 1 });
   // 居中
   graph.centerContent();
 
