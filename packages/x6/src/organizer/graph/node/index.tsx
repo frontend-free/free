@@ -1,9 +1,8 @@
 import type { Node } from '@antv/x6';
 import type { Graph } from '@antv/x6';
-import { defaultNodeConfig } from './helper';
+import { defaultNodeConfig, DefaultNode } from '../helper';
 import { EnumOrganizerGraphNodeType } from '../types';
 import { register } from '@antv/x6-react-shape';
-import { DefaultNode } from './helper';
 import Icon, { HomeOutlined } from '@ant-design/icons';
 import SvgHome from './svg/home.svg?react';
 import type { ReactShapeConfig } from '@antv/x6-react-shape';
@@ -58,3 +57,5 @@ commonRegister({
     iconBg: '#f79009',
   },
 });
+
+export { defaultNodeConfig };

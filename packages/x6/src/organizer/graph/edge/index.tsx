@@ -1,6 +1,6 @@
 import type { Edge } from '@antv/x6';
 import { Graph } from '@antv/x6';
-import { EnumOrganizerGraphEdgeType } from './types';
+import { EnumOrganizerGraphEdgeType } from '../types';
 
 const customEdge: Edge.Metadata = {
   inherit: 'edge',

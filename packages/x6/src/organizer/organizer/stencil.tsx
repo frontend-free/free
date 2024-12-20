@@ -1,7 +1,9 @@
 import type { Graph } from '@antv/x6';
 import { Stencil } from '@antv/x6-plugin-stencil';
-import { defaultNodeConfig } from './node';
-import { EnumOrganizerGraphNodeType } from './types';
+import { defaultNodeConfig } from '../graph';
+import { EnumOrganizerGraphNodeType } from '../graph/types';
+import { GraphContext } from './context';
+import { useContext, useEffect, useRef } from 'react';
 
 const stencilGraphWidth = 300;
 
@@ -68,17 +70,20 @@ function initStencil({ graph, container }: { graph: Graph; container: HTMLElemen
     'common'
   );
 
-  // loadNodes(
-  //   [
-  //     {
-  //       shape: 'ellipse',
-  //       label: 'ellipse',
-  //     },
-  //   ],
-  //   'largeModel'
-  // );
-
   return stencil;
 }
 
-export { initStencil };
+function StencilComponent() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { graph } = useContext(GraphContext);
+
+  useEffect(() => {
+    if (graph && ref.current) {
+      initStencil({ graph, container: ref.current });
+    }
+  }, [graph]);
+
+  return <div ref={ref} className="relative h-full w-[300px]" />;
+}
+
+export { StencilComponent };

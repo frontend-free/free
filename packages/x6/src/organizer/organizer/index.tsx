@@ -1,10 +1,13 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { OrganizerGraph } from '../graph';
+import { forwardRef, useImperativeHandle, useState, useContext, useEffect } from 'react';
+import type { OrganizerGraph } from '../graph';
+import { OrganizerGraphComponent } from '../graph';
 import type { CSSProperties } from 'react';
 import cn from 'classnames';
 import type { Node } from '@antv/x6';
 import { Setting } from './setting';
 import { Operate } from './operate';
+import { GraphContext, GraphProvider } from './context';
+import { StencilComponent } from './stencil';
 
 interface OrganizerProps {
   className?: string;
@@ -12,71 +15,44 @@ interface OrganizerProps {
   onReady?: (organizerGraph: OrganizerGraph) => void;
 }
 
-const useFunction = ({ ref, refOrganizerGraph }) => {
+const useFunction = ({ ref }) => {
+  const { graph } = useContext(GraphContext);
+
   useImperativeHandle(ref, () => ({
     toJSON: () => {
-      if (!refOrganizerGraph.current) {
+      if (!graph) {
         throw new Error('OrganizerGraph is not initialized');
       }
-      return refOrganizerGraph.current?.toJSON();
+      return graph.toJSON();
     },
   }));
 };
 
-const Organizer = forwardRef((props: OrganizerProps, ref) => {
+const BaseOrganizer = forwardRef((props: OrganizerProps, ref) => {
   const { onReady } = props;
 
-  const refDom = useRef<HTMLDivElement | null>(null);
-  const refStencil = useRef<HTMLDivElement | null>(null);
-
-  const refOrganizerGraph = useRef<OrganizerGraph | null>(null);
+  const { graph } = useContext(GraphContext);
 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
-  // 规避 onReady 闭包问题
-  const refReady = useRef(onReady);
   useEffect(() => {
-    refReady.current = onReady;
-  }, [onReady]);
-
-  useEffect(() => {
-    if (!refDom.current || !refStencil.current) {
-      return;
+    if (graph) {
+      graph.on('node:selected', (event) => {
+        setSelectedNode(event.node);
+      });
+      graph.on('node:unselected', () => {
+        setSelectedNode(null);
+      });
     }
+  }, [graph]);
 
-    const organizerGraph = new OrganizerGraph(
-      {
-        container: refDom.current,
-      },
-      {
-        stencilContainer: refStencil.current,
-      }
-    );
-
-    organizerGraph.on('node:selected', (event) => {
-      setSelectedNode(event.node);
-    });
-    organizerGraph.on('node:unselected', () => {
-      setSelectedNode(null);
-    });
-
-    if (refReady.current) {
-      refReady.current(organizerGraph);
-    }
-
-    refOrganizerGraph.current = organizerGraph;
-
-    // @ts-ignore
-    window.__x6_instances__ = organizerGraph;
-  }, []);
-
-  useFunction({ ref, refOrganizerGraph });
+  useFunction({ ref });
 
   return (
     <div className={cn('flex h-full w-full', props.className)} style={props.style}>
-      <div ref={refStencil} className="relative h-full w-[300px]" />
+      <StencilComponent />
       <div className="h-full flex-1 relative">
-        <div ref={refDom} />
+        <OrganizerGraphComponent onReady={onReady} />
         <div className="absolute top-2 right-2 height-[32px]">
           <Operate />
         </div>
@@ -85,6 +61,14 @@ const Organizer = forwardRef((props: OrganizerProps, ref) => {
         </div>
       </div>
     </div>
+  );
+});
+
+const Organizer = forwardRef((props: OrganizerProps, ref) => {
+  return (
+    <GraphProvider>
+      <BaseOrganizer {...props} ref={ref} />
+    </GraphProvider>
   );
 });
 
