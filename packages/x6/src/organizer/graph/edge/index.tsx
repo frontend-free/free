@@ -6,8 +6,9 @@ const customEdge: Edge.Metadata = {
   inherit: 'edge',
   attrs: {
     line: {
-      stroke: '#8f8f8f',
+      // stroke: '#8f8f8f',
       strokeWidth: 1,
+      targetMarker: null,
     },
   },
 };

@@ -93,4 +93,12 @@ const leftPorts = {
   ],
 };
 
-export { commonRegister, rightPorts, leftPorts, defaultNodeConfig, DefaultNode };
+const leftRightPorts = {
+  groups: {
+    ...leftPorts.groups,
+    ...rightPorts.groups,
+  },
+  items: [...leftPorts.items, ...rightPorts.items],
+};
+
+export { commonRegister, rightPorts, leftPorts, leftRightPorts, defaultNodeConfig, DefaultNode };
