@@ -1,18 +1,18 @@
 import { forwardRef, useImperativeHandle, useState, useContext, useEffect } from 'react';
-import type { OrganizerGraph } from '../graph';
 import { OrganizerGraphComponent } from '../graph';
 import type { CSSProperties } from 'react';
 import cn from 'classnames';
-import type { Node } from '@antv/x6';
+import type { Node, Graph } from '@antv/x6';
 import { Setting } from './setting';
 import { Operate } from './operate';
 import { GraphContext, GraphProvider } from './context';
 import { StencilComponent } from './stencil';
+import { QuickComponent } from './quick';
 
 interface OrganizerProps {
   className?: string;
   style?: CSSProperties;
-  onReady?: (organizerGraph: OrganizerGraph) => void;
+  onReady?: (graph: Graph) => void;
 }
 
 const useFunction = ({ ref }) => {
@@ -21,7 +21,7 @@ const useFunction = ({ ref }) => {
   useImperativeHandle(ref, () => ({
     toJSON: () => {
       if (!graph) {
-        throw new Error('OrganizerGraph is not initialized');
+        throw new Error('Graph is not initialized');
       }
       return graph.toJSON();
     },
@@ -58,6 +58,9 @@ const BaseOrganizer = forwardRef((props: OrganizerProps, ref) => {
         </div>
         <div className="absolute top-[50px] right-2 bottom-2">
           {selectedNode && <Setting node={selectedNode} onClose={() => setSelectedNode(null)} />}
+        </div>
+        <div className="absolute left-2 bottom-2">
+          <QuickComponent />
         </div>
       </div>
     </div>

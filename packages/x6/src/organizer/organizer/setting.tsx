@@ -37,7 +37,7 @@ function SettingForm({ node }: { node: Node }) {
 
   const handleValuesChange = useCallback(
     (_, allValues: any) => {
-      data.allValues = allValues;
+      data.values = allValues;
     },
     [data]
   );

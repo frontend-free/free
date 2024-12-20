@@ -46,6 +46,7 @@ const KeyCommand = {
   PASTER: isMac ? 'cmd+v' : 'ctrl+v',
   UNDO: isMac ? 'cmd+z' : 'ctrl+z',
   REDO: isMac ? 'cmd+shift+z' : 'ctrl+y',
+  DELETE: isMac ? 'backspace' : 'backspace',
 };
 
 export { KeyCommand, defaultNodeConfig, DefaultNode };

@@ -84,6 +84,17 @@ function initGraph(options: Graph.Options) {
   // 历史记录
   graph.use(new History({ enabled: true }));
 
+  graph.bindKey(KeyCommand.DELETE, () => {
+    const cells = graph.getSelectedCells();
+
+    if (cells.length) {
+      graph.removeCells(cells);
+    }
+
+    return false;
+  });
+
+  // 复制
   graph.bindKey(KeyCommand.COPY, () => {
     const cells = graph.getSelectedCells();
     if (cells.length) {
@@ -92,6 +103,7 @@ function initGraph(options: Graph.Options) {
     return false;
   });
 
+  // 粘贴
   graph.bindKey(KeyCommand.PASTER, () => {
     if (!graph.isClipboardEmpty()) {
       const cells = graph.paste({ offset: 32 });
@@ -101,12 +113,14 @@ function initGraph(options: Graph.Options) {
     return false;
   });
 
+  // 撤销
   graph.bindKey(KeyCommand.UNDO, () => {
     if (graph.canUndo()) {
       graph.undo();
     }
   });
 
+  // 重做
   graph.bindKey(KeyCommand.REDO, () => {
     if (graph.canRedo()) {
       graph.redo();
