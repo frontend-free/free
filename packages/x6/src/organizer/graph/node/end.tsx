@@ -1,8 +1,7 @@
-import { commonRegister } from './helper';
+import { commonRegister, leftPorts, DefaultNode } from './helper';
 import { EnumOrganizerGraphNodeType } from '../types';
 import Icon from '@ant-design/icons';
 import SvgEnd from './svg/end.svg?react';
-import { DefaultNode } from './helper';
 import type { Graph, Node } from '@antv/x6';
 
 const End = (props: { node: Node; graph: Graph }) => {
@@ -14,6 +13,7 @@ const End = (props: { node: Node; graph: Graph }) => {
 commonRegister({
   shape: EnumOrganizerGraphNodeType.END,
   component: End,
+  ports: leftPorts,
   data: {
     title: '结束',
     icon: <Icon component={SvgEnd} />,

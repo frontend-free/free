@@ -8,14 +8,19 @@ const Demo = () => {
   const handleReady = useCallback((organizerGraph) => {
     const node1 = organizerGraph.addNode({
       shape: EnumOrganizerGraphNodeType.START,
-      x: -300,
+      x: -400,
       y: 40,
+      data: {
+        values: {
+          testField: '这是值，这是值',
+        },
+      },
     });
 
     organizerGraph.addNode({
       shape: EnumOrganizerGraphNodeType.END,
-      x: -100,
-      y: 40,
+      x: 0,
+      y: 100,
     });
 
     organizerGraph.select(node1.id);

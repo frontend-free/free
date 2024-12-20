@@ -1,5 +1,5 @@
 import type { Graph, Node } from '@antv/x6';
-import { commonRegister, DefaultNode } from './helper';
+import { commonRegister, DefaultNode, rightPorts } from './helper';
 import { HomeOutlined } from '@ant-design/icons';
 import { EnumOrganizerGraphNodeType } from '../types';
 
@@ -12,6 +12,7 @@ const Start = (props: { node: Node; graph: Graph }) => {
 commonRegister({
   shape: EnumOrganizerGraphNodeType.START,
   component: Start,
+  ports: rightPorts,
   data: {
     title: '开始',
     icon: <HomeOutlined />,
@@ -22,8 +23,5 @@ commonRegister({
         dataIndex: 'testField',
       },
     ],
-    values: {
-      testField: '这是值，这是值',
-    },
   },
 });

@@ -57,4 +57,40 @@ function commonRegister(config: CommonRegisterProps) {
   });
 }
 
-export { commonRegister, defaultNodeConfig, DefaultNode };
+const attrs = {
+  circle: {
+    magnet: true,
+    stroke: '#8f8f8f',
+    r: 5,
+  },
+};
+
+const rightPorts = {
+  groups: {
+    right: {
+      position: 'right',
+      attrs,
+    },
+  },
+  items: [
+    {
+      group: 'right',
+    },
+  ],
+};
+
+const leftPorts = {
+  groups: {
+    left: {
+      position: 'left',
+      attrs,
+    },
+  },
+  items: [
+    {
+      group: 'left',
+    },
+  ],
+};
+
+export { commonRegister, rightPorts, leftPorts, defaultNodeConfig, DefaultNode };
