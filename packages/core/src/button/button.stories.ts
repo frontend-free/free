@@ -4,8 +4,11 @@ export default {
   title: '@fe-free/core/LoadingButton',
   component: LoadingButton,
   tags: ['autodocs'],
+};
+
+export const Default = {
   args: {
-    children: 'This is a loading Button',
+    children: 'click and resolve',
     onClick: () => {
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
@@ -14,4 +17,13 @@ export default {
   },
 };
 
-export const Default = {};
+export const Reject = {
+  args: {
+    children: 'click and reject',
+    onClick: () => {
+      return new Promise((_, reject) => {
+        setTimeout(reject, 1000);
+      });
+    },
+  },
+};
