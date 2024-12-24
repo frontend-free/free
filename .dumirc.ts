@@ -19,7 +19,6 @@ export default defineConfig({
       { type: "lab", dir: "lab" },
       { type: "lib", dir: "packages/core/src" },
       { type: "lib", dir: "packages/tool/src" },
-      { type: "lib", dir: "packages/x6/src" },
       { type: "common", dir: "common/free-scripts/src" },
       { type: "common", dir: "common/commit-lint/doc" },
       { type: "common", dir: "common/eslint-config-base/doc" },
