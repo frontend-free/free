@@ -22,7 +22,7 @@
     "release:publish": "git push origin main:main; changeset publish;",
     "sync": "node ./scripts/sync.js",
     "build-storybook": "storybook build",
-    "ci:docs": "build-storybook",
+    "ci:docs": "pnpm build-storybook",
     "yalc_publish": "node ./scripts/yalc_publish.js",
     "clean": "rm -rf pnpm-lock.yaml node_modules **/*/node_modules",
     "storybook": "storybook dev -p 6006",
