@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.2.2
+
+### Patch Changes
+
+- feat: free-scripts add jsonUrl
+
 ## 1.2.1
 
 ### Patch Changes

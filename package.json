@@ -10,7 +10,7 @@
   "packageManager": "pnpm@8.7.6",
   "engines": {
     "node": ">=16.19.1",
-    "pnpm": "^8.7.6",
+    "pnpm": "^9.15.1",
     "changeset": "^2.26.2"
   },
   "scripts": {

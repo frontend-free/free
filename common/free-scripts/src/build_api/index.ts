@@ -29,12 +29,19 @@ async function code({ name, options }) {
 }
 
 // /api/base/base-dictionary/add 得到 baseDictionaryAdd
+// /auth/login 得到 authLogin
 function toCamelCase(url) {
-  const parts = url.replace(/-/g, '/').replace(/_/g, '/').split('/');
+  let parts = url.replace('/api/', '/').replace(/-/g, '/').replace(/_/g, '/').split('/');
+
+  // 历史原因，先这样实现
+  if (parts[1] === parts[2]) {
+    parts = parts.slice(1);
+  }
+
   const camelCase =
-    parts[3] +
+    parts[1] +
     parts
-      .slice(4)
+      .slice(2)
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join('');
   return camelCase;
@@ -57,7 +64,7 @@ function merge(mergeJSON, json) {
   });
 }
 
-async function build({ swaggerDoc: { docName, docUrl }, options }) {
+async function swaggerJsonByDocUrl({ docUrl }) {
   const mergeJSON: any = {};
 
   const resources = await fetch(`${docUrl}/swagger-resources`).then((response) => response.json());
@@ -73,24 +80,41 @@ async function build({ swaggerDoc: { docName, docUrl }, options }) {
   // fix，否则跑不通 generateApi
   mergeJSON.info.termsOfService = docUrl;
 
+  return mergeJSON;
+}
+
+async function swaggerJsonByJsonUrl({ jsonUrl }) {
+  const json = await fetch(jsonUrl).then((response) => response.json());
+  return json;
+}
+
+function processJson({ json }) {
   // operationId 不采用原先值（后端没维护好），于是采用 url
-  for (const apiPath in mergeJSON.paths) {
+  for (const apiPath in json.paths) {
     const funName = toCamelCase(apiPath);
     // 只有一个方法，get post ...
-    for (const method in mergeJSON.paths[apiPath]) {
-      mergeJSON.paths[apiPath][method].operationId = funName;
+    for (const method in json.paths[apiPath]) {
+      json.paths[apiPath][method].operationId = funName;
     }
   }
 
-  const outputDir = path.resolve(options.output);
+  return json;
+}
+
+function writeSwaggerJson({ output, docName, json }) {
+  const outputDir = path.resolve(output);
   fs.writeFileSync(
     path.resolve(outputDir, `./swagger/${docName}.json`),
-    JSON.stringify(mergeJSON, null, 2)
+    JSON.stringify(json, null, 2)
   );
+}
 
-  await code({ name: docName, options });
-
-  console.log('build_api success');
+function prepare({ options }) {
+  const outputDir = path.resolve(options.output);
+  fs.rmSync(path.resolve(outputDir, './api'), { recursive: true, force: true });
+  fs.rmSync(path.resolve(outputDir, './swagger'), { recursive: true, force: true });
+  fs.mkdirSync(path.resolve(outputDir, './api'));
+  fs.mkdirSync(path.resolve(outputDir, './swagger'));
 }
 
 interface Options {
@@ -101,6 +125,7 @@ interface Options {
 async function buildApi(options: Options) {
   console.log('buildApi', options);
 
+  // 检查输入和输出目录
   if (
     !options.output ||
     !options.input ||
@@ -110,25 +135,39 @@ async function buildApi(options: Options) {
     throw new Error('请指定有效输入目录和输出目录');
   }
 
-  const outputDir = path.resolve(options.output);
-
-  console.log('新建 api 目录 和 swagger 目录');
-  fs.rmSync(path.resolve(outputDir, './api'), { recursive: true, force: true });
-  fs.rmSync(path.resolve(outputDir, './swagger'), { recursive: true, force: true });
-  fs.mkdirSync(path.resolve(outputDir, './api'));
-  fs.mkdirSync(path.resolve(outputDir, './swagger'));
-
+  // 读取 package.json 配置
   const packageJSON = fs.readJSONSync(path.resolve(options.input, './package.json'));
-
   if (!packageJSON.swaggerDocs) {
     throw new Error('package.json swaggerDocs 未配置');
   }
 
+  // 准备目录
+  prepare({ options });
+
+  // 生成 api
   for (const item of packageJSON.swaggerDocs) {
-    await build({ swaggerDoc: item, options });
+    (async function () {
+      let json;
+      // 获得 json
+      if (item.docUrl) {
+        json = await swaggerJsonByDocUrl({ docUrl: item.docUrl });
+      } else if (item.jsonUrl) {
+        json = await swaggerJsonByJsonUrl({ jsonUrl: item.jsonUrl });
+      }
+
+      // 处理 json
+      json = processJson({ json });
+
+      // 写入 json
+      writeSwaggerJson({ output: options.output, docName: item.docName, json });
+      // 生成 ts 文件
+      await code({ name: item.docName, options });
+
+      console.log(`build-api success ${item.docName}`);
+    })();
   }
 
-  console.log('buildApi success');
+  console.log('build-api all success');
 }
 
 export { buildApi };
