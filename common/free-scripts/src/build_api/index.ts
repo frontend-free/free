@@ -31,14 +31,15 @@ async function code({ name, options }) {
 
 // /auth/login moduleNameIndex 为 0，则得到 login
 function toCamelCase({ url, options }) {
-  const parts = url.replace(/-/g, '/').replace(/_/g, '/').split('/');
-
   const moduleNameIndex = options.moduleNameIndex || 0;
+  let parts = url.split('/').slice(moduleNameIndex + 2);
+
+  parts = parts.join('/').replace(/-/g, '/').replace(/_/g, '/').split('/');
 
   const camelCase =
-    parts[moduleNameIndex + 2] +
+    parts[0] +
     parts
-      .slice(moduleNameIndex + 3)
+      .slice(1)
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join('');
   return camelCase;
