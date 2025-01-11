@@ -14,6 +14,7 @@ program
   .description('swagger 文档生成 API 方法')
   .option('-i, --input <input>', 'package.json 所在的目录，读取 package.json 中的 swaggerDocs 字段')
   .option('-o, --output <output>', '输出 /api /swagger 的目录')
+  .option('-m, --moduleNameIndex <moduleNameIndex>', 'generateApi moduleNameIndex')
   .action(buildApi);
 
 program

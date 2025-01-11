@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: moduleNameIndex
+
 ## 1.2.2
 
 ### Patch Changes

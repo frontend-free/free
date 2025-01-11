@@ -14,8 +14,9 @@ async function code({ name, options }) {
     output: path.resolve(outputDir, './api'),
     input: filename,
     httpClientType: 'axios',
-    // 后端接口规则是 /api/:module/xxxx, 于是 moduleIndex 为 1
-    moduleNameIndex: 1,
+    // eg: /auth/registry, 于是 moduleIndex 为 0
+    // eg: /api/:module/xxxx, 于是 moduleIndex 为 1
+    moduleNameIndex: options.moduleNameIndex || 0,
     // @ts-ignore
     primitiveTypeConstructs: () => ({
       integer: (schema) => {
@@ -28,20 +29,16 @@ async function code({ name, options }) {
   });
 }
 
-// /api/base/base-dictionary/add 得到 baseDictionaryAdd
-// /auth/login 得到 authLogin
-function toCamelCase(url) {
-  let parts = url.replace('/api/', '/').replace(/-/g, '/').replace(/_/g, '/').split('/');
+// /auth/login moduleNameIndex 为 0，则得到 login
+function toCamelCase({ url, options }) {
+  const parts = url.replace(/-/g, '/').replace(/_/g, '/').split('/');
 
-  // 历史原因，先这样实现
-  if (parts[1] === parts[2]) {
-    parts = parts.slice(1);
-  }
+  const moduleNameIndex = options.moduleNameIndex || 0;
 
   const camelCase =
-    parts[1] +
+    parts[moduleNameIndex + 2] +
     parts
-      .slice(2)
+      .slice(moduleNameIndex + 3)
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join('');
   return camelCase;
@@ -88,10 +85,10 @@ async function swaggerJsonByJsonUrl({ jsonUrl }) {
   return json;
 }
 
-function processJson({ json }) {
+function processJson({ json, options }) {
   // operationId 不采用原先值（后端没维护好），于是采用 url
   for (const apiPath in json.paths) {
-    const funName = toCamelCase(apiPath);
+    const funName = toCamelCase({ url: apiPath, options });
     // 只有一个方法，get post ...
     for (const method in json.paths[apiPath]) {
       json.paths[apiPath][method].operationId = funName;
@@ -120,6 +117,7 @@ function prepare({ options }) {
 interface Options {
   input?: string;
   output?: string;
+  moduleNameIndex?: number;
 }
 
 async function buildApi(options: Options) {
@@ -144,28 +142,34 @@ async function buildApi(options: Options) {
   // 准备目录
   prepare({ options });
 
+  const ps: any[] = [];
+
   // 生成 api
   for (const item of packageJSON.swaggerDocs) {
-    (async function () {
-      let json;
-      // 获得 json
-      if (item.docUrl) {
-        json = await swaggerJsonByDocUrl({ docUrl: item.docUrl });
-      } else if (item.jsonUrl) {
-        json = await swaggerJsonByJsonUrl({ jsonUrl: item.jsonUrl });
-      }
+    ps.push(
+      (async function () {
+        let json;
+        // 获得 json
+        if (item.docUrl) {
+          json = await swaggerJsonByDocUrl({ docUrl: item.docUrl });
+        } else if (item.jsonUrl) {
+          json = await swaggerJsonByJsonUrl({ jsonUrl: item.jsonUrl });
+        }
 
-      // 处理 json
-      json = processJson({ json });
+        // 处理 json
+        json = processJson({ json, options });
 
-      // 写入 json
-      writeSwaggerJson({ output: options.output, docName: item.docName, json });
-      // 生成 ts 文件
-      await code({ name: item.docName, options });
+        // 写入 json
+        writeSwaggerJson({ output: options.output, docName: item.docName, json });
+        // 生成 ts 文件
+        await code({ name: item.docName, options });
 
-      console.log(`build-api success ${item.docName}`);
-    })();
+        console.log(`build-api success ${item.docName}`);
+      })()
+    );
   }
+
+  await Promise.all(ps);
 
   console.log('build-api all success');
 }
