@@ -1,7 +1,8 @@
 import { createFilter } from '@rollup/pluginutils';
 
-function vitePluginRemoveSvgColor(config: { include?: string[]; exclude?: string[] }) {
-  const { include = ['/svgs'], exclude } = config;
+function vitePluginRemoveSvgColor(config?: { include?: string[]; exclude?: string[] }) {
+  const { include = ['**/svgs/**/*.svg?react'], exclude } = config || {};
+
   const filter = createFilter(include, exclude);
 
   return {
