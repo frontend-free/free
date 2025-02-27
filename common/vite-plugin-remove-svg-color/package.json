@@ -1,0 +1,24 @@
+{
+  "name": "@fe-free/vite-plugin-remove-svg-color",
+  "version": "1.3.3",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf ./dist; tsc;",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^5.1.3",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0"
+  },
+  "peerDependencies": {
+    "vite-plugin-svgr": "^4.3.0"
+  }
+}
