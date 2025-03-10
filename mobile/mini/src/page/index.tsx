@@ -11,6 +11,7 @@ import { isString } from 'lodash-es';
 
 interface PageProps {
   title?: string;
+  hideNavBar?: boolean;
   hideBack?: boolean;
   hideSafeArea?: boolean;
   top?: React.ReactNode;
@@ -59,11 +60,13 @@ const Page = (props: PageProps) => {
 
   return (
     <View className={classNames('mini-page flex h-full flex-col', props.className)}>
-      <AtNavBar
-        title={props.title}
-        leftIconType={props.hideBack ? '' : 'chevron-left'}
-        onClickLeftIcon={handleBack}
-      />
+      {!props.hideNavBar && (
+        <AtNavBar
+          title={props.title}
+          leftIconType={props.hideBack ? '' : 'chevron-left'}
+          onClickLeftIcon={handleBack}
+        />
+      )}
       {props.top && <View>{props.top}</View>}
       <View className="flex-1 overflow-y-auto">{content}</View>
       {props.bottom && <View>{props.bottom}</View>}
