@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.6
+
+### Patch Changes
+
+- feat: mini page hideNavBar
+
 ## 1.4.5
 
 ### Patch Changes
