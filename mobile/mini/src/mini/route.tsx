@@ -8,7 +8,15 @@ function usePageRoute() {
 
 function usePageRouteParams<T extends Record<string, string>>() {
   const instance = useMemo(() => Taro.getCurrentInstance(), []);
-  return instance.router?.params as T;
+  const params = instance.router?.params as T;
+
+  const result: Record<string, string> = {};
+
+  for (const p in params) {
+    result[p] = decodeURIComponent(params[p]);
+  }
+
+  return result;
 }
 
 const route = {

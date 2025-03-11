@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.9
+
+### Patch Changes
+
+- feat: mini route
+
 ## 1.4.8
 
 ### Patch Changes
