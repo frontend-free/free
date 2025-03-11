@@ -23,6 +23,12 @@ Toast.show = (props: ToastProps) => {
   };
 
   ComponentRoot.renderComponent(key, <Toast {...props} onClose={handleOnClose} />);
+
+  return {
+    close: () => {
+      ComponentRoot.renderComponent(key, null);
+    },
+  };
 };
 
 export { Toast };

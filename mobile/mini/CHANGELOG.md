@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.8
+
+### Patch Changes
+
+- feat: mini toast
+
 ## 1.4.7
 
 ### Patch Changes
