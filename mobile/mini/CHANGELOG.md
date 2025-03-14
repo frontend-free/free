@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.12
+
+### Patch Changes
+
+- feat: mini view
+
 ## 1.4.11
 
 ### Patch Changes

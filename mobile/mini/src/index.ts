@@ -1,4 +1,8 @@
+import { View } from '@tarojs/components';
 import './index.scss';
+
+// 原封不动 export 出去，减少 @tarojs/components 的使用
+export { View };
 
 export * from './mini';
 
