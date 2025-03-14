@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.11
+
+### Patch Changes
+
+- fix: mini alert
+
 ## 1.4.10
 
 ### Patch Changes

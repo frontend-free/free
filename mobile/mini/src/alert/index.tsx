@@ -1,5 +1,6 @@
-import { View, Text } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import classNames from 'classnames';
+import { Text } from '../text';
 
 function Alert({
   message,
