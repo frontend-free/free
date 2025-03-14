@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.10
+
+### Patch Changes
+
+- feat: add alert segmented control
+
 ## 1.4.9
 
 ### Patch Changes

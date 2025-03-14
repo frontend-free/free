@@ -2,6 +2,8 @@ import './index.scss';
 
 export * from './mini';
 
+export * from './alert';
+
 export * from './button';
 export type * from './button';
 
@@ -16,6 +18,9 @@ export type * from './select';
 
 export * from './radio';
 export type * from './radio';
+
+export * from './segmented_control';
+export type * from './segmented_control';
 
 export * from './text';
 export type * from './text';
