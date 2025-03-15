@@ -18,6 +18,7 @@ interface PageProps {
   bottom?: React.ReactNode;
   children?: React.ReactNode | ReactNode[];
   loading?: boolean;
+  bg?: boolean;
   error?: boolean | string;
   empty?: boolean | string;
   className?: string;
@@ -59,7 +60,15 @@ const Page = (props: PageProps) => {
   }, []);
 
   return (
-    <View className={classNames('mini-page flex h-full flex-col', props.className)}>
+    <View
+      className={classNames(
+        'mini-page flex h-full flex-col',
+        {
+          'bg-[#ededed]': props.bg,
+        },
+        props.className
+      )}
+    >
       {!props.hideNavBar && (
         <AtNavBar
           title={props.title}

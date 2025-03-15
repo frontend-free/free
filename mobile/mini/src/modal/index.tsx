@@ -16,7 +16,11 @@ const Modal = (props: ModalProps) => {
       <AtModalContent>{props.content || props.children}</AtModalContent>
       <AtModalAction>
         {props.cancelText && <Button onClick={props.onCancel}>{props.cancelText}</Button>}
-        {props.confirmText && <Button onClick={props.onConfirm}>{props.confirmText}</Button>}
+        {props.confirmText && (
+          <Button type="primary" onClick={props.onConfirm}>
+            {props.confirmText}
+          </Button>
+        )}
       </AtModalAction>
     </AtModal>
   );
