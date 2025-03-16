@@ -22,6 +22,7 @@ interface PageProps {
   error?: boolean | string;
   empty?: boolean | string;
   className?: string;
+  onBack?: () => void;
 }
 const Page = (props: PageProps) => {
   let content;
@@ -73,7 +74,7 @@ const Page = (props: PageProps) => {
         <AtNavBar
           title={props.title}
           leftIconType={props.hideBack ? '' : 'chevron-left'}
-          onClickLeftIcon={handleBack}
+          onClickLeftIcon={props.onBack || handleBack}
         />
       )}
       {props.top && <View>{props.top}</View>}
@@ -85,3 +86,4 @@ const Page = (props: PageProps) => {
 };
 
 export { Page };
+export type { PageProps };

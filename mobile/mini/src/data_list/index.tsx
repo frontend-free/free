@@ -21,7 +21,7 @@ function DataList<D extends object = any>({
   className,
 }: DataListProps<D>) {
   return (
-    <View className={classNames('flex flex-col gap-2 h-full w-full overflow-y-auto', className)}>
+    <View className={classNames('h-full w-full overflow-y-auto', className)}>
       {loading && (
         <View className="flex items-center justify-center pt-4">
           <AtActivityIndicator size={60} />

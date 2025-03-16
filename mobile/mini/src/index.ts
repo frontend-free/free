@@ -34,6 +34,7 @@ export type * from './text';
 
 export * from './svg';
 export * from './page';
+export type * from './page';
 
 export * from './tabs';
 
