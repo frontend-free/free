@@ -40,8 +40,8 @@ const DataList = ({
           return renderItem({ item, index });
         })}
       {loadingMore && (
-        <View className="flex flex-row items-center justify-center py-2">
-          <AtActivityIndicator size={60} />
+        <View className="flex flex-row items-center justify-center py-2 gap-2">
+          <AtActivityIndicator />
           <Text className="text-desc">加载更多...</Text>
         </View>
       )}
