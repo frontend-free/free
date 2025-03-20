@@ -39,6 +39,7 @@ export type * from './page';
 export * from './tabs';
 
 export * from './list';
+export type * from './list';
 
 export * from './v_list';
 
