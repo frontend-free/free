@@ -24,7 +24,12 @@ const DataList = ({
   ...scrollViewProps
 }: DataListProps<any>) => {
   return (
-    <ScrollView scrollY {...scrollViewProps} className={classNames('h-full w-full', className)}>
+    <ScrollView
+      scrollY
+      refresherEnabled
+      {...scrollViewProps}
+      className={classNames('h-full w-full', className)}
+    >
       {loading && (
         <View className="flex items-center justify-center pt-4">
           <AtActivityIndicator size={60} />
