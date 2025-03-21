@@ -20,8 +20,8 @@ export const valueEnum<%= enumName %> = {
     value:  '<%= enumItem[key].value %>',<%} else {%>
     value:  '<%= key %>',<%}%><% if(enumItem[key].status) {%>
     status:  '<%= enumItem[key].status %>',<%}%><% if(enumItem[key].color) {%>
-    color:  '<%= enumItem[key].color %>'
-    <%}%>
+    color:  '<%= enumItem[key].color %>',<%}%><% if(enumItem[key].data) {%>
+    data:  <%- JSON.stringify(enumItem[key].data) %>,<%}%>
   },<% }); %>
 }
 
@@ -31,6 +31,7 @@ export const list<%= enumName %> = Object.keys(valueEnum<%= enumName %>).map((ke
   return {
     value: item.value !== undefined ? item.value : key,
     label: item.text,
+    originData: item.data
   };
 });
 
