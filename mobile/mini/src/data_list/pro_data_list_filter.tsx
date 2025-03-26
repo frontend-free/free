@@ -2,11 +2,9 @@ import type { ProDataListProps } from './pro_data_list';
 import { FloatLayout } from '../float_layout';
 import { Input } from '../input';
 import { List } from '../list';
-import { Picker } from '../picker';
 import { ProDataList } from './pro_data_list';
 import { Text } from '../text';
 import { View } from '@tarojs/components';
-import { Picker as TaroPicker } from '@tarojs/components';
 import { useMemo, useState } from 'react';
 
 interface ProDataListWithFilterColumnOfSelect {
@@ -63,13 +61,13 @@ function FilterOfSelect({
   }
 
   return (
-    <Picker
+    <List.SelectItem
+      title={title}
+      extraText={extraText}
       value={filter[name]}
       onChange={(v) => setFilter({ ...filter, [name]: v })}
       options={options}
-    >
-      <List.Item title={title} extraText={extraText} />
-    </Picker>
+    />
   );
 }
 
@@ -106,15 +104,14 @@ function FilterOfDate({
 }) {
   const { title, name } = column;
   return (
-    <TaroPicker
-      mode="date"
+    <List.DateItem
+      title={title}
+      extraText={filter[name]}
       value={filter[name] || ''}
-      onChange={(e) => {
-        setFilter({ ...filter, [name]: e.detail.value });
+      onChange={(v) => {
+        setFilter({ ...filter, [name]: v });
       }}
-    >
-      <List.Item title={title} extraText={filter[name] || '请选择'} />
-    </TaroPicker>
+    />
   );
 }
 

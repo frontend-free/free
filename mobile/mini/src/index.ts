@@ -11,6 +11,9 @@ export * from './alert';
 export * from './button';
 export type * from './button';
 
+export * from './card';
+export type * from './card';
+
 export * from './input';
 export type * from './input';
 

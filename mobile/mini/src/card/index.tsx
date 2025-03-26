@@ -61,7 +61,7 @@ function Card({ title, right, items, buttons }: CardProps) {
             {buttons &&
               buttons.map((button, index) => (
                 <>
-                  {index > 0 && <View className="c-border-right" />}
+                  {index > 0 && <View key={`border-${index}`} className="c-border-right" />}
                   <View key={index} className="flex-1">
                     {/* @ts-ignore 后端字段问题，实际上是 coachSetPrice */}
                     {button.label && (

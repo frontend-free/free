@@ -9,6 +9,8 @@ import { isNumber } from 'lodash-es';
 import SvgCopy from '../assets/copy.svg';
 import { setClipboardData } from '@tarojs/taro';
 import { Svg } from '../svg';
+import { Picker as TaroPicker } from '@tarojs/components';
+import { Picker } from '../picker';
 
 const ListTitle = memo<{ title: string; right?: ReactNode }>((props) => {
   return (
@@ -58,8 +60,37 @@ const ListItem = ({ required, title, extraTextDefaultColor, ...rest }: ListItemP
   );
 };
 
+const ListSelectItem = (props: {
+  value: any;
+  onChange: (v: any) => void;
+  options: { label: string; value: any }[];
+  title: string;
+  extraText: string;
+}) => {
+  return (
+    <Picker value={props.value} onChange={(v) => props.onChange(v)} options={props.options}>
+      <List.Item title={props.title} extraText={props.extraText || '请选择'} arrow="right" />
+    </Picker>
+  );
+};
+
+const ListDateItem = (props: {
+  value: any;
+  onChange: (v: any) => void;
+  title: string;
+  extraText: string;
+}) => {
+  return (
+    <TaroPicker mode="date" value={props.value} onChange={(e) => props.onChange(e.detail.value)}>
+      <List.Item title={props.title} extraText={props.extraText || '请选择'} arrow="right" />
+    </TaroPicker>
+  );
+};
+
 List.Item = ListItem;
 List.Title = ListTitle;
+List.SelectItem = ListSelectItem;
+List.DateItem = ListDateItem;
 
 interface ListDescriptionProps extends Pick<ListProps, 'size' | 'title'> {
   items: {
@@ -117,7 +148,5 @@ const ListDescription = (props: ListDescriptionProps) => {
   );
 };
 
-List.Description = ListDescription;
-
-export { List };
-export type { ListProps, ListItemProps };
+export { List, ListDescription };
+export type { ListProps, ListItemProps, ListDescriptionProps };
