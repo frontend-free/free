@@ -7,7 +7,8 @@ type DigitInputProps = {
   value?: number;
   onChange?: (v: number) => void;
   name: string;
-  title: string;
+  title: string | ReactNode;
+  note?: string | ReactNode;
   placeholder?: string;
   children?: ReactNode;
   disabled?: boolean;
@@ -56,7 +57,7 @@ function DigitInput(props: DigitInputProps) {
   );
 }
 
-interface PriceInputProps extends DigitInputProps {}
+type PriceInputProps = DigitInputProps;
 
 function PriceInput(props: PriceInputProps) {
   return <DigitInput unit={100} {...props} />;
