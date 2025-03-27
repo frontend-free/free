@@ -1,3 +1,7 @@
+$color-brand: var(--color-brand, #6190e8);
+
+@import 'taro-ui/dist/style/index';
+
 // fix_taro_ui
 .at-modal__content {
   min-height: 2rem;
@@ -18,4 +22,14 @@
     line-height: 1;
     content: '*';
   }
+}
+
+// override theme
+.weui-switch:checked {
+  background-color: $color-brand !important;
+  border-color: $color-brand !important;
+}
+//
+.at-input__children span {
+  color: $color-brand !important;
 }

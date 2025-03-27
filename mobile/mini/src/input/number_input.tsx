@@ -3,28 +3,32 @@ import Big from 'big.js';
 import type { ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-type PriceInputProps = {
+type DigitInputProps = {
   value?: number;
   onChange?: (v: number) => void;
   name: string;
   title: string;
   placeholder?: string;
   children?: ReactNode;
+  disabled?: boolean;
+  unit?: 1 | 100;
 };
 
-function PriceInput(props: PriceInputProps) {
+function DigitInput(props: DigitInputProps) {
   const onChange = props.onChange;
   const value = props.value || 0;
-  const [text, setText] = useState<string>(Big(value).div(100).toString());
+  const unit = props.unit || 1;
+
+  const [text, setText] = useState<string>(Big(value).div(unit).toString());
 
   // 以便 effect 使用
   const refText = useRef<string>(text);
   useEffect(() => {
-    const inputValue = refText.current ? Big(refText.current).times(100).toNumber() : 0;
+    const inputValue = refText.current ? Big(refText.current).times(unit).toNumber() : 0;
 
     // 如果输入框的值与 props.value 不一致，则更新输入框的值
     if (value !== inputValue) {
-      const newText = Big(value).div(100).toString();
+      const newText = Big(value).div(unit).toString();
       setText(newText);
       refText.current = newText;
     }
@@ -42,13 +46,21 @@ function PriceInput(props: PriceInputProps) {
       setText(newV);
       refText.current = newV;
 
-      onChange?.(newV ? Big(newV).times(100).toNumber() : 0);
+      onChange?.(newV ? Big(newV).times(unit).toNumber() : 0);
     },
     [onChange]
   );
 
-  return <Input {...props} type="digit" value={text} onChange={handleChange} />;
+  return (
+    <Input {...props} type="digit" value={text} onChange={handleChange} disabled={props.disabled} />
+  );
 }
 
-export { PriceInput };
-export type { PriceInputProps };
+interface PriceInputProps extends DigitInputProps {}
+
+function PriceInput(props: PriceInputProps) {
+  return <DigitInput unit={100} {...props} />;
+}
+
+export { DigitInput, PriceInput };
+export type { DigitInputProps, PriceInputProps };

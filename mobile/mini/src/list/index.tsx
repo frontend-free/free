@@ -42,13 +42,22 @@ const List = (props: ListProps) => {
   );
 };
 
-interface ListItemProps extends Omit<AtListItemProps, 'title'> {
+interface ListItemProps extends Omit<AtListItemProps, 'title' | 'note' | 'extraText'> {
   title?: string | ReactNode;
+  note?: string | ReactNode;
+  extraText?: string | ReactNode;
   required?: boolean;
   extraTextDefaultColor?: boolean;
 }
 
-const ListItem = ({ required, title, extraTextDefaultColor, ...rest }: ListItemProps) => {
+const ListItem = ({
+  required,
+  title,
+  note,
+  extraText,
+  extraTextDefaultColor,
+  ...rest
+}: ListItemProps) => {
   return (
     <AtListItem
       {...rest}
@@ -56,6 +65,8 @@ const ListItem = ({ required, title, extraTextDefaultColor, ...rest }: ListItemP
         'mini-list-item-extra-text-default-color': extraTextDefaultColor,
       })}
       title={required ? <View className="mini-required">{title}</View> : (title as any)}
+      note={note as any}
+      extraText={extraText as any}
     />
   );
 };
@@ -64,12 +75,25 @@ const ListSelectItem = (props: {
   value: any;
   onChange: (v: any) => void;
   options: { label: string; value: any }[];
-  title: string;
-  extraText: string;
+  title: string | ReactNode;
+  note?: string | ReactNode;
+  extraText?: string | ReactNode;
+  disabled?: boolean;
 }) => {
   return (
-    <Picker value={props.value} onChange={(v) => props.onChange(v)} options={props.options}>
-      <List.Item title={props.title} extraText={props.extraText || '请选择'} arrow="right" />
+    <Picker
+      value={props.value}
+      onChange={(v) => props.onChange(v)}
+      options={props.options}
+      disabled={props.disabled}
+    >
+      <List.Item
+        title={props.title}
+        note={props.note}
+        extraText={props.extraText || '请选择'}
+        arrow="right"
+        disabled={props.disabled}
+      />
     </Picker>
   );
 };
@@ -77,8 +101,8 @@ const ListSelectItem = (props: {
 const ListDateItem = (props: {
   value: any;
   onChange: (v: any) => void;
-  title: string;
-  extraText: string;
+  title: string | ReactNode;
+  extraText: string | ReactNode;
 }) => {
   return (
     <TaroPicker mode="date" value={props.value} onChange={(e) => props.onChange(e.detail.value)}>

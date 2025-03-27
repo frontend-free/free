@@ -11,10 +11,11 @@ interface PickerProps {
   value?: string | number;
   onChange?: (value?: string | number, item?: PickerItem) => void;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 function Picker(props: PickerProps) {
-  const { options, value, onChange, children } = props;
+  const { options, value, onChange, children, disabled } = props;
 
   const tPickerProps = useMemo(() => {
     const valueMap = {};
@@ -37,6 +38,7 @@ function Picker(props: PickerProps) {
         const item = options[v.detail.value];
         onChange?.(item?.value, item);
       }}
+      disabled={disabled}
     >
       {children}
     </TaroPicker>
