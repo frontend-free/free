@@ -8,6 +8,7 @@ import { memo } from 'react';
 interface InputProps extends Omit<AtInputProps, 'title'> {
   title?: string | ReactNode;
   note?: string | ReactNode;
+  disabled?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -19,11 +20,13 @@ const Input = memo<InputProps>((props) => {
       <div style={{ color: '#999', fontSize: '0.7rem' }}>{props.note}</div>
     </div>
   );
+
   return (
     <AtInput
       {...props}
       className={classNames('mini-input', props.className)}
-      title={newTitle as any}
+      title={(typeof props.title === 'string' && !props.note ? newTitle : props.title) as any}
+      disabled={props.disabled}
     />
   );
 });

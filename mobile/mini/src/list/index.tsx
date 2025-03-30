@@ -12,9 +12,14 @@ import { Svg } from '../svg';
 import { Picker as TaroPicker } from '@tarojs/components';
 import { Picker } from '../picker';
 
-const ListTitle = memo<{ title: string; right?: ReactNode }>((props) => {
+const ListTitle = memo<{ title: string; right?: ReactNode; size?: 'small' }>((props) => {
   return (
-    <View className="mini-list-title flex items-end justify-between p-1 px-2 pt-2">
+    <View
+      className={classNames('mini-list-title flex items-end justify-between pb-1 px-2', {
+        'pt-3': props.size !== 'small',
+        'pt-2': props.size === 'small',
+      })}
+    >
       <Text className="text-desc">{props.title}</Text>
       <View>{props.right}</View>
     </View>
@@ -29,7 +34,7 @@ interface ListProps extends AtListProps {
 const List = (props: ListProps) => {
   return (
     <View>
-      {props.title && <ListTitle title={props.title} />}
+      {props.title && <ListTitle title={props.title} size={props.size} />}
       <View
         className={classNames('mini-list', {
           'mini-list-response-width': props.responseWidth,
@@ -74,12 +79,14 @@ const ListItem = ({
 const ListSelectItem = (props: {
   value: any;
   onChange: (v: any) => void;
-  options: { label: string; value: any }[];
+  options: { label: string; value: any; originData?: any }[];
   title: string | ReactNode;
   note?: string | ReactNode;
   extraText?: string | ReactNode;
   disabled?: boolean;
 }) => {
+  const option = props.options.find((item) => item.value === props.value);
+
   return (
     <Picker
       value={props.value}
@@ -90,7 +97,7 @@ const ListSelectItem = (props: {
       <List.Item
         title={props.title}
         note={props.note}
-        extraText={props.extraText || '请选择'}
+        extraText={props.extraText || option?.label || '请选择'}
         arrow="right"
         disabled={props.disabled}
       />
@@ -102,11 +109,19 @@ const ListDateItem = (props: {
   value: any;
   onChange: (v: any) => void;
   title: string | ReactNode;
+  note?: string | ReactNode;
   extraText: string | ReactNode;
+  disabled?: boolean;
 }) => {
   return (
     <TaroPicker mode="date" value={props.value} onChange={(e) => props.onChange(e.detail.value)}>
-      <List.Item title={props.title} extraText={props.extraText || '请选择'} arrow="right" />
+      <List.Item
+        title={props.title}
+        note={props.note}
+        extraText={props.extraText || '请选择'}
+        arrow="right"
+        disabled={props.disabled}
+      />
     </TaroPicker>
   );
 };

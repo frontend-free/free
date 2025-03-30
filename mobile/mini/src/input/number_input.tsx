@@ -2,6 +2,7 @@ import { Input } from './input';
 import Big from 'big.js';
 import type { ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Text } from '../text';
 
 type DigitInputProps = {
   value?: number;
@@ -60,7 +61,11 @@ function DigitInput(props: DigitInputProps) {
 type PriceInputProps = DigitInputProps;
 
 function PriceInput(props: PriceInputProps) {
-  return <DigitInput unit={100} {...props} />;
+  return (
+    <DigitInput unit={100} {...props}>
+      {props.children || <Text>元</Text>}
+    </DigitInput>
+  );
 }
 
 export { DigitInput, PriceInput };

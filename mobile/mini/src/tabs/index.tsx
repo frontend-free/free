@@ -10,10 +10,11 @@ interface TabsProps {
     content: React.ReactNode;
   }[];
   height?: string;
+  initialCurrent?: number;
 }
 
 const Tabs = (props: TabsProps) => {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(props.initialCurrent || 0);
 
   return (
     <AtTabs
