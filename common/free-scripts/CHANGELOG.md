@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.5
+
+### Patch Changes
+
+- feat: fix swagger-typescript-api
+
 ## 1.3.4
 
 ### Patch Changes

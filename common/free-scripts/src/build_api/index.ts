@@ -10,7 +10,7 @@ async function code({ name, options }) {
   console.log('code', filename);
 
   return generateApi({
-    name: `${name}.ts`,
+    fileName: `${name}.ts`,
     output: path.resolve(outputDir, './api'),
     input: filename,
     httpClientType: 'axios',
