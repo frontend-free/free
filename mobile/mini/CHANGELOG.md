@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.17
+
+### Patch Changes
+
+- feat: mini and fe-script
+
 ## 1.4.16
 
 ### Patch Changes
