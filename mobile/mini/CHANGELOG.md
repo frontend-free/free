@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.4.18
+
+### Patch Changes
+
+- 209a9c9: feat: mini
+
 ## 1.4.17
 
 ### Patch Changes
