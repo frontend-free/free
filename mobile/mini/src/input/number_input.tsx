@@ -13,7 +13,7 @@ type DigitInputProps = {
   placeholder?: string;
   children?: ReactNode;
   disabled?: boolean;
-  unit?: 1 | 100;
+  unit?: 1 | 100 | 60;
 };
 
 function DigitInput(props: DigitInputProps) {
@@ -50,7 +50,7 @@ function DigitInput(props: DigitInputProps) {
 
       onChange?.(newV ? Big(newV).times(unit).toNumber() : 0);
     },
-    [onChange]
+    [onChange, unit]
   );
 
   return (

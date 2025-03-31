@@ -33,3 +33,7 @@ $color-brand: var(--color-brand, #6190e8);
 .at-input__children span {
   color: $color-brand !important;
 }
+.at-tag--active.at-tag--primary {
+  border-color: $color-brand !important;
+  background-color: $color-brand !important;
+}

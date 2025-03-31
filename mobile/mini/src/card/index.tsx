@@ -18,12 +18,13 @@ interface CardProps {
     label: string;
     onClick: () => void;
   }[];
+  labelWidth?: string;
 }
 
-const Field = ({ label, value, children }: CardItem) => {
+const Field = ({ label, value, children, labelWidth }: CardItem & { labelWidth?: string }) => {
   return (
     <View className="flex flex-1 flex-row gap-2 items-center">
-      <Text size="sm" className="w-[4em]">
+      <Text size="sm" style={{ width: labelWidth || '4em' }}>
         {label}
       </Text>
       {children ? children : <Text className="text-desc">{value || '-'}</Text>}
@@ -31,7 +32,7 @@ const Field = ({ label, value, children }: CardItem) => {
   );
 };
 
-function Card({ title, right, items, buttons }: CardProps) {
+function Card({ title, right, items, buttons, labelWidth }: CardProps) {
   return (
     <View className="bg-white rounded-lg flex flex-col">
       <View className="p-3 flex flex-col gap-2">
@@ -45,12 +46,12 @@ function Card({ title, right, items, buttons }: CardProps) {
               return (
                 <View key={index} className="flex flex-row gap-2">
                   {item.map((item, index) => (
-                    <Field key={index} {...item} />
+                    <Field key={index} labelWidth={labelWidth} {...item} />
                   ))}
                 </View>
               );
             }
-            return <Field key={index} {...item} />;
+            return <Field key={index} labelWidth={labelWidth} {...item} />;
           })}
         </View>
       </View>

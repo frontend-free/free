@@ -11,10 +11,12 @@ interface TabsProps {
   }[];
   height?: string;
   initialCurrent?: number;
+  current?: number;
+  onChange?: (current: number) => void;
 }
 
 const Tabs = (props: TabsProps) => {
-  const [current, setCurrent] = useState(props.initialCurrent || 0);
+  const [current, setCurrent] = useState(props.current || props.initialCurrent || 0);
 
   return (
     <AtTabs
@@ -23,7 +25,10 @@ const Tabs = (props: TabsProps) => {
       tabList={props.items.map((item) => ({ title: item.title }))}
       tabDirection={props.direction}
       current={current}
-      onClick={(v) => setCurrent(v)}
+      onClick={(v) => {
+        setCurrent(v);
+        props.onChange?.(v);
+      }}
     >
       {props.items.map((item, index) => (
         <AtTabsPane key={index} tabDirection={props.direction} current={current} index={index}>
