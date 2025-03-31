@@ -4,7 +4,8 @@ import { ComponentRoot } from '../component_root';
 import type { ReactNode } from 'react';
 import { Button } from '@tarojs/components';
 import { View } from '@tarojs/components';
-
+import ReactDOM from 'react-dom';
+import { useMemo } from 'react';
 interface ModalProps extends Omit<AtModalProps, 'isOpened' | 'content'> {
   content?: string | ReactNode;
 }
@@ -24,6 +25,18 @@ const Modal = (props: ModalProps) => {
       </AtModalAction>
     </AtModal>
   );
+};
+
+const PortalModal = (props: ModalProps) => {
+  const componentRoot = useMemo(() => {
+    return document.querySelector('.mini-component-root-container');
+  }, []);
+
+  if (!componentRoot) {
+    return null;
+  }
+
+  return ReactDOM.createPortal(<Modal {...props} />, componentRoot);
 };
 
 const key = 'Modal';
@@ -78,4 +91,4 @@ Modal.confirm = (props: ModalProps) => {
   });
 };
 
-export { Modal };
+export { Modal, PortalModal };

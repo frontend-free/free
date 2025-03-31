@@ -11,17 +11,12 @@ $color-brand: var(--color-brand, #6190e8);
 .weui-tabbar__item {
   padding-bottom: 0 !important;
 }
+.weui-picker__action:last-child {
+  color: $color-brand !important;
+}
 
-.mini-required {
-  &::before {
-    display: inline-block;
-    margin-right: 0.2rem;
-    color: #ff4949;
-    font-size: 0.7rem;
-    font-family: SimSun, sans-serif;
-    line-height: 1;
-    content: '*';
-  }
+taro-button-core[type='primary']:not([disabled]):active {
+  background-color: $color-brand !important;
 }
 
 // override theme
@@ -36,4 +31,19 @@ $color-brand: var(--color-brand, #6190e8);
 .at-tag--active.at-tag--primary {
   border-color: $color-brand !important;
   background-color: $color-brand !important;
+}
+.at-list__item .item-extra__info {
+  color: #727272;
+}
+
+.mini-required {
+  &::before {
+    display: inline-block;
+    margin-right: 0.2rem;
+    color: #ff4949;
+    font-size: 0.7rem;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: '*';
+  }
 }
