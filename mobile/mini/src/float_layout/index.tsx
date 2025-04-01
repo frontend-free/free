@@ -66,3 +66,4 @@ const FloatLayoutClick = forwardRef<FloatLayoutClickRef, FloatLayoutClickProps>(
 FloatLayout.Click = FloatLayoutClick;
 
 export { FloatLayout };
+export type { FloatLayoutClickRef, FloatLayoutClickProps };

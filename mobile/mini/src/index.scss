@@ -15,6 +15,11 @@ $color-brand: var(--color-brand, #6190e8);
   color: $color-brand !important;
 }
 
+.at-float-layout .layout-body__content {
+  min-height: 12.85rem;
+  position: relative;
+}
+
 taro-button-core[type='primary']:not([disabled]):active {
   background-color: $color-brand !important;
 }

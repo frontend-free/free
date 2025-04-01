@@ -5,7 +5,11 @@ import { DataList } from './data_list';
 
 interface ProDataListProps<D extends object = any>
   extends Omit<DataListProps<D>, 'data' | 'loading'> {
-  request: (params: { offset: number; [key: string]: any }) => Promise<D[] | undefined>;
+  request: (params: {
+    offset: number;
+    pageSize: number;
+    [key: string]: any;
+  }) => Promise<D[] | undefined>;
   params?: Record<string, any>;
   pageSize?: number;
 }
@@ -33,7 +37,7 @@ function ProDataList<D extends object = any>({
         nextId: resData?.length === pageSize ? offset + pageSize : undefined,
       };
     },
-    [request, params, pageSize]
+    [request, params, pageSize],
   );
 
   const {
@@ -43,7 +47,7 @@ function ProDataList<D extends object = any>({
     loadingMore,
     noMore,
   } = useInfiniteScroll(service, {
-    reloadDeps: Object.values(params || {}),
+    reloadDeps: [JSON.stringify(params || {})],
     isNoMore: (d) => d?.nextId === undefined,
   });
 
