@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
-import { Text } from '../text';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
+import { Text } from '../text';
 
 interface CardItem {
   label: string;
@@ -24,10 +24,10 @@ interface CardProps {
 const Field = ({ label, value, children, labelWidth }: CardItem & { labelWidth?: string }) => {
   return (
     <View className="flex flex-1 flex-row gap-2 items-center">
-      <Text size="sm" style={{ width: labelWidth || '4em' }}>
+      <Text size="sm" style={{ width: labelWidth || '5em' }}>
         {label}
       </Text>
-      {children ? children : <Text className="text-desc">{value || '-'}</Text>}
+      {children ? children : <Text className="text-secondary">{value || '-'}</Text>}
     </View>
   );
 };

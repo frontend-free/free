@@ -31,6 +31,7 @@
   "dependencies": {
     "@ant-design/pro-components": "^2.7.15",
     "@fe-free/core": "workspace:^",
+    "@fe-free/mini": "link:mobile/mini",
     "@fe-free/tool": "workspace:^",
     "antd": "^5.20.0",
     "dayjs": "~1.11.10",
@@ -76,5 +77,8 @@
     "tailwindcss": "^3.4.16",
     "typescript": "^5.1.2",
     "vite-plugin-svgr": "^4.3.0"
+  },
+  "pnpm": {
+    "overrides": {}
   }
 }

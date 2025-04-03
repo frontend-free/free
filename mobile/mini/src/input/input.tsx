@@ -1,13 +1,14 @@
-import { AtInput } from 'taro-ui';
 import classNames from 'classnames';
-import './index.scss';
-import type { AtInputProps } from 'taro-ui/types/input';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 import { memo } from 'react';
+import { AtInput } from 'taro-ui';
+import type { AtInputProps } from 'taro-ui/types/input';
+import { Text } from '../text';
+import './index.scss';
 
 interface InputProps extends Omit<AtInputProps, 'title'> {
-  title?: string | ReactNode;
-  note?: string | ReactNode;
+  title?: string;
+  note?: string;
   disabled?: boolean;
   className?: string;
   style?: CSSProperties;
@@ -15,17 +16,19 @@ interface InputProps extends Omit<AtInputProps, 'title'> {
 
 const Input = memo<InputProps>((props) => {
   const newTitle = (
-    <div>
-      <div>{props.title}</div>
-      <div style={{ color: '#999', fontSize: '0.7rem' }}>{props.note}</div>
-    </div>
+    <>
+      {props.title}
+      <Text size="xs" className="text-desc">
+        {props.note}
+      </Text>
+    </>
   );
 
   return (
     <AtInput
       {...props}
       className={classNames('mini-input', props.className)}
-      title={(typeof props.title === 'string' && !props.note ? newTitle : props.title) as any}
+      title={(typeof props.title === 'string' && !props.note ? props.title : newTitle) as any}
       disabled={props.disabled}
     />
   );
