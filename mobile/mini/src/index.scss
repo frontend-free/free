@@ -37,11 +37,13 @@ taro-button-core[type='primary']:not([disabled]):active {
   border-color: $color-brand !important;
   background-color: $color-brand !important;
 }
+
 .at-list__item-extra {
   max-width: 8rem;
 }
+
 .at-list__item .item-extra__info {
-  color: 'rgba(0, 0, 0, 0.65)';
+  color: #727272;
 }
 
 .mini-required {
