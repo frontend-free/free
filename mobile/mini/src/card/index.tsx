@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
+import { Fragment } from 'react';
 import { Text } from '../text';
 
 interface CardItem {
@@ -61,7 +62,7 @@ function Card({ title, right, items, buttons, labelWidth }: CardProps) {
           <View className="flex">
             {buttons &&
               buttons.map((button, index) => (
-                <>
+                <Fragment key={index}>
                   {index > 0 && <View key={`border-${index}`} className="c-border-right" />}
                   <View key={index} className="flex-1">
                     {/* @ts-ignore 后端字段问题，实际上是 coachSetPrice */}
@@ -77,7 +78,7 @@ function Card({ title, right, items, buttons, labelWidth }: CardProps) {
                       </Text>
                     )}
                   </View>
-                </>
+                </Fragment>
               ))}
           </View>
         </>
