@@ -1,9 +1,10 @@
-import { Text } from '../text';
 import type { ScrollViewProps } from '@tarojs/components';
 import { ScrollView, View } from '@tarojs/components';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
+import { Fragment } from 'react';
 import { AtActivityIndicator } from 'taro-ui';
+import { Text } from '../text';
 
 interface DataListProps<D> extends ScrollViewProps {
   loading?: boolean;
@@ -42,7 +43,7 @@ const DataList = ({
       )}
       {!loading &&
         data?.map((item, index) => {
-          return renderItem({ item, index });
+          return <Fragment key={index}>{renderItem({ item, index })}</Fragment>;
         })}
       {loadingMore && (
         <View className="flex flex-row items-center justify-center py-2 gap-2">
