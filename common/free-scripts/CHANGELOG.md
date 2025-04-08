@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.6
+
+### Patch Changes
+
+- feat: some
+
 ## 1.3.5
 
 ### Patch Changes

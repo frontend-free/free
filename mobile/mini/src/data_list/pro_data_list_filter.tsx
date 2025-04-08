@@ -1,15 +1,15 @@
-import type { ProDataListProps } from './pro_data_list';
+import { View } from '@tarojs/components';
+import type { RefObject } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import { AtSearchBar } from 'taro-ui';
+import type { AtSearchBarProps } from 'taro-ui/types/search-bar';
+import { Button } from '../button';
 import type { FloatLayoutClickRef } from '../float_layout';
 import { FloatLayout } from '../float_layout';
 import { List } from '../list';
-import { ProDataList } from './pro_data_list';
 import { Text } from '../text';
-import { View } from '@tarojs/components';
-import type { RefObject} from 'react';
-import { useMemo, useRef, useState } from 'react';
-import { Button } from '../button';
-import { AtSearchBar } from 'taro-ui';
-import type { AtSearchBarProps } from 'taro-ui/types/search-bar';
+import type { ProDataListProps } from './pro_data_list';
+import { ProDataList } from './pro_data_list';
 
 interface ProDataListWithFilterColumnOfSelect {
   type: 'select';
@@ -47,7 +47,7 @@ interface ProDataListWithProps {
   request: ProDataListProps['request'];
   renderItem: ProDataListProps['renderItem'];
   columns?: ProDataListWithFilterColumn[];
-  params?: ProDataListProps['params']
+  params?: ProDataListProps['params'];
   showSearchBar?: boolean;
   searchBarProps?: Omit<AtSearchBarProps, 'onChange' | 'value' | 'onActionClick'>;
 }
@@ -139,11 +139,11 @@ const Filter = ({
   const handleOK = () => {
     setFilter(values);
     refLayout.current?.close();
-  }
+  };
 
   const handleReset = () => {
     setValues(filter);
-  }
+  };
 
   return (
     <View className="flex flex-col h-full absolute w-full">
@@ -171,20 +171,27 @@ const Filter = ({
           <Button onClick={handleReset}>重置</Button>
         </View>
         <View className="flex-1">
-          <Button type="primary" onClick={handleOK}>确定</Button>
+          <Button type="primary" onClick={handleOK}>
+            确定
+          </Button>
         </View>
       </View>
     </View>
   );
 };
 
-const ProDataListWithFilter = ({ request, renderItem, columns, params, 
+const ProDataListWithFilter = ({
+  request,
+  renderItem,
+  columns,
+  params,
   showSearchBar,
-  searchBarProps, }: ProDataListWithProps) => {
+  searchBarProps,
+}: ProDataListWithProps) => {
   const refLayout = useRef<FloatLayoutClickRef>(null);
 
   const [searchText, setSearchText] = useState('');
-  
+
   const defaultFilter = useMemo(() => {
     const result = {};
 
@@ -202,16 +209,16 @@ const ProDataListWithFilter = ({ request, renderItem, columns, params,
 
     return {
       title: '筛选',
-      children: <Filter refLayout={refLayout} filter={filter} setFilter={setFilter} columns={columns} />,
+      children: (
+        <Filter refLayout={refLayout} filter={filter} setFilter={setFilter} columns={columns} />
+      ),
     };
   }, [filter, columns]);
-
-
 
   return (
     <View className="flex flex-col h-full">
       {(columns || showSearchBar) && (
-        <View className="flex flex-row bg-white">
+        <View className="flex flex-row bg-white cl-border-bottom">
           <View className="flex-1">
             {showSearchBar && (
               <AtSearchBar
@@ -239,10 +246,14 @@ const ProDataListWithFilter = ({ request, renderItem, columns, params,
         </View>
       )}
       <View className="flex-1 overflow-y-auto">
-        <ProDataList request={request} params={{
-          ...params,
-          ...filter
-        }} renderItem={renderItem} />
+        <ProDataList
+          request={request}
+          params={{
+            ...params,
+            ...filter,
+          }}
+          renderItem={renderItem}
+        />
       </View>
     </View>
   );

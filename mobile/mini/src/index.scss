@@ -57,3 +57,23 @@ taro-button-core[type='primary']:not([disabled]):active {
     content: '*';
   }
 }
+
+.cl-border {
+  border: 2px solid #e6e6e6;
+}
+
+.cl-border-top {
+  border-top: 2px solid #e6e6e6;
+}
+
+.cl-border-bottom {
+  border-bottom: 2px solid #e6e6e6;
+}
+
+.cl-border-left {
+  border-left: 2px solid #e6e6e6;
+}
+
+.cl-border-right {
+  border-right: 2px solid #e6e6e6;
+}
