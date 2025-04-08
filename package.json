@@ -17,7 +17,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "changeset": "changeset",
-    "npm_publish": "pnpm release; pnpm release:publish; pnpm sync",
+    "npm_publish": "pnpm release; pnpm release:publish;",
     "release": "changeset version; git add .; git commit -m 'chore: changeset Version Packages';",
     "release:publish": "git push origin main:main; changeset publish;",
     "sync": "node ./scripts/sync.js",
