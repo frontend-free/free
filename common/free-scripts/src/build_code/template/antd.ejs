@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tag } from 'antd';
+import type { TagProps } from 'antd';
 
 <% Object.keys(enums).forEach(function(enumName){
   const enumItem = enums[enumName]; %>
@@ -35,11 +36,11 @@ export const list<%= enumName %> = Object.keys(valueEnum<%= enumName %>).map((ke
   };
 });
 
-export function Tag<%= enumName %>(props: { value?: Enum<%= enumName %> | string }) {
+export function Tag<%= enumName %>(props: { value?: Enum<%= enumName %> | string } & TagProps) {
   const item = props.value && valueEnum<%= enumName %>[props.value]
 
   if(item){
-    return <Tag color={item.color}>{item.text}</Tag>;
+    return <Tag color={item.color} {...props}>{item.text}</Tag>;
   }
 
   return null;
