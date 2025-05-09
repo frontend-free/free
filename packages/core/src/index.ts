@@ -1,5 +1,7 @@
-export { CRUD, useDelete, OperateDelete, CRUDDetail } from './crud';
-export type { CRUDProps, CRUDMethods, CRUDDetailProps } from './crud';
+'use client';
+
+export { CRUD, CRUDDetail, OperateDelete, useDelete } from './crud';
+export type { CRUDDetailProps, CRUDMethods, CRUDProps } from './crud';
 
 export { ProFormJSON, ProFormJavascript, proFormSelectSearchProps } from './form';
 
@@ -10,7 +12,7 @@ export type { TableProps } from './table';
 
 export { EditorJavascript } from './editor_javascript';
 export { EditorJSON } from './editor_json';
-export { EditorMarkdown } from './editor_markdown';
 export { EditorLogs } from './editor_logs';
+export { EditorMarkdown } from './editor_markdown';
 
-export { customValueTypeMap, CustomValueTypeEnum } from './value_type_map';
+export { CustomValueTypeEnum, customValueTypeMap } from './value_type_map';

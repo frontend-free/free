@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
 import { Modal } from 'antd';
+import { useCallback } from 'react';
 
 interface Params {
   name: string;
@@ -7,6 +7,7 @@ interface Params {
   operateText?: string;
   onDelete: () => Promise<any>;
 }
+
 function useDelete(params: Params) {
   const { name, desc, onDelete } = params;
 
@@ -48,4 +49,4 @@ function OperateDelete(props: Params) {
   );
 }
 
-export { useDelete, OperateDelete };
+export { OperateDelete, useDelete };

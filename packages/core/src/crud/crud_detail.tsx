@@ -1,9 +1,9 @@
-import { message, Spin } from 'antd';
 import { DrawerForm, ProForm } from '@ant-design/pro-components';
+import { message, Spin } from 'antd';
+import classNames from 'classnames';
+import { isString } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 import type { CRUDProps } from './crud';
-import { isString } from 'lodash-es';
-import classNames from 'classnames';
 
 /**
  * create 创建
@@ -100,13 +100,13 @@ function CRUDDetail(props: CRUDDetailProps) {
           return true;
         }
       } catch (e) {
-        // 由于 onFinish 吃掉了 error，所以这里自行抛出
+        // 由于 onFinish 吃掉了 error，所以这里自行抛出到全局
         setTimeout(() => {
           throw e;
         }, 10);
       }
     },
-    [action, requestCreateByValues, requestUpdateById, onSuccess, createProps, id, updateProps]
+    [action, requestCreateByValues, requestUpdateById, onSuccess, createProps, id, updateProps],
   );
 
   const handleOpenChange = useCallback(
@@ -132,7 +132,7 @@ function CRUDDetail(props: CRUDDetailProps) {
 
       return;
     },
-    [form, id, requestGetByRecord, record]
+    [form, id, requestGetByRecord, record],
   );
 
   const children = useMemo(() => {

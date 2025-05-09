@@ -1,5 +1,5 @@
-import type { ProFormInstance, ActionType } from '@ant-design/pro-components';
-import { Space, Button } from 'antd';
+import type { ActionType, ProFormInstance } from '@ant-design/pro-components';
+import { Button, Space } from 'antd';
 import type { ReactNode } from 'react';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -65,6 +65,8 @@ interface CRUDProps {
   };
 
   /** 更新接口 */
+  requestUpdateByValues?: (values) => Promise<any>;
+  /** @deprecated 已废弃，请使用 requestUpdateByValues 替代 */
   requestUpdateById?: (values) => Promise<any>;
   updateProps?: {
     /** 文本 */
@@ -99,22 +101,21 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     createProps,
     requestCreateByValues,
     updateProps,
-    requestUpdateById,
+    requestUpdateById: originalRequestUpdateById,
+    requestUpdateByValues: originalRequestUpdateByValues,
     detailFormInstance,
   } = props;
+
+  const requestUpdateById = originalRequestUpdateByValues || originalRequestUpdateById;
 
   const actionRef = useRef<ActionType>();
   const location = useLocation();
 
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        getActionRef: () => actionRef,
-      };
-    },
-    [actionRef]
-  );
+  useImperativeHandle(ref, () => {
+    return {
+      getActionRef: () => actionRef,
+    };
+  }, [actionRef]);
 
   const detailProps = useMemo(
     () => ({
@@ -134,7 +135,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
       detailFormInstance,
       createProps,
       updateProps,
-    ]
+    ],
   );
 
   const getHandleDelete = useCallback(
@@ -149,7 +150,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
         throw new Error('没有传 requestDeleteByRecord');
       };
     },
-    [requestDeleteByRecord]
+    [requestDeleteByRecord],
   );
 
   const handleReload = useCallback(() => {
@@ -239,6 +240,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
 
   const toolBarRender = useCallback(
     (...args) => [
+      // @ts-ignore
       ...(tableProps.toolBarRender ? tableProps.toolBarRender(...args) : []),
       actions.includes('create') && (
         <CRUDDetail
@@ -249,7 +251,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
         />
       ),
     ],
-    [actions, createButton, detailProps, handleReload, tableProps]
+    [actions, createButton, detailProps, handleReload, tableProps],
   );
 
   return (
@@ -266,4 +268,4 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
 });
 
 export { CRUD };
-export type { CRUDProps, CRUDMethods };
+export type { CRUDMethods, CRUDProps };
