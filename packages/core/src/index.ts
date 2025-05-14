@@ -11,6 +11,7 @@ export { Table } from './table';
 export type { TableProps } from './table';
 
 export { EditorJavascript } from './editor_javascript';
+export type { EditorJavascriptProps } from './editor_javascript';
 export { EditorJSON } from './editor_json';
 export { EditorLogs } from './editor_logs';
 export { EditorMarkdown } from './editor_markdown';

@@ -29,11 +29,11 @@
     "dev": "pnpm storybook"
   },
   "dependencies": {
-    "@ant-design/pro-components": "^2.7.15",
+    "@ant-design/pro-components": "^2.8.7",
     "@fe-free/core": "workspace:^",
     "@fe-free/mini": "link:mobile/mini",
     "@fe-free/tool": "workspace:^",
-    "antd": "^5.20.0",
+    "antd": "^5.25.1",
     "dayjs": "~1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,8 +1,8 @@
 import AceEditor from 'react-ace';
 
+import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-monokai';
-import 'ace-builds/src-noconflict/ext-language_tools';
 
 const fullStyle = { width: '100%', height: '100%' };
 
@@ -34,3 +34,4 @@ function EditorJavascript({ value, onChange, readonly }: EditorJavascriptProps) 
 }
 
 export { EditorJavascript };
+export type { EditorJavascriptProps };

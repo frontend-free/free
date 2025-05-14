@@ -35,8 +35,8 @@
     "zustand": "^4.5.4"
   },
   "peerDependencies": {
-    "@ant-design/pro-components": "^2.7.15",
-    "antd": "^5.20.0",
+    "@ant-design/pro-components": "^2.8.7",
+    "antd": "^5.25.1",
     "react": "^18.2.0"
   }
 }
