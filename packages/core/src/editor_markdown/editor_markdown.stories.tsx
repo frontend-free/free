@@ -1,16 +1,18 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { EditorMarkdown } from './index';
 
-export default {
+const meta: Meta<typeof EditorMarkdown> = {
   title: '@fe-free/core/EditorMarkdown',
   component: EditorMarkdown,
   tags: ['autodocs'],
 };
 
-// type Story = StoryObj<typeof EditorMarkdown>;
+export default meta;
+type Story = StoryObj<typeof EditorMarkdown>;
 
 // 常规示例
-const StoryOfDefault = () => {
+const BasicDemo = () => {
   const [value] = useState(
     `# hello
 
@@ -25,6 +27,6 @@ world
   );
 };
 
-export const Default = {
-  render: () => <StoryOfDefault />,
+export const Basic: Story = {
+  render: () => <BasicDemo />,
 };

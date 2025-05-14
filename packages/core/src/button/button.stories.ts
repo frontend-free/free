@@ -1,12 +1,17 @@
 import { LoadingButton } from '@fe-free/core';
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
+const meta: Meta<typeof LoadingButton> = {
   title: '@fe-free/core/LoadingButton',
   component: LoadingButton,
   tags: ['autodocs'],
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof LoadingButton>;
+
+export const Resolve: Story = {
   args: {
     children: 'click and resolve',
     onClick: () => {

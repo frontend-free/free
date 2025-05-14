@@ -1,17 +1,18 @@
-import type { StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { EditorJavascript } from './index';
 
-export default {
+const meta: Meta<typeof EditorJavascript> = {
   title: '@fe-free/core/EditorJavascript',
   component: EditorJavascript,
   tags: ['autodocs'],
 };
 
+export default meta;
 type Story = StoryObj<typeof EditorJavascript>;
 
 // 常规示例
-const StoryOfDefault = () => {
+const BasicDemo = () => {
   const [value, setValue] = useState(
     `const name = 'world';
 console.log('hello', name);
@@ -25,12 +26,12 @@ console.log('hello', name);
   );
 };
 
-export const Default: Story = {
-  render: () => <StoryOfDefault />,
+export const Basic: Story = {
+  render: () => <BasicDemo />,
 };
 
 // readonly 示例
-const StoryOfReadonly = () => {
+const ReadonlyDemo = () => {
   const [value, setValue] = useState(
     `const name = 'world';
 console.log('hello', name);
@@ -45,5 +46,5 @@ console.log('hello', name);
 };
 
 export const Readonly: Story = {
-  render: () => <StoryOfReadonly />,
+  render: () => <ReadonlyDemo />,
 };
