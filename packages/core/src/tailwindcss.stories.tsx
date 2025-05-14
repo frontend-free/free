@@ -6,7 +6,7 @@ export default {
 export const Default = () => {
   return (
     <div>
-      <div>extends colors</div>
+      <div>@fe-free/core 扩展的</div>
       <div className="flex flex-row gap-2">
         <span className="text-primary">text-primary</span>
         <span className="text-secondary">text-secondary</span>
