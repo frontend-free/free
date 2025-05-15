@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.5.0
+
+### Minor Changes
+
+- feat: some
+
 ## 1.4.20
 
 ### Patch Changes

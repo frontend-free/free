@@ -1,5 +1,16 @@
 # @fe-free/core
 
+## 1.3.0
+
+### Minor Changes
+
+- feat: some
+
+### Patch Changes
+
+- Updated dependencies
+  - @fe-free/tool@1.3.0
+
 ## 1.2.4
 
 ### Patch Changes
