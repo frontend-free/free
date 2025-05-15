@@ -1,5 +1,5 @@
+import type { ParamsType, ProTableProps } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import type { ProTableProps, ParamsType } from '@ant-design/pro-components';
 import { useMemo } from 'react';
 
 interface TableProps<DataSource = any, Params = any, ValueType = 'text'>
@@ -10,7 +10,7 @@ interface TableProps<DataSource = any, Params = any, ValueType = 'text'>
 
 function Table<
   DataSource extends Record<string, any> = any,
-  Params extends ParamsType = ParamsType
+  Params extends ParamsType = ParamsType,
 >(props: TableProps<DataSource, Params>) {
   const { columns, rowKey = 'id', search, ...rest } = props;
 
@@ -48,7 +48,7 @@ function Table<
       scroll={getTableScroll(newColumns)}
       search={
         hasSearch && {
-          layout: 'vertical',
+          labelWidth: 'auto',
           defaultCollapsed: false,
           ...search,
         }
