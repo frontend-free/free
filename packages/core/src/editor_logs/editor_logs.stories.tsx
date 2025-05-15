@@ -1,5 +1,5 @@
+import { EditorLogs } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react';
-import { EditorLogs } from './index';
 
 const meta: Meta<typeof EditorLogs> = {
   title: '@fe-free/core/EditorLogs',

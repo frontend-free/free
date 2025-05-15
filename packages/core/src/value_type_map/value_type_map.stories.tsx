@@ -1,49 +1,20 @@
----
-group: 'core'
-toc: content
----
-
-# valueTypeMap
-
-自定义 valueType
-
-## customValueTypeMap
-
-配置 customValueTypeMap
-
-```tsx | pure
-import { customValueTypeMap } from '@fe-free/core';
 import { ProConfigProvider } from '@ant-design/pro-components';
-
-const Demo = () => (
-  <ProConfigProvider valueTypeMap={customValueTypeMap}>
-    <div>some</div>
-  </ProConfigProvider>
-);
-
-export default Demo;
-```
-
-## CustomValueTypeEnum
-
-使用
-
-```tsx | pure
-enum CustomValueTypeEnum {
-  /** 渲染时间 + 搜索日期范围 */
-  CustomDateTimeAndDateRange = 'CustomDateTimeAndDateRange',
-  /** 渲染日期 + 搜索日期范围 */
-  CustomDateAndDateRange = 'CustomDateAndDateRange',
-  /** JSON */
-  CustomJSON = 'CustomJSON',
-}
-```
-
-```tsx
-import { CRUD, customValueTypeMap, CustomValueTypeEnum } from '@fe-free/core';
-import { ProConfigProvider } from '@ant-design/pro-components';
-import { range } from 'lodash-es';
+import { CRUD, CustomValueTypeEnum, customValueTypeMap } from '@fe-free/core';
+import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
+import { range } from 'lodash-es';
+
+const meta: Meta = {
+  title: '@fe-free/core/ValueTypeMap',
+  component: ProConfigProvider,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 async function fakeRequest() {
   const data = range(5).map((item) => ({
@@ -94,7 +65,7 @@ const Table = () => {
       search: true,
     },
     {
-      title: '秒数',
+      title: '日期 number 秒',
       dataIndex: 'seconds',
       valueType: CustomValueTypeEnum.CustomDateAndDateRange,
       search: true,
@@ -118,11 +89,10 @@ const Table = () => {
   );
 };
 
-const Demo = () => (
-  <ProConfigProvider valueTypeMap={customValueTypeMap}>
-    <Table />
-  </ProConfigProvider>
-);
-
-export default Demo;
-```
+export const Default: Story = {
+  render: () => (
+    <ProConfigProvider valueTypeMap={customValueTypeMap}>
+      <Table />
+    </ProConfigProvider>
+  ),
+};

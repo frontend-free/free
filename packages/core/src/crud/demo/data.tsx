@@ -43,7 +43,7 @@ function makeData(count) {
 
     return {
       id: `${id}`,
-      name: `这是名字这是名字这是名字 ${id}`,
+      name: `这是名字这是名字这是名字这是名字这是名字 ${id}`,
       city,
       area,
       level: randomLevel(),
@@ -131,14 +131,14 @@ function fakeRequestSchool() {
 }
 
 export {
+  fakeCreate,
   fakeData,
-  levels,
-  fakeRequest,
   fakeDeleteByRecord,
   fakeGetByRecord,
-  fakeCreate,
-  fakeUpdateById,
-  fakeRequestCity,
+  fakeRequest,
   fakeRequestArea,
+  fakeRequestCity,
   fakeRequestSchool,
+  fakeUpdateById,
+  levels,
 };

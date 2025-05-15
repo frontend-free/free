@@ -1,6 +1,6 @@
+import { EditorMarkdown } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { EditorMarkdown } from './index';
 
 const meta: Meta<typeof EditorMarkdown> = {
   title: '@fe-free/core/EditorMarkdown',

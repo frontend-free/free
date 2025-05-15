@@ -1,6 +1,6 @@
+import { EditorJavascript } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { EditorJavascript } from './index';
 
 const meta: Meta<typeof EditorJavascript> = {
   title: '@fe-free/core/EditorJavascript',
