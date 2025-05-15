@@ -46,3 +46,4 @@ function EditorJSON({ value, onChange, readonly, mode, mainMenuBar }: EditorJSON
 }
 
 export { EditorJSON };
+export type { EditorJSONProps };

@@ -1,8 +1,8 @@
-import React from 'react';
-import CodeMirror from '@uiw/react-codemirror';
 import { StreamLanguage } from '@codemirror/language';
-import { createTheme } from '@uiw/codemirror-themes';
 import { tags as t } from '@lezer/highlight';
+import { createTheme } from '@uiw/codemirror-themes';
+import CodeMirror from '@uiw/react-codemirror';
+import React from 'react';
 
 interface EditorLogsProps {
   logs: {
@@ -67,3 +67,4 @@ const EditorLogs: React.FC<EditorLogsProps> = ({ logs }) => {
 };
 
 export { EditorLogs };
+export type { EditorLogsProps };

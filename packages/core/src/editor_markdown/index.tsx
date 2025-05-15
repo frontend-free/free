@@ -37,3 +37,4 @@ function EditorMarkdown({ value }: EditorMarkdownProps) {
 }
 
 export { EditorMarkdown };
+export type { EditorMarkdownProps };

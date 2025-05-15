@@ -2,7 +2,6 @@ import type { ActionType, ProFormInstance } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import type { ReactNode } from 'react';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import type { TableProps } from '../table';
 import { Table } from '../table';
 import { OperateDelete } from './crud_delete';
@@ -66,7 +65,7 @@ interface CRUDProps {
 
   /** 更新接口 */
   requestUpdateByValues?: (values) => Promise<any>;
-  /** @deprecated 已废弃，请使用 requestUpdateByValues 替代 */
+  /** @deprecated 请使用 requestUpdateByValues 替代 */
   requestUpdateById?: (values) => Promise<any>;
   updateProps?: {
     /** 文本 */
@@ -109,7 +108,6 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
   const requestUpdateById = originalRequestUpdateByValues || originalRequestUpdateById;
 
   const actionRef = useRef<ActionType>();
-  const location = useLocation();
 
   useImperativeHandle(ref, () => {
     return {
@@ -177,12 +175,9 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
               />
             )}
             {actions.includes('read_detail') && (
-              <Link
-                to={`${location.pathname}/detail/${record[detailIdIndex || 'id']}`}
-                target={readProps?.target}
-              >
+              <a href={`./detail/${record[detailIdIndex || 'id']}`} target={readProps?.target}>
                 {readProps?.operateText || '查看'}
-              </Link>
+              </a>
             )}
             {actions.includes('update') && (
               <CRUDDetail
@@ -231,7 +226,6 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     readProps?.operateText,
     readProps?.target,
     detailProps,
-    location.pathname,
     detailIdIndex,
     updateProps?.operateText,
     deleteProps,

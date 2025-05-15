@@ -13,7 +13,7 @@ function LoadingButton({ onClick, ...rest }: ButtonProps) {
         setLoading(false);
       });
     },
-    [onClick]
+    [onClick],
   );
 
   return <Button loading={loading} {...rest} onClick={handleClick} />;
