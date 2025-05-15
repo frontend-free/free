@@ -348,3 +348,37 @@ export const CustomText: Story = {
     );
   },
 };
+
+export const RowSelection: Story = {
+  render: () => {
+    return (
+      <CRUD
+        actions={[]}
+        tableProps={{
+          columns: [
+            {
+              title: 'id',
+              dataIndex: 'id',
+              search: true,
+            },
+            {
+              title: '名字',
+              dataIndex: 'name',
+              search: true,
+            },
+          ],
+          request: fakeRequest,
+        }}
+        batchActions={[
+          {
+            btnText: '批量删除',
+            danger: true,
+            onClick: async (_, { selectedRowKeys }) => {
+              console.log(selectedRowKeys);
+            },
+          },
+        ]}
+      />
+    );
+  },
+};

@@ -1,89 +1,13 @@
-import type { ActionType, ProFormInstance } from '@ant-design/pro-components';
+import type { ActionType } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
-import type { ReactNode } from 'react';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import type { TableProps } from '../table';
 import { Table } from '../table';
 import { OperateDelete } from './crud_delete';
 import { CRUDDetail } from './crud_detail';
 import './style.scss';
-
-/**
- * create 创建
- * read 查看
- * read_detail 详情页查看
- * update 编辑
- * delete 删除
- */
-type CrudAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
-
-interface CRUDProps {
-  actions: CrudAction[];
-
-  /** 新建按钮，默认新建 */
-  createButton?: ReactNode;
-
-  /** 表格相关 */
-  tableProps: TableProps;
-  operateColumnProps?: {
-    width?: number;
-    /** 扩展操作区域，再其他操作之前 */
-    moreOperator?: (record) => ReactNode;
-    /** 扩展操作区域，在其他操作之后 */
-    moreOperatorAfter?: (record) => ReactNode;
-  };
-  readProps?: {
-    /** 文本 */
-    operateText?: string;
-    /** 打开方式, action 为 read_detail 有效 */
-    target?: '_blank';
-  };
-
-  /** 删除接口 */
-  requestDeleteByRecord?: (record) => Promise<any>;
-  /** 删除相关 */
-  deleteProps?: {
-    /** 显示名称索引 */
-    nameIndex: string;
-    /** 删除确认描述 */
-    desc?: string;
-    /** 文本 */
-    operateText?: string;
-  };
-
-  /** 弹窗表单 */
-  detailForm?: (formProps: { readonly: boolean }, info: { action: CrudAction }) => ReactNode;
-  /** detailForm 的 formRef */
-  detailFormInstance?: ProFormInstance;
-
-  /** 新增接口 */
-  requestCreateByValues?: (values) => Promise<any>;
-  createProps?: {
-    /** 成功文案 */
-    successText?: string | (() => string);
-  };
-
-  /** 更新接口 */
-  requestUpdateByValues?: (values) => Promise<any>;
-  /** @deprecated 请使用 requestUpdateByValues 替代 */
-  requestUpdateById?: (values) => Promise<any>;
-  updateProps?: {
-    /** 文本 */
-    operateText?: string;
-    /** 成功文案 */
-    successText?: string | (() => string);
-  };
-
-  /** 获取详情接口 */
-  requestGetByRecord?: (record) => Promise<any>;
-
-  /** 跳转到详情的索引 ，默认 id */
-  detailIdIndex?: string;
-}
-
-interface CRUDMethods {
-  getActionRef: () => React.MutableRefObject<ActionType | undefined>;
-}
+import type { CRUDMethods, CRUDProps } from './types';
+import { useRowSelection } from './use_row_selection';
 
 const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
   const {
@@ -103,6 +27,7 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     requestUpdateById: originalRequestUpdateById,
     requestUpdateByValues: originalRequestUpdateByValues,
     detailFormInstance,
+    batchActions,
   } = props;
 
   const requestUpdateById = originalRequestUpdateByValues || originalRequestUpdateById;
@@ -248,6 +173,10 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     [actions, createButton, detailProps, handleReload, tableProps],
   );
 
+  const { rowSelection, tableAlertRender, tableAlertOptionRender } = useRowSelection({
+    batchActions,
+  });
+
   return (
     <div className="crud-table">
       <Table
@@ -256,10 +185,12 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
         actionRef={actionRef}
         toolBarRender={toolBarRender}
         columns={newColumns}
+        rowSelection={rowSelection}
+        tableAlertRender={tableAlertRender}
+        tableAlertOptionRender={tableAlertOptionRender}
       />
     </div>
   );
 });
 
 export { CRUD };
-export type { CRUDMethods, CRUDProps };
