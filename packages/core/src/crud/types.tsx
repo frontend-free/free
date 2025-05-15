@@ -11,20 +11,23 @@ import type { TableProps } from '../table';
  */
 type CrudAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
 
-interface CRUDProps {
+interface CRUDProps<
+  DataSource extends Record<string, any> = any,
+  Key extends string | number = string,
+> {
   actions: CrudAction[];
 
   /** 新建按钮，默认新建 */
   createButton?: ReactNode;
 
   /** 表格相关 */
-  tableProps: TableProps;
+  tableProps: TableProps<DataSource>;
   operateColumnProps?: {
     width?: number;
     /** 扩展操作区域，再其他操作之前 */
-    moreOperator?: (record) => ReactNode;
+    moreOperator?: (record: DataSource) => ReactNode;
     /** 扩展操作区域，在其他操作之后 */
-    moreOperatorAfter?: (record) => ReactNode;
+    moreOperatorAfter?: (record: DataSource) => ReactNode;
   };
   readProps?: {
     /** 文本 */
@@ -34,11 +37,11 @@ interface CRUDProps {
   };
 
   /** 删除接口 */
-  requestDeleteByRecord?: (record) => Promise<any>;
+  requestDeleteByRecord?: (record: DataSource) => Promise<any>;
   /** 删除相关 */
   deleteProps?: {
     /** 显示名称索引 */
-    nameIndex: string;
+    nameIndex: keyof DataSource;
     /** 删除确认描述 */
     desc?: string;
     /** 文本 */
@@ -51,16 +54,16 @@ interface CRUDProps {
   detailFormInstance?: ProFormInstance;
 
   /** 新增接口 */
-  requestCreateByValues?: (values) => Promise<any>;
+  requestCreateByValues?: (values: Partial<DataSource>) => Promise<any>;
   createProps?: {
     /** 成功文案 */
     successText?: string | (() => string);
   };
 
   /** 更新接口 */
-  requestUpdateByValues?: (values) => Promise<any>;
+  requestUpdateByValues?: (values: Partial<DataSource>) => Promise<any>;
   /** @deprecated 请使用 requestUpdateByValues 替代 */
-  requestUpdateById?: (values) => Promise<any>;
+  requestUpdateById?: (values: Partial<DataSource>) => Promise<any>;
   updateProps?: {
     /** 文本 */
     operateText?: string;
@@ -69,7 +72,7 @@ interface CRUDProps {
   };
 
   /** 获取详情接口 */
-  requestGetByRecord?: (record) => Promise<any>;
+  requestGetByRecord?: (record: DataSource) => Promise<any>;
 
   /** 跳转到详情的索引 ，默认 id */
   detailIdIndex?: string;
@@ -83,7 +86,7 @@ interface CRUDProps {
     /** 批量操作接口 */
     onClick: (
       event: React.MouseEvent<HTMLElement>,
-      options: { selectedRowKeys: string[]; selectedRows: any[] },
+      options: { selectedRowKeys: Key[]; selectedRows: DataSource[] },
     ) => Promise<any>;
   }[];
 }

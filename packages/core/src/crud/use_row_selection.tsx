@@ -3,7 +3,10 @@ import { useCallback, useMemo } from 'react';
 import { LoadingButton } from '../button';
 import type { CRUDProps } from './types';
 
-function useRowSelection({ batchActions }: { batchActions?: CRUDProps['batchActions'] }) {
+function useRowSelection<
+  DataSource extends Record<string, any> = any,
+  Key extends string | number = string,
+>({ batchActions }: { batchActions?: CRUDProps<DataSource, Key>['batchActions'] }) {
   const rowSelection = useMemo(() => ({}), []);
 
   const tableAlertRender = useCallback(({ selectedRowKeys, onCleanSelected }) => {

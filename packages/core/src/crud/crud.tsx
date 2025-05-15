@@ -9,7 +9,10 @@ import './style.scss';
 import type { CRUDMethods, CRUDProps } from './types';
 import { useRowSelection } from './use_row_selection';
 
-const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
+function CRUDComponent<
+  DataSource extends Record<string, any> = any,
+  Key extends string | number = string,
+>(props: CRUDProps<DataSource, Key>, ref: React.ForwardedRef<CRUDMethods>) {
   const {
     actions,
     tableProps,
@@ -173,7 +176,10 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
     [actions, createButton, detailProps, handleReload, tableProps],
   );
 
-  const { rowSelection, tableAlertRender, tableAlertOptionRender } = useRowSelection({
+  const { rowSelection, tableAlertRender, tableAlertOptionRender } = useRowSelection<
+    DataSource,
+    Key
+  >({
     batchActions,
   });
 
@@ -191,6 +197,13 @@ const CRUD = forwardRef<CRUDMethods, CRUDProps>(function CRUD(props, ref) {
       />
     </div>
   );
-});
+}
+
+const CRUD = forwardRef(CRUDComponent) as <
+  DataSource extends Record<string, any> = any,
+  Key extends string | number = string,
+>(
+  props: CRUDProps<DataSource, Key> & { ref?: React.ForwardedRef<CRUDMethods> },
+) => JSX.Element;
 
 export { CRUD };
