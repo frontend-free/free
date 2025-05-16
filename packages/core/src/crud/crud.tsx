@@ -8,6 +8,7 @@ import { CRUDDetail } from './crud_detail';
 import './style.scss';
 import type { CRUDMethods, CRUDProps } from './types';
 import { useRowSelection } from './use_row_selection';
+import { useTips } from './use_tips';
 
 function CRUDComponent<
   DataSource extends Record<string, any> = any,
@@ -33,9 +34,11 @@ function CRUDComponent<
     batchActions,
   } = props;
 
+  useTips(props);
+
   const requestUpdateById = originalRequestUpdateByValues || originalRequestUpdateById;
 
-  const actionRef = useRef<ActionType>();
+  const actionRef = useRef<ActionType | undefined>(undefined);
 
   useImperativeHandle(ref, () => {
     return {
@@ -181,11 +184,12 @@ function CRUDComponent<
     Key
   >({
     batchActions,
+    actionRef,
   });
 
   return (
     <div className="crud-table">
-      <Table
+      <Table<DataSource>
         rowKey="id"
         {...tableProps}
         actionRef={actionRef}

@@ -1,12 +1,17 @@
+import type { ActionType } from '@ant-design/pro-components';
 import { Modal } from 'antd';
+import type { MutableRefObject } from 'react';
 import { useCallback, useMemo } from 'react';
 import { LoadingButton } from '../button';
 import type { CRUDProps } from './types';
 
-function useRowSelection<
-  DataSource extends Record<string, any> = any,
-  Key extends string | number = string,
->({ batchActions }: { batchActions?: CRUDProps<DataSource, Key>['batchActions'] }) {
+function useRowSelection<DataSource, Key>({
+  batchActions,
+  actionRef,
+}: {
+  batchActions?: CRUDProps<DataSource, Key>['batchActions'];
+  actionRef?: MutableRefObject<ActionType | undefined>;
+}) {
   const rowSelection = useMemo(() => ({}), []);
 
   const tableAlertRender = useCallback(({ selectedRowKeys, onCleanSelected }) => {
@@ -55,6 +60,8 @@ function useRowSelection<
                     selectedRows,
                   });
                 }
+
+                actionRef?.current?.reload();
               }}
             >
               {action.btnText}
@@ -63,7 +70,7 @@ function useRowSelection<
         </div>
       );
     },
-    [batchActions],
+    [actionRef, batchActions],
   );
 
   if (!batchActions || batchActions.length === 0) {

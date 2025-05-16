@@ -11,10 +11,7 @@ import type { TableProps } from '../table';
  */
 type CrudAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
 
-interface CRUDProps<
-  DataSource extends Record<string, any> = any,
-  Key extends string | number = string,
-> {
+interface CRUDProps<DataSource = any, Key = string> {
   actions: CrudAction[];
 
   /** 新建按钮，默认新建 */
