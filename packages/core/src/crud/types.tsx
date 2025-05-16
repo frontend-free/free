@@ -23,10 +23,10 @@ interface CRUDProps<DataSource = any, Key = string> {
 
   // *** Create 新建 ***
 
-  /** 新建按钮，默认新建 */
-  createButton?: ReactNode;
   /** 新增接口 */
   requestCreateByValues?: (values: Partial<DataSource>) => Promise<any>;
+  /** 新建按钮，默认新建 */
+  createButton?: ReactNode;
   /** create 更多设置 */
   createProps?: {
     /** 成功文案 */

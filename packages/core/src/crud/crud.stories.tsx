@@ -109,8 +109,78 @@ export const ReadDetail: Story = {
   },
 };
 
+export const MoreCustom: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+        search: true,
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+      {
+        title: 'city',
+        dataIndex: 'city',
+      },
+      {
+        title: 'area',
+        dataIndex: 'area',
+      },
+    ];
+
+    return (
+      <CRUD
+        actions={['create', 'read', 'delete', 'update']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
+          toolBarRender: () => {
+            return [<div key="custom1">自定义1</div>, <div key="custom2">自定义2</div>];
+          },
+        }}
+        operateColumnProps={{
+          // 自定义宽度
+          width: 300,
+          // 自定义操作列
+          moreOperator: () => {
+            return <div>自定义</div>;
+          },
+          // 自定义操作列之后
+          moreOperatorAfter: () => {
+            return <div>自定义</div>;
+          },
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'name',
+        }}
+        detailForm={(formProps) => (
+          <>
+            <ProFormText
+              {...formProps}
+              name="name"
+              label="名字"
+              required
+              rules={[{ required: true }]}
+              extra="extra extra extra extra"
+            />
+          </>
+        )}
+        requestGetByRecord={fakeGetByRecord}
+        requestCreateByValues={fakeCreate}
+        requestUpdateById={fakeUpdateById}
+      />
+    );
+  },
+};
+
 // 表格表单和详情表单 ref
-const RefComponent = () => {
+const FormRefComponent = () => {
   const formRef = useRef<any>();
   const [detailFormInstance] = ProForm.useForm();
 
@@ -156,8 +226,8 @@ const RefComponent = () => {
   );
 };
 
-export const Ref: Story = {
-  render: () => <RefComponent />,
+export const FormRef: Story = {
+  render: () => <FormRefComponent />,
 };
 
 // 通过 ref 获取 actionRef
