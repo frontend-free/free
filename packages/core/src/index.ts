@@ -1,7 +1,7 @@
 export { LoadingButton } from './button';
 
-export { CRUD, CRUDDetail, OperateDelete, useDelete } from './crud';
-export type { CRUDDetailProps, CRUDMethods, CRUDProps } from './crud';
+export { CRUD, CRUDDetail, CRUDOfSimple, OperateDelete, useDelete } from './crud';
+export type { CRUDDetailProps, CRUDMethods, CRUDOfSimpleProps, CRUDProps } from './crud';
 
 export { EditorJavascript } from './editor_javascript';
 export type { EditorJavascriptProps } from './editor_javascript';

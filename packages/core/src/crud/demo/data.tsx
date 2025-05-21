@@ -58,12 +58,24 @@ let fakeData = makeData(21);
 async function fakeRequest(params) {
   console.log('fakeRequest', params);
 
+  let data = fakeData;
+  Object.keys(params).forEach((field) => {
+    if (params[field] !== undefined && params[field] !== '') {
+      data = data.filter((item) => {
+        if (typeof item[field] === 'string') {
+          return item[field].includes(params[field]);
+        }
+        return true;
+      });
+    }
+  });
+
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        data: fakeData,
+        data,
         success: true,
-        total: fakeData.length,
+        total: data.length,
       });
     }, 1000);
   }) as Promise<any>;

@@ -164,18 +164,19 @@ function CRUDComponent<
   ]);
 
   const toolBarRender = useCallback(
-    (...args) => [
-      // @ts-ignore
-      ...(tableProps.toolBarRender ? tableProps.toolBarRender(...args) : []),
-      actions.includes('create') && (
-        <CRUDDetail
-          onSuccess={handleReload}
-          trigger={createButton || <Button type="primary">新建</Button>}
-          action="create"
-          {...detailProps}
-        />
-      ),
-    ],
+    (...args) =>
+      [
+        // @ts-ignore
+        ...(tableProps.toolBarRender ? tableProps.toolBarRender(...args) : []),
+        actions.includes('create') && (
+          <CRUDDetail
+            onSuccess={handleReload}
+            trigger={createButton || <Button type="primary">新建</Button>}
+            action="create"
+            {...detailProps}
+          />
+        ),
+      ].filter(Boolean),
     [actions, createButton, detailProps, handleReload, tableProps],
   );
 
