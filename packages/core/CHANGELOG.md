@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.3.3
+
+### Patch Changes
+
+- feat: add CRUDOfSimple
+  - @fe-free/tool@1.3.3
+
 ## 1.3.2
 
 ### Patch Changes
