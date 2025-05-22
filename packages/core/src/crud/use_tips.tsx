@@ -7,11 +7,17 @@ function useTips<DataSource, Key>(props: CRUDProps<DataSource, Key>) {
       if (!props.requestCreateByValues) {
         console.warn('actions 包含 create 时，需要传递 requestCreateByValues');
       }
+      if (!props.detailForm) {
+        console.warn('actions 包含 create 时，需要传递 detailForm');
+      }
     }
 
     if (props.actions.includes('read')) {
       if (!props.requestGetByRecord) {
         console.warn('actions 包含 read 时，需要传递 requestGetByRecord');
+      }
+      if (!props.detailForm) {
+        console.warn('actions 包含 read 时，需要传递 detailForm');
       }
     }
 
@@ -20,6 +26,9 @@ function useTips<DataSource, Key>(props: CRUDProps<DataSource, Key>) {
         console.warn(
           'actions 包含 update 时，需要传递 requestGetByRecord 和 requestUpdateByValues',
         );
+      }
+      if (!props.detailForm) {
+        console.warn('actions 包含 update 时，需要传递 detailForm');
       }
     }
 
