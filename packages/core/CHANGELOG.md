@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.3.5
+
+### Patch Changes
+
+- feat: editor
+  - @fe-free/tool@1.3.5
+
 ## 1.3.4
 
 ### Patch Changes

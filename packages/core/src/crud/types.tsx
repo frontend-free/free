@@ -9,15 +9,16 @@ import type { TableProps } from '../table';
  * update 编辑
  * delete 删除
  */
-type CrudAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
+type CRUDAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
 
 interface CRUDProps<DataSource = any, Key = string> {
-  actions: CrudAction[];
+  /** 操作类型 */
+  actions: CRUDAction[];
 
   // *** 表单 ***
 
-  /** 弹窗表单 */
-  detailForm?: (formProps: { readonly: boolean }, info: { action: CrudAction }) => ReactNode;
+  /** 弹窗表单，action 为 read update 时需要传递 */
+  detailForm?: (formProps: { readonly: boolean }, info: { action: CRUDAction }) => ReactNode;
   /** detailForm 的 formRef */
   detailFormInstance?: ProFormInstance;
 

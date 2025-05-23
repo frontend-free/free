@@ -1,8 +1,8 @@
 import { StreamLanguage } from '@codemirror/language';
 import { tags as t } from '@lezer/highlight';
 import { createTheme } from '@uiw/codemirror-themes';
-import CodeMirror from '@uiw/react-codemirror';
 import React from 'react';
+import { Editor } from '../editor';
 
 interface EditorLogsProps {
   logs: {
@@ -55,14 +55,7 @@ const EditorLogs: React.FC<EditorLogsProps> = ({ logs }) => {
   });
 
   return (
-    <CodeMirror
-      value={formattedLogs}
-      theme={myTheme}
-      extensions={logExtension}
-      editable={false}
-      height="400px"
-      style={{ overflowY: 'auto' }}
-    />
+    <Editor value={formattedLogs} theme={myTheme} extensions={logExtension} editable={false} />
   );
 };
 

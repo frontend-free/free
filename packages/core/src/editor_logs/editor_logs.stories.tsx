@@ -44,4 +44,9 @@ export const Basic: Story = {
       },
     ],
   },
+  render: (props) => (
+    <div style={{ width: '500px', height: '500px' }}>
+      <EditorLogs {...props} />
+    </div>
+  ),
 };
