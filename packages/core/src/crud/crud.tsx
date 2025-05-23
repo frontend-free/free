@@ -106,7 +106,10 @@ function CRUDComponent<
               />
             )}
             {actions.includes('read_detail') && (
-              <a href={`./detail/${record[detailIdIndex || 'id']}`} target={readProps?.target}>
+              <a
+                href={`${window.location.pathname}/detail/${record[detailIdIndex || 'id']}`}
+                target={readProps?.target}
+              >
                 {readProps?.operateText || '查看'}
               </a>
             )}
@@ -166,6 +169,7 @@ function CRUDComponent<
   const toolBarRender = useCallback(
     (...args) =>
       [
+        <div key="placeholder" />,
         // @ts-ignore
         ...(tableProps.toolBarRender ? tableProps.toolBarRender(...args) : []),
         actions.includes('create') && (
