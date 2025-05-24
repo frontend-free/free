@@ -1,5 +1,11 @@
 # @fe-free/core
 
+## 1.4.2
+
+### Patch Changes
+
+- @fe-free/tool@1.4.2
+
 ## 1.4.0
 
 ### Minor Changes

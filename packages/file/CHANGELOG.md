@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 1.4.2
+
+### Patch Changes
+
+- feat: file
+
 ## 1.4.1
 
 ### Patch Changes

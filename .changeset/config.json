@@ -8,6 +8,7 @@
     ],
     [
       "@fe-free/core",
+      "@fe-free/file",
       "@fe-free/tool"
     ],
     [
