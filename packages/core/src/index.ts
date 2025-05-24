@@ -1,3 +1,6 @@
+export { useGlobalInfiniteScroll } from './ahooks/use_global_infinite_scroll';
+export { useGlobalRequest } from './ahooks/use_global_request';
+
 export { LoadingButton } from './button';
 
 export { CRUD, CRUDDetail, CRUDOfSimple, OperateDelete, useDelete } from './crud';

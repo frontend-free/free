@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 1.4.0
+
+### Minor Changes
+
+- feat: ahooks fix
+
+### Patch Changes
+
+- @fe-free/tool@1.4.0
+
 ## 1.3.5
 
 ### Patch Changes
