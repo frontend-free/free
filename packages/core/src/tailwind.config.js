@@ -8,8 +8,6 @@ module.exports = {
         secondary: 'rgba(0, 0, 0, 0.65)',
         /** 描述文本 */
         desc: 'rgba(0, 0, 0, 0.45)',
-        // 价格
-        price: '#E7484D',
       },
     },
   },

@@ -11,7 +11,6 @@ export const Default = () => {
         <span className="text-primary">text-primary</span>
         <span className="text-secondary">text-secondary</span>
         <span className="text-desc">text-desc</span>
-        <span className="text-price">text-price</span>
       </div>
     </div>
   );
