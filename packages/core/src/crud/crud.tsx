@@ -54,6 +54,7 @@ function CRUDComponent<
       requestUpdateById,
       detailFormInstance,
       createProps,
+      readProps,
       updateProps,
     }),
     [
@@ -63,6 +64,7 @@ function CRUDComponent<
       requestUpdateById,
       detailFormInstance,
       createProps,
+      readProps,
       updateProps,
     ],
   );

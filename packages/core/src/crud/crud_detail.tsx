@@ -3,7 +3,7 @@ import { message, Spin } from 'antd';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
-import type { CRUDProps } from './crud';
+import type { CRUDProps } from './types';
 
 /**
  * create 创建
@@ -20,6 +20,7 @@ interface CRUDDetailProps
     CRUDProps,
     | 'requestGetByRecord'
     | 'createProps'
+    | 'readProps'
     | 'requestCreateByValues'
     | 'updateProps'
     | 'requestUpdateById'
@@ -44,6 +45,7 @@ function CRUDDetail(props: CRUDDetailProps) {
     detailForm,
     requestGetByRecord,
     createProps,
+    readProps,
     requestCreateByValues,
     updateProps,
     requestUpdateById,
@@ -170,6 +172,61 @@ function CRUDDetail(props: CRUDDetailProps) {
     };
   }, []);
 
+  const title = useMemo(() => {
+    if (action === 'create') {
+      return '新建';
+    }
+    if (action === 'read') {
+      return '查看';
+    }
+    if (action === 'update') {
+      return '编辑';
+    }
+
+    return '';
+  }, [action]);
+
+  const submitter = useMemo(() => {
+    const result = {
+      searchConfig: {
+        submitText: '确定',
+        resetText: '取消',
+      },
+    };
+    if (action === 'create') {
+      if (createProps?.submitText) {
+        result.searchConfig.submitText = createProps.submitText;
+      }
+      if (createProps?.resetText) {
+        result.searchConfig.resetText = createProps.resetText;
+      }
+    } else if (action === 'read') {
+      if (readProps?.submitText) {
+        result.searchConfig.submitText = readProps.submitText;
+      }
+      if (readProps?.resetText) {
+        result.searchConfig.resetText = readProps.resetText;
+      }
+    } else if (action === 'update') {
+      if (updateProps?.submitText) {
+        result.searchConfig.submitText = updateProps.submitText;
+      }
+      if (updateProps?.resetText) {
+        result.searchConfig.resetText = updateProps.resetText;
+      }
+    }
+
+    return result;
+  }, [
+    action,
+    createProps?.resetText,
+    createProps?.submitText,
+    readProps?.resetText,
+    readProps?.submitText,
+    updateProps?.resetText,
+    updateProps?.submitText,
+  ]);
+
   return (
     <DrawerForm
       form={form}
@@ -181,6 +238,8 @@ function CRUDDetail(props: CRUDDetailProps) {
       readonly={action === 'read' && !!id}
       // 关闭销毁，否则会有很奇怪的 onFinish 闭包问题，怀疑 pro components bug
       drawerProps={drawerProps}
+      title={title}
+      submitter={submitter}
     >
       {children}
     </DrawerForm>

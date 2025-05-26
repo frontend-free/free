@@ -387,7 +387,13 @@ export const CustomText: Story = {
           request: fakeRequest,
         }}
         createButton={<Button type="primary">新建</Button>}
+        createProps={{
+          submitText: '自定义新建确定',
+          resetText: '自定义新建取消',
+        }}
         readProps={{
+          submitText: '自定义查看确定',
+          resetText: '自定义查看取消',
           operateText: '查看',
         }}
         deleteProps={{
@@ -397,6 +403,8 @@ export const CustomText: Story = {
         }}
         updateProps={{
           operateText: '编辑',
+          submitText: '自定义编辑确定',
+          resetText: '自定义编辑取消',
           successText: '编辑成功',
         }}
         requestDeleteByRecord={fakeDeleteByRecord}

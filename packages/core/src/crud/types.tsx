@@ -30,6 +30,10 @@ interface CRUDProps<DataSource = any, Key = string> {
   createButton?: ReactNode;
   /** create 更多设置 */
   createProps?: {
+    /** 保存按钮文本 */
+    submitText?: string;
+    /** 重置按钮文本 */
+    resetText?: string;
     /** 成功文案 */
     successText?: string | (() => string);
   };
@@ -59,6 +63,10 @@ interface CRUDProps<DataSource = any, Key = string> {
     operateText?: string;
     /** 打开方式, action 为 read_detail 有效 */
     target?: '_blank';
+    /** 保存按钮文本 */
+    submitText?: string;
+    /** 重置按钮文本 */
+    resetText?: string;
   };
 
   // *** Update 更新 ***
@@ -70,6 +78,10 @@ interface CRUDProps<DataSource = any, Key = string> {
   updateProps?: {
     /** 文本 */
     operateText?: string;
+    /** 保存按钮文本 */
+    submitText?: string;
+    /** 重置按钮文本 */
+    resetText?: string;
     /** 成功文案 */
     successText?: string | (() => string);
   };
