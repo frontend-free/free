@@ -25,7 +25,7 @@ interface CRUDProps<DataSource = any, Key = string> {
   // *** Create 新建 ***
 
   /** 新增接口 */
-  requestCreateByValues?: (values: Partial<DataSource>) => Promise<any>;
+  requestCreateByValues?: (values: Partial<DataSource>) => Promise<false | void>;
   /** 新建按钮，默认新建 */
   createButton?: ReactNode;
   /** create 更多设置 */
@@ -54,7 +54,7 @@ interface CRUDProps<DataSource = any, Key = string> {
   // *** Read 详情 ***
 
   /** 获取详情接口 */
-  requestGetByRecord?: (record: DataSource) => Promise<any>;
+  requestGetByRecord?: (record: DataSource) => Promise<DataSource>;
   /** 跳转到详情的索引 ，默认 id */
   detailIdIndex?: string;
   /** read 更多设置 */
@@ -71,10 +71,10 @@ interface CRUDProps<DataSource = any, Key = string> {
 
   // *** Update 更新 ***
 
-  /** 更新接口 */
-  requestUpdateByValues?: (values: Partial<DataSource>) => Promise<any>;
+  /** 更新接口，返回 false 则不关闭弹窗 */
+  requestUpdateByValues?: (values: Partial<DataSource>) => Promise<false | void>;
   /** @deprecated 请使用 requestUpdateByValues 替代 */
-  requestUpdateById?: (values: Partial<DataSource>) => Promise<any>;
+  requestUpdateById?: (values: Partial<DataSource>) => Promise<false | void>;
   updateProps?: {
     /** 文本 */
     operateText?: string;
@@ -89,7 +89,7 @@ interface CRUDProps<DataSource = any, Key = string> {
   // *** Delete 删除 ***
 
   /** 删除接口 */
-  requestDeleteByRecord?: (record: DataSource) => Promise<any>;
+  requestDeleteByRecord?: (record: DataSource) => Promise<void>;
   /** 删除相关 */
   deleteProps?: {
     /** 显示名称索引 */
@@ -112,7 +112,7 @@ interface CRUDProps<DataSource = any, Key = string> {
     onClick: (
       event: React.MouseEvent<HTMLElement>,
       options: { selectedRowKeys: Key[]; selectedRows: DataSource[] },
-    ) => Promise<any>;
+    ) => Promise<void>;
   }[];
 }
 
