@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.4
+
+### Patch Changes
+
+- fix: crud types
+  - @fe-free/tool@1.4.4
+
 ## 1.4.3
 
 ### Patch Changes
