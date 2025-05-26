@@ -86,7 +86,7 @@ async function fakeDeleteByRecord(record) {
 
   fakeData = fakeData.filter((item) => item.id !== record.id);
 
-  return Promise.resolve({});
+  return Promise.resolve();
 }
 
 async function fakeGetByRecord(record) {
@@ -107,7 +107,7 @@ async function fakeCreate(params) {
     ...params,
   });
 
-  return Promise.resolve({});
+  return Promise.resolve();
 }
 
 async function fakeUpdateById(params) {
@@ -123,7 +123,7 @@ async function fakeUpdateById(params) {
     return item;
   });
 
-  return Promise.resolve({});
+  return Promise.resolve();
 }
 
 function fakeRequestCity(): Promise<string[]> {

@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.5
+
+### Patch Changes
+
+- fix: curd types
+  - @fe-free/tool@1.4.5
+
 ## 1.4.4
 
 ### Patch Changes
