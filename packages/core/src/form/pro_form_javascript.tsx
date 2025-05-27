@@ -12,7 +12,6 @@ function JavascriptItem(props: EditorJavascriptProps) {
 }
 
 function ProFormJavascript(props: ProFormItemProps<EditorJavascriptProps>) {
-  // 没搞明白 cacheFormSwr, proFieldKey, onBlur，先这样处理
   /* eslint-disable-next-line */
   const { fieldProps, readonly, ...rest } = props;
 

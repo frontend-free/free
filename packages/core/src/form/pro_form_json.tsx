@@ -12,7 +12,6 @@ function JSONItem(props: EditorJSONProps) {
 }
 
 function ProFormJSON(props: ProFormItemProps<EditorJSONProps>) {
-  // 没搞明白 cacheFormSwr, proFieldKey, onBlur，先这样处理
   /* eslint-disable-next-line */
   const { fieldProps, readonly, ...rest } = props;
 

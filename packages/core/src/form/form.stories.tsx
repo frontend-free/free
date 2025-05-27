@@ -77,6 +77,13 @@ export const ProFormSwitchNumberComponent: Story = {
   render: () => (
     <ProFormBase>
       <ProFormSwitchNumber name="switchNumber" />
+      <ProFormSwitchNumber
+        name="switchNumber"
+        fieldProps={{
+          checkedChildren: '开启',
+          unCheckedChildren: '关闭',
+        }}
+      />
     </ProFormBase>
   ),
 };
