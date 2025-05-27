@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.6
+
+### Patch Changes
+
+- feat: add ProFormSwitchNumber
+  - @fe-free/tool@1.4.6
+
 ## 1.4.5
 
 ### Patch Changes
