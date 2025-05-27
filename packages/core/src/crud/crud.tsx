@@ -89,6 +89,8 @@ function CRUDComponent<
   }, []);
 
   const newColumns = useMemo(() => {
+    const idField = tableProps.rowKey || 'id';
+
     const operateColumn = {
       title: '操作',
       fixed: 'right',
@@ -99,7 +101,7 @@ function CRUDComponent<
             {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
             {actions.includes('read') && (
               <CRUDDetail
-                id={record.id}
+                id={record[idField]}
                 record={record}
                 onSuccess={handleReload}
                 trigger={<a>{readProps?.operateText || '查看'}</a>}
@@ -117,7 +119,7 @@ function CRUDComponent<
             )}
             {actions.includes('update') && (
               <CRUDDetail
-                id={record.id}
+                id={record[idField]}
                 record={record}
                 onSuccess={handleReload}
                 trigger={<a>{updateProps?.operateText || '编辑'}</a>}
@@ -155,9 +157,10 @@ function CRUDComponent<
 
     return tableProps.columns as TableProps['columns'];
   }, [
+    tableProps.rowKey,
+    tableProps.columns,
     operateColumnProps,
     actions,
-    tableProps.columns,
     handleReload,
     readProps?.operateText,
     readProps?.target,
