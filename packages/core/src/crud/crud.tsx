@@ -1,5 +1,6 @@
 import type { ActionType } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
+import { Button, message, Space } from 'antd';
+import { isString } from 'lodash-es';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import type { TableProps } from '../table';
 import { Table } from '../table';
@@ -73,7 +74,17 @@ function CRUDComponent<
     (record) => {
       return () => {
         if (requestDeleteByRecord) {
+          let content = '删除成功';
+          if (deleteProps?.successText) {
+            content = isString(deleteProps.successText)
+              ? deleteProps.successText
+              : deleteProps.successText();
+          }
           return requestDeleteByRecord(record).then(() => {
+            message.open({
+              type: 'success',
+              content,
+            });
             actionRef.current?.reload();
           });
         }
@@ -81,7 +92,7 @@ function CRUDComponent<
         throw new Error('没有传 requestDeleteByRecord');
       };
     },
-    [requestDeleteByRecord],
+    [deleteProps, requestDeleteByRecord],
   );
 
   const handleReload = useCallback(() => {

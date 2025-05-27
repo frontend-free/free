@@ -98,6 +98,8 @@ interface CRUDProps<DataSource = any, Key = string> {
     desc?: string;
     /** 文本 */
     operateText?: string;
+    /** 成功文案 */
+    successText?: string | (() => string);
   };
 
   // *** 批量操作 ***
