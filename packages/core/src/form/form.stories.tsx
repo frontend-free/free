@@ -1,6 +1,7 @@
 import { ProForm } from '@ant-design/pro-components';
-import { ProFormJSON, ProFormJavascript } from '@fe-free/core';
+import { ProFormJSON, ProFormJavascript, ProFormSwitchNumber } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 const meta: Meta = {
   title: '@fe-free/core/Form',
@@ -10,56 +11,72 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// ProFormJSON 基础示例
-export const ProFormJSONBasic: Story = {
-  render: () => (
-    <ProForm>
-      <ProFormJSON name="json" initialValue={JSON.stringify({ name: 'world' }, null, 2)} />
-    </ProForm>
-  ),
-};
+function ProFormBase({
+  children,
+  initialValues,
+}: {
+  children: React.ReactNode;
+  initialValues?: any;
+}) {
+  const [values, setValues] = useState<any>(undefined);
 
-// ProFormJSON 只读示例
-export const ProFormJSONReadonly: Story = {
+  return (
+    <ProForm
+      initialValues={initialValues}
+      onValuesChange={(values) => {
+        console.log('values', values);
+        setValues(values);
+      }}
+      onFinish={(values) => {
+        console.log('values', values);
+      }}
+    >
+      <pre>values: {JSON.stringify(values, null, 2)}</pre>
+      {children}
+    </ProForm>
+  );
+}
+
+// ProFormJSON 基础示例
+export const ProFormJSONComponent: Story = {
   render: () => (
-    <ProForm>
+    <ProFormBase initialValues={{ json: JSON.stringify({ name: 'world' }, null, 2) }}>
+      <ProFormJSON name="json" />
+      <div>readonly</div>
       <ProFormJSON
         name="json"
         readonly
         initialValue={JSON.stringify({ name: 'world' }, null, 2)}
         fieldProps={{
           mainMenuBar: false,
+          readonly: true,
         }}
       />
-    </ProForm>
+    </ProFormBase>
   ),
 };
 
 // ProFormJavascript 基础示例
-export const ProFormJavascriptBasic: Story = {
+export const ProFormJavascriptComponent: Story = {
   render: () => (
-    <ProForm>
-      <ProFormJavascript
-        name="javascript"
-        initialValue={`const name = 'world';
+    <ProFormBase
+      initialValues={{
+        javascript: `const name = 'world';
 console.log('hello', name);
-`}
-      />
-    </ProForm>
+`,
+      }}
+    >
+      <ProFormJavascript name="javascript" />
+      <div>readonly</div>
+      <ProFormJavascript name="javascript" readonly />
+    </ProFormBase>
   ),
 };
 
-// ProFormJavascript 只读示例
-export const ProFormJavascriptReadonly: Story = {
+export const ProFormSwitchNumberComponent: Story = {
   render: () => (
-    <ProForm>
-      <ProFormJavascript
-        name="javascript"
-        readonly
-        initialValue={`const name = 'world';
-console.log('hello', name);
-`}
-      />
-    </ProForm>
+    <ProFormBase>
+      <ProFormSwitchNumber name="switchNumber" />
+    </ProFormBase>
   ),
 };

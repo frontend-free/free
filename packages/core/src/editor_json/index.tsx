@@ -36,7 +36,7 @@ function EditorJSON({ value, onChange, readonly, mode, mainMenuBar }: EditorJSON
         },
         onChange: (newContent) => {
           // @ts-ignore
-          refOnChange.current(newContent.text);
+          refOnChange.current?.(newContent.text);
         },
       },
     });

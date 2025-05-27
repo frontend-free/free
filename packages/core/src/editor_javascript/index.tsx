@@ -11,6 +11,7 @@ interface EditorJavascriptProps {
   onChange?: (value: string, event?: any) => void;
   readonly?: boolean;
 }
+
 function EditorJavascript({ value, onChange, readonly }: EditorJavascriptProps) {
   return (
     <AceEditor

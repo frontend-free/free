@@ -17,7 +17,12 @@ export type { EditorLogsProps } from './editor_logs';
 export { EditorMarkdown } from './editor_markdown';
 export type { EditorMarkdownProps } from './editor_markdown';
 
-export { ProFormJSON, ProFormJavascript, proFormSelectSearchProps } from './form';
+export {
+  ProFormJSON,
+  ProFormJavascript,
+  ProFormSwitchNumber,
+  proFormSelectSearchProps,
+} from './form';
 
 export { Table } from './table';
 export type { TableProps } from './table';
