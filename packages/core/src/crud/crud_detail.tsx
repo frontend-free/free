@@ -24,6 +24,7 @@ interface CRUDDetailProps
     | 'requestCreateByValues'
     | 'updateProps'
     | 'requestUpdateById'
+    | 'requestUpdateByValues'
     | 'detailForm'
     | 'detailFormInstance'
   > {
@@ -49,6 +50,7 @@ function CRUDDetail(props: CRUDDetailProps) {
     requestCreateByValues,
     updateProps,
     requestUpdateById,
+    requestUpdateByValues,
     detailFormInstance,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
@@ -74,11 +76,15 @@ function CRUDDetail(props: CRUDDetailProps) {
             content,
           });
         }
-        if (action === 'update' && requestUpdateById) {
-          result = await requestUpdateById({
-            ...values,
-            id,
-          });
+        if (action === 'update' && (requestUpdateById || requestUpdateByValues)) {
+          if (requestUpdateByValues) {
+            result = await requestUpdateByValues(values);
+          } else if (requestUpdateById) {
+            result = await requestUpdateById({
+              ...values,
+              id,
+            });
+          }
 
           let content = '更新成功';
           if (updateProps?.successText) {
@@ -108,7 +114,16 @@ function CRUDDetail(props: CRUDDetailProps) {
         }, 10);
       }
     },
-    [action, requestCreateByValues, requestUpdateById, onSuccess, createProps, id, updateProps],
+    [
+      action,
+      requestCreateByValues,
+      requestUpdateById,
+      requestUpdateByValues,
+      onSuccess,
+      createProps,
+      id,
+      updateProps,
+    ],
   );
 
   const handleOpenChange = useCallback(

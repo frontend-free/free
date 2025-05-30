@@ -29,15 +29,13 @@ function CRUDComponent<
     createProps,
     requestCreateByValues,
     updateProps,
-    requestUpdateById: originalRequestUpdateById,
-    requestUpdateByValues: originalRequestUpdateByValues,
+    requestUpdateById,
+    requestUpdateByValues,
     detailFormInstance,
     batchActions,
   } = props;
 
   useTips(props);
-
-  const requestUpdateById = originalRequestUpdateByValues || originalRequestUpdateById;
 
   const actionRef = useRef<ActionType | undefined>(undefined);
 
@@ -53,6 +51,7 @@ function CRUDComponent<
       requestGetByRecord,
       requestCreateByValues,
       requestUpdateById,
+      requestUpdateByValues,
       detailFormInstance,
       createProps,
       readProps,
@@ -63,6 +62,7 @@ function CRUDComponent<
       requestGetByRecord,
       requestCreateByValues,
       requestUpdateById,
+      requestUpdateByValues,
       detailFormInstance,
       createProps,
       readProps,
