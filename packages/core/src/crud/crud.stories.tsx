@@ -155,6 +155,7 @@ export const MoreCustom: Story = {
             return <div>自定义</div>;
           },
         }}
+        createButton={<Button type="primary">自定义新建文本</Button>}
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{
           nameIndex: 'name',
