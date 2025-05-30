@@ -36,6 +36,7 @@ function useRowSelection<DataSource, Key>({
               key={action.btnText}
               type="link"
               danger={action.danger}
+              className="!px-0"
               onClick={async (event) => {
                 if (action.danger) {
                   await new Promise((resolve) => {

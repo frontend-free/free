@@ -109,6 +109,34 @@ export const ReadDetail: Story = {
   },
 };
 
+export const BatchDelete: Story = {
+  render: () => {
+    return (
+      <CRUD
+        actions={['batch_delete']}
+        tableProps={{
+          columns: [
+            {
+              title: 'id',
+              dataIndex: 'id',
+              search: true,
+            },
+            {
+              title: '名字',
+              dataIndex: 'name',
+              search: true,
+            },
+          ],
+          request: fakeRequest,
+        }}
+        requestDeleteByRecords={async (records) => {
+          console.log(records);
+        }}
+      />
+    );
+  },
+};
+
 export const MoreCustom: Story = {
   render: () => {
     const columns = [
@@ -450,7 +478,13 @@ export const RowSelection: Story = {
         }}
         batchActions={[
           {
-            btnText: '批量删除',
+            btnText: '批量xxx',
+            onClick: async (_, { selectedRowKeys }) => {
+              console.log(selectedRowKeys);
+            },
+          },
+          {
+            btnText: '批量danger',
             danger: true,
             onClick: async (_, { selectedRowKeys }) => {
               console.log(selectedRowKeys);

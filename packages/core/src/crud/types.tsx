@@ -8,12 +8,26 @@ import type { TableProps } from '../table';
  * read_detail 详情页查看
  * update 编辑
  * delete 删除
+ * batch_delete 批量删除
  */
-type CRUDAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
+type CRUDAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete' | 'batch_delete';
 
 interface CRUDProps<DataSource = any, Key = string> {
   /** 操作类型 */
   actions: CRUDAction[];
+
+  // *** 表格相关 ***
+
+  /** 表格相关 */
+  tableProps: TableProps<DataSource>;
+  /** 表格操作列相关 */
+  operateColumnProps?: {
+    width?: number;
+    /** 扩展操作区域，再其他操作之前 */
+    moreOperator?: (record: DataSource) => ReactNode;
+    /** 扩展操作区域，在其他操作之后 */
+    moreOperatorAfter?: (record: DataSource) => ReactNode;
+  };
 
   // *** 表单 ***
 
@@ -38,20 +52,7 @@ interface CRUDProps<DataSource = any, Key = string> {
     successText?: string | (() => string);
   };
 
-  // *** Read 表格 ***
-
-  /** 表格相关 */
-  tableProps: TableProps<DataSource>;
-  /** 表格操作列相关 */
-  operateColumnProps?: {
-    width?: number;
-    /** 扩展操作区域，再其他操作之前 */
-    moreOperator?: (record: DataSource) => ReactNode;
-    /** 扩展操作区域，在其他操作之后 */
-    moreOperatorAfter?: (record: DataSource) => ReactNode;
-  };
-
-  // *** Read 详情 ***
+  // *** Read 查看 ***
 
   /** 获取详情接口 */
   requestGetByRecord?: (record: DataSource) => Promise<DataSource>;
@@ -101,6 +102,11 @@ interface CRUDProps<DataSource = any, Key = string> {
     /** 成功文案 */
     successText?: string | (() => string);
   };
+
+  // *** batch_delete 批量删除 ***
+
+  /** 批量删除接口 */
+  requestDeleteByRecords?: (records: DataSource[]) => Promise<void>;
 
   // *** 批量操作 ***
 

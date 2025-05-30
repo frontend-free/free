@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.10
+
+### Patch Changes
+
+- feat: crud batch_delete
+  - @fe-free/tool@1.4.10
+
 ## 1.4.9
 
 ### Patch Changes

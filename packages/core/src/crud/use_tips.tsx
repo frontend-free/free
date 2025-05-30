@@ -37,6 +37,12 @@ function useTips<DataSource, Key>(props: CRUDProps<DataSource, Key>) {
         console.warn('actions 包含 delete 时，需要传递 deleteProps 和 requestDeleteByRecord');
       }
     }
+
+    if (props.actions.includes('batch_delete')) {
+      if (!props.requestDeleteByRecords) {
+        console.warn('actions 包含 batch_delete 时，需要传递 requestDeleteByRecords');
+      }
+    }
   }, []);
 }
 

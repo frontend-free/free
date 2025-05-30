@@ -32,7 +32,8 @@ function CRUDComponent<
     requestUpdateById,
     requestUpdateByValues,
     detailFormInstance,
-    batchActions,
+    requestDeleteByRecords,
+    batchActions: originBatchActions,
   } = props;
 
   useTips(props);
@@ -199,6 +200,23 @@ function CRUDComponent<
       ].filter(Boolean),
     [actions, createButton, detailProps, handleReload, tableProps],
   );
+
+  const batchActions = useMemo(() => {
+    const bas = [...(originBatchActions || [])];
+
+    if (actions.includes('batch_delete') && requestDeleteByRecords) {
+      const batchDeleteAction = {
+        btnText: '批量删除',
+        danger: true,
+        onClick: async (_, { selectedRows }) => {
+          await requestDeleteByRecords(selectedRows);
+        },
+      };
+      bas.push(batchDeleteAction);
+    }
+
+    return bas;
+  }, [actions, originBatchActions, requestDeleteByRecords]);
 
   const { rowSelection, tableAlertRender, tableAlertOptionRender } = useRowSelection<
     DataSource,
