@@ -41,10 +41,9 @@ export const Normal: Story = {
         deleteProps={{
           nameIndex: 'name',
         }}
-        detailForm={(formProps) => (
+        detailForm={() => (
           <>
             <ProFormText
-              {...formProps}
               name="name"
               label="名字"
               required
@@ -87,10 +86,9 @@ export const WithSearch: Story = {
         deleteProps={{
           nameIndex: 'name',
         }}
-        detailForm={(formProps) => (
+        detailForm={() => (
           <>
             <ProFormText
-              {...formProps}
               name="name"
               label="名字"
               required

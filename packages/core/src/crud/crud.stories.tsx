@@ -61,10 +61,9 @@ export const Normal: Story = {
         deleteProps={{
           nameIndex: 'name',
         }}
-        detailForm={(formProps) => (
+        detailForm={() => (
           <>
             <ProFormText
-              {...formProps}
               name="name"
               label="名字"
               required
@@ -188,10 +187,9 @@ export const MoreCustom: Story = {
         deleteProps={{
           nameIndex: 'name',
         }}
-        detailForm={(formProps) => (
+        detailForm={() => (
           <>
             <ProFormText
-              {...formProps}
               name="name"
               label="名字"
               required
@@ -235,17 +233,16 @@ const FormRefComponent = () => {
         request: fakeRequest,
       }}
       detailFormInstance={detailFormInstance}
-      detailForm={(formProps) => (
+      detailForm={() => (
         <>
           <ProFormText
-            {...formProps}
             name="name"
             label="名字"
             required
             rules={[{ required: true }]}
             initialValue={'default'}
           />
-          <ProFormSwitch {...formProps} name="status" label="开启" initialValue={false} />
+          <ProFormSwitch name="status" label="开启" initialValue={false} />
         </>
       )}
       requestGetByRecord={fakeGetByRecord}
@@ -437,15 +434,9 @@ export const CustomText: Story = {
           successText: '编辑成功',
         }}
         requestDeleteByRecord={fakeDeleteByRecord}
-        detailForm={(formProps) => (
+        detailForm={() => (
           <>
-            <ProFormText
-              {...formProps}
-              name="name"
-              label="名字"
-              required
-              rules={[{ required: true }]}
-            />
+            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
           </>
         )}
         requestGetByRecord={fakeGetByRecord}
