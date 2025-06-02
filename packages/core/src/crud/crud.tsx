@@ -2,6 +2,7 @@ import type { ActionType } from '@ant-design/pro-components';
 import { Button, message, Space } from 'antd';
 import { isString } from 'lodash-es';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import type { TableProps } from '../table';
 import { Table } from '../table';
 import { OperateDelete } from './crud_delete';
@@ -122,12 +123,9 @@ function CRUDComponent<
               />
             )}
             {actions.includes('read_detail') && (
-              <a
-                href={`${window.location.pathname}/detail/${record[detailIdIndex || 'id']}`}
-                target={readProps?.target}
-              >
+              <Link to={`./detail/${record[detailIdIndex || 'id']}`} target={readProps?.target}>
                 {readProps?.operateText || '查看'}
-              </a>
+              </Link>
             )}
             {actions.includes('update') && (
               <CRUDDetail
