@@ -2,6 +2,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
 import { markdown } from '@codemirror/lang-markdown';
 import { python } from '@codemirror/lang-python';
+import { EditorView } from '@codemirror/view';
 import { basicDarkInit } from '@uiw/codemirror-theme-basic/dark';
 import type { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import CodeMirror from '@uiw/react-codemirror';
@@ -47,7 +48,7 @@ function Editor(props: EditorProps) {
   } = props;
 
   const extensions = useMemo(() => {
-    const result: ReactCodeMirrorProps['extensions'] = [];
+    const result: ReactCodeMirrorProps['extensions'] = [EditorView.lineWrapping];
 
     if (originExtensions) {
       result.push(...originExtensions);

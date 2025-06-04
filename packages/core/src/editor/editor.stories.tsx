@@ -39,6 +39,14 @@ export const ReadOnly: Story = {
   render: (props) => <BasicDemo {...props} />,
 };
 
+export const Wrap: Story = {
+  args: {
+    value:
+      'hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!',
+  },
+  render: (props) => <BasicDemo {...props} />,
+};
+
 // 不可编辑模式
 export const Editable: Story = {
   args: {
