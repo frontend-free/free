@@ -331,6 +331,9 @@ importers:
       '@lezer/highlight':
         specifier: ^1.2.1
         version: 1.2.1
+      '@uiw/codemirror-theme-basic':
+        specifier: ^4.23.12
+        version: 4.23.12(@codemirror/language@6.10.6)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)
       '@uiw/codemirror-themes':
         specifier: ^4.23.12
         version: 4.23.12(@codemirror/language@6.10.6)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)
@@ -3600,6 +3603,9 @@ packages:
       '@codemirror/search': '>=6.0.0'
       '@codemirror/state': '>=6.0.0'
       '@codemirror/view': '>=6.0.0'
+
+  '@uiw/codemirror-theme-basic@4.23.12':
+    resolution: {integrity: sha512-KepDYk/yb1DPV733N0UwbngRlHmFjGR5gh4UOXZic9yI14ndx8jEJsa36Em8THNSCqhSpmn1zeCbnXBxhyF4rA==}
 
   '@uiw/codemirror-themes@4.23.12':
     resolution: {integrity: sha512-8etEByfS9yttFZW0rcWhdZc7/JXJKRWlU5lHmJCI3GydZNGCzydNA+HtK9nWKpJUndVc58Q2sqSC5OIcwq8y6A==}
@@ -14877,6 +14883,14 @@ snapshots:
       '@codemirror/search': 6.5.8
       '@codemirror/state': 6.5.0
       '@codemirror/view': 6.35.3
+
+  '@uiw/codemirror-theme-basic@4.23.12(@codemirror/language@6.10.6)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)':
+    dependencies:
+      '@uiw/codemirror-themes': 4.23.12(@codemirror/language@6.10.6)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)
+    transitivePeerDependencies:
+      - '@codemirror/language'
+      - '@codemirror/state'
+      - '@codemirror/view'
 
   '@uiw/codemirror-themes@4.23.12(@codemirror/language@6.10.6)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)':
     dependencies:

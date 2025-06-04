@@ -2,6 +2,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
 import { markdown } from '@codemirror/lang-markdown';
 import { python } from '@codemirror/lang-python';
+import { basicDarkInit } from '@uiw/codemirror-theme-basic/dark';
 import type { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import CodeMirror from '@uiw/react-codemirror';
 import { useCallback, useMemo } from 'react';
@@ -23,6 +24,13 @@ interface EditorProps {
   extensions?: ReactCodeMirrorProps['extensions'];
 }
 
+const defaultTheme = basicDarkInit({
+  settings: {
+    caret: '#c6c6c6',
+    fontFamily: 'monospace',
+  },
+});
+
 function Editor(props: EditorProps) {
   const {
     language,
@@ -34,7 +42,7 @@ function Editor(props: EditorProps) {
     placeholder,
     height,
     width,
-    theme,
+    theme = defaultTheme,
     extensions: originExtensions,
   } = props;
 

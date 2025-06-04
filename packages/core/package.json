@@ -1,6 +1,6 @@
 {
   "name": "@fe-free/core",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "description": "",
   "main": "./src/index.ts",
   "scripts": {
@@ -26,6 +26,7 @@
     "@codemirror/view": "^6.33.0",
     "@fe-free/tool": "workspace:*",
     "@lezer/highlight": "^1.2.1",
+    "@uiw/codemirror-theme-basic": "^4.23.12",
     "@uiw/codemirror-themes": "^4.23.12",
     "@uiw/react-codemirror": "^4.23.12",
     "ace-builds": "^1.33.1",
