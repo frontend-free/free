@@ -109,42 +109,76 @@ function CRUDComponent<
       fixed: 'right',
       width: operateColumnProps?.width || 120,
       render: function (_, record) {
-        return (
-          <Space>
-            {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
-            {actions.includes('read') && (
+        const btns: React.ReactNode[] = [];
+
+        if (actions.includes('read')) {
+          btns.push(
+            <CRUDDetail
+              key="read"
+              id={record[idField]}
+              record={record}
+              onSuccess={handleReload}
+              trigger={<a>{readProps?.operateText || '查看'}</a>}
+              action="read"
+              {...detailProps}
+            />,
+          );
+        }
+
+        if (actions.includes('read_detail')) {
+          btns.push(
+            <Link
+              key="read_detail"
+              to={`./detail/${record[detailIdIndex || 'id']}`}
+              target={readProps?.target}
+            >
+              {readProps?.operateText || '查看'}
+            </Link>,
+          );
+        }
+
+        if (actions.includes('update')) {
+          const disabled = updateProps?.operateIsDisabled?.(record) || false;
+
+          if (disabled) {
+            btns.push(
+              <a key="update" disabled>
+                {updateProps?.operateText || '编辑'}
+              </a>,
+            );
+          } else {
+            btns.push(
               <CRUDDetail
-                id={record[idField]}
-                record={record}
-                onSuccess={handleReload}
-                trigger={<a>{readProps?.operateText || '查看'}</a>}
-                action="read"
-                {...detailProps}
-              />
-            )}
-            {actions.includes('read_detail') && (
-              <Link to={`./detail/${record[detailIdIndex || 'id']}`} target={readProps?.target}>
-                {readProps?.operateText || '查看'}
-              </Link>
-            )}
-            {actions.includes('update') && (
-              <CRUDDetail
+                key="update"
                 id={record[idField]}
                 record={record}
                 onSuccess={handleReload}
                 trigger={<a>{updateProps?.operateText || '编辑'}</a>}
                 action="update"
                 {...detailProps}
-              />
-            )}
-            {actions.includes('delete') && deleteProps && (
-              <OperateDelete
-                name={record[deleteProps.nameIndex]}
-                desc={deleteProps.desc}
-                operateText={deleteProps.operateText}
-                onDelete={getHandleDelete(record)}
-              />
-            )}
+              />,
+            );
+          }
+        }
+
+        if (actions.includes('delete') && deleteProps) {
+          const disabled = deleteProps?.operateIsDisabled?.(record) || false;
+          btns.push(
+            <OperateDelete
+              key="delete"
+              name={record[deleteProps.nameIndex]}
+              desc={deleteProps.desc}
+              operateText={deleteProps.operateText}
+              disabled={disabled}
+              onDelete={getHandleDelete(record)}
+            />,
+          );
+        }
+
+        return (
+          <Space>
+            {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
+            {btns}
             {operateColumnProps?.moreOperatorAfter && operateColumnProps.moreOperatorAfter(record)}
           </Space>
         );

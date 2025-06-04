@@ -186,6 +186,12 @@ export const MoreCustom: Story = {
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{
           nameIndex: 'name',
+          operateIsDisabled: (record) => {
+            if (record.id % 3) {
+              return false;
+            }
+            return true;
+          },
         }}
         detailForm={() => (
           <>
@@ -201,6 +207,14 @@ export const MoreCustom: Story = {
         requestGetByRecord={fakeGetByRecord}
         requestCreateByValues={fakeCreate}
         requestUpdateById={fakeUpdateById}
+        updateProps={{
+          operateIsDisabled: (record) => {
+            if (record.id % 3) {
+              return false;
+            }
+            return true;
+          },
+        }}
       />
     );
   },

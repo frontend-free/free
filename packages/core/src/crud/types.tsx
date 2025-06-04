@@ -77,8 +77,10 @@ interface CRUDProps<DataSource = any, Key = string> {
   /** @deprecated 请使用 requestUpdateByValues 替代 */
   requestUpdateById?: (values: Partial<DataSource>) => Promise<false | void>;
   updateProps?: {
-    /** 文本 */
+    /** 文本“编辑” */
     operateText?: string;
+    /** ”编辑”是否禁用 */
+    operateIsDisabled?: (record: DataSource) => boolean;
     /** 保存按钮文本 */
     submitText?: string;
     /** 重置按钮文本 */
@@ -93,12 +95,15 @@ interface CRUDProps<DataSource = any, Key = string> {
   requestDeleteByRecord?: (record: DataSource) => Promise<void>;
   /** 删除相关 */
   deleteProps?: {
+    /** 文本“删除” */
+    operateText?: string;
+    /** “删除”是否禁用 */
+    operateIsDisabled?: (record: DataSource) => boolean;
     /** 显示名称索引 */
     nameIndex: keyof DataSource;
     /** 删除确认描述 */
     desc?: string;
-    /** 文本 */
-    operateText?: string;
+
     /** 成功文案 */
     successText?: string | (() => string);
   };

@@ -6,6 +6,7 @@ interface Params {
   desc?: string;
   operateText?: string;
   onDelete: () => Promise<any>;
+  disabled?: boolean;
 }
 
 function useDelete(params: Params) {
@@ -34,8 +35,12 @@ function useDelete(params: Params) {
 }
 
 function OperateDelete(props: Params) {
-  const { name, desc, onDelete, operateText } = props;
+  const { name, desc, onDelete, operateText, disabled } = props;
   const { doDelete } = useDelete({ name, desc, onDelete, operateText });
+
+  if (disabled) {
+    return <a disabled>{operateText || '删除'}</a>;
+  }
 
   return (
     <a style={{ color: 'red' }} onClick={doDelete}>
