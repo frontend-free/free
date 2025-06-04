@@ -205,13 +205,13 @@ function CRUDComponent<
     tableProps.columns,
     operateColumnProps,
     actions,
+    deleteProps,
     handleReload,
     readProps?.operateText,
     readProps?.target,
     detailProps,
     detailIdIndex,
-    updateProps?.operateText,
-    deleteProps,
+    updateProps,
     getHandleDelete,
   ]);
 

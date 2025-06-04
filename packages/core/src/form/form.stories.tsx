@@ -1,5 +1,5 @@
 import { ProForm } from '@ant-design/pro-components';
-import { ProFormJSON, ProFormJavascript, ProFormSwitchNumber } from '@fe-free/core';
+import { ProFormEditor, ProFormJSON, ProFormJavascript, ProFormSwitchNumber } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
@@ -36,6 +36,20 @@ function ProFormBase({
     </ProForm>
   );
 }
+
+export const ProFormEditorComponent: Story = {
+  render: () => (
+    <ProFormBase
+      initialValues={{
+        code: `const name = 'world';
+console.log('hello', name);
+`,
+      }}
+    >
+      <ProFormEditor name="code" fieldProps={{ language: 'javascript', height: '50vh' }} />
+    </ProFormBase>
+  ),
+};
 
 // ProFormJSON 基础示例
 export const ProFormJSONComponent: Story = {

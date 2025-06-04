@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.13
+
+### Patch Changes
+
+- feat: ProFormEditor
+  - @fe-free/tool@1.4.13
+
 ## 1.4.12
 
 ### Patch Changes

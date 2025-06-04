@@ -1,3 +1,4 @@
+export { ProFormEditor } from './pro_form_editor';
 export { ProFormJavascript } from './pro_form_javascript';
 export { ProFormJSON } from './pro_form_json';
 export {
@@ -5,6 +6,7 @@ export {
   SwitchNumber,
   type SwitchNumberProps,
 } from './pro_form_switch_number';
+
 import { pinyinMatch } from '@fe-free/tool';
 
 /** ProFromSelect 搜索相关 props。 支持 1 搜索 2 拼音过滤 */

@@ -15,6 +15,9 @@ interface EditorProps {
   readOnly?: boolean;
   editable?: boolean;
 
+  height?: string;
+  width?: string;
+
   // 不对外
   theme?: ReactCodeMirrorProps['theme'];
   extensions?: ReactCodeMirrorProps['extensions'];
@@ -29,6 +32,8 @@ function Editor(props: EditorProps) {
     editable,
     autoFocus,
     placeholder,
+    height,
+    width,
     theme,
     extensions: originExtensions,
   } = props;
@@ -70,8 +75,8 @@ function Editor(props: EditorProps) {
   return (
     <CodeMirror
       className="w-full h-full"
-      height="100%"
-      width="100%"
+      height={height || '100%'}
+      width={width || '100%'}
       value={value}
       onChange={handleChange}
       extensions={extensions}

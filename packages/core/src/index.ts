@@ -18,6 +18,7 @@ export { EditorMarkdown } from './editor_markdown';
 export type { EditorMarkdownProps } from './editor_markdown';
 
 export {
+  ProFormEditor,
   ProFormJSON,
   ProFormJavascript,
   ProFormSwitchNumber,
