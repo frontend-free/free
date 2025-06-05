@@ -43,6 +43,7 @@ export const Wrap: Story = {
   args: {
     value:
       'hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!',
+    lineWrapping: true,
   },
   render: (props) => <BasicDemo {...props} />,
 };

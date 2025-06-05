@@ -19,6 +19,7 @@ interface EditorProps {
 
   height?: string;
   width?: string;
+  lineWrapping?: boolean;
 
   // 不对外
   theme?: ReactCodeMirrorProps['theme'];
@@ -43,12 +44,17 @@ function Editor(props: EditorProps) {
     placeholder,
     height,
     width,
+    lineWrapping,
     theme = defaultTheme,
     extensions: originExtensions,
   } = props;
 
   const extensions = useMemo(() => {
-    const result: ReactCodeMirrorProps['extensions'] = [EditorView.lineWrapping];
+    const result: ReactCodeMirrorProps['extensions'] = [];
+
+    if (lineWrapping) {
+      result.push(EditorView.lineWrapping);
+    }
 
     if (originExtensions) {
       result.push(...originExtensions);

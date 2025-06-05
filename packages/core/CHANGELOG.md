@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.18
+
+### Patch Changes
+
+- feat: modify Editor
+  - @fe-free/tool@1.4.18
+
 ## 1.4.17
 
 ### Patch Changes
