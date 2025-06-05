@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.4.16
+
+### Patch Changes
+
+- feat: modify EditorLogs
+  - @fe-free/tool@1.4.16
+
 ## 1.4.15
 
 ### Patch Changes

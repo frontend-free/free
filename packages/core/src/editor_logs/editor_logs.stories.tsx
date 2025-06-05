@@ -42,6 +42,38 @@ export const Basic: Story = {
         message:
           'This is a debug log message. This is a debug log message This is a debug log message This is a debug log message This is a debug log message',
       },
+      {
+        timestamp: '2023-01-01 12:00:00',
+        message: 'This is an log message.',
+      },
+      {
+        level: 'info',
+        message: 'This is an log message.',
+      },
+      {
+        message: 'This is an log message.',
+      },
+    ],
+  },
+  render: (props) => (
+    <div style={{ width: '500px', height: '500px' }}>
+      <EditorLogs {...props} />
+    </div>
+  ),
+};
+
+export const Pure: Story = {
+  args: {
+    logs: [
+      {
+        message: 'This is an info log message.',
+      },
+      {
+        message: 'This is a warning log message.',
+      },
+      {
+        message: 'This is an error log message.',
+      },
     ],
   },
   render: (props) => (

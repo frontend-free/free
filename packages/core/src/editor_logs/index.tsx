@@ -6,19 +6,35 @@ import { Editor } from '../editor';
 
 interface EditorLogsProps {
   logs: {
-    timestamp: string;
-    level: 'info' | 'warn' | 'error' | 'system';
+    timestamp?: string;
+    level?: 'info' | 'warn' | 'error' | 'system';
     message: string;
   }[];
 }
 
 const EditorLogs: React.FC<EditorLogsProps> = ({ logs }) => {
-  const formattedLogs = logs
-    .map((log) => {
-      const levelPadded = `[${log.level}]`.padEnd(8, ' ');
-      return `${log.timestamp} ${levelPadded.toUpperCase()} ${log.message}`;
-    })
-    .join('\n');
+  const notPure = logs.find((item) => item.timestamp || item.level);
+
+  let formattedLogs = '';
+  if (notPure) {
+    formattedLogs = logs
+      .map((log) => {
+        const arr: string[] = [];
+
+        arr.push((log.timestamp || '').padEnd(19, ' '));
+
+        arr.push(`[${log.level || ''}]`.padEnd(8, ' ').toUpperCase());
+
+        if (log.message) {
+          arr.push(log.message);
+        }
+
+        return arr.join(' ');
+      })
+      .join('\n');
+  } else {
+    formattedLogs = logs.map((log) => log.message).join('\n');
+  }
 
   const logExtension = [
     StreamLanguage.define({
