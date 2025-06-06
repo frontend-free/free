@@ -12,7 +12,8 @@
     "module": "CommonJS",
     "moduleResolution": "node10",
     "noEmit": false,
-    "allowImportingTsExtensions": false
+    "allowImportingTsExtensions": false,
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }

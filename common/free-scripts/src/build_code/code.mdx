@@ -1,0 +1,103 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="@fe-free/free-scripts/build-code" />
+
+# Build Code
+
+这是一个用于构建代码的工具。
+
+## build-code
+
+```json
+// package.json
+{
+  "scripts": {
+    "build-enums": "free-scripts build-code -i ./enums.config.js -o ./src/code -t antd && prettier ./src/code --write"
+  }
+}
+```
+
+enums.config.js 配置如下
+
+```typescript
+const enums = {
+  SomeThing: {
+    // 建议大写开头
+    STRING: {
+      text: '文本',
+      value: 'string',
+    },
+    NUMBER: {
+      text: '数字',
+      // 如果不提供 value，则默认和 Key 一致
+      // value: 'NUMBER',
+    },
+    Time: {
+      text: '时间',
+      value: 'time',
+      // color 用于 Tag 的 color
+      color: 'green',
+      // status pro-components 的 valueEnum 定义 'Success' | 'Error' | 'Processing' | 'Warning' | 'Default';
+      status: 'Default',
+    },
+  },
+};
+module.exports = { enums };
+```
+
+会生成如下代码，供使用
+
+```typescript
+import type { TagProps } from 'antd';
+import { Tag } from 'antd';
+
+// --- SomeThing
+
+export enum EnumSomeThing {
+  STRING = 'string',
+  NUMBER = 'NUMBER',
+  Time = 'time',
+}
+
+export const valueEnumSomeThing = {
+  [EnumSomeThing.STRING]: {
+    text: '文本',
+    value: 'string',
+  },
+  [EnumSomeThing.NUMBER]: {
+    text: '数字',
+    value: 'NUMBER',
+  },
+  [EnumSomeThing.Time]: {
+    text: '时间',
+    value: 'time',
+    status: 'Default',
+    color: 'green',
+  },
+};
+
+export const listSomeThing = Object.keys(valueEnumSomeThing).map((key) => {
+  const item = valueEnumSomeThing[key];
+
+  return {
+    value: item.value !== undefined ? item.value : key,
+    label: item.text,
+    originData: item.data,
+  };
+});
+
+export function TagSomeThing(props: { value?: EnumSomeThing | string } & TagProps) {
+  const item = props.value && valueEnumSomeThing[props.value];
+
+  if (item) {
+    return (
+      <Tag color={item.color} {...props}>
+        {item.text}
+      </Tag>
+    );
+  }
+
+  return null;
+}
+
+```
