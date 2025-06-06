@@ -1,7 +1,7 @@
 import type { Cell, Workbook, Worksheet } from 'exceljs';
 import ExcelJS from 'exceljs';
 import FileSaver from 'file-saver';
-import { isNumber } from 'lodash-es';
+import { isDate, isNumber } from 'lodash-es';
 
 type JSONSheetItem = {
   name: string;
@@ -62,6 +62,17 @@ function eachRowAndCell(worksheet: Worksheet, callback) {
   });
 }
 
+function fixDate(cell: any) {
+  // excel 不保存时区。
+  // 假设 excel 显示的是 2025-06-06 12:00:00，那么 xlsx 获取到的是 Fri Jun 06 2025 20:00:00 GMT+0800 (中国标准时间)
+  // 所以需要把 xlsx 获取到的日期转成当前时区
+
+  const date = new Date(cell);
+  // 得到负数 -480
+  const offset = date.getTimezoneOffset();
+  return new Date(date.getTime() + offset * 60 * 1000);
+}
+
 function worksheetToJSON(
   worksheet: Worksheet,
   processCell?: (info: { cell: Cell; colNumber: number; rowNumber: number }) => void,
@@ -77,7 +88,19 @@ function worksheetToJSON(
   });
 
   // 挪掉空行。 空行会显示 null
-  return sheet.filter(Boolean);
+  let json = sheet.filter(Boolean);
+
+  json = json.map((row) => {
+    return row.map((cell) => {
+      if (isDate(cell)) {
+        return fixDate(cell);
+      } else {
+        return cell;
+      }
+    });
+  });
+
+  return json;
 }
 
 interface JSONToWorksheetOption {

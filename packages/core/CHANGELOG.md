@@ -1,5 +1,11 @@
 # @fe-free/core
 
+## 1.4.19
+
+### Patch Changes
+
+- @fe-free/tool@1.4.19
+
 ## 1.4.18
 
 ### Patch Changes

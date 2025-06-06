@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 1.4.19
+
+### Patch Changes
+
+- feat: xlsx
+
 ## 1.4.18
 
 ## 1.4.17
