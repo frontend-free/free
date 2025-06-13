@@ -500,3 +500,56 @@ export const RowSelection: Story = {
     );
   },
 };
+
+export const ExpandedRowRender: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+        search: true,
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+    ];
+
+    return (
+      <CRUD
+        actions={['create', 'read', 'delete', 'update']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
+          defaultExpandAllRows: true,
+          expandable: {
+            expandedRowKeys: ['0', '1'],
+            expandedRowRender: () => {
+              return <div>123</div>;
+            },
+          },
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'name',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText
+              name="name"
+              label="名字"
+              required
+              rules={[{ required: true }]}
+              extra="extra extra extra extra"
+            />
+          </>
+        )}
+        requestGetByRecord={fakeGetByRecord}
+        requestCreateByValues={fakeCreate}
+        requestUpdateById={fakeUpdateById}
+      />
+    );
+  },
+};
