@@ -89,7 +89,7 @@ function CRUDOfSimpleComponent(props: CRUDOfSimpleProps, ref: React.ForwardedRef
   }, [debouncedSearchValue, simpleSearchProps, tableProps.params]);
 
   return (
-    <div className="crud-of-simple">
+    <div className="fec-crud-of-simple">
       <CRUD
         ref={ref}
         {...rest}

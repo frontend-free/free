@@ -1,6 +1,6 @@
-.crud-detail {
+.fec-crud-detail {
   // 查看情况下隐藏 FormItem 的 extra
-  &.crud-detail-hide-extra {
+  &.fec-crud-detail-hide-extra {
     .ant-form-item {
       .ant-form-item-extra {
         display: none;
@@ -9,7 +9,7 @@
   }
 }
 
-.crud-of-simple {
+.fec-crud-of-simple {
   .ant-pro-table-list-toolbar {
     border-bottom: 1px solid #f0f0f0;
   }

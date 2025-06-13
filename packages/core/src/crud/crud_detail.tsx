@@ -172,8 +172,8 @@ function CRUDDetail(props: CRUDDetailProps) {
 
     return (
       <div
-        className={classNames('crud-detail', `crud-detail-action-${action}`, {
-          'crud-detail-hide-extra': action === 'read',
+        className={classNames('fec-crud-detail', `fec-crud-detail-action-${action}`, {
+          'fec-crud-detail-hide-extra': action === 'read',
         })}
       >
         {detailForm({ readonly: action === 'read' && !!id }, { action })}

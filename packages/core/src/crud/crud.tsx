@@ -1,5 +1,5 @@
 import type { ActionType } from '@ant-design/pro-components';
-import { Button, message, Space } from 'antd';
+import { Button, message } from 'antd';
 import { isString } from 'lodash-es';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -176,11 +176,11 @@ function CRUDComponent<
         }
 
         return (
-          <Space>
+          <div className="fec-crud-operate-column flex gap-2">
             {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
             {btns}
             {operateColumnProps?.moreOperatorAfter && operateColumnProps.moreOperatorAfter(record)}
-          </Space>
+          </div>
         );
       },
     };
@@ -259,7 +259,7 @@ function CRUDComponent<
   });
 
   return (
-    <div className="crud-table">
+    <div className="fec-crud">
       <Table<DataSource>
         rowKey="id"
         {...tableProps}
