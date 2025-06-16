@@ -183,7 +183,7 @@ function CRUDDetail(props: CRUDDetailProps) {
 
   const drawerProps = useMemo(() => {
     return {
-      destroyOnClose: true,
+      destroyOnHidden: true,
     };
   }, []);
 
