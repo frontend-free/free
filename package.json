@@ -45,6 +45,7 @@
     "@fe-free/commit-lint": "workspace:^",
     "@fe-free/eslint-config-base": "workspace:^",
     "@fe-free/style-lint": "workspace:^",
+    "@storybook/addon-docs": "^9.0.13",
     "@storybook/addon-onboarding": "^9.0.13",
     "@storybook/react-vite": "^9.0.13",
     "@types/lodash-es": "^4.17.12",
@@ -71,8 +72,7 @@
     "stylelint": "^15.7.0",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.1.2",
-    "vite-plugin-svgr": "^4.3.0",
-    "@storybook/addon-docs": "^9.0.13"
+    "vite-plugin-svgr": "^4.3.0"
   },
   "pnpm": {
     "overrides": {}
