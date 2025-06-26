@@ -3,13 +3,22 @@ import { ProFormEditor, ProFormJSON, ProFormJavascript, ProFormSwitchNumber } fr
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-const meta: Meta = {
+const meta: Meta<typeof ProForm> = {
   title: '@fe-free/core/Form',
+  component: ProForm,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Form 组件基于 Ant Design ProForm，支持多种表单类型和扩展字段，适用于复杂表单场景。',
+      },
+    },
+  },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof ProForm>;
 
 function ProFormBase({
   children,
@@ -46,7 +55,7 @@ console.log('hello', name);
 `,
       }}
     >
-      <ProFormEditor name="code" fieldProps={{ language: 'javascript', height: '50vh' }} />
+      <ProFormEditor name="code" fieldProps={{ language: 'javascript', height: '400px' }} />
     </ProFormBase>
   ),
 };

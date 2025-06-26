@@ -3,9 +3,20 @@ import dayjs from 'dayjs';
 import { isDate, isNumber, isString } from 'lodash-es';
 import React from 'react';
 
-export default {
+const meta = {
   title: '@fe-free/file/xlsx',
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'xlsx 相关工具函数，支持 xlsx 与 JSON 的互转、校验、导出等功能，适用于表格数据的导入导出场景。',
+      },
+    },
+  },
 };
+
+export default meta;
 
 export const XlsxToJSON = () => (
   <>

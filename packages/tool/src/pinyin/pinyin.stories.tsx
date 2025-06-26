@@ -4,6 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 const meta: Meta = {
   title: '@fe-free/tool/Pinyin',
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Pinyin 相关工具函数，支持中文转拼音、首字母提取、拼音匹配与过滤，适用于搜索、筛选等场景。',
+      },
+    },
+  },
 };
 
 export default meta;

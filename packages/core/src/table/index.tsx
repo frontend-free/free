@@ -47,11 +47,15 @@ function Table<
       columns={newColumns}
       scroll={getTableScroll(newColumns)}
       search={
-        hasSearch && {
-          labelWidth: 'auto',
-          defaultCollapsed: false,
-          ...search,
-        }
+        hasSearch
+          ? {
+              labelWidth: 'auto',
+              defaultCollapsed: false,
+              ...search,
+            }
+          : {
+              ...search,
+            }
       }
       {...rest}
     />

@@ -4,6 +4,13 @@ import { buildURL } from './index';
 const meta: Meta = {
   title: '@fe-free/tool/URL',
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'URL 工具函数',
+      },
+    },
+  },
 };
 
 export default meta;

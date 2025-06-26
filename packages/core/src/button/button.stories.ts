@@ -5,6 +5,14 @@ const meta: Meta<typeof LoadingButton> = {
   title: '@fe-free/core/LoadingButton',
   component: LoadingButton,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'LoadingButton 是一个带有加载状态的按钮组件，适用于异步操作场景。<br/>区别于 antd Button 需要手动传 loading props。',
+      },
+    },
+  },
 };
 
 export default meta;
