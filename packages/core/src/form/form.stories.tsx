@@ -1,6 +1,6 @@
 import { ProForm } from '@ant-design/pro-components';
 import { ProFormEditor, ProFormJSON, ProFormJavascript, ProFormSwitchNumber } from '@fe-free/core';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 const meta: Meta = {

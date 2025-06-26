@@ -1,6 +1,6 @@
 import { ProConfigProvider } from '@ant-design/pro-components';
 import { CRUD, CustomValueTypeEnum, customValueTypeMap } from '@fe-free/core';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import dayjs from 'dayjs';
 import { range } from 'lodash-es';
 

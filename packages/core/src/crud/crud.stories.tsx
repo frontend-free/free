@@ -1,7 +1,7 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProForm, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
 import { CRUD, proFormSelectSearchProps } from '@fe-free/core';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from 'antd';
 import { useRef } from 'react';
 import {

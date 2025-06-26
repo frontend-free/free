@@ -1,5 +1,5 @@
 import { EditorJavascript } from '@fe-free/core';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 const meta: Meta<typeof EditorJavascript> = {

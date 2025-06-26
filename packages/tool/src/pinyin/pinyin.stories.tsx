@@ -1,5 +1,5 @@
 import { pinyin, pinyinFilter, pinyinMatch } from '@fe-free/tool';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta: Meta = {
   title: '@fe-free/tool/Pinyin',

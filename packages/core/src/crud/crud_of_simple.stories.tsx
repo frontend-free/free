@@ -1,6 +1,6 @@
 import { ProFormText } from '@ant-design/pro-components';
 import { CRUDOfSimple } from '@fe-free/core';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fakeCreate, fakeDeleteByRecord, fakeRequest } from './demo/data';
 
 const meta: Meta<typeof CRUDOfSimple> = {
