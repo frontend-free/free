@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
-    "@chromatic-com/storybook": "^4.0.1",
     "@fe-free/commit-lint": "workspace:^",
     "@fe-free/eslint-config-base": "workspace:^",
     "@fe-free/style-lint": "workspace:^",
