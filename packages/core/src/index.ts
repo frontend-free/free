@@ -21,6 +21,10 @@ export {
   ProFormEditor,
   ProFormJSON,
   ProFormJavascript,
+  ProFormListHelper,
+  ProFormListModalHelper,
+  ProFormListNumber,
+  ProFormListText,
   ProFormSwitchNumber,
   proFormSelectSearchProps,
 } from './form';

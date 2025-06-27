@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 1.5.0
+
+### Minor Changes
+
+- feat: form
+
+### Patch Changes
+
+- @fe-free/tool@1.5.0
+
 ## 1.4.20
 
 ### Patch Changes

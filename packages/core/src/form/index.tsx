@@ -1,3 +1,7 @@
+export { ProFormListNumber, ProFormListText } from './form_list/form_list';
+export { ProFormListHelper } from './form_list/form_list_helper';
+export { ProFormListModalHelper } from './form_list/form_list_modal_helper';
+
 export { ProFormEditor } from './pro_form_editor';
 export { ProFormJavascript } from './pro_form_javascript';
 export { ProFormJSON } from './pro_form_json';

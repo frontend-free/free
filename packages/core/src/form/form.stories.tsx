@@ -1,5 +1,12 @@
 import { ProForm } from '@ant-design/pro-components';
-import { ProFormEditor, ProFormJSON, ProFormJavascript, ProFormSwitchNumber } from '@fe-free/core';
+import {
+  ProFormEditor,
+  ProFormJSON,
+  ProFormJavascript,
+  ProFormListNumber,
+  ProFormListText,
+  ProFormSwitchNumber,
+} from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
@@ -32,9 +39,11 @@ function ProFormBase({
   return (
     <ProForm
       initialValues={initialValues}
-      onValuesChange={(values) => {
-        console.log('values', values);
-        setValues(values);
+      onValuesChange={(newValues) => {
+        setValues({
+          ...values,
+          ...newValues,
+        });
       }}
       onFinish={(values) => {
         console.log('values', values);
@@ -107,6 +116,23 @@ export const ProFormSwitchNumberComponent: Story = {
           unCheckedChildren: '关闭',
         }}
       />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormListTextComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormListText name="listText" />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormListNumberComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormListNumber name="listNumber" label="listNumber" />
+      <ProFormListNumber name="listInteger" label="listInteger" fieldProps={{ precision: 0 }} />
     </ProFormBase>
   ),
 };
