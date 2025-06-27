@@ -11,7 +11,7 @@ function Edit<T>(props: {
   onChange: (values: T) => void;
   detailForm: JSX.Element;
   editForm?: any;
-  disabledAddFormSubmitter?: boolean;
+  disabledSubmitter?: boolean;
 }) {
   const handleFinish = async (newValues) => {
     props.onChange(newValues as T);
@@ -26,31 +26,7 @@ function Edit<T>(props: {
       onFinish={handleFinish}
       formRef={props?.editForm}
       initialValues={props.values || undefined}
-      submitter={
-        props.disabledAddFormSubmitter
-          ? false
-          : {
-              render: (props, defaultDoms) => {
-                return [
-                  <div
-                    key="cancel"
-                    className="pr-[20px] w-[500px] pt-[12px]"
-                    style={{ borderTop: '1px solid rgba(0, 0, 0, 0.1)' }}
-                  >
-                    <div className="custom-button-container">
-                      {React.Children.map(defaultDoms, (dom) => {
-                        return React.cloneElement(dom, {
-                          className:
-                            'w-[88px] h-[40px] text-base rounded-[0.5rem] ml-3' +
-                            (dom.props?.className || ''),
-                        });
-                      })}
-                    </div>
-                  </div>,
-                ];
-              },
-            }
-      }
+      submitter={props.disabledSubmitter ? false : undefined}
     >
       {props.detailForm}
     </ModalForm>
@@ -66,7 +42,7 @@ interface ProFormListModalHelperProps<T> {
   // 如果 addForm 存在，则使用 addForm 作为添加按钮
   addForm?: JSX.Element;
   // 禁用添加的提交按钮
-  disabledAddFormSubmitter?: boolean;
+  disabledSubmitter?: boolean;
 
   disabledAdd?: boolean;
   // 触发添加
@@ -129,7 +105,7 @@ function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) 
             }}
             detailForm={props.addForm || props.detailForm}
             editForm={props?.editForm}
-            disabledAddFormSubmitter={props.disabledAddFormSubmitter}
+            disabledSubmitter={props.disabledSubmitter}
           >
             {props.addTrigger || (
               <Button size="small" icon={<PlusOutlined />}>
