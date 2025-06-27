@@ -12,12 +12,11 @@ function JavascriptItem(props: EditorJavascriptProps) {
 }
 
 function ProFormJavascript(props: ProFormItemProps<EditorJavascriptProps>) {
-  /* eslint-disable-next-line */
-  const { fieldProps, readonly, ...rest } = props;
+  const { fieldProps, ...rest } = props;
 
   return (
     <ProForm.Item {...rest}>
-      <JavascriptItem readonly={readonly} {...(fieldProps as EditorJavascriptProps)} />
+      <JavascriptItem {...(fieldProps as EditorJavascriptProps)} />
     </ProForm.Item>
   );
 }

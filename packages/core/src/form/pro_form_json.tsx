@@ -12,12 +12,11 @@ function JSONItem(props: EditorJSONProps) {
 }
 
 function ProFormJSON(props: ProFormItemProps<EditorJSONProps>) {
-  /* eslint-disable-next-line */
-  const { fieldProps, readonly, ...rest } = props;
+  const { fieldProps, ...rest } = props;
 
   return (
     <ProForm.Item {...rest}>
-      <JSONItem readonly={props.readonly} {...(fieldProps as EditorJSONProps)} />
+      <JSONItem {...(fieldProps as EditorJSONProps)} />
     </ProForm.Item>
   );
 }

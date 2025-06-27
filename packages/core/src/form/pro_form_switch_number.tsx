@@ -25,8 +25,7 @@ function SwitchNumber(props: SwitchNumberProps) {
 }
 
 function ProFormSwitchNumber(props: ProFormItemProps<SwitchNumberProps>) {
-  /* eslint-disable-next-line */
-  const { fieldProps, readonly, ...rest } = props;
+  const { fieldProps, ...rest } = props;
 
   return (
     <ProForm.Item {...rest}>

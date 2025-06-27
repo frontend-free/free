@@ -8,12 +8,11 @@ function EditorItem(props: EditorProps) {
 }
 
 function ProFormEditor(props: ProFormItemProps<EditorProps>) {
-  /* eslint-disable-next-line */
-  const { fieldProps, readonly, ...rest } = props;
+  const { fieldProps, ...rest } = props;
 
   return (
     <ProForm.Item {...rest}>
-      <EditorItem readOnly={readonly} {...(fieldProps as EditorProps)} />
+      <EditorItem {...fieldProps} />
     </ProForm.Item>
   );
 }
