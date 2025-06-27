@@ -1,0 +1,12 @@
+.cl-import-xlsx {
+  &.cl-import-xlsx-has-file {
+    .ant-upload-drag {
+      display: none;
+    }
+  }
+
+  .ant-attachment-list-card {
+    width: auto;
+    background-color: white;
+  }
+}
