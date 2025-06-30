@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.5.2
+
+### Patch Changes
+
+- fix: crud search
+  - @fe-free/tool@1.5.2
+
 ## 1.5.1
 
 ### Patch Changes

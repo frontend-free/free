@@ -101,6 +101,8 @@ function CRUDOfSimpleComponent(props: CRUDOfSimpleProps, ref: React.ForwardedRef
           ghost: true,
           columns: newColumns,
           toolBarRender,
+          // 简单的隐藏搜索栏
+          search: false,
         }}
       />
     </div>

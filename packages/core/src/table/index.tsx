@@ -37,6 +37,23 @@ function Table<
 
   const hasSearch = !!newColumns?.find((column) => column.search);
 
+  let newSearch: any = undefined;
+  if (hasSearch) {
+    newSearch = {
+      labelWidth: 'auto',
+      defaultCollapsed: false,
+      ...search,
+    };
+  } else if (search === false) {
+    newSearch = false;
+  } else {
+    newSearch = {
+      ...search,
+    };
+  }
+
+  console.log('newSearch', newSearch);
+
   return (
     <ProTable<DataSource, Params>
       cardBordered
@@ -46,17 +63,7 @@ function Table<
       // @ts-ignore 不会处理这里的 ts，或者成本大
       columns={newColumns}
       scroll={getTableScroll(newColumns)}
-      search={
-        hasSearch
-          ? {
-              labelWidth: 'auto',
-              defaultCollapsed: false,
-              ...search,
-            }
-          : {
-              ...search,
-            }
-      }
+      search={newSearch}
       {...rest}
     />
   );
