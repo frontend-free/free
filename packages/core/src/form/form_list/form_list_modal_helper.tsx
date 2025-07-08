@@ -5,6 +5,25 @@ import React from 'react';
 
 const emptyArr = [];
 
+interface ProFormListModalHelperProps<T> {
+  value?: T[];
+  onChange?: (value: T[]) => void;
+  children: (props: { value?: T[]; item: T; index: number }) => React.ReactNode;
+  readOnly?: boolean;
+  detailForm: JSX.Element;
+  // 如果 addForm 存在，则使用 addForm 作为添加按钮
+  addForm?: JSX.Element;
+  // 禁用添加的提交按钮
+  disabledSubmitter?: boolean;
+  // 禁用添加
+  disabledAdd?: boolean;
+  // 禁用编辑
+  disabledEdit?: boolean;
+  // 触发添加
+  addTrigger?: JSX.Element;
+  editForm?: any;
+}
+
 function Edit<T>(props: {
   children: JSX.Element;
   values?: T;
@@ -33,24 +52,6 @@ function Edit<T>(props: {
   );
 }
 
-interface ProFormListModalHelperProps<T> {
-  value?: T[];
-  onChange?: (value: T[]) => void;
-  children: (props: { value?: T[]; item: T; index: number }) => React.ReactNode;
-  readOnly?: boolean;
-  detailForm: JSX.Element;
-  // 如果 addForm 存在，则使用 addForm 作为添加按钮
-  addForm?: JSX.Element;
-  // 禁用添加的提交按钮
-  disabledSubmitter?: boolean;
-
-  disabledAdd?: boolean;
-  // 触发添加
-  addTrigger?: JSX.Element;
-
-  editForm?: any;
-}
-
 function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) {
   const options = props.value || emptyArr;
 
@@ -69,18 +70,20 @@ function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) 
               </div>
               {!props.readOnly && (
                 <div className="absolute right-1 top-1 hidden items-center bg-white group-hover:flex">
-                  <Edit<T>
-                    values={item}
-                    onChange={(newValues) => {
-                      const newOptions = [...options];
-                      newOptions[index] = newValues;
-                      props.onChange?.(newOptions);
-                    }}
-                    detailForm={props.detailForm}
-                    editForm={props?.editForm}
-                  >
-                    <Button icon={<EditOutlined />} type="text" size="small" />
-                  </Edit>
+                  {!props.disabledEdit && (
+                    <Edit<T>
+                      values={item}
+                      onChange={(newValues) => {
+                        const newOptions = [...options];
+                        newOptions[index] = newValues;
+                        props.onChange?.(newOptions);
+                      }}
+                      detailForm={props.detailForm}
+                      editForm={props?.editForm}
+                    >
+                      <Button icon={<EditOutlined />} type="text" size="small" />
+                    </Edit>
+                  )}
                   <Button
                     icon={<DeleteOutlined />}
                     type="text"

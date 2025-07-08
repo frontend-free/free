@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.5.3
+
+### Patch Changes
+
+- feat: ProFormListModalHelper
+  - @fe-free/tool@1.5.3
+
 ## 1.5.2
 
 ### Patch Changes
