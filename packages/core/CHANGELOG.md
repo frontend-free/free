@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.5.4
+
+### Patch Changes
+
+- fix: form_list_modal_helper
+  - @fe-free/tool@1.5.4
+
 ## 1.5.3
 
 ### Patch Changes

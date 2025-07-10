@@ -46,6 +46,9 @@ function Edit<T>(props: {
       formRef={props?.editForm}
       initialValues={props.values || undefined}
       submitter={props.disabledSubmitter ? false : undefined}
+      modalProps={{
+        destroyOnHidden: true,
+      }}
     >
       {props.detailForm}
     </ModalForm>
