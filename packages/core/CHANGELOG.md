@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.5.5
+
+### Patch Changes
+
+- feat: some
+  - @fe-free/tool@1.5.5
+
 ## 1.5.4
 
 ### Patch Changes

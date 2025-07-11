@@ -19,6 +19,8 @@ interface ProFormListModalHelperProps<T> {
   disabledAdd?: boolean;
   // 禁用编辑
   disabledEdit?: boolean;
+  // 禁用删除
+  disabledDelete?: boolean;
   // 触发添加
   addTrigger?: JSX.Element;
   editForm?: any;
@@ -87,16 +89,18 @@ function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) 
                       <Button icon={<EditOutlined />} type="text" size="small" />
                     </Edit>
                   )}
-                  <Button
-                    icon={<DeleteOutlined />}
-                    type="text"
-                    size="small"
-                    onClick={() => {
-                      const newOptions = [...options];
-                      newOptions.splice(index, 1);
-                      props.onChange?.(newOptions);
-                    }}
-                  />
+                  {!props.disabledDelete && (
+                    <Button
+                      icon={<DeleteOutlined />}
+                      type="text"
+                      size="small"
+                      onClick={() => {
+                        const newOptions = [...options];
+                        newOptions.splice(index, 1);
+                        props.onChange?.(newOptions);
+                      }}
+                    />
+                  )}
                 </div>
               )}
             </div>
