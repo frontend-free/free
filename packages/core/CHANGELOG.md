@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 1.6.0
+
+### Minor Changes
+
+- feat: markdown
+
+### Patch Changes
+
+- @fe-free/tool@1.6.0
+
 ## 1.5.5
 
 ### Patch Changes

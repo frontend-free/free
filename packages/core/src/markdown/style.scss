@@ -1,0 +1,11 @@
+.markdown-body {
+  pre {
+    padding: 0;
+  }
+
+  .markdown-body-code-block {
+    & > div {
+      margin: 0 !important;
+    }
+  }
+}
