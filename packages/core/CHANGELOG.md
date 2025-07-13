@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 1.6.1
+
+### Patch Changes
+
+- feat: md
+  - @fe-free/tool@1.6.1
+
 ## 1.6.0
 
 ### Minor Changes
