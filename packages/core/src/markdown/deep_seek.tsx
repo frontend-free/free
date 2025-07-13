@@ -1,8 +1,25 @@
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+
 function DeepSeekBlock(props: { children: string }) {
+  const [show, setShow] = useState(true);
+
   return (
-    <div className="markdown-body-deep-seek-block relative mb-3 pl-[14px] text-[#00000099] text-[14px]">
-      <div className="top=0 absolute left-0 h-full w-[2px] bg-[#00000014]" />
-      {props.children === '<br/>' ? undefined : props.children}
+    <div className="markdown-body-deep-seek-block mb-3 text-[#00000099] text-[14px] flex flex-col gap-2">
+      <div
+        className="cursor-pointer"
+        onClick={() => {
+          setShow((v) => !v);
+        }}
+      >
+        深度思考 {show ? <UpOutlined /> : <DownOutlined />}
+      </div>
+      {show && (
+        <div className="relative pl-[15px]">
+          <div className="top=0 absolute left-0 h-full w-[2px] bg-[#00000014]" />
+          {props.children === '<br/>' ? undefined : props.children}
+        </div>
+      )}
     </div>
   );
 }
