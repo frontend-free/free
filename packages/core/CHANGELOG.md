@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 2.0.0
+
+### Major Changes
+
+- feat: remove some
+
+### Patch Changes
+
+- @fe-free/tool@2.0.0
+
 ## 1.6.1
 
 ### Patch Changes
