@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.0.1
+
+### Patch Changes
+
+- feat: editor mention
+  - @fe-free/tool@2.0.1
+
 ## 2.0.0
 
 ### Major Changes
