@@ -1,5 +1,9 @@
-import type { EnumImportType } from '@lib/api';
 import type { UploadFile } from 'antd';
+
+export enum EnumImportType {
+  FULL = 'Full',
+  APPEND = 'Append',
+}
 
 interface XlsxDataItem {
   name: string;

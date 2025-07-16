@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { memo } from 'react';
 import { AtInput } from 'taro-ui';
 import type { AtInputProps } from 'taro-ui/types/input';
@@ -7,8 +7,8 @@ import { Text } from '../text';
 import './index.scss';
 
 interface InputProps extends Omit<AtInputProps, 'title'> {
-  title?: string;
-  note?: string;
+  title?: string | ReactNode;
+  note?: string | ReactNode;
   disabled?: boolean;
   className?: string;
   style?: CSSProperties;

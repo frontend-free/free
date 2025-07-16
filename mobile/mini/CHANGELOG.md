@@ -1,5 +1,11 @@
 # @fe-free/mini
 
+## 1.5.1
+
+### Patch Changes
+
+- feat: 整理
+
 ## 1.5.0
 
 ### Minor Changes

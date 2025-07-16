@@ -1,13 +1,12 @@
-import React, { createContext, useContext } from 'react';
-import type { ReactNode } from 'react';
-import { useRef, useMemo, useCallback, memo } from 'react';
 import { View } from '@tarojs/components';
-import classNames from 'classnames';
-import { useSize } from 'ahooks';
-import { Text } from '../text';
-import { AtIcon } from 'taro-ui';
 import VirtualList from '@tarojs/components-advanced/dist/components/virtual-list/react';
+import { useSize } from 'ahooks';
+import classNames from 'classnames';
+import type { ReactNode } from 'react';
+import { createContext, memo, useCallback, useContext, useMemo, useRef } from 'react';
+import { AtIcon } from 'taro-ui';
 import { Mini } from '../mini';
+import { Text } from '../text';
 
 type Value = string | number;
 
@@ -126,4 +125,4 @@ const VList = memo(<D extends VListDataItem<D> = any>(props: VListProps<D>) => {
 });
 
 export { VList };
-export type { VListProps, VListDataItem };
+export type { VListDataItem, VListProps };

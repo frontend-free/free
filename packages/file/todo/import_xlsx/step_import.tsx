@@ -1,12 +1,12 @@
 import { DeleteOutlined, InboxOutlined } from '@ant-design/icons';
 import { Attachments } from '@ant-design/x';
 import { xlsxToJSON } from '@fe-free/file';
-import { EnumImportType } from '@lib/api';
 import type { UploadFile } from 'antd';
 import { Button, Radio, Upload, message } from 'antd';
 import classNames from 'classnames';
 import './style.scss';
 import type { ImportXlsxProps, XlsxDataItem } from './types';
+import { EnumImportType } from './types';
 
 function ItemRender({ file, right }: { file: UploadFile; right?: React.ReactNode }) {
   return (

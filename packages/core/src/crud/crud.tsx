@@ -142,9 +142,9 @@ function CRUDComponent<
 
           if (disabled) {
             btns.push(
-              <a key="update" disabled>
+              <span key="update" className="text-desc cursor-not-allowed">
                 {updateProps?.operateText || '编辑'}
-              </a>,
+              </span>,
             );
           } else {
             btns.push(

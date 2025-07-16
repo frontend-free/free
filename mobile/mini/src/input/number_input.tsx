@@ -1,8 +1,8 @@
-import { Input } from './input';
 import Big from 'big.js';
 import type { ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Text } from '../text';
+import { Input } from './input';
 
 type DigitInputProps = {
   value?: number;
@@ -50,7 +50,7 @@ function DigitInput(props: DigitInputProps) {
 
       onChange?.(newV ? Big(newV).times(unit).toNumber() : 0);
     },
-    [onChange, unit]
+    [onChange, unit],
   );
 
   return (

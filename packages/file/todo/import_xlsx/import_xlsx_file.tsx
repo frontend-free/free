@@ -1,11 +1,11 @@
 import { LoadingButton } from '@fe-free/core';
-import { EnumImportType } from '@lib/api';
 import type { UploadFile } from 'antd';
 import { Button, Modal } from 'antd';
 import React, { useState } from 'react';
 import { StepImport } from './step_import';
 import './style.scss';
 import type { ImportXlsxFileProps } from './types';
+import { EnumImportType } from './types';
 
 function ImportXlsxFile(props: ImportXlsxFileProps) {
   const { onTemplateDownload, size, onCancel, onOk, enableImportType } = props;

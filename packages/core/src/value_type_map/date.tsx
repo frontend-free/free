@@ -1,7 +1,6 @@
-import React from 'react';
 import { ProFormDateRangePicker } from '@ant-design/pro-components';
-import dayjs from 'dayjs';
 import { getDayjs } from '@fe-free/tool';
+import dayjs from 'dayjs';
 
 const renderMap = {
   dateTime: (text) => {
