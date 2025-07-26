@@ -211,6 +211,27 @@ export const Chat: Story = {
 }
 \`\`\`
 
+## 散点图示例
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["width", "height"],
+    "rows": [
+      [100, 200],
+      [300, 400],
+      [500, 600]
+    ]
+  },
+  "chart": {
+    "chart_type": "scatter",
+    "x_field": "width",
+    "y_field": "height",
+    "title": "散点图示例"
+  }
+}
+\`\`\`
+
 ## 错误处理示例
 
 ### JSON 解析错误

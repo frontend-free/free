@@ -1,4 +1,4 @@
-import { Column, Line, Pie } from '@ant-design/plots';
+import { Column, Line, Pie, Scatter } from '@ant-design/plots';
 import React, { useMemo } from 'react';
 
 // 类型定义
@@ -8,7 +8,7 @@ interface ChartData {
 }
 
 interface ChartConfig {
-  chart_type: 'line' | 'bar' | 'pie' | 'table';
+  chart_type: 'line' | 'bar' | 'pie' | 'table' | 'scatter';
   x_field?: string;
   y_field?: string;
   angle_field?: string;
@@ -165,6 +165,36 @@ function BarChart(props: { data: ChartData; chart: ChartConfig }) {
   return <Column {...config} />;
 }
 
+function ScatterChart(props: { data: ChartData; chart: ChartConfig }) {
+  const { data, chart } = props;
+  const { columns, rows } = data;
+  const { x_field, y_field } = chart;
+
+  if (!x_field || !y_field) {
+    return <ChatError />;
+  }
+
+  const xIndex = columns.indexOf(x_field);
+  const yIndex = columns.indexOf(y_field);
+
+  if (xIndex === -1 || yIndex === -1) {
+    return <ChatError />;
+  }
+
+  const chartData = rows.map((row) => ({
+    [x_field]: row[xIndex],
+    [y_field]: row[yIndex],
+  }));
+
+  const config = {
+    data: chartData,
+    xField: x_field,
+    yField: y_field,
+  };
+
+  return <Scatter {...config} />;
+}
+
 // 主 ChatBlock 组件
 function ChatBlockBase(props: any) {
   const { children } = props;
@@ -202,6 +232,12 @@ function ChatBlockBase(props: any) {
       return (
         <ChartContainer title={title}>
           <BarChart data={data} chart={chart} />
+        </ChartContainer>
+      );
+    case 'scatter':
+      return (
+        <ChartContainer title={title}>
+          <ScatterChart data={data} chart={chart} />
         </ChartContainer>
       );
     case 'table':
