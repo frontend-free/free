@@ -189,29 +189,29 @@ export const Chat: Story = {
 }
 \`\`\`
 
-## 复杂数据示例
+## 饼图示例
 
 \`\`\`chat
 {
   "data": {
-    "columns": ["month", "sales", "profit"],
+    "columns": ["category", "sales"],
     "rows": [
-      ["1月", 1200, 300],
-      ["2月", 1800, 450],
-      ["3月", 1500, 375],
-      ["4月", 2200, 550],
-      ["5月", 2800, 700],
-      ["6月", 3200, 800]
+      ["电子产品", 45],
+      ["服装", 30],
+      ["食品", 15],
+      ["家居", 10]
     ]
   },
   "chart": {
-    "chart_type": "line",
-    "x_field": "month",
-    "y_field": "sales",
-    "title": "月度销售数据趋势"
+    "chart_type": "pie",
+    "angle_field": "sales",
+    "color_field": "category",
+    "title": "销售品类分布"
   }
 }
 \`\`\`
+
+## 错误处理示例
 
 ### JSON 解析错误
 
@@ -264,7 +264,7 @@ export const Chat: Story = {
     ]
   },
   "chart": {
-    "chart_type": "pie",
+    "chart_type": "some_chart_type",
     "x_field": "time",
     "y_field": "amount",
     "title": "张三金额变化趋势图"
