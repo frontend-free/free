@@ -138,3 +138,139 @@ export const DeepSeekPending: Story = {
     `,
   },
 };
+
+export const Chat: Story = {
+  args: {
+    children: `这是一个使用 @ant-design/plots 的 chat 示例
+
+## 折线图示例
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["time", "amount"],
+    "rows": [
+      ["2025-06-03", 18.23],
+      ["2025-06-10", 112.2],
+      ["2025-06-23", 10],
+      ["2025-07-01", 85.5],
+      ["2025-07-15", 156.8]
+    ]
+  },
+  "chart": {
+    "chart_type": "line",
+    "x_field": "time",
+    "y_field": "amount",
+    "title": "张三金额变化趋势图"
+  }
+}
+\`\`\`
+
+## 柱状图示例
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["time", "amount"],
+    "rows": [
+      ["2025-06-03", 18.23],
+      ["2025-06-10", 112.2],
+      ["2025-06-23", 10],
+      ["2025-07-01", 85.5],
+      ["2025-07-15", 156.8]
+    ]
+  },
+  "chart": {
+    "chart_type": "bar",
+    "x_field": "time",
+    "y_field": "amount",
+    "title": "张三金额变化趋势图"
+  }
+}
+\`\`\`
+
+## 复杂数据示例
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["month", "sales", "profit"],
+    "rows": [
+      ["1月", 1200, 300],
+      ["2月", 1800, 450],
+      ["3月", 1500, 375],
+      ["4月", 2200, 550],
+      ["5月", 2800, 700],
+      ["6月", 3200, 800]
+    ]
+  },
+  "chart": {
+    "chart_type": "line",
+    "x_field": "month",
+    "y_field": "sales",
+    "title": "月度销售数据趋势"
+  }
+}
+\`\`\`
+
+### JSON 解析错误
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["time", "amount"],
+    "rows": [
+      ["2025-06-03", 18.23],
+      ["2025-06-10", 112.2]
+    ]
+  },
+  "chart": {
+    "chart_type": "line",
+    "x_field": "time",
+    "y_field": "amount",
+    "title": "张三金额变化趋势图"
+  }
+\`\`\`
+
+### 字段不存在错误
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["time", "amount"],
+    "rows": [
+      ["2025-06-03", 18.23],
+      ["2025-06-10", 112.2]
+    ]
+  },
+  "chart": {
+    "chart_type": "line",
+    "x_field": "nonexistent_field",
+    "y_field": "amount",
+    "title": "张三金额变化趋势图"
+  }
+}
+\`\`\`
+
+### 不支持的图表类型
+
+\`\`\`chat
+{
+  "data": {
+    "columns": ["time", "amount"],
+    "rows": [
+      ["2025-06-03", 18.23],
+      ["2025-06-10", 112.2]
+    ]
+  },
+  "chart": {
+    "chart_type": "pie",
+    "x_field": "time",
+    "y_field": "amount",
+    "title": "张三金额变化趋势图"
+  }
+}
+\`\`\`
+`,
+  },
+};

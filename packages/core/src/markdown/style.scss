@@ -8,4 +8,15 @@
       margin: 0 !important;
     }
   }
+
+  .markdown-body-chat-block {
+    background: white;
+    border-radius: 6px;
+
+    .markdown-body-chat-block-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
 }
