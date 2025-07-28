@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.0.6
+
+### Patch Changes
+
+- feat: md chart
+  - @fe-free/tool@2.0.6
+
 ## 2.0.5
 
 ### Patch Changes
