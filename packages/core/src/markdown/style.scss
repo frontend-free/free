@@ -4,16 +4,18 @@
   }
 
   .markdown-body-code-block {
+    margin: 0.5rem 0;
+
     & > div {
       margin: 0 !important;
     }
   }
 
-  .markdown-body-chat-block {
+  .markdown-body-chart-block {
     background: white;
     border-radius: 6px;
 
-    .markdown-body-chat-block-title {
+    .markdown-body-chart-block-title {
       font-size: 16px;
       font-weight: bold;
       margin-bottom: 10px;

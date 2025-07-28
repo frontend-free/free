@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.0.5
+
+### Patch Changes
+
+- feat: chat
+  - @fe-free/tool@2.0.5
+
 ## 2.0.4
 
 ### Patch Changes

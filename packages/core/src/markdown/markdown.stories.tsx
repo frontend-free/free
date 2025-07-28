@@ -139,13 +139,13 @@ export const DeepSeekPending: Story = {
   },
 };
 
-export const Chat: Story = {
+export const Chart: Story = {
   args: {
-    children: `这是一个使用 @ant-design/plots 的 chat 示例
+    children: `这是一个使用 @ant-design/plots 的 chart 示例
 
 ## 折线图示例
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["time", "amount"],
@@ -168,7 +168,7 @@ export const Chat: Story = {
 
 ## 柱状图示例
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["time", "amount"],
@@ -191,7 +191,7 @@ export const Chat: Story = {
 
 ## 饼图示例
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["category", "sales"],
@@ -213,7 +213,7 @@ export const Chat: Story = {
 
 ## 散点图示例
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["width", "height"],
@@ -236,7 +236,7 @@ export const Chat: Story = {
 
 ### JSON 解析错误
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["time", "amount"],
@@ -255,7 +255,7 @@ export const Chat: Story = {
 
 ### 字段不存在错误
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["time", "amount"],
@@ -275,7 +275,7 @@ export const Chat: Story = {
 
 ### 不支持的图表类型
 
-\`\`\`chat
+\`\`\`chart
 {
   "data": {
     "columns": ["time", "amount"],

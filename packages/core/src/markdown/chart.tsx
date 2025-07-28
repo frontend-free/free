@@ -17,10 +17,10 @@ interface ChartConfig {
 }
 
 // 错误处理组件
-function ChatError(props: { children?: React.ReactNode }) {
+function ChartError(props: { children?: React.ReactNode }) {
   const { children } = props;
   return (
-    <div className="markdown-body-chat-block">
+    <div className="markdown-body-chart-block">
       <div style={{ textAlign: 'center', padding: '20px' }}>{children || '图表发生错误'}</div>
     </div>
   );
@@ -39,7 +39,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <ChatError />;
+      return <ChartError />;
     }
     return this.props.children;
   }
@@ -49,8 +49,8 @@ class ErrorBoundary extends React.Component {
 function ChartContainer(props: { title: string; children: React.ReactNode }) {
   const { title, children } = props;
   return (
-    <div className="markdown-body-chat-block">
-      <div className="markdown-body-chat-block-title">{title}</div>
+    <div className="markdown-body-chart-block">
+      <div className="markdown-body-chart-block-title">{title}</div>
       {children}
     </div>
   );
@@ -63,14 +63,14 @@ function PieChart(props: { data: ChartData; chart: ChartConfig }) {
   const { angle_field, color_field } = chart;
 
   if (!angle_field || !color_field) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   const angleIndex = columns.indexOf(angle_field);
   const colorIndex = columns.indexOf(color_field);
 
   if (angleIndex === -1 || colorIndex === -1) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   // 转换数据格式为 Ant Design Charts 需要的格式
@@ -108,14 +108,14 @@ function LineChart(props: { data: ChartData; chart: ChartConfig }) {
   const { x_field, y_field } = chart;
 
   if (!x_field || !y_field) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   const xIndex = columns.indexOf(x_field);
   const yIndex = columns.indexOf(y_field);
 
   if (xIndex === -1 || yIndex === -1) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   // 转换数据格式为 Ant Design Charts 需要的格式
@@ -140,14 +140,14 @@ function BarChart(props: { data: ChartData; chart: ChartConfig }) {
   const { x_field, y_field } = chart;
 
   if (!x_field || !y_field) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   const xIndex = columns.indexOf(x_field);
   const yIndex = columns.indexOf(y_field);
 
   if (xIndex === -1 || yIndex === -1) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   // 转换数据格式为 Ant Design Charts 需要的格式
@@ -171,14 +171,14 @@ function ScatterChart(props: { data: ChartData; chart: ChartConfig }) {
   const { x_field, y_field } = chart;
 
   if (!x_field || !y_field) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   const xIndex = columns.indexOf(x_field);
   const yIndex = columns.indexOf(y_field);
 
   if (xIndex === -1 || yIndex === -1) {
-    return <ChatError />;
+    return <ChartError />;
   }
 
   const chartData = rows.map((row) => ({
@@ -195,24 +195,24 @@ function ScatterChart(props: { data: ChartData; chart: ChartConfig }) {
   return <Scatter {...config} />;
 }
 
-// 主 ChatBlock 组件
-function ChatBlockBase(props: any) {
+// 主 ChartBlock 组件
+function ChartBlockBase(props: any) {
   const { children } = props;
 
-  const chatData = useMemo(() => {
+  const chartData = useMemo(() => {
     try {
       return JSON.parse(children);
     } catch (error) {
-      console.error('Failed to parse chat data:', error);
+      console.error('Failed to parse chart data:', error);
       return null;
     }
   }, [children]);
 
-  if (!chatData) {
-    return <ChatError />;
+  if (!chartData) {
+    return <ChartError />;
   }
 
-  const { data, chart } = chatData;
+  const { data, chart } = chartData;
   const { chart_type, title } = chart;
 
   switch (chart_type) {
@@ -244,18 +244,18 @@ function ChatBlockBase(props: any) {
       // 表格类型暂不处理
       return null;
     default:
-      return <ChatError>不支持的图表类型：{chart_type}</ChatError>;
+      return <ChartError>不支持的图表类型：{chart_type}</ChartError>;
   }
 }
 
-function ChatBlock(props: any) {
+function ChartBlock(props: any) {
   const { children } = props;
 
   return (
     <ErrorBoundary>
-      <ChatBlockBase>{children}</ChatBlockBase>
+      <ChartBlockBase>{children}</ChartBlockBase>
     </ErrorBoundary>
   );
 }
 
-export { ChatBlock };
+export { ChartBlock };
