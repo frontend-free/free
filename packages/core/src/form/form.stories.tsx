@@ -1,11 +1,15 @@
 import { ProForm } from '@ant-design/pro-components';
 import {
   ProFormEditor,
+  ProFormImageUpload,
+  ProFormImageUploadDragger,
   ProFormJSON,
   ProFormJavascript,
   ProFormListNumber,
   ProFormListText,
   ProFormSwitchNumber,
+  ProFormUpload,
+  ProFormUploadDragger,
 } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
@@ -133,6 +137,100 @@ export const ProFormListNumberComponent: Story = {
     <ProFormBase>
       <ProFormListNumber name="listNumber" label="listNumber" />
       <ProFormListNumber name="listInteger" label="listInteger" fieldProps={{ precision: 0 }} />
+    </ProFormBase>
+  ),
+};
+
+function customRequest(option: any) {
+  const { file, onProgress, onSuccess } = option;
+
+  // 模拟上传进度
+  let percent = 0;
+  const interval = setInterval(() => {
+    percent += 10;
+    onProgress({ percent });
+
+    if (percent >= 100) {
+      clearInterval(interval);
+      // 模拟上传成功
+      onSuccess({
+        data: {
+          url: `https://picsum.photos/200/300?random=${Date.now()}`,
+          name: file.name,
+          uid: file.uid,
+        },
+      });
+    }
+  }, 100);
+
+  // 返回 abort 方法，用于取消上传
+  return {
+    abort: () => {
+      clearInterval(interval);
+      console.log('上传已取消');
+    },
+  };
+}
+
+export const ProFormUploadComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormUpload label="file" name="file" fieldProps={{ customRequest }} />
+      <ProFormUploadDragger
+        label="file_dragger"
+        name="file_dragger"
+        fieldProps={{ customRequest }}
+      />
+      <ProFormUploadDragger
+        label="files_dragger"
+        name="files_dragger"
+        fieldProps={{ multiple: true, maxCount: 2, customRequest }}
+      />
+      <ProFormUpload
+        label="files"
+        name="files"
+        fieldProps={{ multiple: true, maxCount: 2, showCount: true, customRequest }}
+      />
+      <ProFormUpload
+        label="files_picture"
+        name="files_picture"
+        fieldProps={{ multiple: true, maxCount: 2, listType: 'picture', customRequest }}
+      />
+      <ProFormUpload
+        label="files_picture_card"
+        name="files_picture_card"
+        fieldProps={{ multiple: true, maxCount: 2, listType: 'picture-card', customRequest }}
+      />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormImageUploadComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormImageUpload
+        label="image"
+        name="image"
+        fieldProps={{
+          customRequest,
+        }}
+      />
+      <ProFormImageUploadDragger
+        label="image_dragger"
+        name="image_dragger"
+        fieldProps={{
+          customRequest,
+        }}
+      />
+      <ProFormImageUploadDragger
+        label="images_dragger"
+        name="images_dragger"
+        fieldProps={{
+          multiple: true,
+          maxCount: 2,
+          customRequest,
+        }}
+      />
     </ProFormBase>
   ),
 };

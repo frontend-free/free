@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 2.1.0
+
+### Minor Changes
+
+- feat: upload
+
+### Patch Changes
+
+- @fe-free/tool@2.1.0
+
 ## 2.0.6
 
 ### Patch Changes

@@ -13,6 +13,8 @@ export { EditorMention } from './editor_mention';
 export type { EditorMentionProps } from './editor_mention';
 export {
   ProFormEditor,
+  ProFormImageUpload,
+  ProFormImageUploadDragger,
   ProFormJSON,
   ProFormJavascript,
   ProFormListHelper,
@@ -20,6 +22,8 @@ export {
   ProFormListNumber,
   ProFormListText,
   ProFormSwitchNumber,
+  ProFormUpload,
+  ProFormUploadDragger,
   proFormSelectSearchProps,
 } from './form';
 export { Markdown } from './markdown';
