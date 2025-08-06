@@ -74,8 +74,6 @@ function CRUDOfSimpleComponent(props: CRUDOfSimpleProps, ref: React.ForwardedRef
             onChange={(value) => setSearchValue(value)}
           />
         ),
-        // 留更多间隔，避免直接贴右边。
-        simpleSearchProps && <div key="search-gap" />,
         // @ts-ignore
         ...(tableProps.toolBarRender ? tableProps.toolBarRender(...args) : []),
       ];
