@@ -29,4 +29,5 @@ export {
 export { Markdown } from './markdown';
 export { Table } from './table';
 export type { TableProps } from './table';
+export { useLocalforageState } from './use_localforage_state';
 export { CustomValueTypeEnum, customValueTypeMap } from './value_type_map';
