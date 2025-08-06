@@ -62,6 +62,10 @@ interface CRUDProps<DataSource = any, Key = string> {
   readProps?: {
     /** 文本 */
     operateText?: string;
+    /** ”查看”是否禁用 */
+    operateIsDisabled?: (record: DataSource) => boolean;
+    /** ”查看”是否隐藏 */
+    operateIsHidden?: (record: DataSource) => boolean;
     /** 打开方式, action 为 read_detail 有效 */
     target?: '_blank';
     /** 保存按钮文本 */
@@ -81,6 +85,8 @@ interface CRUDProps<DataSource = any, Key = string> {
     operateText?: string;
     /** ”编辑”是否禁用 */
     operateIsDisabled?: (record: DataSource) => boolean;
+    /** ”编辑”是否隐藏 */
+    operateIsHidden?: (record: DataSource) => boolean;
     /** 保存按钮文本 */
     submitText?: string;
     /** 重置按钮文本 */
@@ -99,6 +105,8 @@ interface CRUDProps<DataSource = any, Key = string> {
     operateText?: string;
     /** “删除”是否禁用 */
     operateIsDisabled?: (record: DataSource) => boolean;
+    /** ”删除”是否隐藏 */
+    operateIsHidden?: (record: DataSource) => boolean;
     /** 显示名称索引 */
     nameIndex: keyof DataSource;
     /** 删除确认描述 */

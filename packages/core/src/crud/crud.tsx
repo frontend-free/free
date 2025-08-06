@@ -1,5 +1,6 @@
 import type { ActionType } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
+import classNames from 'classnames';
 import { isString } from 'lodash-es';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -112,67 +113,97 @@ function CRUDComponent<
         const btns: React.ReactNode[] = [];
 
         if (actions.includes('read')) {
-          btns.push(
-            <CRUDDetail
-              key="read"
-              id={record[idField]}
-              record={record}
-              onSuccess={handleReload}
-              trigger={<a>{readProps?.operateText || '查看'}</a>}
-              action="read"
-              {...detailProps}
-            />,
-          );
+          const hidden = readProps?.operateIsHidden?.(record) || false;
+          if (!hidden) {
+            const disabled = readProps?.operateIsDisabled?.(record) || false;
+            if (disabled) {
+              btns.push(
+                <span key="read" className="text-desc cursor-not-allowed">
+                  {readProps?.operateText || '查看'}
+                </span>,
+              );
+            } else {
+              btns.push(
+                <CRUDDetail
+                  key="read"
+                  id={record[idField]}
+                  record={record}
+                  onSuccess={handleReload}
+                  trigger={<a>{readProps?.operateText || '查看'}</a>}
+                  action="read"
+                  {...detailProps}
+                />,
+              );
+            }
+          }
         }
 
         if (actions.includes('read_detail')) {
-          btns.push(
-            <Link
-              key="read_detail"
-              to={`./detail/${record[detailIdIndex || 'id']}`}
-              target={readProps?.target}
-            >
-              {readProps?.operateText || '查看'}
-            </Link>,
-          );
+          const hidden = readProps?.operateIsHidden?.(record) || false;
+          if (!hidden) {
+            const disabled = readProps?.operateIsDisabled?.(record) || false;
+            if (disabled) {
+              btns.push(
+                <span key="read" className="text-desc cursor-not-allowed">
+                  {readProps?.operateText || '查看'}
+                </span>,
+              );
+            } else {
+              btns.push(
+                <Link
+                  key="read_detail"
+                  to={`./detail/${record[detailIdIndex || 'id']}`}
+                  target={readProps?.target}
+                >
+                  {readProps?.operateText || '查看'}
+                </Link>,
+              );
+            }
+          }
         }
 
         if (actions.includes('update')) {
-          const disabled = updateProps?.operateIsDisabled?.(record) || false;
+          const hidden = updateProps?.operateIsHidden?.(record) || false;
+          if (!hidden) {
+            const disabled = updateProps?.operateIsDisabled?.(record) || false;
 
-          if (disabled) {
-            btns.push(
-              <span key="update" className="text-desc cursor-not-allowed">
-                {updateProps?.operateText || '编辑'}
-              </span>,
-            );
-          } else {
-            btns.push(
-              <CRUDDetail
-                key="update"
-                id={record[idField]}
-                record={record}
-                onSuccess={handleReload}
-                trigger={<a>{updateProps?.operateText || '编辑'}</a>}
-                action="update"
-                {...detailProps}
-              />,
-            );
+            if (disabled) {
+              btns.push(
+                <span key="update" className="text-desc cursor-not-allowed">
+                  {updateProps?.operateText || '编辑'}
+                </span>,
+              );
+            } else {
+              btns.push(
+                <CRUDDetail
+                  key="update"
+                  id={record[idField]}
+                  record={record}
+                  onSuccess={handleReload}
+                  trigger={<a>{updateProps?.operateText || '编辑'}</a>}
+                  action="update"
+                  {...detailProps}
+                />,
+              );
+            }
           }
         }
 
         if (actions.includes('delete') && deleteProps) {
-          const disabled = deleteProps?.operateIsDisabled?.(record) || false;
-          btns.push(
-            <OperateDelete
-              key="delete"
-              name={record[deleteProps.nameIndex]}
-              desc={deleteProps.desc}
-              operateText={deleteProps.operateText}
-              disabled={disabled}
-              onDelete={getHandleDelete(record)}
-            />,
-          );
+          const hidden = deleteProps?.operateIsHidden?.(record) || false;
+          if (!hidden) {
+            const disabled = deleteProps?.operateIsDisabled?.(record) || false;
+            btns.push(
+              <OperateDelete
+                key="delete"
+                name={record[deleteProps.nameIndex]}
+                desc={deleteProps.desc}
+                operateText={deleteProps.operateText}
+                disabled={disabled}
+                onDelete={getHandleDelete(record)}
+              />,
+            );
+          }
         }
 
         return (
@@ -206,9 +237,8 @@ function CRUDComponent<
     operateColumnProps,
     actions,
     deleteProps,
+    readProps,
     handleReload,
-    readProps?.operateText,
-    readProps?.target,
     detailProps,
     detailIdIndex,
     updateProps,
@@ -259,7 +289,7 @@ function CRUDComponent<
   });
 
   return (
-    <div className="fec-crud">
+    <div className={classNames('fec-crud')}>
       <Table<DataSource>
         rowKey="id"
         {...tableProps}

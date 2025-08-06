@@ -183,6 +183,14 @@ export const MoreCustom: Story = {
           },
         }}
         createButton={<Button type="primary">自定义新建文本</Button>}
+        readProps={{
+          operateIsDisabled: (record) => {
+            if (record.id % 3) {
+              return false;
+            }
+            return true;
+          },
+        }}
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{
           nameIndex: 'name',
@@ -210,6 +218,12 @@ export const MoreCustom: Story = {
         updateProps={{
           operateIsDisabled: (record) => {
             if (record.id % 3) {
+              return false;
+            }
+            return true;
+          },
+          operateIsHidden: (record) => {
+            if (record.id % 4) {
               return false;
             }
             return true;
