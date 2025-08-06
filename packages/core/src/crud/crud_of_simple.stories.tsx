@@ -89,7 +89,8 @@ export const WithSearch: Story = {
         )}
         requestCreateByValues={fakeCreate}
         simpleSearchProps={{
-          name: 'id',
+          name: 'name',
+          widthFull: true,
         }}
       />
     );
@@ -173,7 +174,8 @@ export const JustSearch: Story = {
         )}
         requestCreateByValues={fakeCreate}
         simpleSearchProps={{
-          name: 'id',
+          name: 'name',
+          widthFull: true,
         }}
       />
     );

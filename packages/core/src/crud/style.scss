@@ -28,4 +28,18 @@
       }
     }
   }
+
+  &.fec-crud-of-simple-search-width-full {
+    .ant-pro-table-list-toolbar-container {
+      justify-content: unset;
+
+      .ant-pro-table-list-toolbar-right {
+        justify-content: unset;
+
+        & > div {
+          flex: 1;
+        }
+      }
+    }
+  }
 }

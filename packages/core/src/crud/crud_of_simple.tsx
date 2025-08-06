@@ -16,6 +16,8 @@ interface CRUDOfSimpleProps<
     name: string;
     /** 搜索项的 placeholder，默认 请输入 */
     placeholder?: string;
+    /** 占满宽度 */
+    widthFull?: boolean;
   };
 }
 
@@ -41,6 +43,7 @@ function SearchRender(props: {
       allowClear
       value={props.value}
       onChange={(e) => props.onChange(e.target.value)}
+      className="w-full"
     />
   );
 }
@@ -95,6 +98,7 @@ function CRUDOfSimpleComponent(props: CRUDOfSimpleProps, ref: React.ForwardedRef
     <div
       className={classNames('fec-crud-of-simple', {
         'fec-crud-of-simple-hover-show': simpleOperateHoverShow,
+        'fec-crud-of-simple-search-width-full': simpleSearchProps?.widthFull,
       })}
     >
       <CRUD
