@@ -1,5 +1,19 @@
 # @fe-free/core
 
+## 2.1.4
+
+### Patch Changes
+
+- feat: chat
+  - @fe-free/tool@2.1.4
+
+## 2.1.3
+
+### Patch Changes
+
+- fix: chat and useLocalforageState
+  - @fe-free/tool@2.1.3
+
 ## 2.1.2
 
 ### Patch Changes

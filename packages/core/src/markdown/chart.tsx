@@ -7,14 +7,26 @@ interface ChartData {
   rows: (string | number)[][];
 }
 
-interface ChartConfig {
-  chart_type: 'line' | 'bar' | 'pie' | 'table' | 'scatter';
+interface ChartConfigBase {
+  chart_type: 'bar' | 'pie' | 'table' | 'scatter';
   x_field?: string;
   y_field?: string;
   angle_field?: string;
   color_field?: string;
   title: string;
 }
+
+interface LineChartConfig {
+  chart_type: 'line';
+  x_field?: string;
+  y_field: string | string[];
+  angle_field?: string;
+  color_field?: string;
+  title: string;
+}
+
+// @ts-ignore
+interface ChartConfig extends ChartConfigBase, ChartConfigLine {}
 
 // 错误处理组件
 function ChartError(props: { children?: React.ReactNode }) {
@@ -29,7 +41,8 @@ function ChartError(props: { children?: React.ReactNode }) {
 class ErrorBoundary extends React.Component {
   state = { hasError: false };
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(error) {
+    console.error('ErrorBoundary:', error);
     return { hasError: true };
   }
 
@@ -102,7 +115,7 @@ function PieChart(props: { data: ChartData; chart: ChartConfig }) {
 }
 
 // 折线图组件
-function LineChart(props: { data: ChartData; chart: ChartConfig }) {
+function LineChart(props: { data: ChartData; chart: LineChartConfig }) {
   const { data, chart } = props;
   const { columns, rows } = data;
   const { x_field, y_field } = chart;
@@ -112,25 +125,64 @@ function LineChart(props: { data: ChartData; chart: ChartConfig }) {
   }
 
   const xIndex = columns.indexOf(x_field);
-  const yIndex = columns.indexOf(y_field);
-
-  if (xIndex === -1 || yIndex === -1) {
+  if (xIndex === -1) {
     return <ChartError />;
   }
 
-  // 转换数据格式为 Ant Design Charts 需要的格式
-  const chartData = rows.map((row) => ({
-    [x_field]: row[xIndex],
-    [y_field]: Number(row[yIndex]),
-  }));
+  // 处理 y_field 为数组的情况
+  if (Array.isArray(y_field)) {
+    // 验证所有 y_field 是否存在于 columns 中
+    const yIndices = y_field.map((field) => columns.indexOf(field));
+    if (yIndices.some((index) => index === -1)) {
+      return <ChartError />;
+    }
 
-  const config = {
-    data: chartData,
-    xField: x_field,
-    yField: y_field,
-  };
+    // 转换数据格式为 Ant Design Charts 需要的格式（长数据格式）
+    const chartData: any[] = [];
+    rows.forEach((row) => {
+      y_field.forEach((field, index) => {
+        const value = row[yIndices[index]];
+        if (value !== null && value !== undefined) {
+          chartData.push({
+            [x_field]: row[xIndex],
+            type: field,
+            value: Number(value),
+          });
+        }
+      });
+    });
 
-  return <Line {...config} />;
+    const config = {
+      data: chartData,
+      xField: x_field,
+      yField: 'value',
+      seriesField: 'type',
+    };
+
+    console.log('config', config);
+
+    return <Line {...config} />;
+  } else {
+    // 处理单个 y_field 的情况（保持向后兼容）
+    const yIndex = columns.indexOf(y_field);
+    if (yIndex === -1) {
+      return <ChartError />;
+    }
+
+    // 转换数据格式为 Ant Design Charts 需要的格式
+    const chartData = rows.map((row) => ({
+      [x_field]: row[xIndex],
+      [y_field]: Number(row[yIndex]),
+    }));
+
+    const config = {
+      data: chartData,
+      xField: x_field,
+      yField: y_field,
+    };
+
+    return <Line {...config} />;
+  }
 }
 
 // 柱状图组件
@@ -251,9 +303,14 @@ function ChartBlockBase(props: any) {
 function ChartBlock(props: any) {
   const { children } = props;
 
+  // 大模型会返回一些奇怪字符，需要去掉
+  // 不间断空格
+  // eslint-disable-next-line no-irregular-whitespace
+  const content = children?.replace(/ /g, '');
+
   return (
     <ErrorBoundary>
-      <ChartBlockBase>{children}</ChartBlockBase>
+      <ChartBlockBase>{content}</ChartBlockBase>
     </ErrorBoundary>
   );
 }

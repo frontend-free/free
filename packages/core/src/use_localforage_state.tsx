@@ -12,7 +12,7 @@ const useLocalforageState = <T = any,>(
 
   useEffect(() => {
     localforage.getItem(key).then((v) => {
-      if (v !== undefined) {
+      if (v !== undefined && v !== null) {
         setValue(v as T);
       }
       setReady(true);

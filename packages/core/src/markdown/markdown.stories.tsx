@@ -166,6 +166,30 @@ export const Chart: Story = {
 }
 \`\`\`
 
+多条折线
+
+\`\`\`chart
+{
+  "data": {
+    "columns": ["quarter", "L'Oreal", "P&G", "Proya"],
+    "rows": [
+      ["FY23-Q4/23-Q2", 8, 7, null],
+      ["FY24-Q1/23-Q3", 7, 6, null],
+      ["FY24-Q2/23-Q4", 4, 3, null],
+      ["FY24-Q3/24-Q1", 3, null, null],
+      ["FY24-Q4/24-Q2", null, null, null],
+      ["FY25-Q1/24-Q34",null,null,null]
+    ]
+  },
+  "chart": {
+    "chart_type": "line",
+    "x_field": "quarter",
+    "y_field": ["L'Oreal", "P&G","Proya"],
+    "title": "欧莱雅、宝洁及珀莱雅增长率变化趋势"
+  }
+}
+\`\`\`
+
 ## 柱状图示例
 
 \`\`\`chart
@@ -188,6 +212,7 @@ export const Chart: Story = {
   }
 }
 \`\`\`
+
 
 ## 饼图示例
 
