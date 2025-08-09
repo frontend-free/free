@@ -76,6 +76,12 @@ const Table = () => {
       ellipsis: true,
       valueType: CustomValueTypeEnum.CustomJSON,
     },
+    {
+      title: 'jsonModal',
+      dataIndex: 'jsonText',
+      ellipsis: true,
+      valueType: CustomValueTypeEnum.CustomJSONModal,
+    },
   ];
 
   return (

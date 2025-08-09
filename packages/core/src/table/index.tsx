@@ -52,8 +52,6 @@ function Table<
     };
   }
 
-  console.log('newSearch', newSearch);
-
   return (
     <ProTable<DataSource, Params>
       cardBordered

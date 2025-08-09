@@ -1,6 +1,7 @@
 import type { ProRenderFieldPropsType } from '@ant-design/pro-components';
 import { dateRender } from './date';
 import { jsonRender } from './json';
+import { jsonModalRender } from './json_modal';
 
 enum CustomValueTypeEnum {
   /** 渲染时间 + 搜索日期范围 */
@@ -9,6 +10,8 @@ enum CustomValueTypeEnum {
   CustomDateAndDateRange = 'CustomDateAndDateRange',
   /** JSON */
   CustomJSON = 'CustomJSON',
+  /** JSON Modal */
+  CustomJSONModal = 'CustomJSONModal',
 }
 
 const customValueTypeMap: Record<string, ProRenderFieldPropsType> = {
@@ -24,6 +27,10 @@ const customValueTypeMap: Record<string, ProRenderFieldPropsType> = {
     render: jsonRender.render,
     renderFormItem: jsonRender.renderFormItem,
   },
+  [CustomValueTypeEnum.CustomJSONModal]: {
+    render: jsonModalRender.render,
+    renderFormItem: jsonModalRender.renderFormItem,
+  },
 };
 
-export { customValueTypeMap, CustomValueTypeEnum };
+export { CustomValueTypeEnum, customValueTypeMap };

@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.1.5
+
+### Patch Changes
+
+- feat: json modal
+  - @fe-free/tool@2.1.5
+
 ## 2.1.4
 
 ### Patch Changes
