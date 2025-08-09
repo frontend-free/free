@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.1.6
+
+### Patch Changes
+
+- feat: page layout
+  - @fe-free/tool@2.1.6
+
 ## 2.1.5
 
 ### Patch Changes

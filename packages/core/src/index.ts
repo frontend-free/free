@@ -27,6 +27,7 @@ export {
   proFormSelectSearchProps,
 } from './form';
 export { Markdown } from './markdown';
+export { PageLayout } from './page_layout';
 export { Table } from './table';
 export type { TableProps } from './table';
 export { useLocalforageState } from './use_localforage_state';
