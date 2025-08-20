@@ -12,6 +12,14 @@ export const Default = () => {
         <span className="text-secondary">text-secondary</span>
         <span className="text-desc">text-desc</span>
       </div>
+      <div>
+        <div className="c-border-bottom">c-border-bottom</div>
+        <div className="c-border-top">c-border-top</div>
+        <div className="c-border-left">c-border-left</div>
+        <div className="c-border-right">c-border-right</div>
+        <div className="c-bg">c-bg</div>
+        <div className="c-bg-hover">c-bg-hover</div>
+      </div>
     </div>
   );
 };

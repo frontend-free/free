@@ -1,0 +1,41 @@
+/** 和 antd 冲突，不开启 */
+/* stylelint-disable-next-line at-rule-no-unknown */
+// @tailwind base;
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind components;
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind utilities;
+
+.c-border {
+  border: 1px solid #f0f0f0;
+}
+
+.c-border-bottom {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.c-border-top {
+  border-top: 1px solid #f0f0f0;
+}
+
+.c-border-left {
+  border-left: 1px solid #f0f0f0;
+}
+
+.c-border-right {
+  border-right: 1px solid #f0f0f0;
+}
+
+.c-bg {
+  background-color: #f3f5f6;
+}
+
+.c-bg-hover {
+  background-color: #f3f5f6;
+
+  &:hover {
+    background-color: #e9ebec;
+  }
+}

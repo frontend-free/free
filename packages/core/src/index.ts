@@ -1,3 +1,5 @@
+import './style.scss';
+
 export { useGlobalInfiniteScroll } from './ahooks/use_global_infinite_scroll';
 export { useGlobalRequest } from './ahooks/use_global_request';
 export { LoadingButton } from './button';
