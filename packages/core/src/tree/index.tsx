@@ -4,6 +4,7 @@ import type { TreeProps as AntdTreeProps } from 'antd';
 import { Tree as AntdTree, Input } from 'antd';
 import type { DataNode } from 'antd/es/tree';
 import { useMemo, useState } from 'react';
+import { flatToTreeData } from './helper';
 
 interface TreeProps<T extends DataNode> extends AntdTreeProps<T> {
   enableSearch?: boolean;
@@ -127,4 +128,5 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
   );
 }
 
-export { Tree };
+export { flatToTreeData, Tree };
+export type { TreeProps };

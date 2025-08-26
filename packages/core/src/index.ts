@@ -32,6 +32,7 @@ export { Markdown } from './markdown';
 export { PageLayout } from './page_layout';
 export { Table } from './table';
 export type { TableProps } from './table';
-export { Tree } from './tree';
+export { Tree, flatToTreeData } from './tree';
+export type { TreeProps } from './tree';
 export { useLocalforageState } from './use_localforage_state';
 export { CustomValueTypeEnum, customValueTypeMap } from './value_type_map';
