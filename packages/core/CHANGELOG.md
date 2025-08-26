@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.2.2
+
+### Patch Changes
+
+- tree
+  - @fe-free/tool@2.2.2
+
 ## 2.2.1
 
 ### Patch Changes

@@ -113,7 +113,7 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
       direction="vertical"
       start={
         enableSearch && (
-          <div className="pb-2">
+          <div className="px-2 pb-2">
             <Input.Search
               placeholder="搜索"
               value={search}
