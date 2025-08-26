@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 2.2.0
+
+### Minor Changes
+
+- feat: tree and page layout
+
+### Patch Changes
+
+- @fe-free/tool@2.2.0
+
 ## 2.1.7
 
 ### Patch Changes
