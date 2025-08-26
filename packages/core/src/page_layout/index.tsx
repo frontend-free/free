@@ -6,6 +6,9 @@ interface PageLayoutProps {
   children?: React.ReactNode;
   end?: React.ReactNode;
   className?: string;
+  startClassName?: string;
+  childrenClassName?: string;
+  endClassName?: string;
 }
 
 function PageLayout({
@@ -14,6 +17,9 @@ function PageLayout({
   children,
   end,
   className,
+  startClassName,
+  childrenClassName,
+  endClassName,
 }: PageLayoutProps) {
   return (
     <div
@@ -26,9 +32,9 @@ function PageLayout({
         className,
       )}
     >
-      <div className="flex-none">{start}</div>
-      <div className="flex-1 overflow-auto">{children}</div>
-      <div className="flex-none">{end}</div>
+      <div className={cn('flex-none', startClassName)}>{start}</div>
+      <div className={cn('flex-1 overflow-auto', childrenClassName)}>{children}</div>
+      <div className={cn('flex-none', endClassName)}>{end}</div>
     </div>
   );
 }
