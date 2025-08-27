@@ -17,17 +17,20 @@ const renderMap = {
 
 const renderFormItemMap = {
   dateRange: (_, props) => {
+    // @ts-ignore onBlur 类型错误
+    const { onBlur, fieldProps, ...rest } = props;
+
     return (
       <ProFormDateRangePicker
-        {...props}
+        {...rest}
         fieldProps={{
-          ...props.fieldProps,
-          onChange: (value) => {
+          ...fieldProps,
+          onChange: (value, ...args) => {
             const newValue = value
               ? [dayjs(value[0]).startOf('day'), dayjs(value[1]).endOf('day')]
               : value;
 
-            props.fieldProps.onChange?.(newValue);
+            props.fieldProps.onChange?.(newValue, ...args);
           },
         }}
       />

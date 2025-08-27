@@ -1,5 +1,20 @@
 # @fe-free/core
 
+## 2.2.4
+
+### Patch Changes
+
+- fix: form
+- Updated dependencies
+  - @fe-free/tool@2.2.4
+
+## 2.2.3
+
+### Patch Changes
+
+- feat: form
+  - @fe-free/tool@2.2.3
+
 ## 2.2.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @fe-free/tool
 
+## 2.2.4
+
+### Patch Changes
+
+- fix: form
+
+## 2.2.3
+
 ## 2.2.2
 
 ## 2.2.1
