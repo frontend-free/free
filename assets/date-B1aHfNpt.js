@@ -1,1 +1,0 @@
-import{i,d as a,a as e}from"./isNumber-C3pds2mi.js";const n=Math.abs(+a().add(100,"year")/1e3);function u(r){if(i(r)&&/^\d+$/.test(r)){const s=parseInt(r);return s>n?a(s):a(s*1e3)}return e(r)?r>n?a(r):a(r*1e3):a(r)}export{u as g};
