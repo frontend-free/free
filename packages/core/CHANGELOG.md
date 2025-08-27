@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 2.2.5
+
+### Patch Changes
+
+- feat: add copy and route
+- Updated dependencies
+  - @fe-free/tool@2.2.5
+
 ## 2.2.4
 
 ### Patch Changes

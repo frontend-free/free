@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 2.2.5
+
+### Patch Changes
+
+- feat: add copy and route
+
 ## 2.2.4
 
 ### Patch Changes

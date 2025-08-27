@@ -1,5 +1,7 @@
 # @ones-wb/file
 
+## 2.2.5
+
 ## 2.2.4
 
 ### Patch Changes

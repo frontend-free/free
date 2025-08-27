@@ -30,6 +30,7 @@ export {
 } from './form';
 export { Markdown } from './markdown';
 export { PageLayout } from './page_layout';
+export { routeTool } from './route';
 export { Table } from './table';
 export type { TableProps } from './table';
 export { Tree, flatToTreeData } from './tree';
