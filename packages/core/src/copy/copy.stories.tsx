@@ -1,5 +1,5 @@
+import { Copy } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Copy } from './index';
 
 const meta: Meta<typeof Copy> = {
   title: '@fe-free/core/Copy',

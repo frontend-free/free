@@ -42,3 +42,4 @@ const Copy: React.FC<CopyProps> = ({ value, showIcon, hoverIcon, children, onCop
 };
 
 export { Copy };
+export type { CopyProps };

@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.2.6
+
+### Patch Changes
+
+- chore: republish
+  - @fe-free/tool@2.2.6
+
 ## 2.2.5
 
 ### Patch Changes
