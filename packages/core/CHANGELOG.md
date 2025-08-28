@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.2.8
+
+### Patch Changes
+
+- feat: global
+  - @fe-free/tool@2.2.8
+
 ## 2.2.7
 
 ### Patch Changes

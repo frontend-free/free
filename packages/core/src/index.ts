@@ -30,6 +30,8 @@ export {
   ProFormUploadDragger,
   proFormSelectSearchProps,
 } from './form';
+export { RequestError, initErrorHandle } from './global/error';
+export { downloadInterceptor } from './global/interceptors';
 export { Markdown } from './markdown';
 export { PageLayout } from './page_layout';
 export { routeTool } from './route';
