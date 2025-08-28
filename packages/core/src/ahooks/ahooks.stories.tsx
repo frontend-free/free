@@ -7,7 +7,10 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: '',
+        component: `基于 ahooks 封装
+- useGlobalRequest。基于 useRequest 封装，会抛出全局错误。
+- useGlobalInfiniteScroll。基于 useInfiniteScroll 封装，会抛出全局错误。
+`,
       },
     },
   },
