@@ -118,7 +118,7 @@ function CRUDComponent<
             const disabled = readProps?.operateIsDisabled?.(record) || false;
             if (disabled) {
               btns.push(
-                <span key="read" className="text-desc cursor-not-allowed">
+                <span key="read" className="cursor-not-allowed text-desc">
                   {readProps?.operateText || '查看'}
                 </span>,
               );
@@ -144,7 +144,7 @@ function CRUDComponent<
             const disabled = readProps?.operateIsDisabled?.(record) || false;
             if (disabled) {
               btns.push(
-                <span key="read" className="text-desc cursor-not-allowed">
+                <span key="read" className="cursor-not-allowed text-desc">
                   {readProps?.operateText || '查看'}
                 </span>,
               );
@@ -169,7 +169,7 @@ function CRUDComponent<
 
             if (disabled) {
               btns.push(
-                <span key="update" className="text-desc cursor-not-allowed">
+                <span key="update" className="cursor-not-allowed text-desc">
                   {updateProps?.operateText || '编辑'}
                 </span>,
               );
@@ -284,6 +284,7 @@ function CRUDComponent<
     DataSource,
     Key
   >({
+    rowSelection: tableProps.rowSelection,
     batchActions,
     actionRef,
   });

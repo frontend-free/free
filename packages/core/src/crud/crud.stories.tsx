@@ -494,6 +494,9 @@ export const RowSelection: Story = {
             },
           ],
           request: fakeRequest,
+          rowSelection: {
+            alwaysShowAlert: true,
+          },
         }}
         batchActions={[
           {

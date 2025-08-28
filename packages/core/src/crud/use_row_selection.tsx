@@ -6,13 +6,20 @@ import { LoadingButton } from '../button';
 import type { CRUDProps } from './types';
 
 function useRowSelection<DataSource, Key>({
+  rowSelection: originRowSelection,
   batchActions,
   actionRef,
 }: {
+  rowSelection?: CRUDProps<DataSource, Key>['tableProps']['rowSelection'];
   batchActions?: CRUDProps<DataSource, Key>['batchActions'];
   actionRef?: MutableRefObject<ActionType | undefined>;
 }) {
-  const rowSelection = useMemo(() => ({}), []);
+  const rowSelection = useMemo(
+    () => ({
+      ...originRowSelection,
+    }),
+    [originRowSelection],
+  );
 
   const tableAlertRender = useCallback(({ selectedRowKeys, onCleanSelected }) => {
     return (
@@ -30,13 +37,14 @@ function useRowSelection<DataSource, Key>({
   const tableAlertOptionRender = useCallback(
     ({ selectedRowKeys, selectedRows }) => {
       return (
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           {batchActions?.map((action) => (
             <LoadingButton
               key={action.btnText}
               type="link"
               danger={action.danger}
               className="!px-0"
+              disabled={selectedRowKeys.length === 0}
               onClick={async (event) => {
                 if (action.danger) {
                   await new Promise((resolve) => {
