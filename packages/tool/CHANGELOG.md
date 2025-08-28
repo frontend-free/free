@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 2.2.9
+
+### Patch Changes
+
+- fix: copy
+
 ## 2.2.8
 
 ## 2.2.7
