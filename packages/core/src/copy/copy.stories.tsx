@@ -5,6 +5,13 @@ const meta: Meta<typeof Copy> = {
   title: '@fe-free/core/Copy',
   component: Copy,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: '基于 antd 的 Copy 组件，自动根据 value 显示复制按钮',
+      },
+    },
+  },
 };
 
 export default meta;
@@ -14,7 +21,7 @@ type Story = StoryObj<typeof meta>;
 export const Basic: Story = {
   args: {
     value: '点击复制',
-    children: '点击复制',
+    children: 'children 点击复制',
   },
 };
 
@@ -22,7 +29,7 @@ export const ShowIcon: Story = {
   args: {
     value: 'icon复制',
     showIcon: true,
-    children: 'icon复制',
+    children: 'children 点击复制',
   },
 };
 
@@ -31,7 +38,7 @@ export const HoverIcon: Story = {
     value: 'hover复制',
     showIcon: true,
     hoverIcon: true,
-    children: 'hover复制',
+    children: 'children 点击复制',
   },
 };
 
@@ -41,6 +48,6 @@ export const OnCopied: Story = {
     onCopied: () => {
       alert('复制成功');
     },
-    children: '点击复制',
+    children: 'children 点击复制',
   },
 };

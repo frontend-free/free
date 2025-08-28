@@ -8,8 +8,7 @@ const meta: Meta<typeof LoadingButton> = {
   parameters: {
     docs: {
       description: {
-        component:
-          'LoadingButton 是一个带有加载状态的按钮组件，适用于异步操作场景。<br/>区别于 antd Button 需要手动传 loading props。',
+        component: '基于 antd Button 封装的 LoadingButton，自动根据 onClick 显示 loading',
       },
     },
   },

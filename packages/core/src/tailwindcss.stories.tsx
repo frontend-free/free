@@ -7,10 +7,10 @@ export const Default = () => {
   return (
     <div>
       <div>@fe-free/core 扩展的</div>
-      <div className="flex flex-row gap-2">
-        <span className="text-primary">text-primary</span>
-        <span className="text-secondary">text-secondary</span>
-        <span className="text-desc">text-desc</span>
+      <div>
+        <div className="text-primary">text-primary</div>
+        <div className="text-secondary">text-secondary</div>
+        <div className="text-desc">text-desc</div>
       </div>
       <div>
         <div className="c-border-bottom">c-border-bottom</div>

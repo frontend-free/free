@@ -2,7 +2,9 @@ import type { ButtonProps } from 'antd';
 import { Button } from 'antd';
 import { useCallback, useState } from 'react';
 
-function LoadingButton({ onClick, ...rest }: ButtonProps) {
+function LoadingButton(props: ButtonProps) {
+  const { onClick, ...rest } = props;
+
   const [loading, setLoading] = useState(false);
 
   const handleClick = useCallback(
