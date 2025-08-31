@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.2.10
+
+### Patch Changes
+
+- feat: true
+  - @fe-free/tool@2.2.10
+
 ## 2.2.9
 
 ### Patch Changes

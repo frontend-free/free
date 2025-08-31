@@ -3,7 +3,7 @@ import { useDebounce } from 'ahooks';
 import type { TreeProps as AntdTreeProps } from 'antd';
 import { Tree as AntdTree, Input } from 'antd';
 import type { DataNode } from 'antd/es/tree';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { flatToTreeData } from './helper';
 
 interface TreeProps<T extends DataNode> extends AntdTreeProps<T> {
@@ -101,8 +101,32 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
     treeData: filterTreeData,
     search: debouncedSearch,
   });
+  const newTreeData = highlightedTreeData;
 
-  const node = <AntdTree {...rest} treeData={highlightedTreeData} />;
+  const handleSearch = useCallback((e) => {
+    setSearch(e.target.value);
+  }, []);
+
+  const searchExpandKeysProps = useMemo(() => {
+    if (!debouncedSearch) {
+      return {};
+    }
+
+    const keys: string[] = [];
+    function loop(arr) {
+      arr.forEach((item) => {
+        keys.push(item.key);
+        if (item.children) {
+          loop(item.children);
+        }
+      });
+    }
+    loop(newTreeData);
+
+    return { expandedKeys: keys };
+  }, [debouncedSearch, newTreeData]);
+
+  const node = <AntdTree {...searchExpandKeysProps} {...rest} treeData={newTreeData} />;
 
   if (!enableSearch) {
     return node;
@@ -114,11 +138,7 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
       start={
         enableSearch && (
           <div className="px-2 pb-2">
-            <Input.Search
-              placeholder="搜索"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+            <Input.Search placeholder="搜索" value={search} onChange={handleSearch} />
           </div>
         )
       }
