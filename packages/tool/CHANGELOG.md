@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 2.2.12
+
+### Patch Changes
+
+- fix: env
+
 ## 2.2.11
 
 ### Patch Changes
