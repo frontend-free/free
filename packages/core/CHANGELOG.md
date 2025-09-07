@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.2.14
+
+### Patch Changes
+
+- Updated dependencies
+  - @fe-free/tool@2.2.14
+
 ## 2.2.13
 
 ### Patch Changes

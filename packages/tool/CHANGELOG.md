@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 2.2.14
+
+### Patch Changes
+
+- feat: env
+
 ## 2.2.13
 
 ## 2.2.12
