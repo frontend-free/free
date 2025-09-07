@@ -37,6 +37,8 @@ export { PageLayout } from './page_layout';
 export { routeTool } from './route';
 export { Table } from './table';
 export type { TableProps } from './table';
+export { Tabs } from './tabs';
+export type { TabsProps } from './tabs';
 export { Tree, flatToTreeData } from './tree';
 export type { TreeProps } from './tree';
 export { useLocalforageState } from './use_localforage_state';

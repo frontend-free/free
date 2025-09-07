@@ -8,22 +8,22 @@ const meta: Meta<typeof PageLayout> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof PageLayout>;
 
 export const Default: Story = {
   args: {
-    start: <div className="bg-red-500 w-[100px] h-[100px]">start</div>,
-    children: <div className="bg-blue-500 h-[100px]">children</div>,
-    end: <div className="bg-green-500 w-[100px] h-[100px]">end</div>,
+    start: <div className="h-[100px] w-[100px] bg-red-500">start</div>,
+    children: <div className="h-[100px] bg-blue-500">children</div>,
+    end: <div className="h-[100px] w-[100px] bg-green-500">end</div>,
   },
 };
 
 export const DirectionVertical: Story = {
   args: {
     direction: 'vertical',
-    start: <div className="bg-red-500 h-[100px]">start</div>,
-    children: <div className="bg-blue-500 h-[100px]">children</div>,
-    end: <div className="bg-green-500 h-[100px]">end</div>,
+    start: <div className="h-[100px] bg-red-500">start</div>,
+    children: <div className="h-[100px] bg-blue-500">children</div>,
+    end: <div className="h-[100px] bg-green-500">end</div>,
   },
 };
 
@@ -33,8 +33,8 @@ export const ClassName: Story = {
     startClassName: 'p-4 bg-red-200',
     childrenClassName: 'p-4 bg-blue-200',
     endClassName: 'p-4 bg-green-200',
-    start: <div className="bg-red-500 w-[100px] h-full">start</div>,
-    children: <div className="bg-blue-500 h-full">children</div>,
-    end: <div className="bg-green-500 w-[100px] h-full">end</div>,
+    start: <div className="h-full w-[100px] bg-red-500">start</div>,
+    children: <div className="h-full bg-blue-500">children</div>,
+    end: <div className="h-full w-[100px] bg-green-500">end</div>,
   },
 };
