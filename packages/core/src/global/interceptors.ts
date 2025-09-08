@@ -6,8 +6,11 @@ function downloadInterceptor(instance: AxiosInstance) {
     const contentDisposition = response.headers['content-disposition'];
 
     if (contentDisposition) {
-      let filename;
+      if (response.config.responseType !== 'blob') {
+        console.warn('responseType is not blob。', response.config.responseType);
+      }
 
+      let filename;
       // 更加健壮且简洁的写法，优先处理 filename*=，否则处理 filename=
       if (contentDisposition.includes('filename*=')) {
         // RFC 5987 格式：filename*=utf-8''xxx
@@ -18,13 +21,10 @@ function downloadInterceptor(instance: AxiosInstance) {
         const match = contentDisposition.match(/filename\s*=\s*("?)([^";]+)\1/i);
         filename = match ? decodeURIComponent(match[2]) : undefined;
       }
-
       filename = filename || 'download';
 
       // 处理文件下载 - 确保正确处理二进制数据
-      const blob = response.data;
-
-      saveAs(blob, filename);
+      saveAs(response.data, filename);
     }
 
     return response;

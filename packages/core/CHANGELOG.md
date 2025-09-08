@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.2.15
+
+### Patch Changes
+
+- fix: interceptor
+  - @fe-free/tool@2.2.15
+
 ## 2.2.14
 
 ### Patch Changes

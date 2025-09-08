@@ -1,5 +1,7 @@
 # @fe-free/tool
 
+## 2.2.15
+
 ## 2.2.14
 
 ### Patch Changes
