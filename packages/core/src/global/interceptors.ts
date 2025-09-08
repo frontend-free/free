@@ -7,7 +7,7 @@ function downloadInterceptor(instance: AxiosInstance) {
 
     if (contentDisposition) {
       if (response.config.responseType !== 'blob') {
-        console.warn('responseType is not blob。', response.config.responseType);
+        console.error('responseType is not blob。', response.config.responseType);
       }
 
       let filename;
