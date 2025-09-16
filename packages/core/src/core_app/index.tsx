@@ -7,6 +7,64 @@ import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { routeTool } from '../route';
 import { customValueTypeMap } from '../value_type_map';
 
+function CheckUpdate({ basename }: { basename: string }) {
+  const { modal } = App.useApp();
+
+  useEffect(() => {
+    const mainScript = document.querySelector('[data-name="mainScript"]');
+    if (!mainScript) {
+      console.log('没找到 [data-name="mainScript"]，不启用更新提醒');
+      return;
+    }
+
+    async function getMainScriptSrc() {
+      const res = await fetch(basename);
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const nextMainScript = doc.querySelector('[data-name="mainScript"]');
+      return nextMainScript?.getAttribute('src');
+    }
+
+    let ing = false;
+    function confirm() {
+      // 避免重复弹窗
+      if (ing) {
+        return;
+      }
+
+      modal.confirm({
+        title: '发现新版本',
+        content: '请及时刷新页面更新，以避免影响使用',
+        okText: '刷新',
+        cancelText: '稍后更新',
+        onOk: () => {
+          window.location.reload();
+        },
+        onCancel: () => {
+          ing = false;
+        },
+      });
+      ing = true;
+    }
+
+    const src = mainScript.getAttribute('src');
+    const timer = setInterval(async () => {
+      const nextSrc = await getMainScriptSrc();
+      if (nextSrc !== src) {
+        confirm();
+        return;
+      }
+    }, 1000 * 60);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return null;
+}
+
 function SetRouteTool({ basename }: { basename: string }) {
   const navigate = useNavigate();
 
@@ -23,6 +81,7 @@ function SetRouteTool({ basename }: { basename: string }) {
 function CoreApp(props: {
   basename: string;
   name?: string;
+  enableCheckUpdate?: boolean;
   proConfigProviderProps?: Omit<React.ComponentProps<typeof ProConfigProvider>, 'children'>;
   configProviderProps?: Omit<React.ComponentProps<typeof ConfigProvider>, 'children'>;
   appProps?: Omit<React.ComponentProps<typeof App>, 'children'>;
@@ -32,6 +91,7 @@ function CoreApp(props: {
   const {
     basename,
     name,
+    enableCheckUpdate,
     children,
     proConfigProviderProps,
     configProviderProps,
@@ -59,6 +119,7 @@ function CoreApp(props: {
         <App {...appProps}>
           <Router {...routerProps} basename={basename}>
             <SetRouteTool basename={basename} />
+            {enableCheckUpdate && <CheckUpdate basename={basename} />}
             {children}
           </Router>
         </App>
