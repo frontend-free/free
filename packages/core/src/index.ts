@@ -5,6 +5,7 @@ export { useGlobalRequest } from './ahooks/use_global_request';
 export { LoadingButton } from './button';
 export { Copy } from './copy';
 export type { CopyProps } from './copy';
+export { CoreApp } from './core_app';
 export { CRUD, CRUDDetail, CRUDOfSimple, OperateDelete, useDelete } from './crud';
 export type { CRUDDetailProps, CRUDMethods, CRUDOfSimpleProps, CRUDProps } from './crud';
 export { Editor } from './editor';
