@@ -1,4 +1,5 @@
 import { ProConfigProvider } from '@ant-design/pro-components';
+import { useTitle } from 'ahooks';
 import { App, ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import { useEffect, useMemo } from 'react';
@@ -28,14 +29,24 @@ function SetRouteTool({ basename }: { basename: string }) {
 /** 提供一些基础的组 APP 功能 */
 function CoreApp(props: {
   basename: string;
-  proConfigProviderProps?: React.ComponentProps<typeof ProConfigProvider>;
-  configProviderProps?: React.ComponentProps<typeof ConfigProvider>;
-  appProps?: React.ComponentProps<typeof App>;
-  routerProps?: Partial<React.ComponentProps<typeof Router>>;
+  name?: string;
+  proConfigProviderProps?: Omit<React.ComponentProps<typeof ProConfigProvider>, 'children'>;
+  configProviderProps?: Omit<React.ComponentProps<typeof ConfigProvider>, 'children'>;
+  appProps?: Omit<React.ComponentProps<typeof App>, 'children'>;
+  routerProps?: Omit<Partial<React.ComponentProps<typeof Router>>, 'children'>;
   children: React.ReactNode;
 }) {
-  const { basename, children, proConfigProviderProps, configProviderProps, appProps, routerProps } =
-    props;
+  const {
+    basename,
+    name,
+    children,
+    proConfigProviderProps,
+    configProviderProps,
+    appProps,
+    routerProps,
+  } = props;
+
+  useTitle(name || '');
 
   return (
     <ProConfigProvider

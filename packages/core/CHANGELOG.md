@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.3.1
+
+### Patch Changes
+
+- feat: CoreApp
+  - @fe-free/tool@2.3.1
+
 ## 2.3.0
 
 ### Minor Changes
