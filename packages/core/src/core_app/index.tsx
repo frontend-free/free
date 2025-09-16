@@ -16,13 +16,6 @@ function SetRouteTool({ basename }: { basename: string }) {
     routeTool.setBaseName(basename);
   }, [navigate, basename]);
 
-  useEffect(() => {
-    // 首页，且 basename 不是 /，一定是要去到 basename 的
-    if (location.pathname === '/' && basename !== '/') {
-      location.href = basename;
-    }
-  }, []);
-
   return null;
 }
 
@@ -47,6 +40,13 @@ function CoreApp(props: {
   } = props;
 
   useTitle(name || '');
+
+  useEffect(() => {
+    // 首页，且 basename 不是 /，一定是要去到 basename 的
+    if (window.location.pathname === '/' && basename !== '/') {
+      window.location.href = basename;
+    }
+  }, []);
 
   return (
     <ProConfigProvider
