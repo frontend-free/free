@@ -141,8 +141,7 @@ export const DeepSeekPending: Story = {
 
 export const Chart: Story = {
   args: {
-    children: `这是一个使用 @ant-design/plots 的 chart 示例
-
+    children: `
 ## 折线图示例
 
 \`\`\`chart
@@ -317,6 +316,183 @@ export const Chart: Story = {
   }
 }
 \`\`\`
+`,
+  },
+};
+
+export const HMChart: Story = {
+  args: {
+    children: `
+
+类型定义见：packages/core/src/markdown/hm_chart.tsx
+
+## 折线图示例
+
+\`\`\`hmchart
+{
+  "title": "趋势变化",
+  "type": "line",
+  "data": [
+    { "year": "1991", "value": 3 },
+    { "year": "1992", "value": 4 },
+    { "year": "1993", "value": 3.5 }
+  ],
+  "xField": "year",
+  "yField": "value"
+}
+\`\`\`
+
+\`\`\`hmchart
+{
+  "title": "多条趋势变化",
+  "type": "line",
+  "data": [
+    { "year": "1991", "type": "A", "value": 3 },
+    { "year": "1991", "type": "B", "value": 4 },
+    { "year": "1992", "type": "A", "value": 4 },
+    { "year": "1992", "type": "B", "value": 4.5 },
+    { "year": "1993", "type": "A", "value": 3.5 },
+    { "year": "1993", "type": "B", "value": 6 }
+  ],
+  "xField": "year",
+  "yField": "value",
+  "seriesField": "type"
+}
+\`\`\`
+
+\`\`\`hmchart
+{
+  "title": "柱状图",
+  "type": "bar",
+  "data": [
+    { "year": "1991", "value": 3 },
+    { "year": "1992", "value": 4 },
+    { "year": "1993", "value": 3.5 }
+  ],
+  "xField": "year",
+  "yField": "value"
+}
+\`\`\`
+
+\`\`\`hmchart
+{
+  "title": "多条柱状图",
+  "type": "bar",
+  "data": [
+    { "year": "1991", "type": "A", "value": 3 },
+    { "year": "1991", "type": "B", "value": 4 },
+    { "year": "1992", "type": "A", "value": 4 },
+    { "year": "1992", "type": "B", "value": 4.5 },
+    { "year": "1993", "type": "A", "value": 3.5 },
+    { "year": "1993", "type": "B", "value": 6 }
+  ],
+  "xField": "year",
+  "yField": "value",
+  "seriesField": "type"
+}
+\`\`\`
+
+\`\`\`hmchart
+{
+  "title": "饼图",
+  "type": "pie",
+  "data": [
+    { "year": "1991", "value": 3 },
+    { "year": "1992", "value": 4 },
+    { "year": "1993", "value": 3.5 }
+  ],
+  "angleField": "value",
+  "colorField": "year"
+}
+\`\`\`
+
+\`\`\`hmchart
+{
+  "title": "散点图示例",
+  "type": "scatter",
+  "data": [
+    {
+        "gender": "female",
+        "height": 161.2,
+        "weight": 51.6
+    },
+    {
+        "gender": "male",
+        "height": 167.5,
+        "weight": 59
+    },
+    {
+        "gender": "female",
+        "height": 159.5,
+        "weight": 49.2
+    },
+    {
+        "gender": "male",
+        "height": 157,
+        "weight": 63
+    },
+    {
+        "gender": "male",
+        "height": 155.8,
+        "weight": 53.6
+    },
+    {
+        "gender": "female",
+        "height": 170,
+        "weight": 59
+    },
+    {
+        "gender": "female",
+        "height": 159.1,
+        "weight": 47.6
+    },
+    {
+        "gender": "female",
+        "height": 166,
+        "weight": 69.8
+    },
+    {
+        "gender": "female",
+        "height": 176.2,
+        "weight": 66.8
+    },
+    {
+        "gender": "female",
+        "height": 160.2,
+        "weight": 75.2
+    },
+    {
+        "gender": "female",
+        "height": 172.5,
+        "weight": 55.2
+    },
+    {
+        "gender": "female",
+        "height": 170.9,
+        "weight": 54.2
+    },
+    {
+        "gender": "female",
+        "height": 172.9,
+        "weight": 62.5
+    },
+    {
+        "gender": "male",
+        "height": 153.4,
+        "weight": 42
+    },
+    {
+        "gender": "male",
+        "height": 160,
+        "weight": 50
+    }
+  ],
+  "xField": "height",
+  "yField": "weight",
+  "colorField": "gender"
+}
+\`\`\`
+
 `,
   },
 };
