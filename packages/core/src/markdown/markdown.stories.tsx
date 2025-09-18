@@ -323,8 +323,7 @@ export const Chart: Story = {
 export const HMChart: Story = {
   args: {
     children: `
-
-类型定义见：packages/core/src/markdown/hm_chart.tsx
+类型定义见：https://github.com/frontend-free/free/blob/main/packages/core/src/markdown/hm_chart.tsx
 
 ## 折线图示例
 
