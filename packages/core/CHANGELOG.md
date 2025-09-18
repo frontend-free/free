@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.3.4
+
+### Patch Changes
+
+- feat: markdown chart
+  - @fe-free/tool@2.3.4
+
 ## 2.3.3
 
 ### Patch Changes
