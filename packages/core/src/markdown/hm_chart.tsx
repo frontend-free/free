@@ -13,10 +13,10 @@ enum EnumType {
 }
 
 interface HMChartConfigLine<D> {
-  /** 标题 */
-  title?: string;
   /** 折线图 */
   type: EnumType.LINE;
+  /** 标题 */
+  title?: string;
   /** 就是纯粹的数据 */
   data: D[];
   /** 横坐标字段 */
@@ -28,10 +28,10 @@ interface HMChartConfigLine<D> {
 }
 
 interface HMChartConfigBar<D> {
-  /** 标题 */
-  title?: string;
   /** 柱状图 */
   type: EnumType.BAR;
+  /** 标题 */
+  title?: string;
   /** 就是纯粹的数据 */
   data: D[];
   /** 横坐标字段 */
@@ -43,10 +43,10 @@ interface HMChartConfigBar<D> {
 }
 
 interface HMChartConfigPie<D> {
-  /** 标题 */
-  title?: string;
   /** 饼图 */
   type: EnumType.PIE;
+  /** 标题 */
+  title?: string;
   /** 就是纯粹的数据 */
   data: D[];
   /** 角度字段 */
@@ -56,10 +56,10 @@ interface HMChartConfigPie<D> {
 }
 
 interface HMChartConfigScatter<D> {
-  /** 标题 */
-  title?: string;
   /** 散点图 */
   type: EnumType.SCATTER;
+  /** 标题 */
+  title?: string;
   /** 就是纯粹的数据 */
   data: D[];
   /** 横坐标字段 */
