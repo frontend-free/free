@@ -1,5 +1,16 @@
 # @fe-free/core
 
+## 2.4.0
+
+### Minor Changes
+
+- feat: add InfiniteList and sleep
+
+### Patch Changes
+
+- Updated dependencies
+  - @fe-free/tool@2.4.0
+
 ## 2.3.4
 
 ### Patch Changes

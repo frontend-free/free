@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 2.4.0
+
+### Minor Changes
+
+- feat: add InfiniteList and sleep
+
 ## 2.3.4
 
 ## 2.3.3
