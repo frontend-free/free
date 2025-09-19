@@ -1,1 +1,0 @@
-import{i as e,d as a,a as i}from"./isNumber-CTNJfj3i.js";const n=Math.abs(+a().add(100,"year")/1e3);function t(r){if(e(r)&&/^\d+$/.test(r)){const s=parseInt(r);return s>n?a(s):a(s*1e3)}return i(r)?r>n?a(r):a(r*1e3):a(r)}window.navigator.userAgent.toLowerCase();export{t as g};
