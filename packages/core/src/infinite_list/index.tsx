@@ -4,6 +4,9 @@ import type { ReactNode } from 'react';
 import { useImperativeHandle, useRef, useState } from 'react';
 import { useGlobalInfiniteScroll } from '../ahooks/use_global_infinite_scroll';
 
+interface ActionType {
+  reload: () => void;
+}
 interface InfiniteListProps<D, P> {
   request: (params: { current: number; pageSize: number } & P) => Promise<{
     data: D[];
@@ -16,7 +19,7 @@ interface InfiniteListProps<D, P> {
   /** 定义网格布局 */
   gridClassName: string;
   className?: string;
-  actionRef?: React.RefObject<{ reload: () => void }>;
+  actionRef?: React.Ref<ActionType | undefined>;
 }
 
 const emptyParams = {};

@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.4.1
+
+### Patch Changes
+
+- fix: type InfiniteList
+  - @fe-free/tool@2.4.1
+
 ## 2.4.0
 
 ### Minor Changes
