@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 2.5.0
+
+### Minor Changes
+
+- feat: file
+
+### Patch Changes
+
+- @fe-free/tool@2.5.0
+
 ## 2.4.1
 
 ### Patch Changes
