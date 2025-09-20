@@ -1,5 +1,5 @@
 import { ProConfigProvider } from '@ant-design/pro-components';
-import { CRUD, CustomValueTypeEnum, customValueTypeMap } from '@fe-free/core';
+import { CRUD, CustomValueTypeEnum } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import dayjs from 'dayjs';
 import { range } from 'lodash-es';
@@ -96,9 +96,5 @@ const Table = () => {
 };
 
 export const Default: Story = {
-  render: () => (
-    <ProConfigProvider valueTypeMap={customValueTypeMap}>
-      <Table />
-    </ProConfigProvider>
-  ),
+  render: () => <Table />,
 };
