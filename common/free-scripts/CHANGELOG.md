@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.8
+
+### Patch Changes
+
+- fix: bug
+
 ## 1.3.7
 
 ### Patch Changes
