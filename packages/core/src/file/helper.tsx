@@ -7,6 +7,7 @@ import {
   FileTextFilled,
   FileWordFilled,
   FileZipFilled,
+  FolderFilled,
 } from '@ant-design/icons';
 import AudioIcon from './icon/AudioIcon';
 import VideoIcon from './icon/VideoIcon';
@@ -21,7 +22,8 @@ type PresetIcons =
   | 'word'
   | 'zip'
   | 'video'
-  | 'audio';
+  | 'audio'
+  | 'folder';
 
 const IMG_EXTS = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg'];
 
@@ -93,6 +95,12 @@ const PRESET_FILE_ICONS: {
     icon: <AudioIcon />,
     color: '#FFDC00',
     ext: ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'],
+  },
+  {
+    key: 'folder',
+    icon: <FolderFilled />,
+    color: '#FFDC00',
+    ext: [],
   },
 ];
 

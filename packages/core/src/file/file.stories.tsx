@@ -1,4 +1,4 @@
-import { FileCard } from '@fe-free/file';
+import { FileCard } from '@fe-free/tool';
 import type { StoryObj } from '@storybook/react-vite';
 import { PRESET_FILE_ICONS } from './helper';
 

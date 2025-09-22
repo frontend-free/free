@@ -18,8 +18,6 @@ interface TreeProps<T extends DataNode> {
   titleExtra?: ReactNode;
   /** 启用搜索 */
   enableSearch?: boolean;
-  /** 标题换行，默认 true */
-  titleNoWrap?: boolean;
   /** Antd 树的 props */
   treeProps?: AntdTreeProps<T>;
 }
@@ -105,18 +103,19 @@ function useFilterTreeData({ treeData, search }) {
   }, [treeData, search]);
 }
 
+function useIsAllLeaf(treeData?: DataNode[]) {
+  return useMemo(() => {
+    return treeData?.every((item) => item.children === undefined) || true;
+  }, [treeData]);
+}
+
 function Tree<T extends DataNode>(props: TreeProps<T>) {
-  const {
-    title,
-    titleDescription,
-    titleExtra,
-    enableSearch,
-    titleNoWrap = true,
-    treeProps,
-  } = props;
+  const { title, titleDescription, titleExtra, enableSearch, treeProps } = props;
 
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, { wait: 300 });
+
+  const isAllLeaf = useIsAllLeaf(treeProps?.treeData);
 
   const filterTreeData = useFilterTreeData({
     treeData: treeProps?.treeData,
@@ -157,7 +156,13 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
       {...searchExpandKeysProps}
       {...treeProps}
       treeData={newTreeData}
-      className={classNames('cl-tree', { 'cl-tree-no-wrap': titleNoWrap }, treeProps?.className)}
+      className={classNames(
+        'cl-tree cl-tree-no-wrap',
+        {
+          'cl-tree-all-leaf': isAllLeaf,
+        },
+        treeProps?.className,
+      )}
     />
   );
 

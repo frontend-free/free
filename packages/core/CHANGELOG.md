@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.5.1
+
+### Patch Changes
+
+- feat: tree
+  - @fe-free/tool@2.5.1
+
 ## 2.5.0
 
 ### Minor Changes

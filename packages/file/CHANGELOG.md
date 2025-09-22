@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 2.5.1
+
+### Patch Changes
+
+- feat: tree
+
 ## 2.5.0
 
 ## 2.4.1

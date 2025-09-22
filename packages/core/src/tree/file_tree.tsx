@@ -1,17 +1,18 @@
-import { FolderFilled, MoreOutlined, PlusOutlined } from '@ant-design/icons';
+import { MoreOutlined, PlusOutlined } from '@ant-design/icons';
 import { ModalForm, ProFormText } from '@ant-design/pro-components';
 import { Dropdown } from 'antd';
 import type { DataNode } from 'antd/es/tree';
 import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
 import { OperateDelete } from '../crud/crud_delete';
+import { FileCard } from '../file';
 import type { TreeProps } from './tree';
 import { Tree } from './tree';
 
 type FileTreeAction = 'create' | 'update' | 'delete';
 
 interface FileTreeProps<D extends DataNode> extends TreeProps<D> {
-  actions: FileTreeAction[];
+  actions?: FileTreeAction[];
   requestCreateByValues?: (values: { key?: string; title: string }) => Promise<false | void>;
   requestUpdateByValues?: (values: { key: string; title: string }) => Promise<false | void>;
   requestDeleteByRecord?: (values: { key: string }) => Promise<void>;
@@ -82,7 +83,7 @@ function More({
       placement="bottomRight"
       menu={{
         items: [
-          actions.includes('create') && {
+          actions?.includes('create') && {
             label: (
               <Detail
                 action="create"
@@ -93,7 +94,7 @@ function More({
             ),
             key: 'create',
           },
-          actions.includes('update') && {
+          actions?.includes('update') && {
             label: (
               <Detail
                 action="update"
@@ -104,7 +105,7 @@ function More({
             ),
             key: 'update',
           },
-          actions.includes('delete') && {
+          actions?.includes('delete') && {
             label: (
               <OperateDelete
                 name={nodeData.title}
@@ -125,7 +126,7 @@ function More({
 
 function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
   const titleExtra = useMemo(() => {
-    if (!props.actions.includes('create')) {
+    if (!props.actions?.includes('create')) {
       return null;
     }
 
@@ -140,12 +141,15 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
 
   const titleRender = useCallback(
     (nodeData) => {
-      const hasMore = props.actions.includes('update') || props.actions.includes('delete');
+      console.log(nodeData);
+      const hasMore = props.actions?.includes('update') || props.actions?.includes('delete');
       return (
         <div className="group flex gap-1">
-          <div className="text-lg text-[#FFDC00]">
-            <FolderFilled />
-          </div>
+          {nodeData.children ? (
+            <FileCard.FileIcon isDirectory className="text-base" />
+          ) : (
+            <FileCard.FileIcon name={nodeData.title} className="text-base" />
+          )}
           <div className="flex-1 truncate">{nodeData.title}</div>
           <div className={classNames('text-desc', { 'group-hover:hidden': hasMore })}>
             {nodeData.children?.length || 0}

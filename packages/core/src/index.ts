@@ -16,6 +16,7 @@ export { EditorLogs } from './editor_logs';
 export type { EditorLogsProps } from './editor_logs';
 export { EditorMention } from './editor_mention';
 export type { EditorMentionProps } from './editor_mention';
+export { FileCard } from './file';
 export {
   ProFormEditor,
   ProFormImageUpload,
@@ -43,6 +44,6 @@ export type { TableProps } from './table';
 export { Tabs } from './tabs';
 export type { TabsProps } from './tabs';
 export { FileTree, Tree, flatToTreeData } from './tree';
-export type { TreeProps } from './tree';
+export type { FileTreeProps, TreeProps } from './tree';
 export { useLocalforageState } from './use_localforage_state';
 export { CustomValueTypeEnum, customValueTypeMap } from './value_type_map';

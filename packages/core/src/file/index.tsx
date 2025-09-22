@@ -10,18 +10,23 @@ import {
 
 function FileIcon({
   name,
+  isDirectory,
   className,
   showExt = false,
 }: {
   name?: string;
+  isDirectory?: boolean;
   className?: string;
   showExt?: boolean;
 }) {
   const ext = getFileExt(name) || '';
 
   const iconItem = useMemo(() => {
+    if (isDirectory) {
+      return PRESET_FILE_ICONS.find((item) => item.key === 'folder');
+    }
     return PRESET_FILE_ICONS.find((item) => item.ext.includes(ext));
-  }, [ext]);
+  }, [ext, isDirectory]);
 
   return (
     <div className={classNames('flex flex-col items-center', className)}>
