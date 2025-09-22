@@ -16,8 +16,10 @@ interface TreeProps<T extends DataNode> {
   titleDescription?: string | ReactNode;
   /** 标题额外内容 */
   titleExtra?: ReactNode;
-  /** 是否启用搜索 */
+  /** 启用搜索 */
   enableSearch?: boolean;
+  /** 标题换行，默认 true */
+  titleNoWrap?: boolean;
   /** Antd 树的 props */
   treeProps?: AntdTreeProps<T>;
 }
@@ -104,7 +106,14 @@ function useFilterTreeData({ treeData, search }) {
 }
 
 function Tree<T extends DataNode>(props: TreeProps<T>) {
-  const { title, titleDescription, titleExtra, enableSearch, treeProps } = props;
+  const {
+    title,
+    titleDescription,
+    titleExtra,
+    enableSearch,
+    titleNoWrap = true,
+    treeProps,
+  } = props;
 
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, { wait: 300 });
@@ -148,7 +157,7 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
       {...searchExpandKeysProps}
       {...treeProps}
       treeData={newTreeData}
-      className={classNames('cl-tree', treeProps?.className)}
+      className={classNames('cl-tree', { 'cl-tree-no-wrap': titleNoWrap }, treeProps?.className)}
     />
   );
 

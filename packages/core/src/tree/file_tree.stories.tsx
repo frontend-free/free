@@ -6,11 +6,13 @@ const meta: Meta<typeof FileTree> = {
   component: FileTree,
   tags: ['autodocs'],
   decorators: [
-    (Story) => (
-      <div className="c-border w-[200px] overflow-y-auto">
-        <Story />
-      </div>
-    ),
+    (Story) => {
+      return (
+        <div className="c-border w-[200px] overflow-y-auto">
+          <Story />
+        </div>
+      );
+    },
   ],
 };
 
@@ -21,6 +23,19 @@ export const Default: Story = {
   args: {
     title: '某某公司',
     enableSearch: true,
+    actions: ['create', 'update', 'delete'],
+    requestCreateByValues: (values) => {
+      console.log(values);
+      return Promise.resolve();
+    },
+    requestUpdateByValues: (values) => {
+      console.log(values);
+      return Promise.resolve();
+    },
+    requestDeleteByRecord: (values) => {
+      console.log(values);
+      return Promise.resolve();
+    },
     treeProps: {
       defaultExpandAll: true,
       treeData: [

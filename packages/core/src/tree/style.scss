@@ -1,9 +1,18 @@
 .cl-tree {
-  .ant-tree-title {
-    white-space: nowrap;
+  &.cl-tree-no-wrap {
+    .ant-tree-title {
+      white-space: nowrap;
+    }
   }
 
   .ant-tree-switcher {
     margin-inline-end: 0 !important;
+  }
+}
+
+.cl-file-tree {
+  .ant-tree-node-content-wrapper {
+    overflow: hidden;
+    padding-inline-start: 0 !important;
   }
 }

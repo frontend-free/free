@@ -38,7 +38,7 @@ interface CRUDProps<DataSource = any, Key = string> {
 
   // *** Create 新建 ***
 
-  /** 新增接口 */
+  /** 新增接口，false 则不关闭弹窗 */
   requestCreateByValues?: (values: Partial<DataSource>) => Promise<false | void>;
   /** 新建按钮，默认新建 */
   createButton?: ReactNode;
