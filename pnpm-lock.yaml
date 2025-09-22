@@ -199,8 +199,8 @@ importers:
         specifier: ^2.88.2
         version: 2.88.2
       swagger-typescript-api:
-        specifier: ^13.0.28
-        version: 13.2.8
+        specifier: 13.2.9
+        version: 13.2.9
     devDependencies:
       '@types/fs-extra':
         specifier: ^11.0.4
@@ -1407,12 +1407,12 @@ packages:
   '@bang88/react-native-ultimate-listview@4.1.1':
     resolution: {integrity: sha512-3/87AwY8YA7pvTCDHdh8JbiDXF7iQXdmNwIHC5N2CWGbhyVeBrqzft3G3cIVQWMn504JaNAUkW9oYV5DpUn6Lw==}
 
-  '@biomejs/js-api@2.0.3':
-    resolution: {integrity: sha512-fg4hGhg1LtohDqLdG9uggROlVsydcuFwZhPoUOTi9+bkvGMULDKL9dEP5iN6++CIA/AN0T20U82rLYuaxc+VDQ==}
+  '@biomejs/js-api@3.0.0':
+    resolution: {integrity: sha512-5QcGJFj9IO+yXl76ICjvkdE38uxRcTDsBzcCZHEZ+ma+Te/nbvJg4A3KtAds9HCrEF0JKLWiyjMhAbqazuJvYA==}
     peerDependencies:
-      '@biomejs/wasm-bundler': ^2.1.1
-      '@biomejs/wasm-nodejs': ^2.1.1
-      '@biomejs/wasm-web': ^2.1.1
+      '@biomejs/wasm-bundler': ^2.2.0
+      '@biomejs/wasm-nodejs': ^2.2.0
+      '@biomejs/wasm-web': ^2.2.0
     peerDependenciesMeta:
       '@biomejs/wasm-bundler':
         optional: true
@@ -1421,8 +1421,8 @@ packages:
       '@biomejs/wasm-web':
         optional: true
 
-  '@biomejs/wasm-nodejs@2.1.4':
-    resolution: {integrity: sha512-BuvuOiXtTJg9w5+ApMXeJDD5H+XkIJSazIjPJeIxfkCqzVtCByLjCqPC6gbECbylRl9IhrZMWVIskTD6aJ9MzA==}
+  '@biomejs/wasm-nodejs@2.2.2':
+    resolution: {integrity: sha512-GxI0ejyXaCjIq6SxBr9e4jyf3zmI5Eyyq5fF0dlb4nECVXwAgUAnT6hQ5502ZACvBxoWmreXw08im/l3APpvIw==}
 
   '@changesets/apply-release-plan@7.0.12':
     resolution: {integrity: sha512-EaET7As5CeuhTzvXTQCRZeBUcisoYPDDcXvgTE/2jmmypKp0RC7LxKj/yzqeh/1qFTZI7oDGFcL1PHRuQuketQ==}
@@ -9809,8 +9809,8 @@ packages:
   swagger-schema-official@2.0.0-bab6bed:
     resolution: {integrity: sha512-rCC0NWGKr/IJhtRuPq/t37qvZHI/mH4I4sxflVM+qgVe5Z2uOCivzWaVbuioJaB61kvm5UvB7b49E+oBY0M8jA==}
 
-  swagger-typescript-api@13.2.8:
-    resolution: {integrity: sha512-TgC8cB2GwrQctiUrLW9cVcPkiH5/zGbUCD3Y5zjeeFAtcCBGxLlBp9Df/UK+ux/oQ2J8x3C5a4TOz+tAZ8jOkQ==}
+  swagger-typescript-api@13.2.9:
+    resolution: {integrity: sha512-zHFhc8vhz+yr5aZJlOakacwOLJHPZ4qewqnnh7d3tGHD+iPLELqr1/8ALHD7Q0UQpfBkXcgAaHA8MryefbDqUg==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -12216,11 +12216,11 @@ snapshots:
 
   '@bang88/react-native-ultimate-listview@4.1.1': {}
 
-  '@biomejs/js-api@2.0.3(@biomejs/wasm-nodejs@2.1.4)':
+  '@biomejs/js-api@3.0.0(@biomejs/wasm-nodejs@2.2.2)':
     optionalDependencies:
-      '@biomejs/wasm-nodejs': 2.1.4
+      '@biomejs/wasm-nodejs': 2.2.2
 
-  '@biomejs/wasm-nodejs@2.1.4': {}
+  '@biomejs/wasm-nodejs@2.2.2': {}
 
   '@changesets/apply-release-plan@7.0.12':
     dependencies:
@@ -22737,10 +22737,10 @@ snapshots:
 
   swagger-schema-official@2.0.0-bab6bed: {}
 
-  swagger-typescript-api@13.2.8:
+  swagger-typescript-api@13.2.9:
     dependencies:
-      '@biomejs/js-api': 2.0.3(@biomejs/wasm-nodejs@2.1.4)
-      '@biomejs/wasm-nodejs': 2.1.4
+      '@biomejs/js-api': 3.0.0(@biomejs/wasm-nodejs@2.2.2)
+      '@biomejs/wasm-nodejs': 2.2.2
       '@types/swagger-schema-official': 2.0.25
       c12: 3.2.0
       citty: 0.1.6
