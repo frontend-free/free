@@ -1,9 +1,9 @@
-import { FileCard } from '@fe-free/tool';
+import { FileCard } from '@fe-free/core';
 import type { StoryObj } from '@storybook/react-vite';
 import { PRESET_FILE_ICONS } from './helper';
 
 const meta = {
-  title: '@fe-free/file/FileCard',
+  title: '@fe-free/core/FileCard',
   component: FileCard,
   tags: ['autodocs'],
 };

@@ -48,9 +48,9 @@ export const Default: Story = {
               title: '资料2',
               key: '1-1',
               children: [
-                { title: '资料2-1资料2-1资料2-1资料2-1', key: '1-1-0' },
-                { title: '资料2-2', key: '1-1-1' },
-                { title: '资料2-3', key: '1-1-2' },
+                { title: '资料2-1资料2-1资料2-1资料2-1', key: '1-1-0', children: [] },
+                { title: '资料2-2', key: '1-1-1', children: [] },
+                { title: '资料2-3', key: '1-1-2', children: [] },
               ],
             },
 
@@ -66,9 +66,9 @@ export const Default: Story = {
               title: '资料2',
               key: '2-1',
               children: [
-                { title: '资料2-1', key: '2-1-0' },
-                { title: '资料2-2', key: '2-1-1' },
-                { title: '资料2-3', key: '2-1-2' },
+                { title: '资料2-1', key: '2-1-0', children: [] },
+                { title: '资料2-2', key: '2-1-1', children: [] },
+                { title: '资料2-3', key: '2-1-2', children: [] },
               ],
             },
             { title: '资料3', key: '2-0-2', children: [] },
