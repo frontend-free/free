@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 2.5.2
+
+### Patch Changes
+
+- feat: pinyin
+
 ## 2.5.1
 
 ## 2.5.0
