@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.5.3
+
+### Patch Changes
+
+- feat: core app
+  - @fe-free/tool@2.5.3
+
 ## 2.5.2
 
 ### Patch Changes

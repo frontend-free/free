@@ -18,7 +18,7 @@ function CheckUpdate({ basename }: { basename: string }) {
     }
 
     async function getMainScriptSrc() {
-      const res = await fetch(basename);
+      const res = await fetch(`${basename}?r=${Date.now()}`);
       const html = await res.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
