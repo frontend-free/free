@@ -1,16 +1,28 @@
 import { ProFormText } from '@ant-design/pro-components';
-import { CRUDOfSimple } from '@fe-free/core';
+import { CRUDOfList } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fakeCreate, fakeDeleteByRecord, fakeRequest } from './demo/data';
+import { fakeCreate, fakeDeleteByRecord, fakeRequest } from '../crud/demo/data';
 
-const meta: Meta<typeof CRUDOfSimple> = {
-  title: '@fe-free/core/CRUDOfSimple',
-  component: CRUDOfSimple,
+const meta: Meta<typeof CRUDOfList> = {
+  title: '@fe-free/core/CRUDOfList',
+  component: CRUDOfList,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+CRUDOfList 组件。（简洁的列表形态的 CRUD 组件）
+- 隐藏 label
+- 搜索表单按钮一行
+- 移除卡片布局
+`,
+      },
+    },
+  },
   decorators: [
     (Story) => {
       return (
-        <div className="c-border h-[500px] w-[300px] overflow-x-auto">
+        <div className="c-border h-[500px] w-[300px] overflow-y-auto">
           <Story />
         </div>
       );
@@ -19,27 +31,25 @@ const meta: Meta<typeof CRUDOfSimple> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof CRUDOfSimple>;
+type Story = StoryObj<typeof CRUDOfList>;
 
-// 基础用法
-export const Normal: Story = {
+export const Basic: Story = {
   render: () => {
     const columns = [
       {
         title: '名字(省略)',
         dataIndex: 'name',
-        search: true,
+        // search: true,
         ellipsis: true,
       },
     ];
 
     return (
-      <CRUDOfSimple
-        actions={['create', 'delete']}
+      <CRUDOfList
+        actions={[]}
         tableProps={{
           columns,
           request: fakeRequest,
-          pagination: false,
         }}
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{
@@ -47,13 +57,7 @@ export const Normal: Story = {
         }}
         detailForm={() => (
           <>
-            <ProFormText
-              name="name"
-              label="名字"
-              required
-              rules={[{ required: true }]}
-              extra="extra extra extra extra"
-            />
+            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
           </>
         )}
         requestCreateByValues={fakeCreate}
@@ -74,97 +78,11 @@ export const WithSearch: Story = {
     ];
 
     return (
-      <CRUDOfSimple
-        actions={['create', 'delete']}
-        tableProps={{
-          columns,
-          request: fakeRequest,
-          pagination: false,
-        }}
-        requestDeleteByRecord={fakeDeleteByRecord}
-        deleteProps={{
-          nameIndex: 'name',
-        }}
-        detailForm={() => (
-          <>
-            <ProFormText
-              name="name"
-              label="名字"
-              required
-              rules={[{ required: true }]}
-              extra="extra extra extra extra"
-            />
-          </>
-        )}
-        requestCreateByValues={fakeCreate}
-        simpleSearchProps={{
-          name: 'name',
-          widthFull: true,
-        }}
-      />
-    );
-  },
-};
-
-export const HoverShow: Story = {
-  render: () => {
-    const columns = [
-      {
-        title: '名字(省略)',
-        dataIndex: 'name',
-        search: true,
-        ellipsis: true,
-      },
-    ];
-
-    return (
-      <CRUDOfSimple
-        actions={['create', 'delete']}
-        tableProps={{
-          columns,
-          request: fakeRequest,
-          pagination: false,
-        }}
-        requestDeleteByRecord={fakeDeleteByRecord}
-        deleteProps={{
-          nameIndex: 'name',
-        }}
-        detailForm={() => (
-          <>
-            <ProFormText
-              name="name"
-              label="名字"
-              required
-              rules={[{ required: true }]}
-              extra="extra extra extra extra"
-            />
-          </>
-        )}
-        requestCreateByValues={fakeCreate}
-        simpleOperateHoverShow
-      />
-    );
-  },
-};
-
-export const JustSearch: Story = {
-  render: () => {
-    const columns = [
-      {
-        title: '名字(省略)',
-        dataIndex: 'name',
-        search: true,
-        ellipsis: true,
-      },
-    ];
-
-    return (
-      <CRUDOfSimple
+      <CRUDOfList
         actions={['delete']}
         tableProps={{
           columns,
           request: fakeRequest,
-          pagination: false,
         }}
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{
@@ -172,20 +90,75 @@ export const JustSearch: Story = {
         }}
         detailForm={() => (
           <>
-            <ProFormText
-              name="name"
-              label="名字"
-              required
-              rules={[{ required: true }]}
-              extra="extra extra extra extra"
-            />
+            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
           </>
         )}
         requestCreateByValues={fakeCreate}
-        simpleSearchProps={{
-          name: 'name',
-          widthFull: true,
+      />
+    );
+  },
+};
+
+export const WithCreateDelete: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+    ];
+
+    return (
+      <CRUDOfList
+        actions={['create', 'delete']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
         }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'name',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
+      />
+    );
+  },
+};
+
+export const NoSearch: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        ellipsis: true,
+      },
+    ];
+
+    return (
+      <CRUDOfList
+        actions={['create', 'delete']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'name',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
       />
     );
   },
