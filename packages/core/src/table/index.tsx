@@ -38,18 +38,27 @@ function Table<
   const hasSearch = !!newColumns?.find((column) => column.search);
 
   let newSearch: any = undefined;
+  // 如果有搜索，则使用 search 的配置
   if (hasSearch) {
     newSearch = {
       labelWidth: 'auto',
       defaultCollapsed: false,
       ...search,
     };
-  } else if (search === false) {
-    newSearch = false;
-  } else {
+  }
+  // 如果是个对象
+  else if (typeof search === 'object') {
     newSearch = {
       ...search,
     };
+  }
+  // 明确 search false 的情况，这样外部可以控制搜索的显示
+  else if (search === false) {
+    newSearch = false;
+  }
+  // 最后兜底 false
+  else {
+    newSearch = false;
   }
 
   return (

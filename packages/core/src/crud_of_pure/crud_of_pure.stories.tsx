@@ -25,8 +25,7 @@ CRUDOfPure 组件。（更简洁的 CRUD 组件）
 export default meta;
 type Story = StoryObj<typeof CRUDOfPure>;
 
-// 基础用法
-export const Normal: Story = {
+export const Basic: Story = {
   render: () => {
     const columns = [
       {
@@ -67,6 +66,120 @@ export const Normal: Story = {
               ];
             },
           },
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'id',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText
+              name="name"
+              label="名字"
+              required
+              rules={[{ required: true }]}
+              extra="extra extra extra extra"
+            />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
+      />
+    );
+  },
+};
+
+export const WithCreate: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+        search: true,
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+      {
+        title: 'city',
+        dataIndex: 'city',
+      },
+      {
+        title: 'area',
+        dataIndex: 'area',
+      },
+    ];
+
+    return (
+      <CRUDOfPure
+        actions={['create', 'delete']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
+          pagination: false,
+          search: {
+            optionRender: (_, __, dom) => {
+              return [
+                ...dom,
+                <Button key="1" type="primary" className="ml-2">
+                  额外的按钮
+                </Button>,
+              ];
+            },
+          },
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'id',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText
+              name="name"
+              label="名字"
+              required
+              rules={[{ required: true }]}
+              extra="extra extra extra extra"
+            />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
+      />
+    );
+  },
+};
+
+export const NoSearch: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        ellipsis: true,
+      },
+      {
+        title: 'city',
+        dataIndex: 'city',
+      },
+      {
+        title: 'area',
+        dataIndex: 'area',
+      },
+    ];
+
+    return (
+      <CRUDOfPure
+        actions={['create', 'delete']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
+          pagination: false,
         }}
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{

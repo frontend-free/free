@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import type { CRUDMethods, CRUDProps } from '../crud';
 import { CRUD } from '../crud';
 import './style.scss';
@@ -33,8 +33,16 @@ function CRUDOfPureComponent(props: CRUDOfPureProps, ref: React.ForwardedRef<CRU
     return column;
   });
 
+  const noSearch = useMemo(() => {
+    return !props.tableProps.columns?.find((column) => column.search);
+  }, [props.tableProps.columns]);
+
   return (
-    <div className={classNames('fec-crud-of-pure')}>
+    <div
+      className={classNames('fec-crud-of-pure', {
+        'fec-crud-of-pure-no-search': noSearch,
+      })}
+    >
       <CRUD
         ref={ref}
         {...props}
