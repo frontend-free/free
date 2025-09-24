@@ -7,6 +7,15 @@ const meta: Meta<typeof CRUDOfSimple> = {
   title: '@fe-free/core/CRUDOfSimple',
   component: CRUDOfSimple,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      return (
+        <div className="c-border h-[500px] w-[300px] overflow-x-auto">
+          <Story />
+        </div>
+      );
+    },
+  ],
 };
 
 export default meta;

@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.5.4
+
+### Patch Changes
+
+- feat: curd
+  - @fe-free/tool@2.5.4
+
 ## 2.5.3
 
 ### Patch Changes

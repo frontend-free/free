@@ -18,7 +18,6 @@ const config: StorybookConfig = {
     options: {},
   },
   viteFinal: (config) => {
-    console.log(config.plugins);
     config.plugins = [ ...(config.plugins || []), svgr()];
 
     return config;

@@ -8,6 +8,8 @@ export type { CopyProps } from './copy';
 export { CoreApp } from './core_app';
 export { CRUD, CRUDDetail, CRUDOfSimple, OperateDelete, useDelete } from './crud';
 export type { CRUDDetailProps, CRUDMethods, CRUDOfSimpleProps, CRUDProps } from './crud';
+export { CRUDOfPure } from './crud_of_pure';
+export type { CRUDOfPureProps } from './crud_of_pure';
 export { Editor } from './editor';
 export type { EditorProps } from './editor';
 export { EditorJSON } from './editor_json';

@@ -20,7 +20,6 @@ export default meta;
 
 const handleError = (event) => {
   console.log('global error', event);
-  alert('global error');
 };
 
 window.addEventListener('error', handleError);
