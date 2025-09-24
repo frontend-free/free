@@ -1,0 +1,35 @@
+.fec-crud-of-simple {
+  .ant-pro-table-list-toolbar {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &.fec-crud-of-simple-hover-show {
+    .ant-table-cell-fix-right {
+      position: absolute !important;
+      display: none;
+    }
+
+    .ant-table-row {
+      &:hover {
+        .ant-table-cell-fix-right {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &.fec-crud-of-simple-search-width-full {
+    .ant-pro-table-list-toolbar-container {
+      justify-content: unset;
+
+      .ant-pro-table-list-toolbar-right {
+        justify-content: unset;
+
+        & > div {
+          flex: 1;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}

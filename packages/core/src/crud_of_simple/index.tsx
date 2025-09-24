@@ -2,8 +2,9 @@ import { useDebounce } from 'ahooks';
 import { Input } from 'antd';
 import classNames from 'classnames';
 import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
-import { CRUD } from './crud';
-import type { CRUDMethods, CRUDProps } from './types';
+import type { CRUDMethods, CRUDProps } from '../crud';
+import { CRUD } from '../crud';
+import './style.scss';
 
 interface CRUDOfSimpleProps<
   DataSource extends Record<string, any> = any,
