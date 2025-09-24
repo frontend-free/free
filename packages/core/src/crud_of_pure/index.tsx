@@ -41,6 +41,8 @@ function CRUDOfPureComponent(props: CRUDOfPureProps, ref: React.ForwardedRef<CRU
     <div
       className={classNames('fec-crud-of-pure', {
         'fec-crud-of-pure-no-search': noSearch,
+        // 先这样实现
+        'fec-crud-of-pure-no-toolbar': !props.actions.includes('create'),
       })}
     >
       <CRUD

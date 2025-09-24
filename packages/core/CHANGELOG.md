@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.5.7
+
+### Patch Changes
+
+- feat: crud
+  - @fe-free/tool@2.5.7
+
 ## 2.5.6
 
 ### Patch Changes
