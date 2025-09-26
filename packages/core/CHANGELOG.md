@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 2.6.0
+
+### Minor Changes
+
+- feat: slider
+
+### Patch Changes
+
+- @fe-free/tool@2.6.0
+
 ## 2.5.7
 
 ### Patch Changes
