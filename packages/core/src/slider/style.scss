@@ -1,0 +1,16 @@
+.fec-slider {
+  .ant-slider-step {
+    .ant-slider-dot {
+      visibility: hidden;
+
+      &:first-child,
+      &:last-child {
+        visibility: visible;
+      }
+    }
+  }
+
+  .ant-slider-mark-text {
+    color: inherit !important;
+  }
+}

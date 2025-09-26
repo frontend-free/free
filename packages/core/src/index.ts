@@ -43,6 +43,8 @@ export type { InfiniteListProps } from './infinite_list';
 export { Markdown } from './markdown';
 export { PageLayout } from './page_layout';
 export { routeTool } from './route';
+export { NumberSlider, PercentageSlider } from './slider';
+export type { NumberSliderProps, PercentageSliderProps } from './slider';
 export { Table } from './table';
 export type { TableProps } from './table';
 export { Tabs } from './tabs';
