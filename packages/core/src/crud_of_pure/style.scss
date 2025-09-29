@@ -54,4 +54,15 @@
       padding-block: 0;
     }
   }
+
+  &.fec-crud-of-pure-special-toolbar {
+    .ant-pro-table-list-toolbar {
+      margin-top: -48px;
+      pointer-events: none;
+
+      .ant-pro-table-list-toolbar-right > div {
+        pointer-events: auto;
+      }
+    }
+  }
 }
