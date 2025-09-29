@@ -1,4 +1,8 @@
 import cn from 'classnames';
+import { Fragment, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import type { TabsProps } from '../tabs';
+import { Tabs } from '../tabs';
 
 interface PageLayoutProps {
   direction?: 'horizontal' | 'vertical';
@@ -24,7 +28,7 @@ function PageLayout({
   return (
     <div
       className={cn(
-        'flex w-full h-full',
+        'flex h-full w-full',
         {
           'flex-row': direction === 'horizontal',
           'flex-col': direction === 'vertical',
@@ -39,4 +43,56 @@ function PageLayout({
   );
 }
 
-export { PageLayout };
+interface PageLayoutTabsProps extends PageLayoutProps {
+  tabsProps: Omit<TabsProps, 'items' | 'withSearchParams'> & {
+    items: {
+      key: string;
+      label: React.ReactNode;
+      children: React.ReactNode;
+    }[];
+  };
+}
+
+function PageLayoutTabs(props: PageLayoutTabsProps) {
+  const { tabsProps, ...rest } = props;
+
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get(tabsProps.tabKey || 'tab') || undefined;
+
+  const { children, newItems } = useMemo(() => {
+    const items = props.tabsProps.items;
+
+    const item = items.find((item) => item.key === tab);
+    const children = item?.children || items[0]?.children;
+
+    const newItems = items.map((item) => ({
+      ...item,
+      children: undefined,
+    }));
+
+    return { children, newItems };
+  }, [props.tabsProps.items, tab]);
+
+  return (
+    <PageLayout
+      direction="vertical"
+      start={
+        <Tabs
+          tabBarExtraContent={{
+            left: <div className="w-4" />,
+            right: <div className="w-4" />,
+          }}
+          {...tabsProps}
+          items={newItems}
+          withSearchParams
+        />
+      }
+      {...rest}
+    >
+      <Fragment key={tab}>{children}</Fragment>
+    </PageLayout>
+  );
+}
+
+export { PageLayout, PageLayoutTabs };
+export type { PageLayoutProps, PageLayoutTabsProps };

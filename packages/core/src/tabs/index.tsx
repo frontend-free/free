@@ -1,37 +1,46 @@
 import type { TabsProps as AntdTabsProps } from 'antd';
 import { Tabs as AntdTabs } from 'antd';
-import { useEffect } from 'react';
+import classNames from 'classnames';
 import { useSearchParams } from 'react-router-dom';
+import { routeTool } from '../route';
+import './style.scss';
 
 interface TabsProps extends AntdTabsProps {
   /** 自动时设置和同步 searchParams tab */
   withSearchParams?: boolean;
+  /** 设置 searchParams 的类型，默认 set */
+  searchParamsType?: 'set' | 'change';
+  /** 默认 tab */
+  tabKey?: string;
 }
 
 function Tabs(props: TabsProps) {
-  const { withSearchParams, activeKey, onChange, ...rest } = props;
-  const [searchParams, setSearchParams] = useSearchParams();
-  const tab = searchParams.get('tab') || undefined;
-
-  useEffect(() => {
-    if (withSearchParams) {
-      if (!tab && props.items?.[0]?.key) {
-        setSearchParams({ tab: props.items?.[0]?.key });
-      }
-    }
-    // tab 清空的时候要重新设置第一个
-  }, [tab]);
+  const {
+    withSearchParams,
+    searchParamsType = 'set',
+    tabKey = 'tab',
+    activeKey,
+    onChange,
+    className,
+    ...rest
+  } = props;
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get(tabKey) || undefined;
 
   return (
     <AntdTabs
       {...rest}
+      className={classNames('fec-tabs', className)}
       activeKey={withSearchParams ? tab : activeKey}
       onChange={(key) => {
         onChange?.(key);
-        if (props.withSearchParams) {
-          searchParams.set('tab', key);
 
-          setSearchParams({ tab: key });
+        if (props.withSearchParams) {
+          if (searchParamsType === 'set') {
+            routeTool.setSearchParams({ [tabKey]: key });
+          } else {
+            routeTool.changeSearchParams({ [tabKey]: key });
+          }
         }
       }}
     />
