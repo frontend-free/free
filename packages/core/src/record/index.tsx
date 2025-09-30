@@ -1,6 +1,7 @@
-import { Button, Divider, Input } from 'antd';
+import { Divider, Input } from 'antd';
 import classNames from 'classnames';
-import { Fragment, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
+import { ProFormListHelper } from '../form';
 
 function Item({
   value,
@@ -8,7 +9,7 @@ function Item({
   onChange,
 }: {
   value?: string;
-  label: string;
+  label?: string;
   onChange: (value: string) => void;
 }) {
   return (
@@ -31,20 +32,20 @@ function Item({
 interface RecordItem {
   value?: { key?: string; value?: string };
   onChange: (value: { key?: string; value?: string }) => void;
-  item: { key?: string; label?: string; placeholder?: string };
+  label?: string;
 }
 
 function RecordItem(props: RecordItem) {
-  const { value, onChange, item } = props;
+  const { value, onChange, label } = props;
 
-  // 如果提供了 key
-  if (item.key) {
+  // 如果提供了 label
+  if (label) {
     return (
       <Item
         value={value?.value}
-        label={item.label || item.key}
+        label={label || value?.key}
         onChange={(v) => {
-          onChange({ key: item.key, value: v });
+          onChange({ key: value?.key, value: v });
         }}
       />
     );
@@ -73,45 +74,42 @@ function RecordItem(props: RecordItem) {
 interface RecordArrayProps {
   value?: { key?: string; value?: string }[];
   onChange: (value: { key?: string; value?: string }[]) => void;
-  defaultItems?: { key: string; label: string }[];
+  labels?: { key?: string; label?: string }[];
   className?: string;
 }
 
 function RecordArray(props: RecordArrayProps) {
-  const { value, onChange, defaultItems, className } = props;
-  const [items, setItems] = useState<{ name?: string; label?: string }[]>(defaultItems || [{}]);
+  const { value, onChange, labels, className } = props;
+
+  const isFixed = !!labels?.length;
 
   return (
-    <div className={classNames('c-bg flex flex-col gap-2 rounded p-2', className)}>
-      {(items || [{}])?.map((item, index) => {
-        const v = value?.[index] || {};
+    <ProFormListHelper
+      className={classNames('c-bg rounded p-2', className)}
+      value={value}
+      onChange={onChange}
+      getAdd={() => ({
+        key: undefined,
+        value: undefined,
+      })}
+      disabledDelete={isFixed}
+      disabledAdd={isFixed}
+    >
+      {({ item, index, onItemChange }) => {
         return (
-          <Fragment key={index}>
+          <>
             <RecordItem
-              item={item}
-              value={v}
+              value={item}
+              label={labels?.[index]?.label}
               onChange={(v) => {
-                const newValues = [...(value || [])];
-                newValues[index] = v || {};
-                onChange(newValues);
+                onItemChange(v);
               }}
             />
-            {!defaultItems && <Divider className="my-2" />}
-          </Fragment>
+            {!isFixed && <Divider className="mb-2" />}
+          </>
         );
-      })}
-      {!defaultItems && (
-        <div className="flex flex-col items-center">
-          <Button
-            onClick={() => {
-              setItems((v) => [...v, {}]);
-            }}
-          >
-            添加
-          </Button>
-        </div>
-      )}
-    </div>
+      }}
+    </ProFormListHelper>
   );
 }
 
@@ -121,8 +119,9 @@ interface RecordProps extends Omit<RecordArrayProps, 'value' | 'onChange'> {
 }
 
 function Record(props: RecordProps) {
-  const { value, onChange, defaultItems, className } = props;
+  const { value, onChange, ...rest } = props;
 
+  // obj 和 arr 的转换
   const newValue = useMemo(() => {
     return Object.keys(value || {}).map((key) => ({
       key,
@@ -130,13 +129,13 @@ function Record(props: RecordProps) {
     }));
   }, [value]);
 
+  // obj 和 arr 的转换
   const newOnChange = useCallback(
     (newV: { key?: string; value?: string }[]) => {
       const newValues = {};
-      newV.forEach((item) => {
-        if (item.key) {
-          newValues[item.key] = item.value;
-        }
+      newV.forEach((item, index) => {
+        // 确保有值
+        newValues[item.key || index] = item.value;
       });
 
       onChange(newValues);
@@ -144,14 +143,7 @@ function Record(props: RecordProps) {
     [onChange],
   );
 
-  return (
-    <RecordArray
-      value={newValue}
-      onChange={newOnChange}
-      defaultItems={defaultItems}
-      className={className}
-    />
-  );
+  return <RecordArray value={newValue} onChange={newOnChange} {...rest} />;
 }
 
 export { Record, RecordArray };

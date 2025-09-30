@@ -1,5 +1,6 @@
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import classNames from 'classnames';
 
 interface ProFormListHelperProps<T> {
   value?: T[];
@@ -12,7 +13,10 @@ interface ProFormListHelperProps<T> {
   }) => React.ReactNode;
   addText?: string;
   getAdd: () => T;
+  disabledAdd?: boolean;
+  disabledDelete?: boolean;
   readOnly?: boolean;
+  className?: string;
 }
 
 const emptyArr = [];
@@ -20,7 +24,7 @@ function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
   const options = props.value || emptyArr;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={classNames('flex flex-col gap-2', props.className)}>
       <div className="flex flex-col gap-2">
         {options.map((item, index) => {
           return (
@@ -37,7 +41,7 @@ function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
                   },
                 })}
               </div>
-              {!props.readOnly && (
+              {!props.readOnly && !props.disabledDelete && (
                 <Button
                   icon={<DeleteOutlined />}
                   type="text"
@@ -52,7 +56,7 @@ function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
           );
         })}
       </div>
-      {!props.readOnly && (
+      {!props.readOnly && !props.disabledAdd && (
         <div className="flex justify-center">
           <Button
             size="small"

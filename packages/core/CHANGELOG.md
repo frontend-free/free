@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.7.1
+
+### Patch Changes
+
+- feat: record
+  - @fe-free/tool@2.7.1
+
 ## 2.7.0
 
 ### Minor Changes

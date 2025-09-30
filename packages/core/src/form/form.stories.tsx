@@ -244,10 +244,14 @@ export const ProFormRecordComponent: Story = {
         name="record1"
         label="record1"
         fieldProps={{
-          defaultItems: [
+          labels: [
             { key: 'username', label: '用户名' },
             { key: 'password', label: '密码' },
           ],
+        }}
+        initialValue={{
+          username: '',
+          password: '',
         }}
       />
       <ProFormRecord name="record2" label="record2" />
@@ -262,11 +266,15 @@ export const ProFormRecordArrayComponent: Story = {
         name="recordArray1"
         label="recordArray1"
         fieldProps={{
-          defaultItems: [
+          labels: [
             { key: 'username', label: '用户名' },
             { key: 'password', label: '密码' },
           ],
         }}
+        initialValue={[
+          { key: 'username', value: undefined },
+          { key: 'password', value: undefined },
+        ]}
       />
       <ProFormRecordArray name="recordArray2" label="recordArray2" />
     </ProFormBase>
