@@ -7,6 +7,8 @@ import {
   ProFormJavascript,
   ProFormListNumber,
   ProFormListText,
+  ProFormRecord,
+  ProFormRecordArray,
   ProFormSwitchNumber,
   ProFormUpload,
   ProFormUploadDragger,
@@ -231,6 +233,42 @@ export const ProFormImageUploadComponent: Story = {
           customRequest,
         }}
       />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormRecordComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormRecord
+        name="record1"
+        label="record1"
+        fieldProps={{
+          defaultItems: [
+            { key: 'username', label: '用户名' },
+            { key: 'password', label: '密码' },
+          ],
+        }}
+      />
+      <ProFormRecord name="record2" label="record2" />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormRecordArrayComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormRecordArray
+        name="recordArray1"
+        label="recordArray1"
+        fieldProps={{
+          defaultItems: [
+            { key: 'username', label: '用户名' },
+            { key: 'password', label: '密码' },
+          ],
+        }}
+      />
+      <ProFormRecordArray name="recordArray2" label="recordArray2" />
     </ProFormBase>
   ),
 };
