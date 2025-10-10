@@ -8,31 +8,31 @@
 /* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
 
-.c-border {
+.fec-border {
   border: 1px solid #f0f0f0;
 }
 
-.c-border-bottom {
+.fec-border-bottom {
   border-bottom: 1px solid #f0f0f0;
 }
 
-.c-border-top {
+.fec-border-top {
   border-top: 1px solid #f0f0f0;
 }
 
-.c-border-left {
+.fec-border-left {
   border-left: 1px solid #f0f0f0;
 }
 
-.c-border-right {
+.fec-border-right {
   border-right: 1px solid #f0f0f0;
 }
 
-.c-bg {
+.fec-bg {
   background-color: #f3f5f6;
 }
 
-.c-bg-hover {
+.fec-bg-hover {
   background-color: #f3f5f6;
 
   &:hover {

@@ -32,7 +32,7 @@ function ImportXlsx(props: ImportXlsxProps) {
   }, [dataStartIndex, headerIndex, sheetData]);
 
   return (
-    <div className="flex flex-col gap-4 h-full cl-import-xlsx">
+    <div className="fec-import-xlsx flex h-full flex-col gap-4">
       <Steps
         items={[
           {

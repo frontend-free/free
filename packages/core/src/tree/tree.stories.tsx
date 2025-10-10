@@ -7,7 +7,7 @@ const meta: Meta<typeof Tree> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="c-border w-[300px]">
+      <div className="fec-border w-[300px]">
         <Story />
       </div>
     ),

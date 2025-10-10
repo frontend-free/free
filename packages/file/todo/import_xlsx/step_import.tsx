@@ -10,7 +10,7 @@ import { EnumImportType } from './types';
 
 function ItemRender({ file, right }: { file: UploadFile; right?: React.ReactNode }) {
   return (
-    <div className="flex items-center c-border rounded-md gap-2">
+    <div className="fec-border flex items-center gap-2 rounded-md">
       <div className="flex-1">
         <Attachments.FileCard key={file.name} item={file} />
       </div>
@@ -53,8 +53,8 @@ function StepImport({
 
   return (
     <div
-      className={classNames('flex flex-col gap-2', 'cl-import-xlsx', {
-        'cl-import-xlsx-has-file': fileList.length > 0,
+      className={classNames('flex flex-col gap-2', 'fec-import-xlsx', {
+        'fec-import-xlsx-has-file': fileList.length > 0,
       })}
     >
       {onImportType && (

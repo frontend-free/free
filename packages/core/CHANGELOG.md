@@ -1,5 +1,15 @@
 # @fe-free/core
 
+## 2.8.0
+
+### Minor Changes
+
+- feat: className
+
+### Patch Changes
+
+- @fe-free/tool@2.8.0
+
 ## 2.7.1
 
 ### Patch Changes

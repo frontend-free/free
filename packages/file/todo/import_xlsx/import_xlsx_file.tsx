@@ -15,7 +15,7 @@ function ImportXlsxFile(props: ImportXlsxFileProps) {
   const [importType, setImportType] = useState<EnumImportType>(EnumImportType.FULL);
 
   return (
-    <div className="flex flex-col gap-4 h-full cl-import-xlsx">
+    <div className="fec-import-xlsx flex h-full flex-col gap-4">
       <div className="flex-1 overflow-y-auto">
         <StepImport
           fileList={fileList}

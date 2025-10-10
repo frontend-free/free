@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 2.8.0
+
+### Minor Changes
+
+- feat: className
+
 ## 2.7.1
 
 ## 2.7.0

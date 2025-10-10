@@ -157,9 +157,9 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
       {...treeProps}
       treeData={newTreeData}
       className={classNames(
-        'cl-tree cl-tree-no-wrap',
+        'fec-tree fec-tree-no-wrap',
         {
-          'cl-tree-all-leaf': isAllLeaf,
+          'fec-tree-all-leaf': isAllLeaf,
         },
         treeProps?.className,
       )}

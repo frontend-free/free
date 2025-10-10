@@ -183,7 +183,7 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
       treeProps={{
         titleRender,
         ...props.treeProps,
-        className: classNames('cl-file-tree', props.treeProps?.className),
+        className: classNames('fec-file-tree', props.treeProps?.className),
       }}
     />
   );

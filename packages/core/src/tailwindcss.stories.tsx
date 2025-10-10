@@ -13,12 +13,12 @@ export const Default = () => {
         <div className="text-desc">text-desc</div>
       </div>
       <div>
-        <div className="c-border-bottom">c-border-bottom</div>
-        <div className="c-border-top">c-border-top</div>
-        <div className="c-border-left">c-border-left</div>
-        <div className="c-border-right">c-border-right</div>
-        <div className="c-bg">c-bg</div>
-        <div className="c-bg-hover">c-bg-hover</div>
+        <div className="fec-border-bottom">fec-border-bottom</div>
+        <div className="fec-border-top">fec-border-top</div>
+        <div className="fec-border-left">fec-border-left</div>
+        <div className="fec-border-right">fec-border-right</div>
+        <div className="fec-bg">fec-bg</div>
+        <div className="fec-bg-hover">fec-bg-hover</div>
       </div>
     </div>
   );

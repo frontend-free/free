@@ -1,5 +1,5 @@
-.cl-tree {
-  &.cl-tree-no-wrap {
+.fec-tree {
+  &.fec-tree-no-wrap {
     .ant-tree-title {
       white-space: nowrap;
     }
@@ -10,13 +10,13 @@
   }
 }
 
-.cl-file-tree {
+.fec-file-tree {
   .ant-tree-node-content-wrapper {
     overflow: hidden;
     padding-inline-start: 0 !important;
   }
 
-  &.cl-tree-all-leaf {
+  &.fec-tree-all-leaf {
     .ant-tree-switcher {
       display: none;
     }

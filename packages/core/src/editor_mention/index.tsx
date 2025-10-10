@@ -27,11 +27,11 @@ interface EditorMentionProps {
 }
 
 const emptyArr = [];
-const tagClassName = 'cl-editor-mention-tag';
+const tagClassName = 'fec-editor-mention-tag';
 const defaultPrefix = ['/'];
 
 function defaultRenderItem({ item }) {
-  return <div className="py-1 text-sm pl-4 pr-2">{item.label}</div>;
+  return <div className="py-1 pl-4 pr-2 text-sm">{item.label}</div>;
 }
 
 function defaultRenderTagHTML({ item }) {
@@ -104,16 +104,16 @@ function useDropdown({ items, renderItem, onSelect, editorRef }) {
     <div
       // 阻止下拉菜单点击事件冒泡
       onClick={(e) => e.stopPropagation()}
-      className="shadow-md rounded p-1 z-10 max-h-[250px] overflow-y-auto bg-white absolute max-w-[250px]"
+      className="absolute z-10 max-h-[250px] max-w-[250px] overflow-y-auto rounded bg-white p-1 shadow-md"
       style={{
         top: `${position.top}px`,
         left: `${position.left}px`,
       }}
     >
-      {items.length === 0 && <div className="text-desc text-sm p-2">暂无数据</div>}
+      {items.length === 0 && <div className="p-2 text-sm text-desc">暂无数据</div>}
       {items.map((group, i) => (
         <div key={group.label}>
-          <div className="text-desc text-sm p-2">{group.label}</div>
+          <div className="p-2 text-sm text-desc">{group.label}</div>
           <div>
             {group.options.map((item) => (
               <div
@@ -122,7 +122,7 @@ function useDropdown({ items, renderItem, onSelect, editorRef }) {
                   e.preventDefault(); // 防止失去焦点
                   handleSelect(item);
                 }}
-                className="cursor-pointer hover:bg-gray-100 rounded"
+                className="cursor-pointer rounded hover:bg-gray-100"
               >
                 {renderItem({ item, index: i })}
               </div>
@@ -200,7 +200,7 @@ function useChange({ content, editorRef, onChange }) {
   const node = (
     <div
       ref={ref}
-      className="absolute top-[-10px] left-[-10px] w-[1px] h-[1px] overflow-auto"
+      className="absolute left-[-10px] top-[-10px] h-[1px] w-[1px] overflow-auto"
       contentEditable="true"
     />
   );
@@ -324,7 +324,7 @@ const EditorMention = ({
   const isEmpty = !content || content === '<br>';
 
   return (
-    <div className="c-editor-mention relative h-full flex">
+    <div className="c-editor-mention relative flex h-full">
       <div
         ref={editorRef}
         contentEditable="true"
@@ -332,7 +332,7 @@ const EditorMention = ({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         className={classNames(
-          'flex-1 w-full p-2 c-border rounded outline-none overflow-y-auto focus:border-primary',
+          'fec-border w-full flex-1 overflow-y-auto rounded p-2 outline-none focus:border-primary',
           resizeHeight && 'resize-y',
         )}
         style={{
@@ -341,7 +341,7 @@ const EditorMention = ({
       />
       {placeholder && isEmpty && (
         <div
-          className="absolute top-0 left-0 text-gray-500 p-2 cursor-text"
+          className="absolute left-0 top-0 cursor-text p-2 text-gray-500"
           onClick={() => {
             editorRef.current?.focus();
           }}

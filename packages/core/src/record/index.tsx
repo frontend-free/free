@@ -85,7 +85,7 @@ function RecordArray(props: RecordArrayProps) {
 
   return (
     <ProFormListHelper
-      className={classNames('c-bg rounded p-2', className)}
+      className={classNames('fec-bg rounded p-2', className)}
       value={value}
       onChange={onChange}
       getAdd={() => ({
