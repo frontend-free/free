@@ -92,7 +92,29 @@ export const Default: Story = {
           key: '4',
           children: [],
         },
+        {
+          title: 'more operateIsDisabled',
+          key: '5',
+          children: [],
+        },
+        {
+          title: 'more operateIsHidden',
+          key: '6',
+          children: [],
+        },
       ],
+    },
+    createProps: {
+      operateIsDisabled: (nodeData) => nodeData?.key === '5',
+      operateIsHidden: (nodeData) => nodeData?.key === '6',
+    },
+    updateProps: {
+      operateIsDisabled: (nodeData) => nodeData.key === '5',
+      operateIsHidden: (nodeData) => nodeData.key === '6',
+    },
+    deleteProps: {
+      operateIsDisabled: (nodeData) => nodeData.key === '5',
+      operateIsHidden: (nodeData) => nodeData.key === '6',
     },
   },
 };

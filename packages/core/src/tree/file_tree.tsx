@@ -16,6 +16,20 @@ interface FileTreeProps<D extends DataNode> extends TreeProps<D> {
   requestCreateByValues?: (values: { key?: string; title: string }) => Promise<false | void>;
   requestUpdateByValues?: (values: { key: string; title: string }) => Promise<false | void>;
   requestDeleteByRecord?: (values: { key: string }) => Promise<void>;
+  /** 注意，没法控制 title 区域的添加（由 actions 来控制） */
+  createProps?: {
+    operateIsDisabled?: (nodeData: D) => boolean;
+
+    operateIsHidden?: (nodeData: D) => boolean;
+  };
+  updateProps?: {
+    operateIsDisabled?: (nodeData: D) => boolean;
+    operateIsHidden?: (nodeData: D) => boolean;
+  };
+  deleteProps?: {
+    operateIsDisabled?: (nodeData: D) => boolean;
+    operateIsHidden?: (nodeData: D) => boolean;
+  };
 }
 
 function Detail<D extends DataNode>({
@@ -77,44 +91,69 @@ function More({
   requestUpdateByValues,
   requestDeleteByRecord,
   requestCreateByValues,
+  createProps,
+  updateProps,
+  deleteProps,
 }) {
+  const isCreateDisabled = createProps?.operateIsDisabled?.(nodeData);
+  const isCreateHidden = createProps?.operateIsHidden?.(nodeData);
+  const isUpdateDisabled = updateProps?.operateIsDisabled?.(nodeData);
+  const isUpdateHidden = updateProps?.operateIsHidden?.(nodeData);
+  const isDeleteDisabled = deleteProps?.operateIsDisabled?.(nodeData);
+  const isDeleteHidden = deleteProps?.operateIsHidden?.(nodeData);
+
+  const menuItems = [
+    actions?.includes('create') &&
+      !isCreateHidden && {
+        label: isCreateDisabled ? (
+          <div className="cursor-not-allowed text-desc">新建子目录</div>
+        ) : (
+          <Detail
+            action="create"
+            nodeData={{ key: nodeData.key }}
+            requestCreateByValues={(values) => requestCreateByValues?.({ ...values })}
+            trigger={<div>新建子目录</div>}
+          />
+        ),
+        key: 'create',
+      },
+    actions?.includes('update') &&
+      !isUpdateHidden && {
+        label: isUpdateDisabled ? (
+          <div className="cursor-not-allowed text-desc">编辑</div>
+        ) : (
+          <Detail
+            action="update"
+            nodeData={nodeData}
+            requestUpdateByValues={(values) => requestUpdateByValues?.({ ...values })}
+            trigger={<div>编辑</div>}
+          />
+        ),
+        key: 'update',
+      },
+    actions?.includes('delete') &&
+      !isDeleteHidden && {
+        label: isDeleteDisabled ? (
+          <div className="cursor-not-allowed text-desc">删除</div>
+        ) : (
+          <OperateDelete
+            name={nodeData.title}
+            onDelete={() => requestDeleteByRecord?.({ key: nodeData.key })}
+          />
+        ),
+        key: 'delete',
+      },
+  ].filter(Boolean);
+
+  if (menuItems.length === 0) {
+    return null;
+  }
+
   return (
     <Dropdown
       placement="bottomRight"
       menu={{
-        items: [
-          actions?.includes('create') && {
-            label: (
-              <Detail
-                action="create"
-                nodeData={{ key: nodeData.key }}
-                requestCreateByValues={(values) => requestCreateByValues?.({ ...values })}
-                trigger={<div>新建子目录</div>}
-              />
-            ),
-            key: 'create',
-          },
-          actions?.includes('update') && {
-            label: (
-              <Detail
-                action="update"
-                nodeData={nodeData}
-                requestUpdateByValues={(values) => requestUpdateByValues?.({ ...values })}
-                trigger={<div>编辑</div>}
-              />
-            ),
-            key: 'update',
-          },
-          actions?.includes('delete') && {
-            label: (
-              <OperateDelete
-                name={nodeData.title}
-                onDelete={() => requestDeleteByRecord?.({ key: nodeData.key })}
-              />
-            ),
-            key: 'delete',
-          },
-        ].filter(Boolean),
+        items: menuItems,
       }}
     >
       <div onClick={(e) => e.preventDefault()}>
@@ -164,6 +203,9 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
                 requestCreateByValues={props.requestCreateByValues}
                 requestUpdateByValues={props.requestUpdateByValues}
                 requestDeleteByRecord={props.requestDeleteByRecord}
+                createProps={props.createProps}
+                updateProps={props.updateProps}
+                deleteProps={props.deleteProps}
               />
             </div>
           )}
@@ -175,6 +217,9 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
       props.requestCreateByValues,
       props.requestDeleteByRecord,
       props.requestUpdateByValues,
+      props.createProps,
+      props.updateProps,
+      props.deleteProps,
     ],
   );
 

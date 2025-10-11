@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.2
+
+### Patch Changes
+
+- fix: tree
+  - @fe-free/tool@2.8.2
+
 ## 2.8.1
 
 ### Patch Changes
