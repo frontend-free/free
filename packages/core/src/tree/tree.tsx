@@ -30,10 +30,10 @@ function useHighLightTreeData({ treeData, search }) {
 
     const loop = (data) => {
       return data.map((item) => {
-        const strTitle = item.title as string;
-        const index = strTitle.indexOf(search);
-        const beforeStr = strTitle.substring(0, index);
-        const afterStr = strTitle.slice(index + search.length);
+        const originStrTitle = item.title as string;
+        const index = originStrTitle.indexOf(search);
+        const beforeStr = originStrTitle.substring(0, index);
+        const afterStr = originStrTitle.slice(index + search.length);
         const title =
           index > -1 ? (
             <span key={item.key}>
@@ -42,7 +42,7 @@ function useHighLightTreeData({ treeData, search }) {
               {afterStr}
             </span>
           ) : (
-            <span key={item.key}>{strTitle}</span>
+            <span key={item.key}>{originStrTitle}</span>
           );
 
         if (item.children) {
@@ -52,6 +52,7 @@ function useHighLightTreeData({ treeData, search }) {
         return {
           ...item,
           title,
+          originData: item,
         };
       });
     };
@@ -76,21 +77,23 @@ function useFilterTreeData({ treeData, search }) {
 
     // 递归过滤树形数据
     const filterTree = (nodes) => {
+      // 返回自己。 而非 [] undefined，因为要保留原数据格式。
       if (!nodes || nodes.length === 0) {
-        return [];
+        return nodes;
       }
 
       return nodes
         .map((node) => {
-          const children = node.children ? filterTree(node.children) : [];
           const isMatch = isNodeMatch(node);
-          const hasMatchingChildren = children.length > 0;
+
+          const children = filterTree(node.children);
+          const hasMatchingChildren = children?.length > 0;
 
           // 如果当前节点匹配或者有匹配的子节点，则保留该节点
           if (isMatch || hasMatchingChildren) {
             return {
               ...node,
-              children: hasMatchingChildren ? children : undefined,
+              children,
             };
           }
 
@@ -105,7 +108,11 @@ function useFilterTreeData({ treeData, search }) {
 
 function useIsAllLeaf(treeData?: DataNode[]) {
   return useMemo(() => {
-    return treeData?.every((item) => item.children === undefined) || true;
+    if (treeData) {
+      return !treeData.find((item) => item.children);
+    }
+
+    return true;
   }, [treeData]);
 }
 

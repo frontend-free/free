@@ -141,14 +141,16 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
 
   const titleRender = useCallback(
     (nodeData) => {
-      console.log(nodeData);
       const hasMore = props.actions?.includes('update') || props.actions?.includes('delete');
       return (
         <div className="group flex gap-1">
           {nodeData.children ? (
             <FileCard.FileIcon isDirectory className="text-base" />
           ) : (
-            <FileCard.FileIcon name={nodeData.title} className="text-base" />
+            <FileCard.FileIcon
+              name={nodeData.originData?.title || nodeData.title}
+              className="text-base"
+            />
           )}
           <div className="flex-1 truncate">{nodeData.title}</div>
           <div className={classNames('text-desc', { 'group-hover:hidden': hasMore })}>
