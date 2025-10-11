@@ -3,3 +3,12 @@ declare module '*.svg?react' {
   const SVGComponent: React.FC<React.SVGProps<SVGSVGElement>>;
   export default SVGComponent;
 }
+
+declare global {
+  interface Window {
+    __routeTool_navigate: NavigateFunction | null;
+    __routeTool_baseName: string;
+  }
+}
+
+export {};

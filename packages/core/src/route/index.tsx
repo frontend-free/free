@@ -1,20 +1,28 @@
 import type { NavigateFunction } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 
+window.__routeTool_navigate = null;
+window.__routeTool_baseName = '';
+
 const routeTool = {
   _baseName: '' as string,
   _navigate: null as NavigateFunction | null,
   setNavigate: (navigate: NavigateFunction) => {
     routeTool._navigate = navigate;
+    window.__routeTool_navigate = navigate;
   },
   setBaseName: (baseName: string) => {
     routeTool._baseName = baseName;
+    window.__routeTool_baseName = baseName;
   },
   getNavigate: () => {
-    if (!routeTool._navigate) {
+    if (!routeTool._navigate && !window.__routeTool_navigate) {
       throw new Error('routeTool need set navigate first');
     }
-    return routeTool._navigate;
+    return routeTool._navigate || window.__routeTool_navigate;
+  },
+  getBaseName: () => {
+    return routeTool._baseName || window.__routeTool_baseName;
   },
   setSearchParams: (sp: Record<string, any>) => {
     const url = new URL(window.location.href);
@@ -30,7 +38,7 @@ const routeTool = {
     url.search = p.toString();
 
     routeTool.getNavigate()(
-      `${url.pathname.replace(routeTool._baseName, '')}${url.search}${url.hash}`,
+      `${url.pathname.replace(routeTool.getBaseName(), '')}${url.search}${url.hash}`,
     );
   },
   changeSearchParams: (sp: Record<string, any>) => {
@@ -46,7 +54,7 @@ const routeTool = {
     });
 
     routeTool.getNavigate()(
-      `${url.pathname.replace(routeTool._baseName, '')}${url.search}${url.hash}`,
+      `${url.pathname.replace(routeTool.getBaseName(), '')}${url.search}${url.hash}`,
     );
   },
   navigateTo: ({
