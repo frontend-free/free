@@ -1,6 +1,6 @@
 import type { ProFormItemProps } from '@ant-design/pro-components';
 import { ProForm } from '@ant-design/pro-components';
-import { Input, InputNumber } from 'antd';
+import { Input, InputNumber, Switch } from 'antd';
 
 import { ProFormListHelper } from './form_list_helper';
 
@@ -71,6 +71,21 @@ function ListNumber(props: ListNumberProps) {
   );
 }
 
+interface ListBooleanProps {
+  value?: boolean[];
+  onChange?: (value: boolean[]) => void;
+}
+
+function ListBoolean(props: ListBooleanProps) {
+  return (
+    <ProFormListHelper value={props.value} onChange={props.onChange} getAdd={() => false}>
+      {({ item, onItemChange }) => {
+        return <Switch {...props} value={item} onChange={(checked) => onItemChange(checked)} />;
+      }}
+    </ProFormListHelper>
+  );
+}
+
 function ProFormListBase(props) {
   const { fieldProps, ...rest } = props;
 
@@ -124,4 +139,13 @@ function ProFormListNumber(props: ProFormItemProps<ListNumberProps>) {
   );
 }
 
-export { ProFormListNumber, ProFormListText };
+function ProFormListBoolean(props: ProFormItemProps<ListBooleanProps>) {
+  const { fieldProps, ...rest } = props;
+  return (
+    <ProFormListBase {...rest}>
+      <ListBoolean {...fieldProps} />
+    </ProFormListBase>
+  );
+}
+
+export { ProFormListBoolean, ProFormListNumber, ProFormListText };

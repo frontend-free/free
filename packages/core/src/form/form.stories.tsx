@@ -5,6 +5,7 @@ import {
   ProFormImageUploadDragger,
   ProFormJSON,
   ProFormJavascript,
+  ProFormListBoolean,
   ProFormListNumber,
   ProFormListText,
   ProFormRecord,
@@ -139,6 +140,14 @@ export const ProFormListNumberComponent: Story = {
     <ProFormBase>
       <ProFormListNumber name="listNumber" label="listNumber" />
       <ProFormListNumber name="listInteger" label="listInteger" fieldProps={{ precision: 0 }} />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormListBooleanComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormListBoolean name="listBoolean" label="listBoolean" />
     </ProFormBase>
   ),
 };

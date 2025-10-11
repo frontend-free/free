@@ -27,6 +27,7 @@ export {
   ProFormImageUploadDragger,
   ProFormJSON,
   ProFormJavascript,
+  ProFormListBoolean,
   ProFormListHelper,
   ProFormListModalHelper,
   ProFormListNumber,

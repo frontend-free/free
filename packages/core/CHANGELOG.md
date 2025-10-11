@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.4
+
+### Patch Changes
+
+- feat: add ProFormListBoolean
+  - @fe-free/tool@2.8.4
+
 ## 2.8.3
 
 ### Patch Changes
