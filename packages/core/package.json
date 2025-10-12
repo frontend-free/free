@@ -1,6 +1,6 @@
 {
   "name": "@fe-free/core",
-  "version": "2.8.4",
+  "version": "2.8.5",
   "description": "",
   "main": "./src/index.ts",
   "scripts": {
@@ -43,6 +43,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
+    "safe-stable-stringify": "^2.5.0",
     "vanilla-jsoneditor": "^0.23.1",
     "zustand": "^4.5.4"
   },

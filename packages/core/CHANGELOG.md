@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.5
+
+### Patch Changes
+
+- fix: InfiniteListBase
+  - @fe-free/tool@2.8.5
+
 ## 2.8.4
 
 ### Patch Changes

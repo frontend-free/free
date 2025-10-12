@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { useImperativeHandle, useRef, useState } from 'react';
+import stringify from 'safe-stable-stringify';
 import { useGlobalInfiniteScroll } from '../ahooks/use_global_infinite_scroll';
 
 interface ActionType {
@@ -60,6 +61,7 @@ const InfiniteListBase = <D, P>({
     {
       target: ref,
       isNoMore: (d) => d?.nextId === undefined,
+      reloadDeps: [stringify(params || {})],
     },
   );
 
