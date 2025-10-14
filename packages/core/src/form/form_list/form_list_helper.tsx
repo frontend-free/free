@@ -17,6 +17,12 @@ interface ProFormListHelperProps<T> {
   disabledDelete?: boolean;
   readOnly?: boolean;
   className?: string;
+  afterChildren?: (props: {
+    value?: T[];
+    item: T;
+    index: number;
+    onItemChange: (newItem: T) => void;
+  }) => React.ReactNode;
 }
 
 const emptyArr = [];
@@ -28,31 +34,43 @@ function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
       <div className="flex flex-col gap-2">
         {options.map((item, index) => {
           return (
-            <div key={index} className="flex">
-              <div className="flex-1 overflow-hidden">
-                {props.children({
-                  value: props.value,
-                  item,
-                  index,
-                  onItemChange: (newItem) => {
-                    const newOptions = [...options];
-                    newOptions[index] = newItem;
-                    props.onChange?.(newOptions);
-                  },
-                })}
+            <>
+              <div key={index} className="flex">
+                <div className="flex-1 overflow-hidden">
+                  {props.children({
+                    value: props.value,
+                    item,
+                    index,
+                    onItemChange: (newItem) => {
+                      const newOptions = [...options];
+                      newOptions[index] = newItem;
+                      props.onChange?.(newOptions);
+                    },
+                  })}
+                </div>
+                {!props.readOnly && !props.disabledDelete && (
+                  <Button
+                    icon={<DeleteOutlined />}
+                    type="text"
+                    onClick={() => {
+                      const newOptions = [...options];
+                      newOptions.splice(index, 1);
+                      props.onChange?.(newOptions);
+                    }}
+                  />
+                )}
               </div>
-              {!props.readOnly && !props.disabledDelete && (
-                <Button
-                  icon={<DeleteOutlined />}
-                  type="text"
-                  onClick={() => {
-                    const newOptions = [...options];
-                    newOptions.splice(index, 1);
-                    props.onChange?.(newOptions);
-                  }}
-                />
-              )}
-            </div>
+              {props.afterChildren?.({
+                value: props.value,
+                item,
+                index,
+                onItemChange: (newItem) => {
+                  const newOptions = [...options];
+                  newOptions[index] = newItem;
+                  props.onChange?.(newOptions);
+                },
+              })}
+            </>
           );
         })}
       </div>

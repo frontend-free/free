@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.6
+
+### Patch Changes
+
+- feat: form list helper
+  - @fe-free/tool@2.8.6
+
 ## 2.8.5
 
 ### Patch Changes
