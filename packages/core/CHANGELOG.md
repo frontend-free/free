@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.7
+
+### Patch Changes
+
+- feat: record
+  - @fe-free/tool@2.8.7
+
 ## 2.8.6
 
 ### Patch Changes
