@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.8
+
+### Patch Changes
+
+- fix: style
+  - @fe-free/tool@2.8.8
+
 ## 2.8.7
 
 ### Patch Changes
