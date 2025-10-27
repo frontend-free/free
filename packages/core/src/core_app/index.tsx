@@ -17,13 +17,14 @@ function CheckUpdate({ basename }: { basename: string }) {
       return;
     }
 
-    async function getMainScriptSrc() {
+    async function getMainScriptPathname() {
       const res = await fetch(`${basename}?r=${Date.now()}`);
       const html = await res.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
       const nextMainScript = doc.querySelector('[data-name="mainScript"]');
-      return nextMainScript?.getAttribute('src');
+      const src = nextMainScript?.getAttribute('src');
+      return src ? new URL(src).pathname : null;
     }
 
     let ing = false;
@@ -49,13 +50,19 @@ function CheckUpdate({ basename }: { basename: string }) {
     }
 
     const src = mainScript.getAttribute('src');
+    const pathname = src ? new URL(src).pathname : null;
+
+    const checkUpdateInterval = parseInt(
+      localStorage.getItem('__free-checkUpdateInterval') || '60000',
+      10,
+    );
     const timer = setInterval(async () => {
-      const nextSrc = await getMainScriptSrc();
-      if (nextSrc !== src) {
+      const nextPathname = await getMainScriptPathname();
+      if (nextPathname !== pathname) {
         confirm();
         return;
       }
-    }, 1000 * 60);
+    }, checkUpdateInterval);
 
     return () => {
       clearInterval(timer);
