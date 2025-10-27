@@ -9,11 +9,15 @@ function LoadingButton(props: ButtonProps) {
 
   const handleClick = useCallback(
     (event) => {
-      setLoading(true);
+      const result = onClick && onClick(event);
 
-      Promise.resolve(onClick && onClick(event)).finally(() => {
-        setLoading(false);
-      });
+      if (result && typeof (result as Promise<void>).then === 'function') {
+        setLoading(true);
+
+        Promise.resolve(result).finally(() => {
+          setLoading(false);
+        });
+      }
     },
     [onClick],
   );
