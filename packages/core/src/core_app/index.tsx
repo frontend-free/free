@@ -7,6 +7,13 @@ import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { routeTool } from '../route';
 import { customValueTypeMap } from '../value_type_map';
 
+function getPathname(src?: string) {
+  if (!src) {
+    return null;
+  }
+  return src.startsWith('/') ? src : new URL(src).pathname;
+}
+
 function CheckUpdate({ basename }: { basename: string }) {
   const { modal } = App.useApp();
 
@@ -24,7 +31,7 @@ function CheckUpdate({ basename }: { basename: string }) {
       const doc = parser.parseFromString(html, 'text/html');
       const nextMainScript = doc.querySelector('[data-name="mainScript"]');
       const src = nextMainScript?.getAttribute('src');
-      return src ? new URL(src).pathname : null;
+      return getPathname(src || undefined);
     }
 
     let ing = false;
@@ -50,7 +57,7 @@ function CheckUpdate({ basename }: { basename: string }) {
     }
 
     const src = mainScript.getAttribute('src');
-    const pathname = src ? new URL(src).pathname : null;
+    const pathname = getPathname(src || undefined);
 
     const checkUpdateInterval = parseInt(
       localStorage.getItem('__free-checkUpdateInterval') || '60000',

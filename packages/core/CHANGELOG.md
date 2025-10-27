@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.10
+
+### Patch Changes
+
+- fix: update
+  - @fe-free/tool@2.8.10
+
 ## 2.8.9
 
 ### Patch Changes
