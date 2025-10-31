@@ -68,9 +68,14 @@ const routeTool = {
   }) => {
     const sp = new URLSearchParams(searchParams);
 
-    routeTool.getNavigate()(
-      `${generatePath(path, params)}${searchParams ? `?${sp.toString()}` : ''}`,
-    );
+    try {
+      routeTool.getNavigate()(
+        `${generatePath(path, params)}${searchParams ? `?${sp.toString()}` : ''}`,
+      );
+    } catch (e) {
+      console.log('routeTool.navigateTo generatePath error', path, params);
+      console.log(e);
+    }
   },
 };
 
