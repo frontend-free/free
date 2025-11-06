@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.11
+
+### Patch Changes
+
+- feat: react
+  - @fe-free/tool@2.8.11
+
 ## 2.8.10
 
 ### Patch Changes
