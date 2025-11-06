@@ -51,6 +51,6 @@
     "@ant-design/pro-components": "2.8.9",
     "antd": "^5.27.1",
     "dayjs": "~1.11.10",
-    "react": "^18.2.0"
+    "react": "^19.2.0"
   }
 }
