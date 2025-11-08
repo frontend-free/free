@@ -90,10 +90,10 @@ for i in range(10):
   render: (props) => <BasicDemo {...props} />,
 };
 
-export const JSON: Story = {
+export const ForJSON: Story = {
   args: {
     language: 'json',
-    value: '{"action": "hello", "data": "world"}',
+    value: JSON.stringify({ action: 'hello', data: 'world' }, null, 2),
   },
   render: (props) => <BasicDemo {...props} />,
 };
