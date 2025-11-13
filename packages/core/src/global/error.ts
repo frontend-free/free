@@ -71,10 +71,14 @@ function commonHandleError(event) {
   // unknown error
 }
 
-function initErrorHandle(onError) {
+function initErrorHandle(onError?: (event: ErrorEvent | PromiseRejectionEvent) => void | false) {
   const handleError = (event) => {
+    const result = onError?.(event);
+    if (result === false) {
+      return;
+    }
+
     commonHandleError(event);
-    onError?.(event);
   };
 
   window.addEventListener('error', handleError);
