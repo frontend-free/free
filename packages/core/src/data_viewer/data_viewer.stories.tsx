@@ -31,7 +31,7 @@ export const Basic: Story = {
 
 export const ForJSON: Story = {
   args: {
-    data: JSON.stringify({ action: 'hello', data: 'world' }, null, 2),
+    data: JSON.stringify({ action: 'hello', data: 'world' }),
   },
   render: (props) => <BasicDemo {...props} />,
 };

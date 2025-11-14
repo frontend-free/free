@@ -1,6 +1,6 @@
 import { ArrowsAltOutlined } from '@ant-design/icons';
 import { Button, Modal, Select } from 'antd';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Editor } from '../editor';
 import { PageLayout } from '../page_layout';
 
@@ -24,6 +24,18 @@ function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
     options[0].value as DataViewerLanguage,
   );
 
+  const value = useMemo(() => {
+    try {
+      if (language === 'json') {
+        return JSON.stringify(JSON.parse(data), null, 2);
+      }
+      return data;
+    } catch (err) {
+      console.error(err);
+      return data;
+    }
+  }, [data, language]);
+
   return (
     <>
       <PageLayout
@@ -34,7 +46,7 @@ function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
             <Select
               options={options}
               value={language}
-              onChange={(value) => setLanguage(value)}
+              onChange={(v) => setLanguage(v)}
               className="w-[110px]"
             />
             {enableMaximize && (
@@ -45,7 +57,7 @@ function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
       >
         <div className="relative h-full">
           <Editor
-            value={data}
+            value={value}
             language={language === 'text' ? undefined : language}
             editable={false}
           />
@@ -55,7 +67,7 @@ function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
         <Modal title="查看" open width={'80vw'} onCancel={() => setMaximize(false)} footer={null}>
           <div className="h-[80vh]">
             <Editor
-              value={data}
+              value={value}
               language={language === 'text' ? undefined : language}
               editable={false}
             />
