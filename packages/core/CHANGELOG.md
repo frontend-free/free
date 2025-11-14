@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.13
+
+### Patch Changes
+
+- feat: add DataViewer and PageLayout equalParts
+  - @fe-free/tool@2.8.13
+
 ## 2.8.12
 
 ### Patch Changes

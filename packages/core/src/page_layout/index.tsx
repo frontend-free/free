@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import classNames from 'classnames';
 import { Fragment, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { TabsProps } from '../tabs';
@@ -9,6 +9,8 @@ interface PageLayoutProps {
   start?: React.ReactNode;
   children?: React.ReactNode;
   end?: React.ReactNode;
+  /** beta equalParts */
+  equalParts?: boolean;
   className?: string;
   startClassName?: string;
   childrenClassName?: string;
@@ -20,6 +22,7 @@ function PageLayout({
   start,
   children,
   end,
+  equalParts,
   className,
   startClassName,
   childrenClassName,
@@ -27,7 +30,7 @@ function PageLayout({
 }: PageLayoutProps) {
   return (
     <div
-      className={cn(
+      className={classNames(
         'flex h-full w-full',
         {
           'flex-row': direction === 'horizontal',
@@ -36,9 +39,45 @@ function PageLayout({
         className,
       )}
     >
-      <div className={cn('flex-none', startClassName)}>{start}</div>
-      <div className={cn('flex-1 overflow-auto', childrenClassName)}>{children}</div>
-      <div className={cn('flex-none', endClassName)}>{end}</div>
+      {start && (
+        <div
+          className={classNames(
+            {
+              'flex-none': !equalParts,
+              'min-w-0 flex-1 flex-shrink-0 overflow-auto': equalParts,
+            },
+            startClassName,
+          )}
+        >
+          {start}
+        </div>
+      )}
+      {children && (
+        <div
+          className={classNames(
+            'flex-1 overflow-auto',
+            {
+              'min-w-0 flex-shrink-0': equalParts,
+            },
+            childrenClassName,
+          )}
+        >
+          {children}
+        </div>
+      )}
+      {end && (
+        <div
+          className={classNames(
+            {
+              'flex-none': !equalParts,
+              'min-w-0 flex-1 flex-shrink-0 overflow-auto': equalParts,
+            },
+            endClassName,
+          )}
+        >
+          {end}
+        </div>
+      )}
     </div>
   );
 }

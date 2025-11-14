@@ -27,6 +27,15 @@ export const DirectionVertical: Story = {
   },
 };
 
+export const EqualParts: Story = {
+  args: {
+    className: '!w-[800px] !h-[200px] bg-gray-200',
+    equalParts: true,
+    // start: <div className="h-[100px] bg-red-500">start</div>,
+    children: <div className="h-[100px] bg-blue-500">children</div>,
+    end: <div className="h-[100px] w-[600px] bg-green-500">end</div>,
+  },
+};
 export const ClassName: Story = {
   args: {
     className: '!w-[500px] !h-[500px]',

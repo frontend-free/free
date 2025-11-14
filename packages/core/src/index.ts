@@ -12,6 +12,8 @@ export { CRUDOfList } from './crud_of_list';
 export type { CRUDOfListProps } from './crud_of_list';
 export { CRUDOfPure } from './crud_of_pure';
 export type { CRUDOfPureProps } from './crud_of_pure';
+export { DataViewer } from './data_viewer';
+export type { DataViewerProps } from './data_viewer';
 export { Editor } from './editor';
 export type { EditorProps } from './editor';
 export { EditorJSON } from './editor_json';
