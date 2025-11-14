@@ -52,19 +52,17 @@ function PageLayout({
           {start}
         </div>
       )}
-      {children && (
-        <div
-          className={classNames(
-            'flex-1 overflow-auto',
-            {
-              'min-w-0 flex-shrink-0': equalParts,
-            },
-            childrenClassName,
-          )}
-        >
-          {children}
-        </div>
-      )}
+      <div
+        className={classNames(
+          'flex-1 overflow-auto',
+          {
+            'min-w-0 flex-shrink-0': equalParts,
+          },
+          childrenClassName,
+        )}
+      >
+        {children}
+      </div>
       {end && (
         <div
           className={classNames(

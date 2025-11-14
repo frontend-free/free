@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 2.8.14
+
+### Patch Changes
+
+- fix: PageLayout
+  - @fe-free/tool@2.8.14
+
 ## 2.8.13
 
 ### Patch Changes
