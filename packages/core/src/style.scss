@@ -12,15 +12,3 @@
 
 /* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
-
-.fec-bg {
-  background-color: #f3f5f6;
-}
-
-.fec-bg-hover {
-  background-color: #f3f5f6;
-
-  &:hover {
-    background-color: #e9ebec;
-  }
-}

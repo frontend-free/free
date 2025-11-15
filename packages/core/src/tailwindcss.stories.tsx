@@ -63,15 +63,6 @@ export const Default = () => {
         <div className="bg-yellow05">yellow05</div>
         <div className="bg-yellow03">yellow03</div>
       </div>
-      <h1>className</h1>
-      <div>
-        <div className="border-b border-01">border-b border-01</div>
-        <div className="border-t border-01">border-t border-01</div>
-        <div className="border-l border-01">border-l border-01</div>
-        <div className="border-r border-01">border-r border-01</div>
-        <div className="fec-bg">fec-bg</div>
-        <div className="fec-bg-hover">fec-bg-hover</div>
-      </div>
     </div>
   );
 };
