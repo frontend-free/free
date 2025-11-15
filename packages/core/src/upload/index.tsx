@@ -141,13 +141,13 @@ function UploadDragger(props: ImageUploadDraggerProps) {
         <p className={classNames('ant-upload-drag-icon')}>
           <InboxOutlined
             className={classNames({
-              '!text-desc': isDisabled,
+              '!text-03': isDisabled,
             })}
           />
         </p>
         <p
           className={classNames('ant-upload-text', {
-            '!text-desc': isDisabled,
+            '!text-03': isDisabled,
           })}
         >
           点击或拖拽到此区域进行上传

@@ -118,7 +118,7 @@ function CRUDComponent<
             const disabled = readProps?.operateIsDisabled?.(record) || false;
             if (disabled) {
               btns.push(
-                <span key="read" className="cursor-not-allowed text-desc">
+                <span key="read" className="cursor-not-allowed text-03">
                   {readProps?.operateText || '查看'}
                 </span>,
               );
@@ -144,7 +144,7 @@ function CRUDComponent<
             const disabled = readProps?.operateIsDisabled?.(record) || false;
             if (disabled) {
               btns.push(
-                <span key="read" className="cursor-not-allowed text-desc">
+                <span key="read" className="cursor-not-allowed text-03">
                   {readProps?.operateText || '查看'}
                 </span>,
               );
@@ -169,7 +169,7 @@ function CRUDComponent<
 
             if (disabled) {
               btns.push(
-                <span key="update" className="cursor-not-allowed text-desc">
+                <span key="update" className="cursor-not-allowed text-03">
                   {updateProps?.operateText || '编辑'}
                 </span>,
               );

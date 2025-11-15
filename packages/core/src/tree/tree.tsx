@@ -187,7 +187,7 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
               <div className="flex gap-2 px-2">
                 <div className="flex-1">
                   <div className="truncate">{title}</div>
-                  {titleDescription && <div className="text-desc">{titleDescription}</div>}
+                  {titleDescription && <div className="text-03">{titleDescription}</div>}
                 </div>
                 {titleExtra}
               </div>

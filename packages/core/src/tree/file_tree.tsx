@@ -106,7 +106,7 @@ function More({
     actions?.includes('create') &&
       !isCreateHidden && {
         label: isCreateDisabled ? (
-          <div className="cursor-not-allowed text-desc">新建子目录</div>
+          <div className="cursor-not-allowed text-03">新建子目录</div>
         ) : (
           <Detail
             action="create"
@@ -120,7 +120,7 @@ function More({
     actions?.includes('update') &&
       !isUpdateHidden && {
         label: isUpdateDisabled ? (
-          <div className="cursor-not-allowed text-desc">编辑</div>
+          <div className="cursor-not-allowed text-03">编辑</div>
         ) : (
           <Detail
             action="update"
@@ -134,7 +134,7 @@ function More({
     actions?.includes('delete') &&
       !isDeleteHidden && {
         label: isDeleteDisabled ? (
-          <div className="cursor-not-allowed text-desc">删除</div>
+          <div className="cursor-not-allowed text-03">删除</div>
         ) : (
           <OperateDelete
             name={nodeData.title}
@@ -192,7 +192,7 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
             />
           )}
           <div className="flex-1 truncate">{nodeData.title}</div>
-          <div className={classNames('text-desc', { 'group-hover:hidden': hasMore })}>
+          <div className={classNames('text-03', { 'group-hover:hidden': hasMore })}>
             {nodeData.children?.length || 0}
           </div>
           {hasMore && (

@@ -103,8 +103,8 @@ const InfiniteListBase = <D, P>({
         </div>
       )}
       <div className="flex w-full items-center justify-center">
-        {noMore && <div className="my-5 text-center text-desc">没有更多数据</div>}
-        {loadingMore && <div className="my-5 text-center text-desc">加载更多数据中...</div>}
+        {noMore && <div className="my-5 text-center text-03">没有更多数据</div>}
+        {loadingMore && <div className="my-5 text-center text-03">加载更多数据中...</div>}
       </div>
     </div>
   );

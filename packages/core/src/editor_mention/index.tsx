@@ -110,10 +110,10 @@ function useDropdown({ items, renderItem, onSelect, editorRef }) {
         left: `${position.left}px`,
       }}
     >
-      {items.length === 0 && <div className="p-2 text-sm text-desc">暂无数据</div>}
+      {items.length === 0 && <div className="p-2 text-sm text-03">暂无数据</div>}
       {items.map((group, i) => (
         <div key={group.label}>
-          <div className="p-2 text-sm text-desc">{group.label}</div>
+          <div className="p-2 text-sm text-03">{group.label}</div>
           <div>
             {group.options.map((item) => (
               <div

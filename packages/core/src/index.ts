@@ -57,6 +57,7 @@ export { Table } from './table';
 export type { TableProps } from './table';
 export { Tabs } from './tabs';
 export type { TabsProps } from './tabs';
+export { themeVariables } from './theme';
 export { FileTree, Tree, flatToTreeData } from './tree';
 export type { FileTreeProps, TreeProps } from './tree';
 export { useLocalforageState } from './use_localforage_state';

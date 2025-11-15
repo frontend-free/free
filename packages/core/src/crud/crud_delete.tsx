@@ -39,7 +39,7 @@ function OperateDelete(props: Params) {
   const { doDelete } = useDelete({ name, desc, onDelete, operateText });
 
   if (disabled) {
-    return <span className="text-desc cursor-not-allowed">{operateText || '删除'}</span>;
+    return <span className="cursor-not-allowed text-03">{operateText || '删除'}</span>;
   }
 
   return (

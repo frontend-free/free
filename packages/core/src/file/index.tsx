@@ -57,7 +57,7 @@ function FileCard({
       <FileIcon name={name} className="text-4xl" />
       <div className={classNames('flex flex-col', { 'items-center': direction === 'vertical' })}>
         {name && <div className="truncate">{name}</div>}
-        {size && <div className="text-sm text-desc">{getFileSize(size)}</div>}
+        {size && <div className="text-sm text-03">{getFileSize(size)}</div>}
       </div>
     </div>
   );

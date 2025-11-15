@@ -22,6 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: '某某公司',
+    titleDescription: '某某公司的描述',
     enableSearch: true,
     actions: ['create', 'update', 'delete'],
     requestCreateByValues: (values) => {
