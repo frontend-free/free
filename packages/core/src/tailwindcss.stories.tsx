@@ -10,7 +10,6 @@ export const Default = () => {
       <h1>tailwindcss</h1>
       <h2>textColor</h2>
       <div>
-        <div className="bg-black px-2 text-00">text-00</div>
         <div className="text-01">text-01</div>
         <div className="text-02">text-02</div>
         <div className="text-03">text-03</div>
@@ -24,11 +23,10 @@ export const Default = () => {
       </div>
       <h2>backgroundColor</h2>
       <div>
-        <div className="bg-00">bg-00</div>
-        <div className="bg-005">bg-005</div>
         <div className="bg-01">bg-01</div>
         <div className="bg-02">bg-02</div>
         <div className="bg-03">bg-03</div>
+        <div className="bg-04">bg-04</div>
       </div>
       <h2>colors</h2>
       <div>

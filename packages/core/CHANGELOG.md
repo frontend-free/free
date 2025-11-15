@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.2
+
+### Patch Changes
+
+- feat: theme
+  - @fe-free/tool@3.0.2
+
 ## 3.0.1
 
 ### Patch Changes

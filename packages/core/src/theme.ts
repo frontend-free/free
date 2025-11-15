@@ -25,7 +25,6 @@ const themeVariables = {
     yellow03: '#f6e7cd',
   },
   textColor: {
-    '00': '#ffffff',
     '01': '#15191e',
     '02': '#444444',
     '03': '#777777',
@@ -37,11 +36,10 @@ const themeVariables = {
     '03': '#c0c7d2',
   },
   backgroundColor: {
-    '00': '#ffffff',
-    '005': '#f1f3f5',
-    '01': '#ececec',
-    '02': '#d9d9d9',
-    '03': '#c0c0c0',
+    '01': '#f1f3f5',
+    '02': '#ececec',
+    '03': '#d9d9d9',
+    '04': '#c0c0c0',
   },
 } as const;
 
