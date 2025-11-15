@@ -8,7 +8,7 @@ const meta: Meta<typeof FileTree> = {
   decorators: [
     (Story) => {
       return (
-        <div className="fec-border w-[200px] overflow-y-auto">
+        <div className="w-[200px] overflow-y-auto border border-01">
           <Story />
         </div>
       );

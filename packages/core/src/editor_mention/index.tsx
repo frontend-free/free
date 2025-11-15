@@ -332,7 +332,7 @@ const EditorMention = ({
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         className={classNames(
-          'fec-border w-full flex-1 overflow-y-auto rounded p-2 outline-none focus:border-primary',
+          'w-full flex-1 overflow-y-auto rounded border border-01 p-2 outline-none focus:border-primary',
           resizeHeight && 'resize-y',
         )}
         style={{

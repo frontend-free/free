@@ -65,10 +65,10 @@ export const Default = () => {
       </div>
       <h1>className</h1>
       <div>
-        <div className="fec-border-bottom">fec-border-bottom</div>
-        <div className="fec-border-top">fec-border-top</div>
-        <div className="fec-border-left">fec-border-left</div>
-        <div className="fec-border-right">fec-border-right</div>
+        <div className="border-b border-01">border-b border-01</div>
+        <div className="border-t border-01">border-t border-01</div>
+        <div className="border-l border-01">border-l border-01</div>
+        <div className="border-r border-01">border-r border-01</div>
         <div className="fec-bg">fec-bg</div>
         <div className="fec-bg-hover">fec-bg-hover</div>
       </div>

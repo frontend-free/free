@@ -22,7 +22,7 @@ CRUDOfList 组件。（简洁的列表形态的 CRUD 组件）
   decorators: [
     (Story) => {
       return (
-        <div className="fec-border h-[500px] w-[300px] overflow-y-auto">
+        <div className="h-[500px] w-[300px] overflow-y-auto border border-01">
           <Story />
         </div>
       );

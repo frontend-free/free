@@ -10,7 +10,7 @@ import { EnumImportType } from './types';
 
 function ItemRender({ file, right }: { file: UploadFile; right?: React.ReactNode }) {
   return (
-    <div className="fec-border flex items-center gap-2 rounded-md">
+    <div className="flex items-center gap-2 rounded-md border border-01">
       <div className="flex-1">
         <Attachments.FileCard key={file.name} item={file} />
       </div>
