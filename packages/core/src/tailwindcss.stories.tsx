@@ -10,56 +10,56 @@ export const Default = () => {
       <h1>tailwindcss</h1>
       <h2>textColor</h2>
       <div>
-        <div className="text-01">text-01</div>
-        <div className="text-02">text-02</div>
-        <div className="text-03">text-03</div>
-        <div className="text-04">text-04</div>
+        <div className="p-1 text-01">text-01 主要</div>
+        <div className="p-1 text-02">text-02 次要</div>
+        <div className="p-1 text-03">text-03 描述</div>
+        <div className="p-1 text-04">text-04 placeholder</div>
       </div>
       <h2>borderColor</h2>
-      <div className="space-y-2">
-        <div className="border border-solid border-01">border-01</div>
-        <div className="border border-solid border-02">border-02</div>
-        <div className="border border-solid border-03">border-03</div>
+      <div className="space-y-2 p-1">
+        <div className="border border-solid border-01 p-1">border-01 主要</div>
+        <div className="border border-solid border-02 p-1">border-02 表单</div>
+        <div className="border border-solid border-03 p-1">border-03</div>
       </div>
       <h2>backgroundColor</h2>
       <div>
-        <div className="bg-01">bg-01</div>
-        <div className="bg-02">bg-02</div>
-        <div className="bg-03">bg-03</div>
-        <div className="bg-04">bg-04</div>
+        <div className="bg-01 p-1">bg-01 主要（对应设计稿 bg005）</div>
+        <div className="bg-02 p-1">bg-02 hover(对应设计稿 bg01)</div>
+        <div className="bg-03 p-1">bg-03 (对应设计稿 bg02)</div>
+        <div className="bg-04 p-1">bg-04 disabled(对应设计稿 bg03)</div>
       </div>
       <h2>colors</h2>
       <div>
-        <div className="bg-primary">bg-primary</div>
+        <div className="bg-primary p-1">bg-primary 主题色</div>
       </div>
       <h2>colors - themeColor</h2>
       <div>
-        <div className="bg-theme09">theme09</div>
-        <div className="bg-theme08">theme08</div>
-        <div className="bg-theme05">theme05</div>
-        <div className="bg-theme03">theme03</div>
-        <div className="bg-theme02">theme02</div>
+        <div className="bg-theme09 p-1">theme09 加深 hover</div>
+        <div className="bg-theme08 p-1">theme08 主要</div>
+        <div className="bg-theme05 p-1">theme05 次要</div>
+        <div className="bg-theme03 p-1">theme03 背景</div>
+        <div className="bg-theme02 p-1">theme02 </div>
       </div>
       <h2>colors - redColor</h2>
       <div>
-        <div className="bg-red09">red09</div>
-        <div className="bg-red08">red08</div>
-        <div className="bg-red05">red05</div>
-        <div className="bg-red03">red03</div>
+        <div className="bg-red09 p-1">red09 加深 hover</div>
+        <div className="bg-red08 p-1">red08 主要</div>
+        <div className="bg-red05 p-1">red05 次要</div>
+        <div className="bg-red03 p-1">red03 背景</div>
       </div>
       <h2>colors - greenColor</h2>
       <div>
-        <div className="bg-green09">green09</div>
-        <div className="bg-green08">green08</div>
-        <div className="bg-green05">green05</div>
-        <div className="bg-green03">green03</div>
+        <div className="bg-green09 p-1">green09 加深 hover</div>
+        <div className="bg-green08 p-1">green08 主要</div>
+        <div className="bg-green05 p-1">green05 次要</div>
+        <div className="bg-green03 p-1">green03 背景</div>
       </div>
       <h2>colors - yellowColor</h2>
       <div>
-        <div className="bg-yellow09">yellow09</div>
-        <div className="bg-yellow08">yellow08</div>
-        <div className="bg-yellow05">yellow05</div>
-        <div className="bg-yellow03">yellow03</div>
+        <div className="bg-yellow09 p-1">yellow09 加深 hover</div>
+        <div className="bg-yellow08 p-1">yellow08 主要</div>
+        <div className="bg-yellow05 p-1">yellow05 次要</div>
+        <div className="bg-yellow03 p-1">yellow03 背景</div>
       </div>
     </div>
   );
