@@ -38,8 +38,8 @@ const themeVariables = {
   backgroundColor: {
     '01': '#f1f3f5', // 主要
     '02': '#ececec', // 加深 hover
-    '03': '#d9d9d9',
-    '04': '#c0c0c0', // disabled
+    '03': '#d9d9d9', // disabled
+    '04': '#c0c0c0',
   },
 } as const;
 
