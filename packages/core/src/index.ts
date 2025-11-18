@@ -37,8 +37,11 @@ export {
   ProFormRecord,
   ProFormRecordArray,
   ProFormSwitchNumber,
+  ProFormSwitchOptions,
   ProFormUpload,
   ProFormUploadDragger,
+  SwitchNumber,
+  SwitchOptions,
   proFormSelectSearchProps,
 } from './form';
 export { RequestError, initErrorHandle } from './global/error';

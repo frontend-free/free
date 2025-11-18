@@ -7,9 +7,12 @@ export { ProFormJSON } from './pro_form_json';
 export { ProFormRecord, ProFormRecordArray } from './pro_form_record';
 export {
   ProFormSwitchNumber,
+  ProFormSwitchOptions,
   SwitchNumber,
+  SwitchOptions,
   type SwitchNumberProps,
-} from './pro_form_switch_number';
+  type SwitchOptionsProps,
+} from './pro_form_switch';
 export {
   ProFormImageUpload,
   ProFormImageUploadDragger,

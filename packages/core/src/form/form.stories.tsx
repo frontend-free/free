@@ -11,6 +11,7 @@ import {
   ProFormRecord,
   ProFormRecordArray,
   ProFormSwitchNumber,
+  ProFormSwitchOptions,
   ProFormUpload,
   ProFormUploadDragger,
 } from '@fe-free/core';
@@ -121,6 +122,45 @@ export const ProFormSwitchNumberComponent: Story = {
         fieldProps={{
           checkedChildren: '开启',
           unCheckedChildren: '关闭',
+        }}
+      />
+    </ProFormBase>
+  ),
+};
+
+export const ProFormSwitchOptionsComponent: Story = {
+  render: () => (
+    <ProFormBase>
+      <ProFormSwitchOptions
+        name="switchOptions"
+        fieldProps={{
+          options: [
+            { value: 'NO', label: '否' },
+            { value: 'YES', label: '是' },
+          ],
+        }}
+      />
+      <ProFormSwitchOptions
+        name="switchOptionsLabel"
+        fieldProps={{
+          enableLabel: true,
+          options: [
+            { value: 'NO', label: '否' },
+            { value: 'YES', label: '是' },
+          ],
+        }}
+      />
+      <ProFormSwitchOptions
+        name="switchOptions2"
+        fieldProps={{
+          options: ['OFF', 'ON'],
+        }}
+      />
+      <ProFormSwitchOptions
+        name="switchOptions2Label"
+        fieldProps={{
+          enableLabel: true,
+          options: ['OFF', 'ON'],
         }}
       />
     </ProFormBase>

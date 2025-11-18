@@ -25,6 +25,8 @@ async function fakeRequest() {
     dateNumber: +dayjs('2024-10-01'),
     seconds: Math.abs(+dayjs('2024-10-01') / 1000),
     jsonText: JSON.stringify({ name: 'hello world hello world hello world' }),
+    switchNumber: Math.random() > 0.5 ? 1 : 0,
+    switchOptions: Math.random() > 0.5 ? 'ON' : 'OFF',
   }));
 
   return Promise.resolve({
@@ -81,6 +83,20 @@ const Table = () => {
       dataIndex: 'jsonText',
       ellipsis: true,
       valueType: CustomValueTypeEnum.CustomJSONModal,
+    },
+    {
+      title: '开关 number',
+      dataIndex: 'switchNumber',
+      valueType: CustomValueTypeEnum.CustomSwitchNumber,
+    },
+    {
+      title: '开关 options',
+      dataIndex: 'switchOptions',
+      valueType: CustomValueTypeEnum.CustomSwitchOptions,
+      fieldProps: {
+        enableLabel: true,
+        options: ['OFF', 'ON'],
+      },
     },
   ];
 
