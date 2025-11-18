@@ -30,6 +30,8 @@ interface FileTreeProps<D extends DataNode> extends TreeProps<D> {
     operateIsDisabled?: (nodeData: D) => boolean;
     operateIsHidden?: (nodeData: D) => boolean;
   };
+
+  renderTitleRight?: (nodeData: D) => React.ReactNode;
 }
 
 function Detail<D extends DataNode>({
@@ -192,8 +194,8 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
             />
           )}
           <div className="flex-1 truncate">{nodeData.title}</div>
-          <div className={classNames('text-03', { 'group-hover:hidden': hasMore })}>
-            {nodeData.children?.length || 0}
+          <div className={classNames({ 'group-hover:hidden': hasMore })}>
+            {props.renderTitleRight?.(nodeData)}
           </div>
           {hasMore && (
             <div className="hidden group-hover:block">

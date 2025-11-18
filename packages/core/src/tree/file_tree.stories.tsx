@@ -117,6 +117,10 @@ export const Default: Story = {
       operateIsDisabled: (nodeData) => nodeData.key === '5',
       operateIsHidden: (nodeData) => nodeData.key === '6',
     },
+
+    renderTitleRight: () => {
+      return <div className="text-03">right</div>;
+    },
   },
 };
 
