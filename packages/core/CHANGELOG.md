@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.6
+
+### Patch Changes
+
+- fix: pro component
+  - @fe-free/tool@3.0.6
+
 ## 3.0.5
 
 ### Patch Changes

@@ -12,3 +12,9 @@
 
 /* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
+
+// fix
+// ant-pro-card-border 有个 transition 导致颜色会变化，所以就写死个。
+.ant-pro-card-border {
+  border: 1px solid #e2e7f0;
+}
