@@ -228,6 +228,7 @@ export const SpecialToolbar: Story = {
 
     return (
       <CRUDOfPure
+        specialToolbar
         actions={['create', 'delete']}
         tableProps={{
           columns,
@@ -250,7 +251,63 @@ export const SpecialToolbar: Story = {
           </>
         )}
         requestCreateByValues={fakeCreate}
+      />
+    );
+  },
+};
+
+export const SpecialToolbar2: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+        search: true,
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+      {
+        title: 'city',
+        dataIndex: 'city',
+      },
+      {
+        title: 'area',
+        dataIndex: 'area',
+      },
+    ];
+
+    return (
+      <CRUDOfPure
         specialToolbar
+        actions={['delete']}
+        tableProps={{
+          columns,
+          request: fakeRequest,
+          pagination: false,
+          toolBarRender: () => {
+            return [<Button key="custom1">自定义1</Button>];
+          },
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'id',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText
+              name="name"
+              label="名字"
+              required
+              rules={[{ required: true }]}
+              extra="extra extra extra extra"
+            />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
       />
     );
   },
