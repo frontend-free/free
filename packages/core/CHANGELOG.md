@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.5
+
+### Patch Changes
+
+- feat: tree
+  - @fe-free/tool@3.0.5
+
 ## 3.0.4
 
 ### Patch Changes

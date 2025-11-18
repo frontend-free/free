@@ -99,7 +99,7 @@ const PRESET_FILE_ICONS: {
   {
     key: 'folder',
     icon: <FolderFilled />,
-    color: '#FFDC00',
+    color: '#FFD93B',
     ext: [],
   },
 ];

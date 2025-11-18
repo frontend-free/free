@@ -20,6 +20,8 @@ interface TreeProps<T extends DataNode> {
   enableSearch?: boolean;
   /** Antd 树的 props */
   treeProps?: AntdTreeProps<T>;
+  /** 更宽松的布局 */
+  size?: 'large';
 }
 
 function useHighLightTreeData({ treeData, search }) {
@@ -167,6 +169,7 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
         'fec-tree fec-tree-no-wrap',
         {
           'fec-tree-all-leaf': isAllLeaf,
+          'fec-tree-large': props.size === 'large',
         },
         treeProps?.className,
       )}

@@ -8,7 +8,7 @@ const meta: Meta<typeof FileTree> = {
   decorators: [
     (Story) => {
       return (
-        <div className="w-[200px] overflow-y-auto border border-01">
+        <div className="w-[300px] overflow-y-auto border border-01">
           <Story />
         </div>
       );
@@ -119,7 +119,7 @@ export const Default: Story = {
     },
 
     renderTitleRight: () => {
-      return <div className="text-03">right</div>;
+      return <div className="text-03">10</div>;
     },
   },
 };

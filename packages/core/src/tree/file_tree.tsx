@@ -19,7 +19,6 @@ interface FileTreeProps<D extends DataNode> extends TreeProps<D> {
   /** 注意，没法控制 title 区域的添加（由 actions 来控制） */
   createProps?: {
     operateIsDisabled?: (nodeData: D) => boolean;
-
     operateIsHidden?: (nodeData: D) => boolean;
   };
   updateProps?: {
@@ -166,8 +165,20 @@ function More({
 }
 
 function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
+  const {
+    actions,
+    requestCreateByValues,
+    requestUpdateByValues,
+    requestDeleteByRecord,
+    createProps,
+    updateProps,
+    deleteProps,
+    renderTitleRight,
+    treeProps,
+  } = props;
+
   const titleExtra = useMemo(() => {
-    if (!props.actions?.includes('create')) {
+    if (!actions?.includes('create')) {
       return null;
     }
 
@@ -175,16 +186,16 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
       <Detail
         action="create"
         trigger={<PlusOutlined />}
-        requestCreateByValues={props.requestCreateByValues}
+        requestCreateByValues={requestCreateByValues}
       />
     );
-  }, [props.actions, props.requestCreateByValues]);
+  }, [actions, requestCreateByValues]);
 
   const titleRender = useCallback(
     (nodeData) => {
-      const hasMore = props.actions?.includes('update') || props.actions?.includes('delete');
+      const hasMore = actions?.includes('update') || actions?.includes('delete');
       return (
-        <div className="group flex gap-1">
+        <div className="group flex items-center gap-2">
           {nodeData.children ? (
             <FileCard.FileIcon isDirectory className="text-base" />
           ) : (
@@ -195,19 +206,19 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
           )}
           <div className="flex-1 truncate">{nodeData.title}</div>
           <div className={classNames({ 'group-hover:hidden': hasMore })}>
-            {props.renderTitleRight?.(nodeData)}
+            {renderTitleRight?.(nodeData)}
           </div>
           {hasMore && (
             <div className="hidden group-hover:block">
               <More
-                actions={props.actions}
+                actions={actions}
                 nodeData={nodeData}
-                requestCreateByValues={props.requestCreateByValues}
-                requestUpdateByValues={props.requestUpdateByValues}
-                requestDeleteByRecord={props.requestDeleteByRecord}
-                createProps={props.createProps}
-                updateProps={props.updateProps}
-                deleteProps={props.deleteProps}
+                requestCreateByValues={requestCreateByValues}
+                requestUpdateByValues={requestUpdateByValues}
+                requestDeleteByRecord={requestDeleteByRecord}
+                createProps={createProps}
+                updateProps={updateProps}
+                deleteProps={deleteProps}
               />
             </div>
           )}
@@ -215,24 +226,26 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
       );
     },
     [
-      props.actions,
-      props.requestCreateByValues,
-      props.requestDeleteByRecord,
-      props.requestUpdateByValues,
-      props.createProps,
-      props.updateProps,
-      props.deleteProps,
+      actions,
+      createProps,
+      deleteProps,
+      renderTitleRight,
+      requestCreateByValues,
+      requestDeleteByRecord,
+      requestUpdateByValues,
+      updateProps,
     ],
   );
 
   return (
     <Tree
       titleExtra={titleExtra}
+      size="large"
       {...props}
       treeProps={{
         titleRender,
-        ...props.treeProps,
-        className: classNames('fec-file-tree', props.treeProps?.className),
+        ...treeProps,
+        className: classNames('fec-file-tree', treeProps?.className),
       }}
     />
   );

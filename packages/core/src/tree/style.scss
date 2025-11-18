@@ -8,12 +8,25 @@
   .ant-tree-switcher {
     margin-inline-end: 0 !important;
   }
+
+  &.fec-tree-large {
+    .ant-tree-treenode {
+      line-height: 32px;
+    }
+  }
 }
 
 .fec-file-tree {
   .ant-tree-node-content-wrapper {
     overflow: hidden;
-    padding-inline-start: 0 !important;
+  }
+
+  .ant-tree-switcher {
+    &:hover {
+      &::before {
+        background-color: transparent !important;
+      }
+    }
   }
 
   &.fec-tree-all-leaf {
