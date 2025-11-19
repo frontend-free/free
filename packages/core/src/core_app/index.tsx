@@ -2,10 +2,12 @@ import { ProConfigProvider } from '@ant-design/pro-components';
 import { useTitle } from 'ahooks';
 import { App, ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
+import { merge } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { routeTool } from '../route';
 import { customValueTypeMap } from '../value_type_map';
+import { themeConfig } from './config';
 
 function getPathname(src?: string) {
   if (!src) {
@@ -122,6 +124,10 @@ function CoreApp(props: {
     }
   }, []);
 
+  const theme = useMemo(() => {
+    return merge(themeConfig, configProviderProps?.theme);
+  }, [configProviderProps?.theme]);
+
   return (
     <ProConfigProvider
       {...proConfigProviderProps}
@@ -129,7 +135,11 @@ function CoreApp(props: {
       valueTypeMap={{ ...customValueTypeMap, ...proConfigProviderProps?.valueTypeMap }}
     >
       {/* 集成好 locale */}
-      <ConfigProvider {...configProviderProps} locale={configProviderProps?.locale || zhCN}>
+      <ConfigProvider
+        {...configProviderProps}
+        locale={configProviderProps?.locale || zhCN}
+        theme={theme}
+      >
         <App {...appProps}>
           <Router {...routerProps} basename={basename}>
             <SetRouteTool basename={basename} />

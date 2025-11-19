@@ -49,11 +49,18 @@
     }
   }
 
-  // &.fec-crud-of-pure-no-toolbar {
-  //   .ant-pro-table-list-toolbar-container {
-  //     padding-block: 0;
-  //   }
-  // }
+  &.fec-crud-of-pure-special-search {
+    .ant-pro-table-search {
+      position: absolute;
+      z-index: 1;
+      background: transparent;
+      width: auto;
+    }
+
+    .ant-pro-table-list-toolbar-container {
+      padding-block-start: 16px;
+    }
+  }
 
   &.fec-crud-of-pure-special-toolbar {
     .ant-pro-table-list-toolbar {

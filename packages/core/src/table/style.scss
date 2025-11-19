@@ -1,0 +1,24 @@
+.fec-table {
+  .ant-table.ant-table-middle {
+    .ant-table-thead > tr > th {
+      padding: 8px;
+    }
+  }
+
+  .ant-pagination {
+    // gap: 8px;
+
+    .ant-pagination-options {
+      order: -1;
+      margin-right: 8px;
+    }
+
+    .ant-pagination-item-link {
+      border: 1px solid #e2e7f0;
+    }
+
+    .ant-pagination-item {
+      border: 1px solid #e2e7f0;
+    }
+  }
+}

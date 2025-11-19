@@ -8,3 +8,65 @@
     }
   }
 }
+
+.fec-crud.fec-crud-full-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .fec-table {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & > .ant-pro-table-search {
+      flex-shrink: 0;
+    }
+
+    & > .ant-pro-card:not(.ant-pro-table-search) {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+
+      & > .ant-pro-card-body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .ant-table-wrapper {
+      flex: 1;
+      overflow: auto;
+
+      .ant-spin-nested-loading {
+        height: 100%;
+
+        .ant-spin-container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+
+    .ant-table {
+      flex: 1;
+      overflow: auto;
+
+      .ant-table-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .ant-table-header {
+          flex-shrink: 0;
+        }
+
+        .ant-table-body {
+          scrollbar-width: thin;
+        }
+      }
+    }
+  }
+}

@@ -84,33 +84,34 @@ function CRUDOfListComponent(props: CRUDOfListProps, ref: React.ForwardedRef<CRU
   }, [debouncedSearchValue, searchDataIndex, tableProps.params]);
 
   return (
-    <div
-      className={classNames('fec-crud-of-list', {
-        // 先这样实现
-        'fec-crud-of-list-no-toolbar': !searchDataIndex && !props.actions.includes('create'),
-      })}
-    >
-      <CRUD
-        ref={ref}
-        {...rest}
-        tableProps={{
-          cardBordered: false,
-          showHeader: false,
-          ghost: true,
-          // 简单的隐藏搜索栏
-          search: false,
-          pagination: false,
-          ...tableProps,
-          params: newParams,
-          columns: newColumns,
-          toolBarRender,
-        }}
-        operateColumnProps={{
-          width: 1,
-          ...props.operateColumnProps,
-        }}
-      />
-    </div>
+    <CRUD
+      ref={ref}
+      {...rest}
+      className={classNames(
+        'fec-crud-of-list',
+        {
+          // 先这样实现
+          'fec-crud-of-list-no-toolbar': !searchDataIndex && !props.actions.includes('create'),
+        },
+        props.className,
+      )}
+      tableProps={{
+        cardBordered: false,
+        showHeader: false,
+        ghost: true,
+        // 简单的隐藏搜索栏
+        search: false,
+        pagination: false,
+        ...tableProps,
+        params: newParams,
+        columns: newColumns,
+        toolBarRender,
+      }}
+      operateColumnProps={{
+        width: 1,
+        ...props.operateColumnProps,
+      }}
+    />
   );
 }
 

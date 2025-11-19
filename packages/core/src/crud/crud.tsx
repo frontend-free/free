@@ -1,3 +1,4 @@
+import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
 import classNames from 'classnames';
@@ -5,7 +6,7 @@ import { isString } from 'lodash-es';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import type { TableProps } from '../table';
-import { Table } from '../table';
+import { getTableScroll, Table } from '../table';
 import { OperateDelete } from './crud_delete';
 import { CRUDDetail } from './crud_detail';
 import './style.scss';
@@ -36,6 +37,8 @@ function CRUDComponent<
     detailFormInstance,
     requestDeleteByRecords,
     batchActions: originBatchActions,
+    fullPage,
+    className,
   } = props;
 
   useTips(props);
@@ -108,7 +111,7 @@ function CRUDComponent<
     const operateColumn = {
       title: '操作',
       fixed: 'right',
-      width: operateColumnProps?.width || 120,
+      width: operateColumnProps?.width || 80,
       render: function (_, record) {
         const btns: React.ReactNode[] = [];
 
@@ -119,7 +122,7 @@ function CRUDComponent<
             if (disabled) {
               btns.push(
                 <span key="read" className="cursor-not-allowed text-03">
-                  {readProps?.operateText || '查看'}
+                  {readProps?.operateText || <EyeOutlined />}
                 </span>,
               );
             } else {
@@ -129,7 +132,7 @@ function CRUDComponent<
                   id={record[idField]}
                   record={record}
                   onSuccess={handleReload}
-                  trigger={<a>{readProps?.operateText || '查看'}</a>}
+                  trigger={<a>{readProps?.operateText || <EyeOutlined />}</a>}
                   action="read"
                   {...detailProps}
                 />,
@@ -145,7 +148,7 @@ function CRUDComponent<
             if (disabled) {
               btns.push(
                 <span key="read" className="cursor-not-allowed text-03">
-                  {readProps?.operateText || '查看'}
+                  {readProps?.operateText || <EyeOutlined />}
                 </span>,
               );
             } else {
@@ -155,7 +158,7 @@ function CRUDComponent<
                   to={`./detail/${record[detailIdIndex || 'id']}`}
                   target={readProps?.target}
                 >
-                  {readProps?.operateText || '查看'}
+                  {readProps?.operateText || <EyeOutlined />}
                 </Link>,
               );
             }
@@ -170,7 +173,7 @@ function CRUDComponent<
             if (disabled) {
               btns.push(
                 <span key="update" className="cursor-not-allowed text-03">
-                  {updateProps?.operateText || '编辑'}
+                  {updateProps?.operateText || <EditOutlined />}
                 </span>,
               );
             } else {
@@ -180,7 +183,7 @@ function CRUDComponent<
                   id={record[idField]}
                   record={record}
                   onSuccess={handleReload}
-                  trigger={<a>{updateProps?.operateText || '编辑'}</a>}
+                  trigger={<a>{updateProps?.operateText || <EditOutlined />}</a>}
                   action="update"
                   {...detailProps}
                 />,
@@ -289,11 +292,33 @@ function CRUDComponent<
     actionRef,
   });
 
+  const newTableProps = useMemo(() => {
+    if (fullPage) {
+      return {
+        ...tableProps,
+        scroll: {
+          ...getTableScroll(tableProps.columns),
+          y: '100%',
+        },
+      };
+    }
+
+    return tableProps;
+  }, [tableProps, fullPage]);
+
   return (
-    <div className={classNames('fec-crud')}>
+    <div
+      className={classNames(
+        'fec-crud',
+        {
+          'fec-crud-full-page': fullPage,
+        },
+        className,
+      )}
+    >
       <Table<DataSource>
         rowKey="id"
-        {...tableProps}
+        {...newTableProps}
         actionRef={actionRef}
         toolBarRender={toolBarRender}
         columns={newColumns}

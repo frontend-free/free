@@ -570,3 +570,60 @@ export const ExpandedRowRender: Story = {
     );
   },
 };
+
+export const FullPage: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+        search: true,
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+      {
+        title: 'city',
+        dataIndex: 'city',
+      },
+      {
+        title: 'area',
+        dataIndex: 'area',
+      },
+    ];
+
+    return (
+      <div className="h-[800px] border border-red-500">
+        <CRUD
+          fullPage
+          actions={['create', 'read', 'delete', 'update']}
+          tableProps={{
+            columns,
+            request: fakeRequest,
+          }}
+          requestDeleteByRecord={fakeDeleteByRecord}
+          deleteProps={{
+            nameIndex: 'name',
+          }}
+          detailForm={() => (
+            <>
+              <ProFormText
+                name="name"
+                label="名字"
+                required
+                rules={[{ required: true }]}
+                extra="extra extra extra extra"
+              />
+            </>
+          )}
+          requestGetByRecord={fakeGetByRecord}
+          requestCreateByValues={fakeCreate}
+          requestUpdateById={fakeUpdateById}
+        />
+      </div>
+    );
+  },
+};

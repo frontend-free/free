@@ -3,7 +3,8 @@ import { App } from 'antd';
 import { ConfigProvider } from 'antd';
 import React from 'react';
 import { ProConfigProvider } from '@ant-design/pro-components';
-import { customValueTypeMap } from '@fe-free/core';
+import { customValueTypeMap, CoreApp } from '@fe-free/core';
+import { themeConfig } from '@fe-free/core/src/core_app/config';
 
 const preview: Preview = {
   parameters: {
@@ -16,8 +17,8 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ProConfigProvider valueTypeMap={customValueTypeMap}>
-        <ConfigProvider>
+      <ProConfigProvider valueTypeMap={customValueTypeMap} >
+        <ConfigProvider theme={themeConfig}>
           <App>
             <Story />
           </App>

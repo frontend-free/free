@@ -135,6 +135,9 @@ interface CRUDProps<DataSource = any, Key = string> {
       options: { selectedRowKeys: Key[]; selectedRows: DataSource[] },
     ) => Promise<void>;
   }[];
+
+  fullPage?: boolean;
+  className?: string;
 }
 
 interface CRUDMethods {

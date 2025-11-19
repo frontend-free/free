@@ -1,6 +1,8 @@
 import type { ParamsType, ProTableProps } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
+import classNames from 'classnames';
 import { useMemo } from 'react';
+import './style.scss';
 
 interface TableProps<DataSource = any, Params = any, ValueType = 'text'>
   extends ProTableProps<DataSource, Params, ValueType> {
@@ -30,9 +32,11 @@ function Table<
   const newPagination = useMemo(() => {
     return {
       showSizeChanger: true,
-      showQuickJumper: true,
+      showTotal: false,
+      size: 'default',
+      // showQuickJumper: true,
       ...rest.pagination,
-    };
+    } as ProTableProps<DataSource, Params>['pagination'];
   }, [rest.pagination]);
 
   const hasSearch = !!newColumns?.find((column) => column.search);
@@ -72,6 +76,7 @@ function Table<
       scroll={getTableScroll(newColumns)}
       search={newSearch}
       {...rest}
+      className={classNames('fec-table', rest.className)}
     />
   );
 }
@@ -88,5 +93,5 @@ function getTableScroll(columns: ProTableProps<any, any>['columns'], defaultWidt
   return scroll;
 }
 
-export { Table };
+export { getTableScroll, Table };
 export type { TableProps };
