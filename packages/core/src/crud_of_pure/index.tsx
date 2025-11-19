@@ -9,7 +9,6 @@ interface CRUDOfPureProps<
   DataSource extends Record<string, any> = any,
   Key extends string | number = string,
 > extends CRUDProps<DataSource, Key> {
-  specialSearch?: boolean;
   /** 特殊位置的 toolbar，向上 margin，是的 search 和 toolbar 一起。仅适用于 search 很少的情况。 */
   specialToolbar?: boolean;
 }
@@ -47,7 +46,6 @@ function CRUDOfPureComponent(props: CRUDOfPureProps, ref: React.ForwardedRef<CRU
         'fec-crud-of-pure',
         {
           'fec-crud-of-pure-no-search': noSearch,
-          'fec-crud-of-pure-special-search': props.specialSearch,
           'fec-crud-of-pure-special-toolbar': props.specialToolbar,
         },
         props.className,

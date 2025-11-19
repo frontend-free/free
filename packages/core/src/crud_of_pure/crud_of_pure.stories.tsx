@@ -340,8 +340,7 @@ export const FullPage: Story = {
       <div className="h-[800px] border border-red-500">
         <CRUDOfPure
           fullPage
-          specialSearch
-          // specialToolbar
+          specialToolbar
           actions={['create', 'delete']}
           tableProps={{
             columns,
