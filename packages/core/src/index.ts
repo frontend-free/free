@@ -7,7 +7,7 @@ export { Copy } from './copy';
 export type { CopyProps } from './copy';
 export { CoreApp } from './core_app';
 export { CRUD, CRUDDetail, OperateDelete, useDelete } from './crud';
-export type { CRUDDetailProps, CRUDMethods, CRUDProps } from './crud';
+export type { CRUDDetailProps, CRUDProps, CRUDRef } from './crud';
 export { CRUDOfList } from './crud_of_list';
 export type { CRUDOfListProps } from './crud_of_list';
 export { CRUDOfPure } from './crud_of_pure';

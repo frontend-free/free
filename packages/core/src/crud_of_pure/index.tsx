@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { forwardRef, useMemo } from 'react';
-import type { CRUDMethods, CRUDProps } from '../crud';
+import { useMemo } from 'react';
+import type { CRUDProps } from '../crud';
 import { CRUD } from '../crud';
 import './style.scss';
 
@@ -13,7 +13,7 @@ interface CRUDOfPureProps<
   specialToolbar?: boolean;
 }
 
-function CRUDOfPureComponent(props: CRUDOfPureProps, ref: React.ForwardedRef<CRUDMethods>) {
+function CRUDOfPure(props: CRUDOfPureProps) {
   const newColumns = props.tableProps.columns?.map((column) => {
     if (column.search) {
       return {
@@ -40,7 +40,6 @@ function CRUDOfPureComponent(props: CRUDOfPureProps, ref: React.ForwardedRef<CRU
 
   return (
     <CRUD
-      ref={ref}
       {...props}
       className={classNames(
         'fec-crud-of-pure',
@@ -66,13 +65,6 @@ function CRUDOfPureComponent(props: CRUDOfPureProps, ref: React.ForwardedRef<CRU
     />
   );
 }
-
-const CRUDOfPure = forwardRef(CRUDOfPureComponent) as <
-  DataSource extends Record<string, any> = any,
-  Key extends string | number = string,
->(
-  props: CRUDOfPureProps<DataSource, Key> & { ref?: React.ForwardedRef<CRUDMethods> },
-) => JSX.Element;
 
 export { CRUDOfPure };
 export type { CRUDOfPureProps };

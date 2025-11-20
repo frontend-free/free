@@ -3,21 +3,20 @@ import type { ActionType } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
-import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import type { TableProps } from '../table';
 import { getTableScroll, Table } from '../table';
 import { OperateDelete } from './crud_delete';
 import { CRUDDetail } from './crud_detail';
 import './style.scss';
-import type { CRUDMethods, CRUDProps } from './types';
+import type { CRUDProps } from './types';
 import { useRowSelection } from './use_row_selection';
 import { useTips } from './use_tips';
 
-function CRUDComponent<
-  DataSource extends Record<string, any> = any,
-  Key extends string | number = string,
->(props: CRUDProps<DataSource, Key>, ref: React.ForwardedRef<CRUDMethods>) {
+function CRUD<DataSource extends Record<string, any> = any, Key extends string | number = string>(
+  props: CRUDProps<DataSource, Key>,
+) {
   const {
     actions,
     tableProps,
@@ -39,6 +38,7 @@ function CRUDComponent<
     batchActions: originBatchActions,
     fullPage,
     className,
+    ref,
   } = props;
 
   useTips(props);
@@ -329,12 +329,5 @@ function CRUDComponent<
     </div>
   );
 }
-
-const CRUD = forwardRef(CRUDComponent) as <
-  DataSource extends Record<string, any> = any,
-  Key extends string | number = string,
->(
-  props: CRUDProps<DataSource, Key> & { ref?: React.ForwardedRef<CRUDMethods> },
-) => JSX.Element;
 
 export { CRUD };

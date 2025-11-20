@@ -1,5 +1,5 @@
 import type { ActionType, ProFormInstance } from '@ant-design/pro-components';
-import type { ReactNode } from 'react';
+import type { MouseEvent, ReactNode, Ref, RefObject } from 'react';
 import type { TableProps } from '../table';
 
 /**
@@ -12,7 +12,13 @@ import type { TableProps } from '../table';
  */
 type CRUDAction = 'create' | 'read' | 'read_detail' | 'update' | 'delete' | 'batch_delete';
 
+interface CRUDRef {
+  getActionRef: () => RefObject<ActionType | undefined>;
+}
+
 interface CRUDProps<DataSource = any, Key = string> {
+  ref?: Ref<CRUDRef>;
+
   /** 操作类型 */
   actions: CRUDAction[];
 
@@ -131,7 +137,7 @@ interface CRUDProps<DataSource = any, Key = string> {
     danger?: boolean;
     /** 批量操作接口 */
     onClick: (
-      event: React.MouseEvent<HTMLElement>,
+      event: MouseEvent<HTMLElement>,
       options: { selectedRowKeys: Key[]; selectedRows: DataSource[] },
     ) => Promise<void>;
   }[];
@@ -140,8 +146,4 @@ interface CRUDProps<DataSource = any, Key = string> {
   className?: string;
 }
 
-interface CRUDMethods {
-  getActionRef: () => React.MutableRefObject<ActionType | undefined>;
-}
-
-export type { CRUDMethods, CRUDProps };
+export type { CRUDProps, CRUDRef };

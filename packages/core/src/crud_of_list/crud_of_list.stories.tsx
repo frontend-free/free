@@ -1,6 +1,8 @@
 import { ProFormText } from '@ant-design/pro-components';
+import type { CRUDRef } from '@fe-free/core';
 import { CRUDOfList } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { useRef } from 'react';
 import { fakeCreate, fakeDeleteByRecord, fakeRequest } from '../crud/demo/data';
 
 const meta: Meta<typeof CRUDOfList> = {
@@ -35,6 +37,7 @@ type Story = StoryObj<typeof CRUDOfList>;
 
 export const Basic: Story = {
   render: () => {
+    const ref = useRef<CRUDRef>(null);
     const columns = [
       {
         title: '名字(省略)',
@@ -45,23 +48,27 @@ export const Basic: Story = {
     ];
 
     return (
-      <CRUDOfList
-        actions={[]}
-        tableProps={{
-          columns,
-          request: fakeRequest,
-        }}
-        requestDeleteByRecord={fakeDeleteByRecord}
-        deleteProps={{
-          nameIndex: 'name',
-        }}
-        detailForm={() => (
-          <>
-            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
-          </>
-        )}
-        requestCreateByValues={fakeCreate}
-      />
+      <div>
+        <button onClick={() => ref.current?.getActionRef()?.current?.reload()}>reload</button>
+        <CRUDOfList
+          ref={ref}
+          actions={[]}
+          tableProps={{
+            columns,
+            request: fakeRequest,
+          }}
+          requestDeleteByRecord={fakeDeleteByRecord}
+          deleteProps={{
+            nameIndex: 'name',
+          }}
+          detailForm={() => (
+            <>
+              <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
+            </>
+          )}
+          requestCreateByValues={fakeCreate}
+        />
+      </div>
     );
   },
 };

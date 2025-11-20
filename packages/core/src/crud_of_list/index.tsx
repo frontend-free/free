@@ -1,8 +1,8 @@
 import { useDebounce } from 'ahooks';
 import { Input } from 'antd';
 import classNames from 'classnames';
-import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
-import type { CRUDMethods, CRUDProps } from '../crud';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { CRUDProps } from '../crud';
 import { CRUD } from '../crud';
 import './style.scss';
 
@@ -42,7 +42,7 @@ function SearchRender(props: {
   );
 }
 
-function CRUDOfListComponent(props: CRUDOfListProps, ref: React.ForwardedRef<CRUDMethods>) {
+function CRUDOfList(props: CRUDOfListProps) {
   useTips(props);
 
   const { tableProps, ...rest } = props;
@@ -85,7 +85,6 @@ function CRUDOfListComponent(props: CRUDOfListProps, ref: React.ForwardedRef<CRU
 
   return (
     <CRUD
-      ref={ref}
       {...rest}
       className={classNames(
         'fec-crud-of-list',
@@ -114,13 +113,6 @@ function CRUDOfListComponent(props: CRUDOfListProps, ref: React.ForwardedRef<CRU
     />
   );
 }
-
-const CRUDOfList = forwardRef(CRUDOfListComponent) as <
-  DataSource extends Record<string, any> = any,
-  Key extends string | number = string,
->(
-  props: CRUDOfListProps<DataSource, Key> & { ref?: React.ForwardedRef<CRUDMethods> },
-) => JSX.Element;
 
 export { CRUDOfList };
 export type { CRUDOfListProps };

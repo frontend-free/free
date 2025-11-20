@@ -1,6 +1,8 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProForm, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
+import type { CRUDRef } from '@fe-free/core';
 import { CRUD, proFormSelectSearchProps } from '@fe-free/core';
+
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from 'antd';
 import { useRef } from 'react';
@@ -286,7 +288,7 @@ export const FormRef: Story = {
 
 // 通过 ref 获取 actionRef
 const ActionRefComponent = () => {
-  const ref = useRef<any>();
+  const ref = useRef<CRUDRef | null>(null);
 
   const columns = [
     {
@@ -303,7 +305,7 @@ const ActionRefComponent = () => {
 
   return (
     <>
-      <Button onClick={() => ref.current.getActionRef().current?.reload()}>reload</Button>
+      <Button onClick={() => ref.current?.getActionRef()?.current?.reload()}>reload</Button>
       <CRUD
         ref={ref}
         actions={[]}
