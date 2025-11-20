@@ -16,11 +16,13 @@ export const Default: Story = {
     let size = 0;
     return (
       <div>
-        <div className="flex flex-col gap-2">
+        <div className="flex w-[200px] flex-col gap-2 border border-01">
           {PRESET_FILE_ICONS.map((item) => (
-            <div key={item.key} className="flex gap-2">
-              <FileCard name={`这是文件名.${item.ext.join('.') || ''}`} size={(size += 1000000)} />
-            </div>
+            <FileCard
+              key={item.key}
+              name={`这是文件名.${item.ext.join('.') || ''}`}
+              size={(size += 1000000)}
+            />
           ))}
         </div>
       </div>
