@@ -3,9 +3,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [
-    [
-      "@fe-free/mini"
-    ],
+    
     [
       "@fe-free/core",
       "@fe-free/file",

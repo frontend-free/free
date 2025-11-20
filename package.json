@@ -33,7 +33,6 @@
     "@ant-design/pro-components": "2.8.9",
     "@fe-free/core": "workspace:^",
     "@fe-free/file": "workspace:^",
-    "@fe-free/mini": "workspace:^",
     "@fe-free/tool": "workspace:^",
     "antd": "^5.27.1",
     "dayjs": "~1.11.10",
