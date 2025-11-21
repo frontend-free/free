@@ -79,6 +79,8 @@ function Detail<D extends DataNode>({
         destroyOnHidden: true,
         width: 400,
       }}
+      layout="horizontal"
+      labelCol={{ span: 6 }}
     >
       <ProFormText name="key" hidden />
       <ProFormText name="title" label="目录名称" required rules={[{ required: true }]} />
@@ -139,6 +141,7 @@ function More({
         ) : (
           <OperateDelete
             name={nodeData.title}
+            operateText="删除"
             onDelete={() => requestDeleteByRecord?.({ key: nodeData.key })}
           />
         ),

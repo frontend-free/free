@@ -210,7 +210,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
         }
 
         return (
-          <div className="fec-crud-operate-column flex gap-2">
+          <div className="fec-crud-operate-column flex justify-center gap-2">
             {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
             {btns}
             {operateColumnProps?.moreOperatorAfter && operateColumnProps.moreOperatorAfter(record)}

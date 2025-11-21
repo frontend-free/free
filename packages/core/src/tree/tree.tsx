@@ -187,9 +187,9 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
         (enableSearch || title) && (
           <div className="flex flex-col gap-2 py-2">
             {(title || titleExtra) && (
-              <div className="flex gap-2 px-2">
+              <div className="flex gap-2 p-2">
                 <div className="flex-1">
-                  <div className="truncate">{title}</div>
+                  <div className="truncate text-base">{title}</div>
                   {titleDescription && <div className="text-03">{titleDescription}</div>}
                 </div>
                 {titleExtra}
