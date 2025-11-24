@@ -119,7 +119,7 @@ function CoreApp(props: {
 
   useEffect(() => {
     // 首页，且 basename 不是 /，一定是要去到 basename 的
-    if (window.location.pathname === '/' && basename !== '/') {
+    if (window.location.pathname === '/' && basename !== '/' && basename !== '') {
       window.location.href = basename;
     }
   }, []);
