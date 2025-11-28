@@ -1,5 +1,6 @@
 import { ProForm } from '@ant-design/pro-components';
 import {
+  ProFormAvatarImageUpload,
   ProFormEditor,
   ProFormImageUpload,
   ProFormImageUploadDragger,
@@ -48,10 +49,7 @@ function ProFormBase({
     <ProForm
       initialValues={initialValues}
       onValuesChange={(newValues) => {
-        setValues({
-          ...values,
-          ...newValues,
-        });
+        setValues(newValues);
       }}
       onFinish={(values) => {
         console.log('values', values);
@@ -279,6 +277,13 @@ export const ProFormImageUploadComponent: Story = {
         fieldProps={{
           multiple: true,
           maxCount: 2,
+          customRequest,
+        }}
+      />
+      <ProFormAvatarImageUpload
+        label="avatar_image"
+        name="avatar_image"
+        fieldProps={{
           customRequest,
         }}
       />

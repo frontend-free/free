@@ -24,6 +24,7 @@ export { EditorMention } from './editor_mention';
 export type { EditorMentionProps } from './editor_mention';
 export { FileCard } from './file';
 export {
+  ProFormAvatarImageUpload,
   ProFormEditor,
   ProFormImageUpload,
   ProFormImageUploadDragger,

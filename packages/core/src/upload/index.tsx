@@ -1,7 +1,7 @@
 // 避免循环引用
-import { InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import type { UploadProps as AntdUploadProps, UploadFile } from 'antd';
-import { Upload as AntdUpload, Button, message } from 'antd';
+import { Upload as AntdUpload, Avatar, Button, message } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -169,5 +169,53 @@ function ImageUploadDragger(props: ImageUploadDraggerProps) {
   return <UploadDragger {...props} accept="image/*" listType="picture" />;
 }
 
-export { ImageUpload, ImageUploadDragger, Upload, UploadDragger };
-export type { ImageUploadDraggerProps, ImageUploadProps, UploadDraggerProps, UploadProps };
+interface AvatarImageUploadProps {
+  value?: string;
+  onChange?: (value?: string) => void;
+  action?: string;
+  customRequest?: AntdUploadProps['customRequest'];
+  accept?: string;
+  headers?: AntdUploadProps['headers'];
+}
+function AvatarImageUpload(props: AvatarImageUploadProps) {
+  const { value, onChange, action, customRequest, accept = 'image/*', headers } = props;
+
+  return (
+    <div className="flex gap-2">
+      <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
+
+      <div className="flex flex-1 flex-col justify-between">
+        <div className="text-03">请选择</div>
+        <div className="flex gap-2">
+          <AntdUpload
+            action={action}
+            customRequest={customRequest}
+            onChange={(info) => {
+              const url = info.file.response?.data.url;
+              if (url) {
+                onChange?.(url);
+              }
+            }}
+            itemRender={() => null}
+            accept={accept}
+            headers={headers}
+          >
+            <Button icon={<UploadOutlined />}>本地上传</Button>
+          </AntdUpload>
+          <Button icon={<DeleteOutlined />} danger onClick={() => onChange?.()}>
+            删除
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export { AvatarImageUpload, ImageUpload, ImageUploadDragger, Upload, UploadDragger };
+export type {
+  AvatarImageUploadProps,
+  ImageUploadDraggerProps,
+  ImageUploadProps,
+  UploadDraggerProps,
+  UploadProps,
+};

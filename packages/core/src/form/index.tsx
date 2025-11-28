@@ -14,6 +14,7 @@ export {
   type SwitchOptionsProps,
 } from './pro_form_switch';
 export {
+  ProFormAvatarImageUpload,
   ProFormImageUpload,
   ProFormImageUploadDragger,
   ProFormUpload,

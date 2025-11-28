@@ -1,12 +1,19 @@
 // 避免循环引用
 import { ProForm, type ProFormItemProps } from '@ant-design/pro-components';
 import type {
+  AvatarImageUploadProps,
   ImageUploadDraggerProps,
   ImageUploadProps,
   UploadDraggerProps,
   UploadProps,
 } from '../upload';
-import { ImageUpload, ImageUploadDragger, Upload, UploadDragger } from '../upload';
+import {
+  AvatarImageUpload,
+  ImageUpload,
+  ImageUploadDragger,
+  Upload,
+  UploadDragger,
+} from '../upload';
 
 function ProFormUpload(props: ProFormItemProps<UploadProps>) {
   const { fieldProps, ...rest } = props;
@@ -37,6 +44,16 @@ function ProFormImageUpload(props: ProFormItemProps<ImageUploadProps>) {
   );
 }
 
+function ProFormAvatarImageUpload(props: ProFormItemProps<AvatarImageUploadProps>) {
+  const { fieldProps, ...rest } = props;
+
+  return (
+    <ProForm.Item {...rest}>
+      <AvatarImageUpload {...fieldProps} />
+    </ProForm.Item>
+  );
+}
+
 function ProFormImageUploadDragger(props: ProFormItemProps<ImageUploadDraggerProps>) {
   const { fieldProps, ...rest } = props;
 
@@ -47,4 +64,10 @@ function ProFormImageUploadDragger(props: ProFormItemProps<ImageUploadDraggerPro
   );
 }
 
-export { ProFormImageUpload, ProFormImageUploadDragger, ProFormUpload, ProFormUploadDragger };
+export {
+  ProFormAvatarImageUpload,
+  ProFormImageUpload,
+  ProFormImageUploadDragger,
+  ProFormUpload,
+  ProFormUploadDragger,
+};
