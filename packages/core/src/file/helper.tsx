@@ -105,11 +105,11 @@ const PRESET_FILE_ICONS: {
 ];
 
 function isImage(name: string) {
-  return IMG_EXTS.includes(name.split('.').pop() || '');
+  return IMG_EXTS.includes(name.split('.').pop()?.toLowerCase() || '');
 }
 
 function getFileExt(name?: string) {
-  return name?.split('.').pop() || '';
+  return name?.split('.').pop()?.toLowerCase() || '';
 }
 
 function getFileSize(size: number) {
