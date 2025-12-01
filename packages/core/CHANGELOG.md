@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.15
+
+### Patch Changes
+
+- feat: uploader
+  - @fe-free/tool@3.0.15
+
 ## 3.0.14
 
 ### Patch Changes

@@ -19,8 +19,6 @@ interface UploadBaseProps {
 interface UploadProps extends UploadBaseProps {
   showCount?: boolean;
 }
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface UploadDraggerProps extends UploadBaseProps {}
 
 function useUpload(props: ImageUploadProps) {
   const { value, onChange, multiple, maxCount } = props;
@@ -115,8 +113,12 @@ function Upload(props: ImageUploadProps) {
   );
 }
 
-function UploadDragger(props: ImageUploadDraggerProps) {
-  const { multiple, maxCount, action, customRequest, listType, accept } = props;
+interface UploadDraggerProps extends UploadBaseProps {
+  title?: string;
+  description?: string;
+}
+function UploadDragger(props: UploadDraggerProps) {
+  const { multiple, maxCount, action, customRequest, listType, accept, title, description } = props;
   const { onChange, beforeUpload, isDisabled, fileList } = useUpload(props);
 
   return (
@@ -150,8 +152,9 @@ function UploadDragger(props: ImageUploadDraggerProps) {
             '!text-03': isDisabled,
           })}
         >
-          点击或拖拽到此区域进行上传
+          {title || '点击或拖拽到此区域进行上传'}
         </p>
+        {description && <p className={classNames('ant-upload-hint')}>{description}</p>}
       </div>
     </AntdUpload.Dragger>
   );

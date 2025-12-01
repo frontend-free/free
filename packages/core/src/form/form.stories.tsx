@@ -228,7 +228,11 @@ export const ProFormUploadComponent: Story = {
       <ProFormUploadDragger
         label="file_dragger"
         name="file_dragger"
-        fieldProps={{ customRequest }}
+        fieldProps={{
+          title: '这是标题',
+          description: '这是描述',
+          customRequest,
+        }}
       />
       <ProFormUploadDragger
         label="files_dragger"
