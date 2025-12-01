@@ -210,7 +210,7 @@ function customRequest(option: any) {
         },
       });
     }
-  }, 100);
+  }, 1000);
 
   // 返回 abort 方法，用于取消上传
   return {
@@ -238,6 +238,29 @@ export const ProFormUploadComponent: Story = {
         label="files_dragger"
         name="files_dragger"
         fieldProps={{ multiple: true, maxCount: 2, customRequest }}
+      />
+      <ProFormUploadDragger
+        label="knowledge_files_dragger"
+        name="knowledge_files_dragger"
+        fieldProps={{
+          accept: '.doc,.docx,.pdf,.ppt,.jpg, jpeg,.png,.mp3,.mp4,.txt,.markdown,.excel',
+          multiple: true,
+          maxCount: 100,
+          customRequest,
+          showStatus: true,
+          description: (
+            <div>
+              <div className="text-01">
+                支持doc、docx、pdf、ppt、jpg、png、mp3、mp4、txt、markdown、excel格式文件
+              </div>
+              <div className="text-03">
+                pdf
+                文件不超过100MiB、图片文件不超过10MiB、音频文件不超过300MiB、视频文件不超过400MiB
+                其他单文件不超过50MiB 单次最多上传 100 个文件
+              </div>
+            </div>
+          ),
+        }}
       />
       <ProFormUpload
         label="files"

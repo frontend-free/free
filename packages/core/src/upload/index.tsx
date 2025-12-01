@@ -1,9 +1,11 @@
-// 避免循环引用
 import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import type { UploadProps as AntdUploadProps, UploadFile } from 'antd';
 import { Upload as AntdUpload, Avatar, Button, message } from 'antd';
+import type { UploadChangeParam } from 'antd/es/upload';
 import classNames from 'classnames';
+import type { ReactNode } from 'react';
 import { useCallback, useMemo, useState } from 'react';
+import './style.scss';
 
 interface UploadBaseProps {
   value?: string[] | string;
@@ -20,8 +22,10 @@ interface UploadProps extends UploadBaseProps {
   showCount?: boolean;
 }
 
-function useUpload(props: ImageUploadProps) {
-  const { value, onChange, multiple, maxCount } = props;
+function useUpload(
+  props: ImageUploadProps & { onChangeOriginal?: (info: UploadChangeParam<UploadFile>) => void },
+) {
+  const { value, onChange, multiple, maxCount, onChangeOriginal } = props;
   // 转换成 Upload 格式。
   const defaultFileList = useMemo(() => {
     if (!value) {
@@ -35,6 +39,9 @@ function useUpload(props: ImageUploadProps) {
   // 存起来，已选的文件。以便做一些判断。
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList);
 
+  // 找到真正上传成功的。
+  const successList = fileList.map((item) => item.url || item.response?.data.url).filter(Boolean);
+
   const handleChange = useCallback(
     (info) => {
       setFileList(info.fileList);
@@ -45,8 +52,10 @@ function useUpload(props: ImageUploadProps) {
         .filter(Boolean);
 
       onChange?.(multiple ? newValue : newValue[0]);
+
+      onChangeOriginal?.(info);
     },
-    [multiple, onChange],
+    [multiple, onChange, onChangeOriginal],
   );
 
   // 选文件还是可能多选，如果多选，则提示。
@@ -78,6 +87,7 @@ function useUpload(props: ImageUploadProps) {
     beforeUpload: handleBeforeUpload,
     isDisabled,
     fileList,
+    successList,
   };
 }
 
@@ -115,11 +125,43 @@ function Upload(props: ImageUploadProps) {
 
 interface UploadDraggerProps extends UploadBaseProps {
   title?: string;
-  description?: string;
+  description?: string | ReactNode;
+  onChangeOriginal?: (info: UploadChangeParam<UploadFile>) => void;
+  showStatus?: boolean;
 }
 function UploadDragger(props: UploadDraggerProps) {
-  const { multiple, maxCount, action, customRequest, listType, accept, title, description } = props;
-  const { onChange, beforeUpload, isDisabled, fileList } = useUpload(props);
+  const {
+    multiple,
+    maxCount,
+    action,
+    customRequest,
+    listType,
+    accept,
+    title,
+    description,
+    showStatus,
+  } = props;
+  const { onChange, beforeUpload, isDisabled, fileList, successList } = useUpload(props);
+
+  const itemRender = useCallback(
+    (originNode, file, fileList) => {
+      const isFirst = fileList.findIndex((item) => item.uid === file.uid) === 0;
+
+      if (maxCount && maxCount > 1 && showStatus && isFirst) {
+        return (
+          <div>
+            <div className="py-1">
+              文件数量 ({successList.length}/{fileList.length})
+            </div>
+            {originNode}
+          </div>
+        );
+      }
+
+      return originNode;
+    },
+    [maxCount, showStatus, successList.length],
+  );
 
   return (
     <AntdUpload.Dragger
@@ -134,6 +176,10 @@ function UploadDragger(props: UploadDraggerProps) {
       beforeUpload={beforeUpload}
       // 不可，否则会没法删除
       // disabled={isDisabled}
+      className={classNames('fec-upload-dragger', {
+        'fec-upload-dragger-count-ten': fileList.length >= 10,
+      })}
+      itemRender={itemRender}
     >
       <div
         className={classNames({
