@@ -1,6 +1,6 @@
 import type { ActionType, ProFormInstance } from '@ant-design/pro-components';
 import type { MouseEvent, ReactNode, Ref, RefObject } from 'react';
-import type { TableProps } from '../table';
+import type { TableProps } from './table';
 
 /**
  * create 创建

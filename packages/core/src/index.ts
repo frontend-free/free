@@ -57,8 +57,6 @@ export type { RecordArrayProps, RecordProps } from './record';
 export { routeTool } from './route';
 export { NumberSlider, PercentageSlider } from './slider';
 export type { NumberSliderProps, PercentageSliderProps } from './slider';
-export { Table } from './table';
-export type { TableProps } from './table';
 export { Tabs } from './tabs';
 export type { TabsProps } from './tabs';
 export { themeVariables } from './theme';
