@@ -16,6 +16,7 @@ interface UploadBaseProps {
   customRequest?: AntdUploadProps['customRequest'];
   listType?: AntdUploadProps['listType'];
   accept?: string;
+  directory?: AntdUploadProps['directory'];
 }
 
 interface UploadProps extends UploadBaseProps {
@@ -92,7 +93,8 @@ function useUpload(
 }
 
 function Upload(props: ImageUploadProps) {
-  const { multiple, maxCount, showCount, action, customRequest, listType, accept } = props;
+  const { multiple, maxCount, showCount, action, customRequest, listType, accept, directory } =
+    props;
   const { onChange, beforeUpload, isDisabled, fileList } = useUpload(props);
 
   return (
@@ -106,6 +108,7 @@ function Upload(props: ImageUploadProps) {
       maxCount={multiple ? maxCount : 1}
       multiple={multiple}
       beforeUpload={beforeUpload}
+      directory={directory}
       // 不可，否则会没法删除
       // disabled={isDisabled}
     >
@@ -140,6 +143,7 @@ function UploadDragger(props: UploadDraggerProps) {
     title,
     description,
     showStatus,
+    directory,
   } = props;
   const { onChange, beforeUpload, isDisabled, fileList, successList } = useUpload(props);
 
@@ -174,6 +178,7 @@ function UploadDragger(props: UploadDraggerProps) {
       maxCount={multiple ? maxCount : 1}
       multiple={multiple}
       beforeUpload={beforeUpload}
+      directory={directory}
       // 不可，否则会没法删除
       // disabled={isDisabled}
       className={classNames('fec-upload-dragger', {

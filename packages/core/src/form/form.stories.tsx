@@ -243,7 +243,8 @@ export const ProFormUploadComponent: Story = {
         label="knowledge_files_dragger"
         name="knowledge_files_dragger"
         fieldProps={{
-          accept: '.doc,.docx,.pdf,.ppt,.jpg, jpeg,.png,.mp3,.mp4,.txt,.markdown,.excel',
+          directory: true,
+          accept: '.doc,.docx,.pdf,.ppt,.jpg,.jpeg,.png,.mp3,.mp4,.txt,.markdown,.excel',
           multiple: true,
           maxCount: 100,
           customRequest,
