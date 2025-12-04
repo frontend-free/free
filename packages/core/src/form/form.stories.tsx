@@ -16,6 +16,7 @@ import {
   ProFormUpload,
   ProFormUploadDragger,
 } from '@fe-free/core';
+import { sleep } from '@fe-free/tool';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
@@ -191,29 +192,19 @@ export const ProFormListBooleanComponent: Story = {
 };
 
 function customRequest(option: any) {
-  const { onProgress, onSuccess } = option;
-
-  // 模拟上传进度
-  let percent = 0;
-  const interval = setInterval(() => {
-    percent += 10;
-    onProgress({ percent });
-
-    if (percent >= 100) {
-      clearInterval(interval);
-      // 模拟上传成功
-      onSuccess({
-        data: {
-          url: `https://picsum.photos/200/300?random=${Date.now()}`,
-        },
-      });
-    }
-  }, 1000);
+  const { onSuccess } = option;
+  // fake request
+  sleep(1000).then(() => {
+    onSuccess({
+      data: {
+        url: `https://picsum.photos/200/300?random=${Date.now()}`,
+      },
+    });
+  });
 
   // 返回 abort 方法，用于取消上传
   return {
     abort: () => {
-      clearInterval(interval);
       console.log('上传已取消');
     },
   };
