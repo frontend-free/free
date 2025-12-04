@@ -191,7 +191,7 @@ export const ProFormListBooleanComponent: Story = {
 };
 
 function customRequest(option: any) {
-  const { file, onProgress, onSuccess } = option;
+  const { onProgress, onSuccess } = option;
 
   // 模拟上传进度
   let percent = 0;
@@ -205,8 +205,6 @@ function customRequest(option: any) {
       onSuccess({
         data: {
           url: `https://picsum.photos/200/300?random=${Date.now()}`,
-          name: file.name,
-          uid: file.uid,
         },
       });
     }

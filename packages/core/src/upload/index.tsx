@@ -41,7 +41,7 @@ function useUpload(
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList);
 
   // 找到真正上传成功的。
-  const successList = fileList.map((item) => item.url || item.response?.data.url).filter(Boolean);
+  const successList = fileList.map((item) => item.url || item.response?.data?.url).filter(Boolean);
 
   const handleChange = useCallback(
     (info) => {
@@ -49,7 +49,7 @@ function useUpload(
 
       // 找到真正上传成功的。
       const newValue = info.fileList
-        .map((item) => item.url || item.response?.data.url)
+        .map((item) => item.url || item.response?.data?.url)
         .filter(Boolean);
 
       onChange?.(multiple ? newValue : newValue[0]);
@@ -245,7 +245,7 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
             action={action}
             customRequest={customRequest}
             onChange={(info) => {
-              const url = info.file.response?.data.url;
+              const url = info.file.response?.data?.url;
               if (url) {
                 onChange?.(url);
               }
