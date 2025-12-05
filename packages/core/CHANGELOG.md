@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.18
+
+### Patch Changes
+
+- feat: rules
+  - @fe-free/tool@3.0.18
+
 ## 3.0.17
 
 ### Patch Changes

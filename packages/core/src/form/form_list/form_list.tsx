@@ -2,6 +2,7 @@ import type { ProFormItemProps } from '@ant-design/pro-components';
 import { ProForm } from '@ant-design/pro-components';
 import { Input, InputNumber, Switch } from 'antd';
 
+import { uniq, uniqBy } from 'lodash-es';
 import { ProFormListHelper } from './form_list_helper';
 
 interface ListTextProps {
@@ -104,9 +105,17 @@ function ProFormListBase(props) {
               if (value?.some((item) => item.value === undefined)) {
                 return Promise.reject('每个选项都不能为空');
               }
+              // 不能有重复的 value
+              if (uniqBy(value, 'value').length !== value.length) {
+                return Promise.reject('不能有重复');
+              }
             } else {
               if (value?.some((item) => item === undefined)) {
                 return Promise.reject('每个选项都不能为空');
+              }
+              // 不能有重复的 value
+              if (uniq(value).length !== value.length) {
+                return Promise.reject('不能有重复');
               }
             }
             return Promise.resolve();
