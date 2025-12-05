@@ -24,6 +24,17 @@ const routeTool = {
   getBaseName: () => {
     return routeTool._baseName || window.__routeTool_baseName;
   },
+  generateUrl: ({
+    path,
+    params,
+    searchParams,
+  }: {
+    path: string;
+    params?: Record<string, string>;
+    searchParams?: Record<string, string>;
+  }) => {
+    return `${routeTool.getBaseName()}${generatePath(path, params)}${searchParams ? `?${searchParams.toString()}` : ''}`;
+  },
   setSearchParams: (sp: Record<string, any>) => {
     const url = new URL(window.location.href);
 

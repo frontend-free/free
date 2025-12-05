@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.20
+
+### Patch Changes
+
+- feat: routeTool
+  - @fe-free/tool@3.0.20
+
 ## 3.0.19
 
 ### Patch Changes
