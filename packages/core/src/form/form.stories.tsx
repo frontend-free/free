@@ -170,6 +170,7 @@ export const ProFormListTextComponent: Story = {
   render: () => (
     <ProFormBase>
       <ProFormListText name="listText" />
+      <ProFormListText name="listText_isValueLabel" fieldProps={{ isValueLabel: true }} />
     </ProFormBase>
   ),
 };
@@ -178,7 +179,12 @@ export const ProFormListNumberComponent: Story = {
   render: () => (
     <ProFormBase>
       <ProFormListNumber name="listNumber" label="listNumber" />
+      <ProFormListNumber name="listNumber_isValueLabel" fieldProps={{ isValueLabel: true }} />
       <ProFormListNumber name="listInteger" label="listInteger" fieldProps={{ precision: 0 }} />
+      <ProFormListNumber
+        name="listInteger_isValueLabel"
+        fieldProps={{ isValueLabel: true, precision: 0 }}
+      />
     </ProFormBase>
   ),
 };

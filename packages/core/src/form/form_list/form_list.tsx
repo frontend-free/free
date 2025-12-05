@@ -14,8 +14,18 @@ interface ListTextProps {
 
 function ListText(props: ListTextProps) {
   const { isValueLabel, placeholder } = props;
+
   return (
-    <ProFormListHelper value={props.value} onChange={props.onChange} getAdd={() => ''}>
+    <ProFormListHelper
+      value={props.value}
+      onChange={props.onChange}
+      getAdd={() => {
+        if (isValueLabel) {
+          return { value: '', label: '' };
+        }
+        return '';
+      }}
+    >
       {({ item, onItemChange }) => {
         // @ts-ignore
         const value = isValueLabel ? item.value : item;
@@ -48,7 +58,16 @@ interface ListNumberProps {
 function ListNumber(props: ListNumberProps) {
   const { isValueLabel, placeholder, precision } = props;
   return (
-    <ProFormListHelper value={props.value} onChange={props.onChange} getAdd={() => 0}>
+    <ProFormListHelper
+      value={props.value}
+      onChange={props.onChange}
+      getAdd={() => {
+        if (isValueLabel) {
+          return { value: 0, label: '0' };
+        }
+        return 0;
+      }}
+    >
       {({ item, onItemChange }) => {
         // @ts-ignore
         const value = isValueLabel ? item.value : item;
@@ -87,10 +106,8 @@ function ListBoolean(props: ListBooleanProps) {
   );
 }
 
-function ProFormListBase(props) {
+function ProFormListText(props: ProFormItemProps<ListTextProps>) {
   const { fieldProps, ...rest } = props;
-
-  const isValueLabel = fieldProps?.isValueLabel;
 
   return (
     <ProForm.Item
@@ -101,17 +118,17 @@ function ProFormListBase(props) {
         // { required: true },
         {
           validator: async (_, value) => {
-            if (isValueLabel) {
-              if (value?.some((item) => item.value === undefined)) {
-                return Promise.reject('每个选项都不能为空');
+            if (fieldProps?.isValueLabel) {
+              if (value?.some((item) => item.value === undefined || item.value === '')) {
+                return Promise.reject('存在空选项');
               }
               // 不能有重复的 value
               if (uniqBy(value, 'value').length !== value.length) {
                 return Promise.reject('不能有重复');
               }
             } else {
-              if (value?.some((item) => item === undefined)) {
-                return Promise.reject('每个选项都不能为空');
+              if (value?.some((item) => item === undefined || item === '')) {
+                return Promise.reject('存在空选项');
               }
               // 不能有重复的 value
               if (uniq(value).length !== value.length) {
@@ -123,18 +140,8 @@ function ProFormListBase(props) {
         },
       ]}
     >
-      {props.children}
-    </ProForm.Item>
-  );
-}
-
-function ProFormListText(props: ProFormItemProps<ListTextProps>) {
-  const { fieldProps, ...rest } = props;
-
-  return (
-    <ProFormListBase {...rest}>
       <ListText {...fieldProps} />
-    </ProFormListBase>
+    </ProForm.Item>
   );
 }
 
@@ -142,18 +149,47 @@ function ProFormListNumber(props: ProFormItemProps<ListNumberProps>) {
   const { fieldProps, ...rest } = props;
 
   return (
-    <ProFormListBase {...rest}>
+    <ProForm.Item
+      {...rest}
+      required={props.required ?? true}
+      rules={[
+        ...(props.rules || []),
+        // { required: true },
+        {
+          validator: async (_, value) => {
+            if (fieldProps?.isValueLabel) {
+              if (value?.some((item) => item.value === undefined || item.value === null)) {
+                return Promise.reject('存在空选项');
+              }
+              // 不能有重复的 value
+              if (uniqBy(value, 'value').length !== value.length) {
+                return Promise.reject('不能有重复');
+              }
+            } else {
+              if (value?.some((item) => item === undefined || item === null)) {
+                return Promise.reject('存在空选项');
+              }
+              // 不能有重复的 value
+              if (uniq(value).length !== value.length) {
+                return Promise.reject('不能有重复');
+              }
+            }
+            return Promise.resolve();
+          },
+        },
+      ]}
+    >
       <ListNumber {...fieldProps} />
-    </ProFormListBase>
+    </ProForm.Item>
   );
 }
 
 function ProFormListBoolean(props: ProFormItemProps<ListBooleanProps>) {
   const { fieldProps, ...rest } = props;
   return (
-    <ProFormListBase {...rest}>
+    <ProForm.Item {...rest} required={props.required ?? true}>
       <ListBoolean {...fieldProps} />
-    </ProFormListBase>
+    </ProForm.Item>
   );
 }
 
