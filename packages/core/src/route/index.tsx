@@ -33,7 +33,8 @@ const routeTool = {
     params?: Record<string, string>;
     searchParams?: Record<string, string>;
   }) => {
-    return `${routeTool.getBaseName()}${generatePath(path, params)}${searchParams ? `?${searchParams.toString()}` : ''}`;
+    const sp = new URLSearchParams(searchParams);
+    return `${routeTool.getBaseName()}${generatePath(path, params)}${searchParams ? `?${sp.toString()}` : ''}`;
   },
   setSearchParams: (sp: Record<string, any>) => {
     const url = new URL(window.location.href);

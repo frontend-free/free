@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.22
+
+### Patch Changes
+
+- fix: routeTool
+  - @fe-free/tool@3.0.22
+
 ## 3.0.21
 
 ### Patch Changes
