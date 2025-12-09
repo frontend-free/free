@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.23
+
+### Patch Changes
+
+- feat: form list
+  - @fe-free/tool@3.0.23
+
 ## 3.0.22
 
 ### Patch Changes

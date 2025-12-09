@@ -169,8 +169,12 @@ export const ProFormSwitchOptionsComponent: Story = {
 export const ProFormListTextComponent: Story = {
   render: () => (
     <ProFormBase>
-      <ProFormListText name="listText" />
-      <ProFormListText name="listText_isValueLabel" fieldProps={{ isValueLabel: true }} />
+      <ProFormListText name="listText" label="listText" required={false} />
+      <ProFormListText
+        name="listText_isValueLabel"
+        label="listText_isValueLabel"
+        fieldProps={{ isValueLabel: true }}
+      />
     </ProFormBase>
   ),
 };

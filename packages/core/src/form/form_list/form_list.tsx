@@ -115,26 +115,29 @@ function ProFormListText(props: ProFormItemProps<ListTextProps>) {
       required={props.required ?? true}
       rules={[
         ...(props.rules || []),
-        // { required: true },
+        { required: props.required ?? true },
         {
           validator: async (_, value) => {
-            if (fieldProps?.isValueLabel) {
-              if (value?.some((item) => item.value === undefined || item.value === '')) {
-                return Promise.reject('存在空选项');
-              }
-              // 不能有重复的 value
-              if (uniqBy(value, 'value').length !== value.length) {
-                return Promise.reject('不能有重复');
-              }
-            } else {
-              if (value?.some((item) => item === undefined || item === '')) {
-                return Promise.reject('存在空选项');
-              }
-              // 不能有重复的 value
-              if (uniq(value).length !== value.length) {
-                return Promise.reject('不能有重复');
+            if (value) {
+              if (fieldProps?.isValueLabel) {
+                if (value?.some((item) => item.value === undefined || item.value === '')) {
+                  return Promise.reject('存在空选项');
+                }
+                // 不能有重复的 value
+                if (uniqBy(value, 'value').length !== value.length) {
+                  return Promise.reject('不能有重复');
+                }
+              } else {
+                if (value?.some((item) => item === undefined || item === '')) {
+                  return Promise.reject('存在空选项');
+                }
+                // 不能有重复的 value
+                if (uniq(value).length !== value.length) {
+                  return Promise.reject('不能有重复');
+                }
               }
             }
+
             return Promise.resolve();
           },
         },
@@ -154,24 +157,26 @@ function ProFormListNumber(props: ProFormItemProps<ListNumberProps>) {
       required={props.required ?? true}
       rules={[
         ...(props.rules || []),
-        // { required: true },
+        { required: props.required ?? true },
         {
           validator: async (_, value) => {
-            if (fieldProps?.isValueLabel) {
-              if (value?.some((item) => item.value === undefined || item.value === null)) {
-                return Promise.reject('存在空选项');
-              }
-              // 不能有重复的 value
-              if (uniqBy(value, 'value').length !== value.length) {
-                return Promise.reject('不能有重复');
-              }
-            } else {
-              if (value?.some((item) => item === undefined || item === null)) {
-                return Promise.reject('存在空选项');
-              }
-              // 不能有重复的 value
-              if (uniq(value).length !== value.length) {
-                return Promise.reject('不能有重复');
+            if (value) {
+              if (fieldProps?.isValueLabel) {
+                if (value?.some((item) => item.value === undefined || item.value === null)) {
+                  return Promise.reject('存在空选项');
+                }
+                // 不能有重复的 value
+                if (uniqBy(value, 'value').length !== value.length) {
+                  return Promise.reject('不能有重复');
+                }
+              } else {
+                if (value?.some((item) => item === undefined || item === null)) {
+                  return Promise.reject('存在空选项');
+                }
+                // 不能有重复的 value
+                if (uniq(value).length !== value.length) {
+                  return Promise.reject('不能有重复');
+                }
               }
             }
             return Promise.resolve();
