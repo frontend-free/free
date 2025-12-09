@@ -111,6 +111,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
     const operateColumn = {
       title: '操作',
       fixed: 'right',
+      align: 'center',
       width: operateColumnProps?.width || 80,
       render: function (_, record) {
         const btns: React.ReactNode[] = [];
