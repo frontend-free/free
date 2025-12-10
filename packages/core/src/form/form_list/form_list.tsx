@@ -198,4 +198,11 @@ function ProFormListBoolean(props: ProFormItemProps<ListBooleanProps>) {
   );
 }
 
-export { ProFormListBoolean, ProFormListNumber, ProFormListText };
+export {
+  ListBoolean,
+  ListNumber,
+  ListText,
+  ProFormListBoolean,
+  ProFormListNumber,
+  ProFormListText,
+};

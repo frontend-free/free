@@ -24,6 +24,9 @@ export { EditorMention } from './editor_mention';
 export type { EditorMentionProps } from './editor_mention';
 export { FileCard } from './file';
 export {
+  ListBoolean,
+  ListNumber,
+  ListText,
   ProFormAvatarImageUpload,
   ProFormEditor,
   ProFormImageUpload,

@@ -1,4 +1,11 @@
-export { ProFormListBoolean, ProFormListNumber, ProFormListText } from './form_list/form_list';
+export {
+  ListBoolean,
+  ListNumber,
+  ListText,
+  ProFormListBoolean,
+  ProFormListNumber,
+  ProFormListText,
+} from './form_list/form_list';
 export { ProFormListHelper } from './form_list/form_list_helper';
 export { ProFormListModalHelper } from './form_list/form_list_modal_helper';
 export { ProFormEditor } from './pro_form_editor';
