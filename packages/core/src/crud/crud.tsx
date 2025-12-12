@@ -112,7 +112,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
       title: '操作',
       fixed: 'right',
       align: 'center',
-      width: operateColumnProps?.width || 80,
+      width: operateColumnProps?.width || 120,
       render: function (_, record) {
         const btns: React.ReactNode[] = [];
 
@@ -123,7 +123,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
             if (disabled) {
               btns.push(
                 <Tooltip title={readProps?.operateText || '查看'}>
-                  <span key="read" className="cursor-not-allowed text-03">
+                  <span key="read" className="cursor-not-allowed text-lg text-03">
                     {readProps?.operateText || <EyeOutlined />}
                   </span>
                 </Tooltip>,
@@ -137,7 +137,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
                   onSuccess={handleReload}
                   trigger={
                     <Tooltip title={readProps?.operateText || '查看'}>
-                      <a>{readProps?.operateText || <EyeOutlined />}</a>
+                      <a className="text-lg">{readProps?.operateText || <EyeOutlined />}</a>
                     </Tooltip>
                   }
                   action="read"
@@ -155,7 +155,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
             if (disabled) {
               btns.push(
                 <Tooltip title={readProps?.operateText || '查看'}>
-                  <span key="read" className="cursor-not-allowed text-03">
+                  <span key="read" className="cursor-not-allowed text-lg text-03">
                     {readProps?.operateText || <EyeOutlined />}
                   </span>
                 </Tooltip>,
@@ -167,6 +167,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
                     key="read_detail"
                     to={`./detail/${record[detailIdIndex || 'id']}`}
                     target={readProps?.target}
+                    className="text-lg"
                   >
                     {readProps?.operateText || <EyeOutlined />}
                   </Link>
@@ -184,7 +185,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
             if (disabled) {
               btns.push(
                 <Tooltip title={updateProps?.operateText || '编辑'}>
-                  <span key="update" className="cursor-not-allowed text-03">
+                  <span key="update" className="cursor-not-allowed text-lg text-03">
                     {updateProps?.operateText || <EditOutlined />}
                   </span>
                 </Tooltip>,
@@ -198,7 +199,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
                   onSuccess={handleReload}
                   trigger={
                     <Tooltip title={updateProps?.operateText || '编辑'}>
-                      <a>{updateProps?.operateText || <EditOutlined />}</a>
+                      <a className="text-lg">{updateProps?.operateText || <EditOutlined />}</a>
                     </Tooltip>
                   }
                   action="update"
@@ -227,7 +228,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
         }
 
         return (
-          <div className="fec-crud-operate-column flex justify-center gap-2">
+          <div className="fec-crud-operate-column flex justify-center gap-4">
             {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
             {btns}
             {operateColumnProps?.moreOperatorAfter && operateColumnProps.moreOperatorAfter(record)}

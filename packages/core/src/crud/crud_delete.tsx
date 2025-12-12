@@ -42,14 +42,16 @@ function OperateDelete(props: Params) {
   if (disabled) {
     return (
       <Tooltip title="删除">
-        <span className="cursor-not-allowed text-03">{operateText || <DeleteOutlined />}</span>
+        <span className="cursor-not-allowed text-lg text-03">
+          {operateText || <DeleteOutlined />}
+        </span>
       </Tooltip>
     );
   }
 
   return (
     <Tooltip title="删除">
-      <a style={{ color: 'red' }} onClick={doDelete}>
+      <a style={{ color: 'red' }} className="text-lg" onClick={doDelete}>
         {operateText || <DeleteOutlined />}
       </a>
     </Tooltip>

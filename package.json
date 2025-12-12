@@ -27,14 +27,17 @@
     "yalc_publish": "node ./scripts/yalc_publish.js",
     "clean": "rm -rf pnpm-lock.yaml node_modules **/*/node_modules",
     "storybook": "storybook dev -p 6006",
+    "icons:build": "pnpm --filter @fe-free/icons build",
     "dev": "pnpm storybook"
   },
   "dependencies": {
     "@ant-design/pro-components": "2.8.9",
+    "@fe-free/icons": "workspace:^",
     "@fe-free/core": "workspace:^",
     "@fe-free/file": "workspace:^",
     "@fe-free/tool": "workspace:^",
     "antd": "^5.27.1",
+    "classnames": "^2.5.1",
     "dayjs": "~1.11.10",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
