@@ -1,5 +1,5 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Modal } from 'antd';
+import { Modal, Tooltip } from 'antd';
 import { useCallback } from 'react';
 
 interface Params {
@@ -40,13 +40,19 @@ function OperateDelete(props: Params) {
   const { doDelete } = useDelete({ name, desc, onDelete, operateText });
 
   if (disabled) {
-    return <span className="cursor-not-allowed text-03">{operateText || <DeleteOutlined />}</span>;
+    return (
+      <Tooltip title="删除">
+        <span className="cursor-not-allowed text-03">{operateText || <DeleteOutlined />}</span>
+      </Tooltip>
+    );
   }
 
   return (
-    <a style={{ color: 'red' }} onClick={doDelete}>
-      {operateText || <DeleteOutlined />}
-    </a>
+    <Tooltip title="删除">
+      <a style={{ color: 'red' }} onClick={doDelete}>
+        {operateText || <DeleteOutlined />}
+      </a>
+    </Tooltip>
   );
 }
 

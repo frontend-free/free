@@ -188,7 +188,7 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
     return (
       <Detail
         action="create"
-        trigger={<PlusOutlined />}
+        trigger={<PlusOutlined className="text-base" />}
         requestCreateByValues={requestCreateByValues}
       />
     );

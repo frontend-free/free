@@ -5,6 +5,22 @@
     }
   }
 
+  .ant-table-container {
+    border-inline-start-color: transparent !important;
+
+    .ant-table-thead {
+      & > tr > th:last-child {
+        border-inline-end-color: transparent !important;
+      }
+    }
+
+    .ant-table-row {
+      & > td:last-child {
+        border-inline-end-color: transparent !important;
+      }
+    }
+  }
+
   .ant-pagination {
     // gap: 8px;
 
@@ -19,6 +35,12 @@
 
     .ant-pagination-item {
       border: 1px solid #e2e7f0;
+
+      &.ant-pagination-item-active {
+        color: theme('colors.theme08');
+        background-color: theme('colors.theme03');
+        border-color: theme('colors.theme05');
+      }
     }
   }
 }

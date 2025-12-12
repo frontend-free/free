@@ -1,6 +1,6 @@
 import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
-import { Button, message } from 'antd';
+import { Button, message, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
 import { useCallback, useImperativeHandle, useMemo, useRef } from 'react';
@@ -122,9 +122,11 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
             const disabled = readProps?.operateIsDisabled?.(record) || false;
             if (disabled) {
               btns.push(
-                <span key="read" className="cursor-not-allowed text-03">
-                  {readProps?.operateText || <EyeOutlined />}
-                </span>,
+                <Tooltip title={readProps?.operateText || '查看'}>
+                  <span key="read" className="cursor-not-allowed text-03">
+                    {readProps?.operateText || <EyeOutlined />}
+                  </span>
+                </Tooltip>,
               );
             } else {
               btns.push(
@@ -133,7 +135,11 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
                   id={record[idField]}
                   record={record}
                   onSuccess={handleReload}
-                  trigger={<a>{readProps?.operateText || <EyeOutlined />}</a>}
+                  trigger={
+                    <Tooltip title={readProps?.operateText || '查看'}>
+                      <a>{readProps?.operateText || <EyeOutlined />}</a>
+                    </Tooltip>
+                  }
                   action="read"
                   {...detailProps}
                 />,
@@ -148,19 +154,23 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
             const disabled = readProps?.operateIsDisabled?.(record) || false;
             if (disabled) {
               btns.push(
-                <span key="read" className="cursor-not-allowed text-03">
-                  {readProps?.operateText || <EyeOutlined />}
-                </span>,
+                <Tooltip title={readProps?.operateText || '查看'}>
+                  <span key="read" className="cursor-not-allowed text-03">
+                    {readProps?.operateText || <EyeOutlined />}
+                  </span>
+                </Tooltip>,
               );
             } else {
               btns.push(
-                <Link
-                  key="read_detail"
-                  to={`./detail/${record[detailIdIndex || 'id']}`}
-                  target={readProps?.target}
-                >
-                  {readProps?.operateText || <EyeOutlined />}
-                </Link>,
+                <Tooltip title={readProps?.operateText || '查看'}>
+                  <Link
+                    key="read_detail"
+                    to={`./detail/${record[detailIdIndex || 'id']}`}
+                    target={readProps?.target}
+                  >
+                    {readProps?.operateText || <EyeOutlined />}
+                  </Link>
+                </Tooltip>,
               );
             }
           }
@@ -173,9 +183,11 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
 
             if (disabled) {
               btns.push(
-                <span key="update" className="cursor-not-allowed text-03">
-                  {updateProps?.operateText || <EditOutlined />}
-                </span>,
+                <Tooltip title={updateProps?.operateText || '编辑'}>
+                  <span key="update" className="cursor-not-allowed text-03">
+                    {updateProps?.operateText || <EditOutlined />}
+                  </span>
+                </Tooltip>,
               );
             } else {
               btns.push(
@@ -184,7 +196,11 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
                   id={record[idField]}
                   record={record}
                   onSuccess={handleReload}
-                  trigger={<a>{updateProps?.operateText || <EditOutlined />}</a>}
+                  trigger={
+                    <Tooltip title={updateProps?.operateText || '编辑'}>
+                      <a>{updateProps?.operateText || <EditOutlined />}</a>
+                    </Tooltip>
+                  }
                   action="update"
                   {...detailProps}
                 />,

@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 3.0.25
+
+### Patch Changes
+
+- feat: ui
+  - @fe-free/tool@3.0.25
+
 ## 3.0.24
 
 ### Patch Changes

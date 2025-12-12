@@ -75,6 +75,7 @@ function Table<
       columns={newColumns}
       scroll={getTableScroll(newColumns)}
       search={newSearch}
+      bordered
       {...rest}
       className={classNames('fec-table', rest.className)}
     />
