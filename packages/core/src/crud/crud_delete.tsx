@@ -51,7 +51,7 @@ function OperateDelete(props: Params) {
 
   return (
     <Tooltip title="删除">
-      <a style={{ color: 'red' }} className="text-lg" onClick={doDelete}>
+      <a className="text-lg" onClick={doDelete}>
         {operateText || <DeleteOutlined />}
       </a>
     </Tooltip>
