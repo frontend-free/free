@@ -53,23 +53,80 @@ console.log(Icons);
 // 所有图标列表
 export const Basic: Story = {
   render: () => {
-    // 自动获取所有导出的图标组件
-    const icons = useMemo(() => {
-      return Object.entries(Icons)
+    const [searchText, setSearchText] = useState('');
+
+    // 自动获取所有导出的图标组件，并分成两组
+    const { outlinedIcons, filledIcons } = useMemo(() => {
+      const allIcons = Object.entries(Icons)
         .map(([name, icon]) => ({
           name,
           icon: icon as typeof Icons.DeleteOutlined,
         }))
-        .sort((a, b) => a.name.localeCompare(b.name)); // 按名称排序
-    }, []);
+        // .filter(({ name, icon }) => {
+        //   // 过滤掉非图标组件（如 types）
+        //   return name !== 'types' && typeof icon === 'function';
+        // })
+        .filter(({ name }) => {
+          // 搜索过滤
+          if (!searchText.trim()) return true;
+          return name.toLowerCase().includes(searchText.toLowerCase());
+        });
 
-    console.log(icons);
+      // 分成两组
+      const outlined = allIcons
+        .filter(({ name }) => name.endsWith('Outlined'))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      const filled = allIcons
+        .filter(({ name }) => name.endsWith('Filled'))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      return { outlinedIcons: outlined, filledIcons: filled };
+    }, [searchText]);
+
+    console.log({ outlinedIcons, filledIcons });
 
     return (
-      <div className="flex flex-wrap gap-4">
-        {icons.map(({ name, icon }) => (
-          <IconItem key={name} name={name} icon={icon} />
-        ))}
+      <div className="space-y-4">
+        {/* 搜索框 */}
+        <div className="w-full max-w-md">
+          <input
+            type="text"
+            placeholder="搜索图标..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="w-full rounded border border-gray-300 px-4 py-2 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          />
+        </div>
+
+        {/* Outlined 图标组 */}
+        {outlinedIcons.length > 0 && (
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">Outlined</h3>
+            <div className="flex flex-wrap gap-4">
+              {outlinedIcons.map(({ name, icon }) => (
+                <IconItem key={name} name={name} icon={icon} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Filled 图标组 */}
+        {filledIcons.length > 0 && (
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">Filled</h3>
+            <div className="flex flex-wrap gap-4">
+              {filledIcons.map(({ name, icon }) => (
+                <IconItem key={name} name={name} icon={icon} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 无匹配结果 */}
+        {outlinedIcons.length === 0 && filledIcons.length === 0 && (
+          <div className="w-full text-center text-gray-500">未找到匹配的图标</div>
+        )}
       </div>
     );
   },
