@@ -4,6 +4,6 @@ const svgContent = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" 
 <path d="M11.6875 10.3125H17.875V11.6875H11.6875V17.875H10.3125V11.6875H4.125V10.3125H10.3125V4.125H11.6875V10.3125Z" fill="#15191E"/>
 </svg>`;
 
-export const PlusOutlined = createIcon('PlusOutlined', svgContent);
+export const PlusOutlined = createIcon('PlusOutlined', 'plus', svgContent);
 
 export default PlusOutlined;

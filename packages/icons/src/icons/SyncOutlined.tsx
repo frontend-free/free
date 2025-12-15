@@ -5,6 +5,6 @@ const svgContent = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" 
 <path d="M9.67773 18.1143C6.95618 17.9763 4.58954 16.4986 3.2207 14.3281V15.625H1.9707V11.25H3.33594C3.92391 14.45 6.72576 16.875 10.0957 16.875C13.4656 16.8749 16.2675 14.4499 16.8555 11.25H18.125C17.5238 15.1438 14.1578 18.1249 10.0957 18.125L9.67773 18.1143Z" fill="#0374E9"/>
 </svg>`;
 
-export const SyncOutlined = createIcon('SyncOutlined', svgContent);
+export const SyncOutlined = createIcon('SyncOutlined', 'sync', svgContent);
 
 export default SyncOutlined;

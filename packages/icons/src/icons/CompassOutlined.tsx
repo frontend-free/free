@@ -5,6 +5,6 @@ const svgContent = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" 
 <path fill-rule="evenodd" clip-rule="evenodd" d="M14.4028 7.59708L12.9444 12.9446L7.59689 14.403L9.0553 9.05548L14.4028 7.59708ZM12.4431 9.55675L10.1751 10.1753L9.55656 12.4433L11.8246 11.8248L12.4431 9.55675Z" fill="#777777"/>
 </svg>`;
 
-export const CompassOutlined = createIcon('CompassOutlined', svgContent);
+export const CompassOutlined = createIcon('CompassOutlined', 'compass', svgContent);
 
 export default CompassOutlined;

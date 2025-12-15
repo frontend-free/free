@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import type { IconComponentProps } from './types';
 
@@ -35,23 +36,36 @@ function extractSvgContent(svgContent: string): string {
  */
 function createIcon(
   name: string,
+  baseName: string,
   svgContent: string,
 ): React.ForwardRefExoticComponent<
-  Omit<IconComponentProps, 'ref'> & React.RefAttributes<SVGSVGElement>
+  Omit<IconComponentProps, 'ref'> & React.RefAttributes<HTMLSpanElement>
 > {
   const viewBox = extractViewBox(svgContent);
   const innerContent = extractSvgContent(svgContent);
 
-  const IconComponent = React.forwardRef<SVGSVGElement, IconComponentProps>((props, ref) => {
+  const IconComponent = React.forwardRef<HTMLSpanElement, IconComponentProps>((props, ref) => {
     const {
-      size = '1em',
       spin = false,
       rotate,
       style,
       className,
       viewBox: propsViewBox,
+      onClick,
+      tabIndex,
       ...restProps
     } = props;
+
+    const prefixCls = 'anticon';
+    const classString = classNames(
+      'fec-icon',
+      prefixCls,
+      {
+        [`${prefixCls}-${baseName}`]: !!baseName,
+        [`${prefixCls}-spin`]: !!spin || baseName === 'loading',
+      },
+      className,
+    );
 
     const mergedStyle: React.CSSProperties = {
       display: 'inline-block',
@@ -64,25 +78,38 @@ function createIcon(
         : {}),
     };
 
+    let iconTabIndex = tabIndex;
+    if (iconTabIndex === undefined && onClick) {
+      iconTabIndex = -1;
+    }
+
     return (
-      <svg
-        viewBox={propsViewBox || viewBox}
-        width={size}
-        height={size}
-        fill="currentColor"
-        className={className}
-        style={mergedStyle}
-        ref={ref}
+      <span
+        role="img"
+        aria-label={baseName}
         {...restProps}
-        dangerouslySetInnerHTML={{ __html: innerContent }}
-      />
+        ref={ref}
+        tabIndex={iconTabIndex}
+        onClick={onClick}
+        className={classString}
+      >
+        <svg
+          viewBox={propsViewBox || viewBox}
+          width={'1em'}
+          height={'1em'}
+          fill="currentColor"
+          style={mergedStyle}
+          {...restProps}
+          dangerouslySetInnerHTML={{ __html: innerContent }}
+        />
+      </span>
     );
   });
 
   IconComponent.displayName = name;
 
   return IconComponent as React.ForwardRefExoticComponent<
-    Omit<IconComponentProps, 'ref'> & React.RefAttributes<SVGSVGElement>
+    Omit<IconComponentProps, 'ref'> & React.RefAttributes<HTMLSpanElement>
   >;
 }
 

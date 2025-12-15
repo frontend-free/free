@@ -35,7 +35,7 @@ function generateIconComponent(svgFileName, subDir) {
 
 const svgContent = \`${svgContent.trim()}\`;
 
-export const ${componentName} = createIcon('${componentName}', svgContent);
+export const ${componentName} = createIcon('${componentName}', '${baseName}', svgContent);
 
 export default ${componentName};
 `;

@@ -12,6 +12,6 @@ const svgContent = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
 </defs>
 </svg>`;
 
-export const EvaluateOutlined = createIcon('EvaluateOutlined', svgContent);
+export const EvaluateOutlined = createIcon('EvaluateOutlined', 'evaluate', svgContent);
 
 export default EvaluateOutlined;

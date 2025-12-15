@@ -5,6 +5,6 @@ const svgContent = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" 
 <rect x="13.5" y="3" width="1.4" height="13" fill="#0374E9"/>
 </svg>`;
 
-export const PauseOutlined = createIcon('PauseOutlined', svgContent);
+export const PauseOutlined = createIcon('PauseOutlined', 'pause', svgContent);
 
 export default PauseOutlined;

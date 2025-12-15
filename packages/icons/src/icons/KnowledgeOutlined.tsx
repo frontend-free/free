@@ -5,6 +5,6 @@ const svgContent = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
 <path d="M11.25 7.8809V19.7615L4.83765 17.9297C4.19379 17.7457 3.75 17.1565 3.75 16.4869V5.73856L11.25 7.8809ZM2.25 16.4869C2.25 17.8263 3.13812 19.0039 4.42603 19.3719L11.7942 21.4768C12.2732 21.6136 12.75 21.2536 12.75 20.7554V7.31547C12.7499 6.98073 12.5277 6.68673 12.2058 6.59476L4.16235 4.29642C3.20415 4.02265 2.25004 4.74203 2.25 5.73856V16.4869Z" fill="#0374E9"/>
 </svg>`;
 
-export const KnowledgeOutlined = createIcon('KnowledgeOutlined', svgContent);
+export const KnowledgeOutlined = createIcon('KnowledgeOutlined', 'knowledge', svgContent);
 
 export default KnowledgeOutlined;

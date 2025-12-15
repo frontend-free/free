@@ -11,6 +11,6 @@ const svgContent = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" 
 </defs>
 </svg>`;
 
-export const LanguageOutlined = createIcon('LanguageOutlined', svgContent);
+export const LanguageOutlined = createIcon('LanguageOutlined', 'language', svgContent);
 
 export default LanguageOutlined;

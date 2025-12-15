@@ -5,6 +5,6 @@ const svgContent = `<?xml version="1.0" standalone="no"?>
   <path d="M112 476h160v72H112zm320 0h160v72H432zm320 0h160v72H752z"/>
 </svg>`;
 
-export const DashOutlined = createIcon('DashOutlined', svgContent);
+export const DashOutlined = createIcon('DashOutlined', 'dash', svgContent);
 
 export default DashOutlined;

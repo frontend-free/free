@@ -13,6 +13,6 @@ const svgContent = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
 </defs>
 </svg>`;
 
-export const DatasetOutlined = createIcon('DatasetOutlined', svgContent);
+export const DatasetOutlined = createIcon('DatasetOutlined', 'dataset', svgContent);
 
 export default DatasetOutlined;

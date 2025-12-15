@@ -1,7 +1,6 @@
 import type React from 'react';
 
-interface IconBaseProps extends React.SVGProps<SVGSVGElement> {
-  size?: string | number;
+interface IconBaseProps extends React.HTMLAttributes<HTMLSpanElement> {
   spin?: boolean;
   rotate?: number;
   className?: string;

@@ -4,6 +4,6 @@ const svgContent = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0608 5.99999L10.0608 12L16.0608 18L15.0001 19.0607L7.93945 12L15.0001 4.93933L16.0608 5.99999Z" fill="#222222"/>
 </svg>`;
 
-export const AngleLeftOutlined = createIcon('AngleLeftOutlined', svgContent);
+export const AngleLeftOutlined = createIcon('AngleLeftOutlined', 'angle-left', svgContent);
 
 export default AngleLeftOutlined;

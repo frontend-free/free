@@ -5,6 +5,6 @@ const svgContent = `<?xml version="1.0" standalone="no"?>
   <path d="M112 476h72v72h-72zm182 0h72v72h-72zm364 0h72v72h-72zm182 0h72v72h-72zm-364 0h72v72h-72z"/>
 </svg>`;
 
-export const SmallDashOutlined = createIcon('SmallDashOutlined', svgContent);
+export const SmallDashOutlined = createIcon('SmallDashOutlined', 'small-dash', svgContent);
 
 export default SmallDashOutlined;

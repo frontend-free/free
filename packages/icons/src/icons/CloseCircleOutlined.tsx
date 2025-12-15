@@ -5,6 +5,6 @@ const svgContent = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" 
 <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.25C14.8325 1.25 18.75 5.16751 18.75 10C18.75 14.8325 14.8325 18.75 10 18.75C5.16751 18.75 1.25 14.8325 1.25 10C1.25 5.16751 5.16751 1.25 10 1.25ZM10 2.5C5.85786 2.5 2.5 5.85786 2.5 10C2.5 14.1421 5.85786 17.5 10 17.5C14.1421 17.5 17.5 14.1421 17.5 10C17.5 5.85786 14.1421 2.5 10 2.5Z" fill="#0374E9"/>
 </svg>`;
 
-export const CloseCircleOutlined = createIcon('CloseCircleOutlined', svgContent);
+export const CloseCircleOutlined = createIcon('CloseCircleOutlined', 'close-circle', svgContent);
 
 export default CloseCircleOutlined;
