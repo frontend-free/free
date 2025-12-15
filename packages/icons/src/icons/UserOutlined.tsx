@@ -1,0 +1,9 @@
+import { createIcon } from '../utils';
+
+const svgContent = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.9998 9.4588C11.3008 9.4588 13.1658 7.59376 13.1658 5.29279C13.1658 2.99181 11.3008 1.12677 8.9998 1.12677C6.69883 1.12677 4.83379 2.99181 4.83379 5.29279C4.83379 7.59376 6.69883 9.4588 8.9998 9.4588ZM8.9998 11.4029C5.16426 11.4029 2.05469 12.6281 2.05469 14.1381C2.05469 15.6481 5.16426 16.875 8.9998 16.875C12.8353 16.875 15.9449 15.6498 15.9449 14.1399C15.9449 12.6299 12.8353 11.4029 8.9998 11.4029Z" fill="#0374E9"/>
+</svg>`;
+
+export const UserOutlined = createIcon('UserOutlined', svgContent);
+
+export default UserOutlined;

@@ -1,0 +1,10 @@
+import { createIcon } from '../utils';
+
+const svgContent = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.9777 6.90613L10.8838 9.99939L13.9777 13.0939L13.0939 13.9777L10 10.8838L6.90613 13.9777L6.02234 13.0939L9.11621 10L6.02234 6.90613L6.90674 6.02234L10 9.1156L13.0939 6.02234L13.9777 6.90613Z" fill="#0374E9"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.25C14.8325 1.25 18.75 5.16751 18.75 10C18.75 14.8325 14.8325 18.75 10 18.75C5.16751 18.75 1.25 14.8325 1.25 10C1.25 5.16751 5.16751 1.25 10 1.25ZM10 2.5C5.85786 2.5 2.5 5.85786 2.5 10C2.5 14.1421 5.85786 17.5 10 17.5C14.1421 17.5 17.5 14.1421 17.5 10C17.5 5.85786 14.1421 2.5 10 2.5Z" fill="#0374E9"/>
+</svg>`;
+
+export const CloseCircleOutlined = createIcon('CloseCircleOutlined', svgContent);
+
+export default CloseCircleOutlined;

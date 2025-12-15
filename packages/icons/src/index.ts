@@ -1,4 +1,7 @@
 export { AngleLeftOutlined } from './icons/AngleLeftOutlined';
+export { ArrowUpOutlined } from './icons/ArrowUpOutlined';
+export { CloseCircleOutlined } from './icons/CloseCircleOutlined';
+export { CloseOutlined } from './icons/CloseOutlined';
 export { CompassOutlined } from './icons/CompassOutlined';
 export { DatasetOutlined } from './icons/DatasetOutlined';
 export { DeleteOutlined } from './icons/DeleteOutlined';
@@ -7,6 +10,8 @@ export { EditOutlined } from './icons/EditOutlined';
 export { EvaluateOutlined } from './icons/EvaluateOutlined';
 export { KnowledgeOutlined } from './icons/KnowledgeOutlined';
 export { PauseOutlined } from './icons/PauseOutlined';
+export { PlusOutlined } from './icons/PlusOutlined';
+export { SearchOutlined } from './icons/SearchOutlined';
 export { SettingOutlined } from './icons/SettingOutlined';
 export { SyncOutlined } from './icons/SyncOutlined';
 export { WorkbenchOutlined } from './icons/WorkbenchOutlined';

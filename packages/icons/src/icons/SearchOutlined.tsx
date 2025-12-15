@@ -1,0 +1,9 @@
+import { createIcon } from '../utils';
+
+const svgContent = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.4375 9.96875C14.4375 12.8165 12.129 15.125 9.28125 15.125C6.43353 15.125 4.125 12.8165 4.125 9.96875C4.125 7.12103 6.43353 4.8125 9.28125 4.8125C12.129 4.8125 14.4375 7.12103 14.4375 9.96875ZM13.3879 15.0477C12.266 15.9559 10.8372 16.5 9.28125 16.5C5.67414 16.5 2.75 13.5759 2.75 9.96875C2.75 6.36164 5.67414 3.4375 9.28125 3.4375C12.8884 3.4375 15.8125 6.36164 15.8125 9.96875C15.8125 11.5246 15.2684 12.9535 14.3602 14.0754L18.0174 17.7326L17.0452 18.7049L13.3879 15.0477Z" fill="#222222"/>
+</svg>`;
+
+export const SearchOutlined = createIcon('SearchOutlined', svgContent);
+
+export default SearchOutlined;

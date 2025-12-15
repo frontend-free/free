@@ -1,5 +1,11 @@
 # @fe-free/core
 
+## 3.0.27
+
+### Patch Changes
+
+- @fe-free/tool@3.0.27
+
 ## 3.0.26
 
 ### Patch Changes
