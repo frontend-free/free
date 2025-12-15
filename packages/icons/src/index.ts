@@ -1,3 +1,5 @@
+export * from './types';
+
 import Icons from '@ant-design/icons';
 export default Icons;
 
@@ -689,4 +691,3 @@ export { ZhihuOutlined } from './icons/ZhihuOutlined';
 export { ZhihuSquareFilled } from './icons/ZhihuSquareFilled';
 export { ZoomInOutlined } from './icons/ZoomInOutlined';
 export { ZoomOutOutlined } from './icons/ZoomOutOutlined';
-export * from './types';

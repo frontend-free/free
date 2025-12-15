@@ -56,6 +56,10 @@ function generateIndexFile(components) {
     .join('\n');
 
   const indexContent = `export * from './types';
+
+import Icons from '@ant-design/icons';
+export default Icons;
+
 ${exports}
 `;
 
