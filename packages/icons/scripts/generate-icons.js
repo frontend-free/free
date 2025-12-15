@@ -19,13 +19,15 @@ function toPascalCase(str) {
 }
 
 // 读取 SVG 文件并生成图标组件
-function generateIconComponent(svgFileName) {
-  const svgPath = path.join(SVGS_DIR, svgFileName);
+function generateIconComponent(svgFileName, subDir) {
+  const svgPath = path.join(SVGS_DIR, subDir, svgFileName);
   const svgContent = fs.readFileSync(svgPath, 'utf-8');
 
   // 提取文件名（不含扩展名）
   const baseName = path.basename(svgFileName, '.svg');
-  const componentName = toPascalCase(baseName) + 'Outlined';
+  // 根据子目录名添加后缀：filled -> Filled, outlined -> Outlined
+  const suffix = subDir.charAt(0).toUpperCase() + subDir.slice(1);
+  const componentName = toPascalCase(baseName) + suffix;
   const fileName = componentName + '.tsx';
 
   // 生成组件代码
@@ -63,27 +65,46 @@ ${exports}
 
 // 主函数
 function main() {
-  // 读取所有 SVG 文件
-  const svgFiles = fs.readdirSync(SVGS_DIR).filter((file) => file.endsWith('.svg'));
+  // 支持的子目录
+  const subDirs = ['filled', 'outlined'];
+  const components = [];
 
-  if (svgFiles.length === 0) {
-    console.log('No SVG files found in', SVGS_DIR);
+  // 遍历每个子目录
+  subDirs.forEach((subDir) => {
+    const subDirPath = path.join(SVGS_DIR, subDir);
+
+    // 检查子目录是否存在
+    if (!fs.existsSync(subDirPath)) {
+      console.log(`Directory ${subDir} does not exist, skipping...`);
+      return;
+    }
+
+    // 读取子目录下的所有 SVG 文件
+    const svgFiles = fs.readdirSync(subDirPath).filter((file) => file.endsWith('.svg'));
+
+    if (svgFiles.length === 0) {
+      console.log(`No SVG files found in ${subDir}`);
+      return;
+    }
+
+    console.log(`Found ${svgFiles.length} SVG file(s) in ${subDir}/`);
+
+    // 生成该目录下的所有图标组件
+    svgFiles.forEach((svgFile) => {
+      try {
+        const { componentName, fileName } = generateIconComponent(svgFile, subDir);
+        components.push({ componentName, fileName });
+        console.log(`Generated: ${fileName}`);
+      } catch (error) {
+        console.error(`Error generating icon from ${subDir}/${svgFile}:`, error.message);
+      }
+    });
+  });
+
+  if (components.length === 0) {
+    console.log('No SVG files found in any subdirectory');
     return;
   }
-
-  console.log(`Found ${svgFiles.length} SVG file(s)`);
-
-  // 生成所有图标组件
-  const components = [];
-  svgFiles.forEach((svgFile) => {
-    try {
-      const { componentName, fileName } = generateIconComponent(svgFile);
-      components.push({ componentName, fileName });
-      console.log(`Generated: ${fileName}`);
-    } catch (error) {
-      console.error(`Error generating icon from ${svgFile}:`, error.message);
-    }
-  });
 
   // 生成 index.ts
   generateIndexFile(components);

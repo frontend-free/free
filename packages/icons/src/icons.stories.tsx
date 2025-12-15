@@ -29,7 +29,7 @@ function IconItem({ name, icon: Icon }: { name: string; icon: typeof Icons.Delet
 
   return (
     <div
-      className="flex cursor-pointer flex-col items-center rounded border border-transparent p-2 hover:border-01"
+      className="flex w-[150px] cursor-pointer flex-col items-center rounded border border-transparent p-2 hover:border-01"
       onClick={handleClick}
     >
       <div className="relative">
