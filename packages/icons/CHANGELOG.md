@@ -1,5 +1,7 @@
 # @fe-free/icons
 
+## 3.0.32
+
 ## 3.0.31
 
 ### Patch Changes
