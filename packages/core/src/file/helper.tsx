@@ -8,7 +8,7 @@ import {
   FileWordFilled,
   FileZipFilled,
   FolderFilled,
-} from '@ant-design/icons';
+} from '@fe-free/icons';
 import AudioIcon from './icon/AudioIcon';
 import VideoIcon from './icon/VideoIcon';
 

@@ -1,4 +1,4 @@
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@fe-free/icons';
 import { Modal, Tooltip } from 'antd';
 import { useCallback } from 'react';
 

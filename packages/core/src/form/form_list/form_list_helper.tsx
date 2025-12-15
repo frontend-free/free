@@ -1,4 +1,4 @@
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@fe-free/icons';
 import { Button } from 'antd';
 import classNames from 'classnames';
 

@@ -1,5 +1,5 @@
-import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
 import { LoadingButton } from '@fe-free/core';
+import { CheckOutlined, LoadingOutlined } from '@fe-free/icons';
 import type { StepsProps, UploadFile } from 'antd';
 import { Button } from 'antd';
 import { useEffect } from 'react';

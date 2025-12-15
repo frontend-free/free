@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 3.0.29
+
+### Patch Changes
+
+- feat: icons
+
 ## 3.0.28
 
 ## 3.0.27

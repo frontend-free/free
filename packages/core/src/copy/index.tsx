@@ -1,4 +1,4 @@
-import { CopyOutlined } from '@ant-design/icons';
+import { CopyOutlined } from '@fe-free/icons';
 import { copyToClipboard } from '@fe-free/tool';
 import classNames from 'classnames';
 import React, { useCallback } from 'react';

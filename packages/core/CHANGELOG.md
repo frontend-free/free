@@ -1,5 +1,14 @@
 # @fe-free/core
 
+## 3.0.29
+
+### Patch Changes
+
+- feat: icons
+- Updated dependencies
+  - @fe-free/icons@3.0.29
+  - @fe-free/tool@3.0.29
+
 ## 3.0.28
 
 ### Patch Changes

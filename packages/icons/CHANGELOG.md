@@ -1,5 +1,11 @@
 # @fe-free/icons
 
+## 3.0.29
+
+### Patch Changes
+
+- feat: icons
+
 ## 3.0.28
 
 ### Patch Changes

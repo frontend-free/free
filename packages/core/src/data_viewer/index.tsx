@@ -1,4 +1,4 @@
-import { ArrowsAltOutlined } from '@ant-design/icons';
+import { ArrowsAltOutlined } from '@fe-free/icons';
 import { Button, Modal, Select } from 'antd';
 import { useMemo, useState } from 'react';
 import { Editor } from '../editor';

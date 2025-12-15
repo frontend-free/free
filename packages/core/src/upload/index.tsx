@@ -1,4 +1,4 @@
-import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@fe-free/icons';
 import type { UploadProps as AntdUploadProps, UploadFile } from 'antd';
 import { Upload as AntdUpload, Avatar, Button, message } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';

@@ -1,6 +1,6 @@
-import { DeleteOutlined, InboxOutlined } from '@ant-design/icons';
 import { Attachments } from '@ant-design/x';
 import { xlsxToJSON } from '@fe-free/file';
+import { DeleteOutlined, InboxOutlined } from '@fe-free/icons';
 import type { UploadFile } from 'antd';
 import { Button, Radio, Upload, message } from 'antd';
 import classNames from 'classnames';

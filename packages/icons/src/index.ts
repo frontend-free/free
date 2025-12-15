@@ -1,3 +1,6 @@
+import Icons from '@ant-design/icons';
+export default Icons;
+
 export { AccountBookFilled } from './icons/AccountBookFilled';
 export { AccountBookOutlined } from './icons/AccountBookOutlined';
 export { AimOutlined } from './icons/AimOutlined';

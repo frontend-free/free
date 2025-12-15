@@ -1,11 +1,11 @@
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined } from '@fe-free/icons';
 import { useState } from 'react';
 
 function DeepSeekBlock(props: { children: string }) {
   const [show, setShow] = useState(true);
 
   return (
-    <div className="markdown-body-deep-seek-block mb-3 text-[#00000099] text-[14px] flex flex-col gap-2">
+    <div className="markdown-body-deep-seek-block mb-3 flex flex-col gap-2 text-[14px] text-[#00000099]">
       <div
         className="cursor-pointer"
         onClick={() => {

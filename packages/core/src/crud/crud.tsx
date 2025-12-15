@@ -1,5 +1,5 @@
-import { EditOutlined, EyeOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
+import { EditOutlined, EyeOutlined } from '@fe-free/icons';
 import { Button, message, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
