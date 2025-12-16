@@ -198,7 +198,7 @@ function FileTree<D extends DataNode>(props: FileTreeProps<D>) {
     (nodeData) => {
       const hasMore = actions?.includes('update') || actions?.includes('delete');
       return (
-        <div className="group flex items-center gap-2">
+        <div className="group flex items-center gap-1">
           {nodeData.children ? (
             <FileCard.FileIcon isDirectory className="text-base" />
           ) : (

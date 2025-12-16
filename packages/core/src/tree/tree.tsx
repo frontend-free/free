@@ -108,6 +108,32 @@ function useFilterTreeData({ treeData, search }) {
   }, [treeData, search]);
 }
 
+function useTreeData({ treeData }) {
+  return useMemo(() => {
+    if (!treeData) {
+      return treeData;
+    }
+
+    function process(nodes) {
+      // 返回自己。 而非 [] undefined，因为要保留原数据格式。
+      if (!nodes || nodes.length === 0) {
+        return nodes;
+      }
+
+      return nodes.map((node) => {
+        return {
+          ...node,
+          // 如果没有显式设置 isLeaf，则 children 没传代表是叶子节点，否则还是个 dir
+          isLeaf: node.isLeaf ?? !node.children,
+          children: process(node.children),
+        };
+      });
+    }
+
+    return process(treeData);
+  }, [treeData]);
+}
+
 function useIsAllLeaf(treeData?: DataNode[]) {
   return useMemo(() => {
     if (treeData) {
@@ -134,7 +160,7 @@ function Tree<T extends DataNode>(props: TreeProps<T>) {
     treeData: filterTreeData,
     search: debouncedSearch,
   });
-  const newTreeData = highlightedTreeData;
+  const newTreeData = useTreeData({ treeData: highlightedTreeData });
 
   const handleSearch = useCallback((e) => {
     setSearch(e.target.value);

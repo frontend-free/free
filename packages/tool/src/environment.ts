@@ -10,6 +10,9 @@ const Environment = {
   isH5: () => {
     return ua.includes('mobile');
   },
+  isDingTalk: () => {
+    return ua.includes('dingtalk');
+  },
   isAndroid: () => {
     return ua.includes('android');
   },

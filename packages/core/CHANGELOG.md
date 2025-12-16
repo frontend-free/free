@@ -1,5 +1,14 @@
 # @fe-free/core
 
+## 3.0.33
+
+### Patch Changes
+
+- feat: tree
+- Updated dependencies
+  - @fe-free/tool@3.0.33
+  - @fe-free/icons@3.0.33
+
 ## 3.0.32
 
 ### Patch Changes

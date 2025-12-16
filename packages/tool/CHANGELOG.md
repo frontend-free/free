@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 3.0.33
+
+### Patch Changes
+
+- feat: tree
+
 ## 3.0.32
 
 ## 3.0.31
