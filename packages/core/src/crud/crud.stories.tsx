@@ -171,6 +171,16 @@ export const MoreCustom: Story = {
           toolBarRender: () => {
             return [<div key="custom1">自定义1</div>, <div key="custom2">自定义2</div>];
           },
+          search: {
+            optionRender: (_, __, dom) => {
+              return [
+                ...dom,
+                <Button key="1" type="primary" className="ml-2">
+                  额外的按钮
+                </Button>,
+              ];
+            },
+          },
         }}
         operateColumnProps={{
           // 自定义宽度
