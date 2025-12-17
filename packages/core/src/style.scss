@@ -14,9 +14,11 @@
 /* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
 
-// 隐藏 label 的冒号
-.ant-form-item .ant-form-item-label > label::after {
-  visibility: hidden;
+.fec-app-hidden-form-item-label-colon {
+  // 隐藏 label 的冒号
+  .ant-form-item .ant-form-item-label > label::after {
+    visibility: hidden;
+  }
 }
 
 .ant-modal-footer {

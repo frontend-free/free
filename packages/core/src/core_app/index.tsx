@@ -2,6 +2,7 @@ import { ProConfigProvider } from '@ant-design/pro-components';
 import { useTitle } from 'ahooks';
 import { App, ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
+import classNames from 'classnames';
 import { merge } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
@@ -103,6 +104,9 @@ function CoreApp(props: {
   appProps?: Omit<React.ComponentProps<typeof App>, 'children'>;
   routerProps?: Omit<Partial<React.ComponentProps<typeof Router>>, 'children'>;
   children: React.ReactNode;
+  customConfig?: {
+    hiddenFormItemLabelColon?: boolean;
+  };
 }) {
   const {
     basename,
@@ -113,6 +117,7 @@ function CoreApp(props: {
     configProviderProps,
     appProps,
     routerProps,
+    customConfig,
   } = props;
 
   useTitle(name || '');
@@ -140,7 +145,12 @@ function CoreApp(props: {
         locale={configProviderProps?.locale || zhCN}
         theme={theme}
       >
-        <App {...appProps}>
+        <App
+          {...appProps}
+          className={classNames('fec-app', appProps?.className, {
+            'fec-app-hidden-form-item-label-colon': customConfig?.hiddenFormItemLabelColon,
+          })}
+        >
           <Router {...routerProps} basename={basename}>
             <SetRouteTool basename={basename} />
             {enableCheckUpdate && <CheckUpdate basename={basename} />}

@@ -13,7 +13,10 @@ interface CRUDOfPureProps<
   specialToolbar?: boolean;
 }
 
-function CRUDOfPure(props: CRUDOfPureProps) {
+function CRUDOfPure<
+  DataSource extends Record<string, any> = any,
+  Key extends string | number = string,
+>(props: CRUDOfPureProps<DataSource, Key>) {
   const newColumns = props.tableProps.columns?.map((column) => {
     if (column.search) {
       return {

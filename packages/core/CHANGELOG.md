@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 3.0.34
+
+### Patch Changes
+
+- feat: crud
+  - @fe-free/icons@3.0.34
+  - @fe-free/tool@3.0.34
+
 ## 3.0.33
 
 ### Patch Changes
