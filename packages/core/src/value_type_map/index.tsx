@@ -16,6 +16,8 @@ enum CustomValueTypeEnum {
   /** 渲染开关 */
   CustomSwitchNumber = 'CustomSwitchNumber',
   CustomSwitchOptions = 'CustomSwitchOptions',
+  /** CRUD 用，显示序号 */
+  CustomSerialNumber = 'CustomSerialNumber',
 }
 
 const customValueTypeMap: Record<string, ProRenderFieldPropsType> = {
@@ -42,6 +44,10 @@ const customValueTypeMap: Record<string, ProRenderFieldPropsType> = {
   [CustomValueTypeEnum.CustomSwitchOptions]: {
     render: switchOptionsRender.render,
     renderFormItem: switchOptionsRender.renderFormItem,
+  },
+  [CustomValueTypeEnum.CustomSerialNumber]: {
+    render: () => <></>,
+    renderFormItem: () => <></>,
   },
 };
 

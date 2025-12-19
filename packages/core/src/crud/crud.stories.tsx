@@ -1,7 +1,7 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProForm, ProFormSwitch, ProFormText } from '@ant-design/pro-components';
-import type { CRUDRef } from '@fe-free/core';
-import { CRUD, proFormSelectSearchProps } from '@fe-free/core';
+import type { CRUDProps, CRUDRef } from '@fe-free/core';
+import { CRUD, CustomValueTypeEnum, proFormSelectSearchProps } from '@fe-free/core';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from 'antd';
@@ -32,6 +32,10 @@ export const Normal: Story = {
   render: () => {
     const columns = [
       {
+        title: '序号',
+        valueType: CustomValueTypeEnum.CustomSerialNumber,
+      },
+      {
         title: 'id',
         dataIndex: 'id',
         search: true,
@@ -50,7 +54,7 @@ export const Normal: Story = {
         title: 'area',
         dataIndex: 'area',
       },
-    ];
+    ] as CRUDProps['tableProps']['columns'];
 
     return (
       <CRUD
@@ -76,7 +80,6 @@ export const Normal: Story = {
         )}
         requestGetByRecord={fakeGetByRecord}
         requestCreateByValues={fakeCreate}
-        requestUpdateById={fakeUpdateById}
       />
     );
   },
@@ -226,7 +229,6 @@ export const MoreCustom: Story = {
         )}
         requestGetByRecord={fakeGetByRecord}
         requestCreateByValues={fakeCreate}
-        requestUpdateById={fakeUpdateById}
         updateProps={{
           operateIsDisabled: (record) => {
             if (record.id % 3) {
@@ -577,7 +579,6 @@ export const ExpandedRowRender: Story = {
         )}
         requestGetByRecord={fakeGetByRecord}
         requestCreateByValues={fakeCreate}
-        requestUpdateById={fakeUpdateById}
       />
     );
   },
@@ -633,7 +634,6 @@ export const FullPage: Story = {
           )}
           requestGetByRecord={fakeGetByRecord}
           requestCreateByValues={fakeCreate}
-          requestUpdateById={fakeUpdateById}
         />
       </div>
     );

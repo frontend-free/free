@@ -29,7 +29,9 @@ function CRUDOfPure<
         // 设置 placeholder
         fieldProps: {
           placeholder:
-            column.valueType === 'select' ? `请选择${column.title}` : `请输入${column.title}`,
+            column.valueType === 'select' || column.valueEnum
+              ? `请选择${column.title}`
+              : `请输入${column.title}`,
           ...column.fieldProps,
         },
       };

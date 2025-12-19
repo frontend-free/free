@@ -23,7 +23,6 @@ interface CRUDDetailProps
     | 'readProps'
     | 'requestCreateByValues'
     | 'updateProps'
-    | 'requestUpdateById'
     | 'requestUpdateByValues'
     | 'detailForm'
     | 'detailFormInstance'
@@ -49,7 +48,6 @@ function CRUDDetail(props: CRUDDetailProps) {
     readProps,
     requestCreateByValues,
     updateProps,
-    requestUpdateById,
     requestUpdateByValues,
     detailFormInstance,
   } = props;
@@ -76,15 +74,8 @@ function CRUDDetail(props: CRUDDetailProps) {
             content,
           });
         }
-        if (action === 'update' && (requestUpdateById || requestUpdateByValues)) {
-          if (requestUpdateByValues) {
-            result = await requestUpdateByValues(values);
-          } else if (requestUpdateById) {
-            result = await requestUpdateById({
-              ...values,
-              id,
-            });
-          }
+        if (action === 'update' && requestUpdateByValues) {
+          result = await requestUpdateByValues(values);
 
           let content = '更新成功';
           if (updateProps?.successText) {
@@ -114,16 +105,7 @@ function CRUDDetail(props: CRUDDetailProps) {
         }, 10);
       }
     },
-    [
-      action,
-      requestCreateByValues,
-      requestUpdateById,
-      requestUpdateByValues,
-      onSuccess,
-      createProps,
-      id,
-      updateProps,
-    ],
+    [action, requestCreateByValues, requestUpdateByValues, onSuccess, createProps, updateProps],
   );
 
   const handleOpenChange = useCallback(
@@ -164,7 +146,7 @@ function CRUDDetail(props: CRUDDetailProps) {
 
     if (loading) {
       return (
-        <div className="pt-[100px] flex justify-center">
+        <div className="flex justify-center pt-[100px]">
           <Spin />
         </div>
       );

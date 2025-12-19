@@ -84,8 +84,6 @@ interface CRUDProps<DataSource = any, Key = string> {
 
   /** 更新接口，返回 false 则不关闭弹窗 */
   requestUpdateByValues?: (values: Partial<DataSource>) => Promise<false | void>;
-  /** @deprecated 请使用 requestUpdateByValues 替代 */
-  requestUpdateById?: (values: Partial<DataSource>) => Promise<false | void>;
   updateProps?: {
     /** 文本“编辑” */
     operateText?: string;

@@ -29,8 +29,11 @@
       margin-right: 8px;
     }
 
-    .ant-pagination-item-link {
-      border: 1px solid #e2e7f0;
+    .ant-pagination-prev,
+    .ant-pagination-next {
+      .ant-pagination-item-link {
+        border: 1px solid #e2e7f0;
+      }
     }
 
     .ant-pagination-item {
