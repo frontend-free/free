@@ -13,7 +13,8 @@
       "@fe-free/commit-lint",
       "@fe-free/eslint-config-base",
       "@fe-free/style-lint",
-      "@fe-free/free-scripts"
+      "@fe-free/free-scripts",
+      "@fe-free/vite-plugin-remove-svg-color"
     ]
   ],
   "linked": [],

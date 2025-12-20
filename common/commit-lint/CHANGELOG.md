@@ -1,5 +1,11 @@
 # @fe-free/commit-lint
 
+## 1.3.10
+
+### Patch Changes
+
+- feat: enum
+
 ## 1.3.9
 
 ## 1.3.8
