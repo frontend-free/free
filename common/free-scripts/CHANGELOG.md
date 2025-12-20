@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.9
+
+### Patch Changes
+
+- feat: enum
+
 ## 1.3.8
 
 ### Patch Changes

@@ -32,4 +32,10 @@ export const list<%= enumName %> = Object.keys(valueEnum<%= enumName %>).map((ke
   };
 });
 
+export function Text<%= enumName %>(props: { value?: Enum<%= enumName %> | string } & TagProps) {
+  const item = props.value && valueEnum<%= enumName %>[props.value]
+
+  return <>{item.text ?? props.value}</>;
+}
+
 <% }); %>
