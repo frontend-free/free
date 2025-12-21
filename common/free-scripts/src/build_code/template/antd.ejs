@@ -49,7 +49,7 @@ export function Tag<%= enumName %>(props: { value?: Enum<%= enumName %> | string
 export function Text<%= enumName %>(props: { value?: Enum<%= enumName %> | string } & TagProps) {
   const item = props.value && valueEnum<%= enumName %>[props.value]
 
-  return <>{item.text ?? props.value}</>;
+  return <>{item?.text ?? props.value}</>;
 }
 
 <% }); %>

@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.11
+
+### Patch Changes
+
+- feat: build
+
 ## 1.3.10
 
 ## 1.3.9

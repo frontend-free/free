@@ -1,5 +1,7 @@
 # @fe-free/commit-lint
 
+## 1.3.11
+
 ## 1.3.10
 
 ### Patch Changes
