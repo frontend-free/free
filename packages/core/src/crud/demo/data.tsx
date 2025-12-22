@@ -58,7 +58,10 @@ let fakeData = makeData(21);
 async function fakeRequest(params) {
   console.log('fakeRequest', params);
 
-  let data = fakeData;
+  let data = fakeData.slice(
+    (params.current - 1) * params.pageSize,
+    params.current * params.pageSize,
+  );
   Object.keys(params).forEach((field) => {
     if (params[field] !== undefined && params[field] !== '') {
       data = data.filter((item) => {
@@ -75,7 +78,7 @@ async function fakeRequest(params) {
       resolve({
         data,
         success: true,
-        total: data.length,
+        total: fakeData.length,
       });
     }, 1000);
   }) as Promise<any>;
