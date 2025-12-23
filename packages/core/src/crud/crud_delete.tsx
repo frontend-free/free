@@ -1,6 +1,7 @@
 import { DeleteOutlined } from '@fe-free/icons';
-import { App, Tooltip } from 'antd';
+import { App } from 'antd';
 import { useCallback } from 'react';
+import { OperateBtn } from './helper';
 
 interface Params {
   name: string;
@@ -40,22 +41,14 @@ function OperateDelete(props: Params) {
   const { name, desc, onDelete, operateText, disabled } = props;
   const { doDelete } = useDelete({ name, desc, onDelete, operateText });
 
-  if (disabled) {
-    return (
-      <Tooltip title="删除">
-        <span className="cursor-not-allowed text-lg text-03">
-          {operateText || <DeleteOutlined />}
-        </span>
-      </Tooltip>
-    );
-  }
-
   return (
-    <Tooltip title="删除">
-      <a className="text-lg" onClick={doDelete}>
-        {operateText || <DeleteOutlined />}
-      </a>
-    </Tooltip>
+    <OperateBtn
+      title="删除"
+      icon={<DeleteOutlined />}
+      operateText={operateText}
+      disabled={disabled}
+      onClick={doDelete}
+    />
   );
 }
 

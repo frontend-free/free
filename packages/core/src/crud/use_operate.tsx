@@ -1,10 +1,11 @@
 import { EditOutlined, EyeOutlined } from '@fe-free/icons';
-import { message, Tooltip } from 'antd';
+import { App } from 'antd';
 import { isString } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { routeTool } from '../route';
 import { OperateDelete } from './crud_delete';
 import { CRUDDetail } from './crud_detail';
+import { OperateBtn } from './helper';
 import type { TableProps } from './table';
 
 function useOperate(props, detailProps, actionRef) {
@@ -18,6 +19,7 @@ function useOperate(props, detailProps, actionRef) {
     detailIdIndex,
     requestDeleteByRecord,
   } = props;
+  const { message } = App.useApp();
 
   const idField = tableProps.rowKey || 'id';
 
@@ -56,13 +58,15 @@ function useOperate(props, detailProps, actionRef) {
 
       if (!hidden) {
         const disabled = readProps?.operateIsDisabled?.(record) || false;
+
         if (disabled) {
           return (
-            <Tooltip title={readProps?.operateText || '查看'}>
-              <span key="read" className="cursor-not-allowed text-lg text-03">
-                {readProps?.operateText || <EyeOutlined />}
-              </span>
-            </Tooltip>
+            <OperateBtn
+              title="查看"
+              icon={<EyeOutlined />}
+              operateText={readProps?.operateText}
+              disabled
+            />
           );
         } else {
           return (
@@ -72,9 +76,11 @@ function useOperate(props, detailProps, actionRef) {
               record={record}
               onSuccess={handleReload}
               trigger={
-                <Tooltip title={readProps?.operateText || '查看'}>
-                  <a className="text-lg">{readProps?.operateText || <EyeOutlined />}</a>
-                </Tooltip>
+                <OperateBtn
+                  title="查看"
+                  icon={<EyeOutlined />}
+                  operateText={readProps?.operateText}
+                />
               }
               action="read"
               {...detailProps}
@@ -94,24 +100,31 @@ function useOperate(props, detailProps, actionRef) {
         const disabled = readProps?.operateIsDisabled?.(record) || false;
         if (disabled) {
           return (
-            <Tooltip title={readProps?.operateText || '查看'}>
-              <span key="read" className="cursor-not-allowed text-lg text-03">
-                {readProps?.operateText || <EyeOutlined />}
-              </span>
-            </Tooltip>
+            <OperateBtn
+              title="查看"
+              icon={<EyeOutlined />}
+              operateText={readProps?.operateText}
+              disabled
+            />
           );
         } else {
           return (
-            <Tooltip title={readProps?.operateText || '查看'}>
-              <Link
-                key="read_detail"
-                to={`./detail/${record[detailIdIndex || 'id']}`}
-                target={readProps?.target}
-                className="text-lg"
-              >
-                {readProps?.operateText || <EyeOutlined />}
-              </Link>
-            </Tooltip>
+            <OperateBtn
+              title="查看"
+              icon={<EyeOutlined />}
+              operateText={readProps?.operateText}
+              onClick={() => {
+                if (readProps?.target === '_blank') {
+                  const url = `${window.location.pathname}/detail/${record[detailIdIndex || 'id']}`;
+                  window.open(url, readProps?.target);
+                } else {
+                  routeTool.navigateTo({
+                    path: './detail/:id',
+                    params: { id: record[detailIdIndex || 'id'] },
+                  });
+                }
+              }}
+            />
           );
         }
       }
@@ -128,11 +141,12 @@ function useOperate(props, detailProps, actionRef) {
 
         if (disabled) {
           return (
-            <Tooltip title={updateProps?.operateText || '编辑'}>
-              <span key="update" className="cursor-not-allowed text-lg text-03">
-                {updateProps?.operateText || <EditOutlined />}
-              </span>
-            </Tooltip>
+            <OperateBtn
+              title="编辑"
+              icon={<EditOutlined />}
+              operateText={updateProps?.operateText}
+              disabled
+            />
           );
         } else {
           return (
@@ -142,9 +156,11 @@ function useOperate(props, detailProps, actionRef) {
               record={record}
               onSuccess={handleReload}
               trigger={
-                <Tooltip title={updateProps?.operateText || '编辑'}>
-                  <a className="text-lg">{updateProps?.operateText || <EditOutlined />}</a>
-                </Tooltip>
+                <OperateBtn
+                  title="编辑"
+                  icon={<EditOutlined />}
+                  operateText={updateProps?.operateText}
+                />
               }
               action="update"
               {...detailProps}
