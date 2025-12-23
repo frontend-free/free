@@ -1,5 +1,5 @@
 import type { ActionType } from '@ant-design/pro-components';
-import { Modal } from 'antd';
+import { App } from 'antd';
 import type { MutableRefObject } from 'react';
 import { useCallback, useMemo } from 'react';
 import { LoadingButton } from '../button';
@@ -14,6 +14,8 @@ function useRowSelection<DataSource, Key>({
   batchActions?: CRUDProps<DataSource, Key>['batchActions'];
   actionRef?: MutableRefObject<ActionType | undefined>;
 }) {
+  const { modal } = App.useApp();
+
   const rowSelection = useMemo(
     () => ({
       ...originRowSelection,
@@ -48,7 +50,7 @@ function useRowSelection<DataSource, Key>({
               onClick={async (event) => {
                 if (action.danger) {
                   await new Promise((resolve) => {
-                    Modal.confirm({
+                    modal.confirm({
                       title: `确定要执行 ${action.btnText} 吗？`,
                       onOk: () => {
                         resolve(
@@ -79,7 +81,7 @@ function useRowSelection<DataSource, Key>({
         </div>
       );
     },
-    [actionRef, batchActions],
+    [actionRef, batchActions, modal],
   );
 
   if (!batchActions || batchActions.length === 0) {

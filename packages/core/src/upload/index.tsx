@@ -1,6 +1,6 @@
 import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@fe-free/icons';
 import type { UploadProps as AntdUploadProps, UploadFile } from 'antd';
-import { Upload as AntdUpload, Avatar, Button, message } from 'antd';
+import { Upload as AntdUpload, App, Avatar, Button } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
@@ -26,6 +26,7 @@ interface UploadProps extends UploadBaseProps {
 function useUpload(
   props: ImageUploadProps & { onChangeOriginal?: (info: UploadChangeParam<UploadFile>) => void },
 ) {
+  const { message } = App.useApp();
   const { value, onChange, multiple, maxCount, onChangeOriginal } = props;
   // 转换成 Upload 格式。
   const defaultFileList = useMemo(() => {

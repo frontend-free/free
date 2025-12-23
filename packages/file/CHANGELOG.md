@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 3.0.38
+
+### Patch Changes
+
+- feat: some
+
 ## 3.0.37
 
 ## 3.0.36

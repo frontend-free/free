@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import { message } from 'antd';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosError } from 'axios';

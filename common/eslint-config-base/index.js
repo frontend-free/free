@@ -35,6 +35,20 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': ['error'],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
+    // 禁止直接导入 antd 的 Modal 和 message，必须使用 App.useApp() 提供的 modal 和 message
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'antd',
+            importNames: ['Modal', 'message'],
+            message:
+              '禁止直接使用 antd 的 Modal 和 message，请使用 App.useApp() 提供的 modal 和 message。示例：const { modal, message } = App.useApp();',
+          },
+        ],
+      },
+    ],
   },
   settings: {
     react: {

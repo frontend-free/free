@@ -1,5 +1,5 @@
 import { DrawerForm, ProForm } from '@ant-design/pro-components';
-import { message, Spin } from 'antd';
+import { App, Spin } from 'antd';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
@@ -54,6 +54,7 @@ function CRUDDetail(props: CRUDDetailProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(id ? true : false);
   const [form] = ProForm.useForm(detailFormInstance);
+  const { message } = App.useApp();
 
   const handleFinish = useCallback(
     async (values) => {

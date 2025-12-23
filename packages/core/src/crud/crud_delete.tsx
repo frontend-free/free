@@ -1,5 +1,5 @@
 import { DeleteOutlined } from '@fe-free/icons';
-import { Modal, Tooltip } from 'antd';
+import { App, Tooltip } from 'antd';
 import { useCallback } from 'react';
 
 interface Params {
@@ -12,10 +12,11 @@ interface Params {
 
 function useDelete(params: Params) {
   const { name, desc, onDelete } = params;
+  const { modal } = App.useApp();
 
   const doDelete = useCallback(async () => {
     await new Promise((resolve) => {
-      Modal.confirm({
+      modal.confirm({
         title: `确认删除 “${name}” 吗？`,
         content: desc || '删除后不可恢复，请谨慎操作',
         okText: '确定',
@@ -28,7 +29,7 @@ function useDelete(params: Params) {
         },
       });
     });
-  }, [name, desc, onDelete]);
+  }, [modal, name, desc, onDelete]);
 
   return {
     doDelete,

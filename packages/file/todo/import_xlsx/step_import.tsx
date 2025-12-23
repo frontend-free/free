@@ -2,7 +2,7 @@ import { Attachments } from '@ant-design/x';
 import { xlsxToJSON } from '@fe-free/file';
 import { DeleteOutlined, InboxOutlined } from '@fe-free/icons';
 import type { UploadFile } from 'antd';
-import { Button, Radio, Upload, message } from 'antd';
+import { App, Button, Radio, Upload } from 'antd';
 import classNames from 'classnames';
 import './style.scss';
 import type { ImportXlsxProps, XlsxDataItem } from './types';
@@ -34,6 +34,7 @@ function StepImport({
   onImportType?: (importType: EnumImportType) => void;
   size: ImportXlsxProps['size'];
 }) {
+  const { message } = App.useApp();
   const mbSize = size && (size / 1024 / 1024).toFixed(1);
 
   const handleBeforeUpload = async (file: File) => {
