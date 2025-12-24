@@ -42,9 +42,9 @@ module.exports = {
         paths: [
           {
             name: 'antd',
-            importNames: ['Modal', 'message'],
+            importNames: ['message'],
             message:
-              '禁止直接使用 antd 的 Modal 和 message，请使用 App.useApp() 提供的 modal 和 message。示例：const { modal, message } = App.useApp();',
+              '禁止直接使用 antd 的 message，请使用 App.useApp() 提供的 message。示例：const { message } = App.useApp();',
           },
         ],
       },

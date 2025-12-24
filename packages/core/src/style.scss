@@ -14,6 +14,19 @@
 /* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .fec-app-hidden-form-item-label-colon {
   // 隐藏 label 的冒号
   .ant-form-item .ant-form-item-label > label::after {

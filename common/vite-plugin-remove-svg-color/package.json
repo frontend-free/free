@@ -1,6 +1,6 @@
 {
   "name": "@fe-free/vite-plugin-remove-svg-color",
-  "version": "1.3.12",
+  "version": "1.3.13",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist; tsc;",
