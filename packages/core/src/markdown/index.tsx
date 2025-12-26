@@ -18,9 +18,9 @@ function Markdown(props: MarkdownProps) {
 
   const newChildren = useMemo(() => {
     let processed = processWithDeepSeek(children);
-    processed = processWithKnowledgeRef(processed);
+    processed = processWithKnowledgeRef(processed, knowledgeRefs);
     return processed;
-  }, [children]);
+  }, [children, knowledgeRefs]);
 
   const KnowledgeRefComponent = useMemo(
     () => (p: any) => {
