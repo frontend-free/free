@@ -34,7 +34,7 @@ function KnowledgeRefBlock(props: any) {
   );
 }
 
-function processWithKnowledgeRef(text: string, knowledgeRefs?: { id: string; title: string }[]) {
+function processWithKnowledgeRef(text: string, knowledgeRefs?: { id: string }[]) {
   // 匹配 [^knowledge:X-Y] 格式
   const knowledgeRefRegex = /\[\^knowledge:(\d+-\d+)\]/g;
 
@@ -45,7 +45,7 @@ function processWithKnowledgeRef(text: string, knowledgeRefs?: { id: string; tit
   });
 
   if (count > 0 && knowledgeRefs && knowledgeRefs.length > 0) {
-    newText = `${newText}\n<knowledge-ref>来源&gt;&gt;</knowledge>`;
+    newText = `${newText}\n\n<knowledge-ref>来源&gt;&gt;</knowledge>`;
   }
 
   return newText;

@@ -10,9 +10,10 @@ import './style.scss';
 
 interface MarkdownProps {
   children: string;
-  knowledgeRefs?: { id: string; title: string }[];
+  knowledgeRefs?: { id: string }[];
   onKnowledgeRef?: (id?: string) => void;
 }
+
 function Markdown(props: MarkdownProps) {
   const { children, knowledgeRefs, onKnowledgeRef } = props;
 
