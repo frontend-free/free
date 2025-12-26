@@ -1,9 +1,11 @@
 .markdown-body {
+  font-size: 14px;
+
   pre {
     padding: 0;
   }
 
-  .markdown-body-code-block {
+  .markdown-body-block-code {
     margin: 0.5rem 0;
 
     & > div {
@@ -11,15 +13,34 @@
     }
   }
 
-  .markdown-body-chart-block {
+  .markdown-body-block-chart {
     background: white;
     border-radius: 6px;
     margin: 0.5rem;
 
-    .markdown-body-chart-block-title {
+    .markdown-body-block-chart-title {
       font-size: 16px;
       font-weight: bold;
       padding: 10px;
     }
+  }
+
+  .markdown-body-block-knowledge-ref[data-id] {
+    height: 16px;
+    min-width: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid #0374e9;
+    color: #0374e9;
+    font-size: 12px;
+    padding: 0 4px;
+  }
+
+  .markdown-body-block-knowledge-ref-source {
+    color: #0374e9;
+    cursor: pointer;
   }
 }

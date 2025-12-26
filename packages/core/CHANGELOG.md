@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 3.0.42
+
+### Patch Changes
+
+- feat: markdown
+  - @fe-free/icons@3.0.42
+  - @fe-free/tool@3.0.42
+
 ## 3.0.41
 
 ### Patch Changes

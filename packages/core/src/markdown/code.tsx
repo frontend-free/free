@@ -18,7 +18,7 @@ function CodeBlock(props: any) {
   }
 
   return (
-    <div className="markdown-body-code-block">
+    <div className="markdown-body-block-code">
       {match ? (
         <SyntaxHighlighter
           {...rest}

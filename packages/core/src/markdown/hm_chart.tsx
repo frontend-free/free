@@ -80,7 +80,7 @@ type HMChartConfig<D> =
 function ChartError(props: { children?: React.ReactNode }) {
   const { children } = props;
   return (
-    <div className="markdown-body-hmchart-block">
+    <div className="markdown-body-block-hmchart">
       <div style={{ textAlign: 'center', padding: '20px' }}>{children || '图表发生错误'}</div>
     </div>
   );

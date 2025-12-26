@@ -5,12 +5,35 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { CodeBlock } from './code';
 import { DeepSeekBlock, processWithDeepSeek } from './deep_seek';
+import { KnowledgeRefBlock, processWithKnowledgeRef } from './knowledge_ref';
 import './style.scss';
 
-function Markdown(props: { children: string }) {
+interface MarkdownProps {
+  children: string;
+  knowledgeRefs?: { id: string; title: string }[];
+  onKnowledgeRef?: (id?: string) => void;
+}
+function Markdown(props: MarkdownProps) {
+  const { children, knowledgeRefs, onKnowledgeRef } = props;
+
   const newChildren = useMemo(() => {
-    return processWithDeepSeek(props.children);
-  }, [props.children]);
+    let processed = processWithDeepSeek(children);
+    processed = processWithKnowledgeRef(processed);
+    return processed;
+  }, [children]);
+
+  const KnowledgeRefComponent = useMemo(
+    () => (props: { id: string }) => {
+      return (
+        <KnowledgeRefBlock
+          {...props}
+          knowledgeRefs={knowledgeRefs}
+          onKnowledgeRef={onKnowledgeRef}
+        />
+      );
+    },
+    [knowledgeRefs, onKnowledgeRef],
+  );
 
   return (
     <div className="markdown-body">
@@ -21,6 +44,7 @@ function Markdown(props: { children: string }) {
           code: CodeBlock,
           // @ts-ignore
           think: DeepSeekBlock,
+          'knowledge-ref': KnowledgeRefComponent,
         }}
       >
         {newChildren}

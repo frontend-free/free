@@ -32,7 +32,7 @@ interface ChartConfig extends ChartConfigBase, ChartConfigLine {}
 function ChartError(props: { children?: React.ReactNode }) {
   const { children } = props;
   return (
-    <div className="markdown-body-chart-block">
+    <div className="markdown-body-block-chart">
       <div style={{ textAlign: 'center', padding: '20px' }}>{children || '图表发生错误'}</div>
     </div>
   );
@@ -62,8 +62,8 @@ class ErrorBoundary extends React.Component {
 function ChartContainer(props: { title: string; children: React.ReactNode }) {
   const { title, children } = props;
   return (
-    <div className="markdown-body-chart-block">
-      <div className="markdown-body-chart-block-title">{title}</div>
+    <div className="markdown-body-block-chart">
+      <div className="markdown-body-block-chart-title">{title}</div>
       {children}
     </div>
   );

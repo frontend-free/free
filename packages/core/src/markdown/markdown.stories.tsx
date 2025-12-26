@@ -495,3 +495,21 @@ export const HMChart: Story = {
 `,
   },
 };
+
+export const Knowledge: Story = {
+  args: {
+    children: `
+   根据检索结果，知识库中包含多个酒店的信息。[^knowledge:1-0]例如：\n\n- **杭州城中香格里拉**：位于杭州长寿路6号，提供多种餐饮选择，包括非凡酒廊、美食汇、城中啤酒餐吧以及城中小馆中餐厅[^knowledge:0-0]。\n- **凯恩斯香格里拉**：位于澳大利亚Pierpoint Road Cairns, Queensland，提供纯正澳式待客之道，靠近马林码头与珊瑚海交汇处[^knowledge:2-0]。\n- **马斯喀特 Al Husn 香格里拉**：位于阿曼P.O. Box 644, Muscat 100，是一个成人专享的世外桃源，拥有私人海滩和海湾[^knowledge:3-0]。\n\n此外，还有一家未直接命名但详细描述了其服务特色的豪华酒店，该酒店以江南丝绸商贸之家为灵感设计，提供独特的入住体验，包括定制贴心体验、精致餐饮及新颖的康养项目[^knowledge:4-0]。
+    `,
+    knowledgeRefs: [
+      { id: '0-0', title: '杭州城中香格里拉' },
+      { id: '1-0', title: '巴拉巴拉酒店' },
+      { id: '2-0', title: '凯恩斯香格里拉' },
+      { id: '3-0', title: '马斯喀特 Al Husn 香格里拉' },
+      { id: '4-0', title: '江南丝绸商贸之家' },
+    ],
+    onKnowledgeRef: (id?: string) => {
+      console.log('onKnowledgeRef', id);
+    },
+  },
+};
