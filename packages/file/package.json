@@ -1,6 +1,6 @@
 {
   "name": "@fe-free/file",
-  "version": "3.0.45",
+  "version": "3.0.46",
   "description": "",
   "main": "./src/index.ts",
   "scripts": {

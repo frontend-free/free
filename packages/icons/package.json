@@ -1,6 +1,6 @@
 {
   "name": "@fe-free/icons",
-  "version": "3.0.45",
+  "version": "3.0.46",
   "description": "Icon components library for @fe-free packages",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

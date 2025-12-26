@@ -4,8 +4,6 @@ function KnowledgeRefBlock(props: any) {
   const { knowledgeRefs, onKnowledgeRef } = props;
   const id = props['data-id'];
 
-  console.log('KnowledgeRefBlock', props);
-
   const handleClick = useCallback(() => {
     onKnowledgeRef?.(id);
   }, [id, onKnowledgeRef]);
