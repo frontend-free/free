@@ -23,13 +23,9 @@ function Markdown(props: MarkdownProps) {
   }, [children]);
 
   const KnowledgeRefComponent = useMemo(
-    () => (props: { id: string }) => {
+    () => (p: any) => {
       return (
-        <KnowledgeRefBlock
-          {...props}
-          knowledgeRefs={knowledgeRefs}
-          onKnowledgeRef={onKnowledgeRef}
-        />
+        <KnowledgeRefBlock {...p} knowledgeRefs={knowledgeRefs} onKnowledgeRef={onKnowledgeRef} />
       );
     },
     [knowledgeRefs, onKnowledgeRef],

@@ -13,6 +13,12 @@ function KnowledgeRefBlock(props: any) {
   if (id) {
     const index = knowledgeRefs?.findIndex((ref: { id: string }) => ref.id === id);
 
+    console.log('index', index);
+    // 没有数据的时候显示 id
+    if (index === -1) {
+      return <span>[{id}]</span>;
+    }
+
     return (
       <span
         data-id={id}
