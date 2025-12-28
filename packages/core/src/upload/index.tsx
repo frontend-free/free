@@ -17,6 +17,7 @@ interface UploadBaseProps {
   listType?: AntdUploadProps['listType'];
   accept?: string;
   directory?: AntdUploadProps['directory'];
+  children?: ReactNode | ((props: { isDisabled: boolean }) => ReactNode);
 }
 
 interface UploadProps extends UploadBaseProps {
@@ -73,7 +74,7 @@ function useUpload(
 
       return true;
     },
-    [fileList, multiple, maxCount],
+    [multiple, maxCount, fileList.length, message],
   );
 
   // 多选情况下，超出则上传按钮 disabled
@@ -93,9 +94,39 @@ function useUpload(
   };
 }
 
+function defaultChildren(
+  props: ImageUploadProps,
+  otherProps: { fileList: UploadFile[]; isDisabled: boolean },
+) {
+  const { listType, showCount, multiple, maxCount } = props;
+  const { fileList, isDisabled } = otherProps;
+
+  if (listType === 'picture-card') {
+    return (
+      <button style={{ border: 0, background: 'none' }} type="button" disabled={isDisabled}>
+        <PlusOutlined />
+        <div style={{ marginTop: 8 }}>本地上传</div>
+      </button>
+    );
+  }
+  return (
+    <Button icon={<UploadOutlined />} disabled={isDisabled}>
+      本地上传{showCount && multiple ? `（${fileList.length}/${maxCount}）` : ''}
+    </Button>
+  );
+}
+
 function Upload(props: ImageUploadProps) {
-  const { multiple, maxCount, showCount, action, customRequest, listType, accept, directory } =
-    props;
+  const {
+    multiple,
+    maxCount,
+    action,
+    customRequest,
+    listType,
+    accept,
+    directory,
+    children = defaultChildren,
+  } = props;
   const { onChange, beforeUpload, isDisabled, fileList } = useUpload(props);
 
   return (
@@ -113,16 +144,7 @@ function Upload(props: ImageUploadProps) {
       // 不可，否则会没法删除
       // disabled={isDisabled}
     >
-      {listType === 'picture-card' ? (
-        <button style={{ border: 0, background: 'none' }} type="button" disabled={isDisabled}>
-          <PlusOutlined />
-          <div style={{ marginTop: 8 }}>本地上传</div>
-        </button>
-      ) : (
-        <Button icon={<UploadOutlined />} disabled={isDisabled}>
-          本地上传{showCount && multiple ? `（${fileList.length}/${maxCount}）` : ''}
-        </Button>
-      )}
+      {typeof children === 'function' ? children(props, { fileList, isDisabled }) : children}
     </AntdUpload>
   );
 }

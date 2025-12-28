@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 3.0.48
+
+### Patch Changes
+
+- feat: upload
+  - @fe-free/icons@3.0.48
+  - @fe-free/tool@3.0.48
+
 ## 3.0.47
 
 ### Patch Changes

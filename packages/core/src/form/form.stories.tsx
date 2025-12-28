@@ -268,6 +268,17 @@ export const ProFormUploadComponent: Story = {
         fieldProps={{ multiple: true, maxCount: 2, showCount: true, customRequest }}
       />
       <ProFormUpload
+        label="files_custom"
+        name="files"
+        fieldProps={{
+          multiple: true,
+          maxCount: 2,
+          showCount: true,
+          customRequest,
+          children: <div>click me</div>,
+        }}
+      />
+      <ProFormUpload
         label="files_picture"
         name="files_picture"
         fieldProps={{ multiple: true, maxCount: 2, listType: 'picture', customRequest }}
