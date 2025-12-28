@@ -65,5 +65,19 @@ export type { TabsProps } from './tabs';
 export { themeVariables } from './theme';
 export { FileTree, Tree, flatToTreeData } from './tree';
 export type { FileTreeProps, TreeProps } from './tree';
+export {
+  AvatarImageUpload,
+  ImageUpload,
+  ImageUploadDragger,
+  Upload,
+  UploadDragger,
+} from './upload';
+export type {
+  AvatarImageUploadProps,
+  ImageUploadDraggerProps,
+  ImageUploadProps,
+  UploadDraggerProps,
+  UploadProps,
+} from './upload';
 export { useLocalforageState } from './use_localforage_state';
 export { CustomValueTypeEnum, customValueTypeMap } from './value_type_map';
