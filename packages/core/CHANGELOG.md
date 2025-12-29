@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 3.0.50
+
+### Patch Changes
+
+- feat: curd
+  - @fe-free/icons@3.0.50
+  - @fe-free/tool@3.0.50
+
 ## 3.0.49
 
 ### Patch Changes

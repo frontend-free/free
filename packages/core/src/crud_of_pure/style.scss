@@ -57,6 +57,12 @@
 
     .ant-pro-card:not(.ant-pro-table-search) {
       margin-top: -48px;
+
+      & > .ant-pro-card-body {
+        // height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     .ant-pro-table-list-toolbar {

@@ -58,10 +58,9 @@ let fakeData = makeData(21);
 async function fakeRequest(params) {
   console.log('fakeRequest', params);
 
-  let data = fakeData.slice(
-    (params.current - 1) * params.pageSize,
-    params.current * params.pageSize,
-  );
+  let data = params.current
+    ? fakeData.slice((params.current - 1) * params.pageSize, params.current * params.pageSize)
+    : fakeData;
   Object.keys(params).forEach((field) => {
     if (params[field] !== undefined && params[field] !== '') {
       data = data.filter((item) => {
