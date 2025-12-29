@@ -45,7 +45,7 @@ function useOperate(props, detailProps, actionRef) {
         throw new Error('没有传 requestDeleteByRecord');
       };
     },
-    [actionRef, deleteProps, requestDeleteByRecord],
+    [actionRef, deleteProps, message, requestDeleteByRecord],
   );
 
   const handleReload = useCallback(() => {
@@ -114,13 +114,12 @@ function useOperate(props, detailProps, actionRef) {
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               onClick={() => {
+                const path = `${window.location.pathname}/detail/${record[detailIdIndex || 'id']}`;
                 if (readProps?.target === '_blank') {
-                  const url = `${window.location.pathname}/detail/${record[detailIdIndex || 'id']}`;
-                  window.open(url, readProps?.target);
+                  window.open(path, readProps?.target);
                 } else {
                   routeTool.navigateTo({
-                    path: './detail/:id',
-                    params: { id: record[detailIdIndex || 'id'] },
+                    path: path.replace(routeTool.getBaseName(), ''),
                   });
                 }
               }}
