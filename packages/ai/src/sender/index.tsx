@@ -1,7 +1,9 @@
 import { FileCard } from '@fe-free/core';
 import Icons, { CloseOutlined } from '@fe-free/icons';
+import { useDrop } from 'ahooks';
 import { Button, Divider, Input, Upload } from 'antd';
 import type { UploadFile } from 'antd/lib';
+import classNames from 'classnames';
 import type { RefObject } from 'react';
 import { useMemo, useRef, useState } from 'react';
 import FilesIcon from '../svgs/files.svg?react';
@@ -79,8 +81,8 @@ function FileItem({ file, onDelete }: { file: UploadFile; onDelete: () => void }
         </div>
       )}
       {!isDone && (
-        <div className="absolute inset-0 flex items-center justify-center bg-01/50 text-xs">
-          {file.percent?.toFixed(0)}%
+        <div className="absolute inset-0 flex items-center justify-center bg-01/80">
+          {(file.percent ?? 0).toFixed(0)}%
         </div>
       )}
       <CloseOutlined
@@ -91,10 +93,13 @@ function FileItem({ file, onDelete }: { file: UploadFile; onDelete: () => void }
   );
 }
 
-function Files(props: SenderProps & { refUpload: RefObject<HTMLDivElement> }) {
-  const { value, onChange, uploadAction, refUpload } = props;
-
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+function Files(
+  props: SenderProps & {
+    fileList: UploadFile[];
+    setFileList: (fileList: UploadFile[]) => void;
+  },
+) {
+  const { fileList, setFileList } = props;
 
   return (
     <>
@@ -111,21 +116,34 @@ function Files(props: SenderProps & { refUpload: RefObject<HTMLDivElement> }) {
           ))}
         </div>
       )}
-      <Upload
-        action={uploadAction}
-        fileList={fileList}
-        multiple
-        pastable
-        onChange={(info) => {
-          setFileList(info.fileList);
-
-          const urls = info.fileList.map((file) => file.response?.data?.url).filter(Boolean);
-          onChange?.({ ...value, files: urls });
-        }}
-      >
-        <div ref={refUpload} />
-      </Upload>
     </>
+  );
+}
+
+function FileUpload(
+  props: SenderProps & {
+    refUpload: RefObject<HTMLDivElement>;
+    fileList: UploadFile[];
+    setFileList: (fileList: UploadFile[]) => void;
+  },
+) {
+  const { value, onChange, uploadAction, refUpload, fileList, setFileList } = props;
+  return (
+    <Upload.Dragger
+      action={uploadAction}
+      fileList={fileList}
+      multiple
+      pastable
+      onChange={(info) => {
+        setFileList(info.fileList);
+
+        const urls = info.fileList.map((file) => file.response?.data?.url).filter(Boolean);
+        onChange?.({ ...value, files: urls });
+      }}
+      className={'fea-sender-upload'}
+    >
+      <div ref={refUpload}>在此处拖放文件</div>
+    </Upload.Dragger>
   );
 }
 
@@ -134,7 +152,9 @@ const defaultProps = {
 };
 
 function Sender(originProps: SenderProps) {
+  const refContainer = useRef<HTMLDivElement>(null);
   const refUpload = useRef<HTMLDivElement>(null);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const props = useMemo(() => {
     return {
@@ -143,13 +163,33 @@ function Sender(originProps: SenderProps) {
     };
   }, [originProps]);
 
+  const [dragHover, setDragHover] = useState(false);
+
+  useDrop(refContainer, {
+    onDragEnter: () => {
+      setDragHover(true);
+    },
+    onDragLeave: () => {
+      setDragHover(false);
+    },
+    onDrop: () => {
+      setDragHover(false);
+    },
+  });
+
   return (
-    <div className="fea-sender flex flex-col rounded-lg border border-01 p-2">
-      <Files {...props} refUpload={refUpload} />
+    <div
+      ref={refContainer}
+      className={classNames('fea-sender relative flex flex-col rounded-lg border border-01 p-2', {
+        'fea-sender-drag-hover': dragHover,
+      })}
+    >
+      <Files {...props} fileList={fileList} setFileList={setFileList} />
       <div className="flex">
         <Text {...props} />
       </div>
       <Actions {...props} refUpload={refUpload} />
+      <FileUpload {...props} refUpload={refUpload} fileList={fileList} setFileList={setFileList} />
     </div>
   );
 }

@@ -6,4 +6,21 @@
   .ant-upload-list {
     display: none !important;
   }
+
+  .fea-sender-upload {
+    display: none;
+  }
+
+  &.fea-sender-drag-hover {
+    .fea-sender-upload {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+
+      .ant-upload-drag {
+        border-color: theme('colors.primary');
+      }
+    }
+  }
 }
