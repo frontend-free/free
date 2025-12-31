@@ -6,6 +6,7 @@ import {
   DEFAULT_ICON_COLOR,
   getFileExt,
   getFileSize,
+  isImage,
   PRESET_FILE_ICONS,
 } from './helper';
 
@@ -69,5 +70,8 @@ function FileCard({
 }
 
 FileCard.FileIcon = FileIcon;
+FileCard.isImage = isImage;
+FileCard.getFileExt = getFileExt;
+FileCard.getFileSize = getFileSize;
 
 export { FileCard };

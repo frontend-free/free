@@ -7,7 +7,8 @@
       "@fe-free/core",
       "@fe-free/file",
       "@fe-free/icons",
-      "@fe-free/tool"
+      "@fe-free/tool",
+      "@fe-free/ai"
     ],
     [
       "@fe-free/commit-lint",

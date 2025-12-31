@@ -1,0 +1,27 @@
+{
+  "name": "@fe-free/ai",
+  "version": "3.0.51",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@fe-free/core": "workspace:*",
+    "ahooks": "^3.7.8",
+    "classnames": "^2.5.1"
+  },
+  "peerDependencies": {
+    "@fe-free/icons": "workspace:*",
+    "@fe-free/tool": "workspace:*",
+    "antd": "^5.27.1",
+    "dayjs": "~1.11.10",
+    "react": "^19.2.0"
+  }
+}

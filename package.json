@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@ant-design/pro-components": "2.8.9",
+    "@fe-free/ai": "workspace:^",
     "@fe-free/icons": "workspace:^",
     "@fe-free/core": "workspace:^",
     "@fe-free/file": "workspace:^",

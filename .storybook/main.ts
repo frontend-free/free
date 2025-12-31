@@ -20,6 +20,14 @@ const config: StorybookConfig = {
   viteFinal: (config) => {
     config.plugins = [ ...(config.plugins || []), svgr()];
 
+    config.server = {
+      proxy: {
+        '/api': {
+          target: 'http://pivot-agent-web.agent.gz.pivotinteract.cn:23456',
+          changeOrigin: true,
+        },
+      },
+    };
     return config;
   },
 };
