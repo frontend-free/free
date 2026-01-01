@@ -21,6 +21,7 @@ function Component(props: Omit<SenderProps, 'value' | 'onChange'>) {
         console.log('newValue', v);
         setV(v);
       }}
+      uploadAction="/api/ai-service/v1/file_upload/upload"
       {...props}
     />
   );
@@ -29,7 +30,6 @@ function Component(props: Omit<SenderProps, 'value' | 'onChange'>) {
 export const Default: Story = {
   render: (props) => <Component {...props} />,
   args: {
-    uploadAction: '/api/ai-service/v1/file_upload/upload',
     onSubmit: (value) => {
       console.log(value);
     },
@@ -39,10 +39,17 @@ export const Default: Story = {
 export const Loading: Story = {
   args: {
     loading: true,
-    uploadAction: '/api/ai-service/v1/file_upload/upload',
+
     onSubmit: (value) => {
       console.log(value);
     },
+  },
+  render: (props) => <Component {...props} />,
+};
+
+export const FilesMaxCount: Story = {
+  args: {
+    filesMaxCount: 3,
   },
   render: (props) => <Component {...props} />,
 };

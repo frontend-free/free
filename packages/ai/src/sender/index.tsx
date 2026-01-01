@@ -37,7 +37,7 @@ function Sender(originProps: SenderProps) {
     };
   }, [originProps]);
 
-  const { value, onChange } = props;
+  const { value, onChange, filesMaxCount } = props;
 
   const refContainer = useRef<HTMLDivElement>(null);
   const refUpload = useRef<HTMLDivElement>(null);
@@ -121,6 +121,7 @@ function Sender(originProps: SenderProps) {
           refUpload={refUpload}
           fileList={fileList}
           setFileList={setFileList}
+          uploadMaxCount={filesMaxCount ? filesMaxCount - fileUrls.length : undefined}
         />
       </div>
       <div className="mt-1 text-center text-xs text-03">

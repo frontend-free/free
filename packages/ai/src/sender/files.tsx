@@ -1,7 +1,7 @@
 import { FileCard } from '@fe-free/core';
 import Icons, { CloseOutlined, LinkOutlined, PlusOutlined } from '@fe-free/icons';
 import type { UploadFile } from 'antd';
-import { Button, Dropdown, Input, Modal, Upload } from 'antd';
+import { App, Button, Dropdown, Input, Modal, Upload } from 'antd';
 import type { RefObject } from 'react';
 import { useState } from 'react';
 import FilesIcon from '../svgs/files.svg?react';
@@ -14,7 +14,8 @@ function FileAction(
     setFileUrls: (fileUrls: string[]) => void;
   },
 ) {
-  const { refUpload, fileUrls, setFileUrls } = props;
+  const { value, refUpload, fileUrls, setFileUrls, filesMaxCount } = props;
+  const { message } = App.useApp();
 
   const [url, setUrl] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
@@ -55,6 +56,11 @@ function FileAction(
           open
           onCancel={() => setOpen(false)}
           onOk={() => {
+            if (filesMaxCount && value?.files && value.files.length >= filesMaxCount) {
+              message.warning(`超过最大上传数量${filesMaxCount}`);
+              return;
+            }
+
             if (url.trim()) {
               setFileUrls([...fileUrls, url]);
             }
@@ -77,16 +83,27 @@ function FileUpload(
     refUpload: RefObject<HTMLDivElement>;
     fileList: UploadFile[];
     setFileList: (fileList: UploadFile[]) => void;
+    uploadMaxCount?: number;
   },
 ) {
-  const { uploadAction, refUpload, fileList, setFileList } = props;
+  const { uploadAction, refUpload, fileList, setFileList, uploadMaxCount, filesMaxCount } = props;
+  const { message } = App.useApp();
+
   return (
     <Upload.Dragger
       action={uploadAction}
       fileList={fileList}
       multiple
       pastable
+      maxCount={uploadMaxCount ? uploadMaxCount + 1 : undefined}
       onChange={(info) => {
+        if (uploadMaxCount && info.fileList.length > uploadMaxCount) {
+          message.warning(`超过最大上传数量${filesMaxCount}`);
+
+          setFileList(info.fileList.slice(-uploadMaxCount));
+          return;
+        }
+
         setFileList(info.fileList);
       }}
     >

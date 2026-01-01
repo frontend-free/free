@@ -18,6 +18,8 @@ interface SenderProps {
 
   /** 上传文件的接口地址，约定返回的 {data: {url: string}} */
   uploadAction?: string;
+  /** files 最大数量 */
+  filesMaxCount?: number;
 }
 
 export type { SenderProps, SenderRef, SenderValue };
