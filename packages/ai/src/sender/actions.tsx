@@ -2,7 +2,6 @@ import Icons from '@fe-free/icons';
 import { Button, Divider } from 'antd';
 import type { RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
-import StopIcon from '../svgs/stop.svg?react';
 import { FileAction } from './files';
 import './style.scss';
 import type { SenderProps } from './types';
@@ -34,13 +33,7 @@ function Actions(
         <Button
           type="primary"
           shape="circle"
-          icon={
-            isLoading ? (
-              <Icons component={StopIcon} />
-            ) : (
-              <Icons component={SendIcon} className="!text-lg" />
-            )
-          }
+          icon={<Icons component={SendIcon} className="!text-lg" />}
           loading={isLoading}
           // disabled={loading}
           onClick={() => {
