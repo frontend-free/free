@@ -48,7 +48,7 @@ function FileAction(
           ],
         }}
       >
-        <Button type="text" icon={<Icons component={PlusOutlined} />} className="text-lg" />
+        <Button shape="circle" icon={<Icons component={PlusOutlined} />} className="text-lg" />
       </Dropdown>
       {open && (
         <Modal
