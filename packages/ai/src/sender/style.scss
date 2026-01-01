@@ -7,12 +7,12 @@
     display: none !important;
   }
 
-  .fea-sender-upload {
+  .ant-upload-wrapper {
     display: none;
   }
 
   &.fea-sender-drag-hover {
-    .fea-sender-upload {
+    .ant-upload-wrapper {
       display: block;
       position: absolute;
       inset: 0;

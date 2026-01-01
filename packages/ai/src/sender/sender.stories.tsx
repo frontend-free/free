@@ -14,7 +14,16 @@ type Story = StoryObj<typeof Sender>;
 function Component(props: Omit<SenderProps, 'value' | 'onChange'>) {
   const [v, setV] = useState<SenderValue | undefined>(undefined);
 
-  return <Sender value={v} onChange={(v) => setV(v)} {...props} />;
+  return (
+    <Sender
+      value={v}
+      onChange={(v) => {
+        console.log('newValue', v);
+        setV(v);
+      }}
+      {...props}
+    />
+  );
 }
 
 export const Default: Story = {
