@@ -8,6 +8,7 @@ import type { RefObject } from 'react';
 import { useMemo, useRef, useState } from 'react';
 import FilesIcon from '../svgs/files.svg?react';
 import SendIcon from '../svgs/send.svg?react';
+import StopIcon from '../svgs/stop.svg?react';
 import './style.scss';
 import type { SenderProps, SenderRef } from './types';
 
@@ -28,8 +29,12 @@ function Text(props: SenderProps) {
   );
 }
 
-function Actions(props: SenderProps & { refUpload: RefObject<HTMLDivElement> }) {
-  const { loading, onSubmit, value, refUpload, uploadAction } = props;
+function Actions(
+  props: SenderProps & { refUpload: RefObject<HTMLDivElement>; isUploading: boolean },
+) {
+  const { loading, onSubmit, value, refUpload, uploadAction, isUploading } = props;
+
+  const isLoading = loading || isUploading;
 
   return (
     <div className="flex items-center gap-2">
@@ -50,11 +55,29 @@ function Actions(props: SenderProps & { refUpload: RefObject<HTMLDivElement> }) 
         <Button
           type="primary"
           shape="circle"
-          icon={<Icons component={SendIcon} />}
-          className="text-lg"
-          disabled={loading}
+          icon={
+            isLoading ? (
+              <Icons component={StopIcon} />
+            ) : (
+              <Icons component={SendIcon} className="!text-lg" />
+            )
+          }
+          loading={isLoading}
+          // disabled={loading}
           onClick={() => {
-            onSubmit?.(value);
+            if (isLoading) {
+              return;
+            }
+
+            const newValue = {
+              ...value,
+              text: value?.text?.trim(),
+            };
+
+            // 有内容才提交
+            if (newValue.text || (newValue.files && newValue.files.length > 0)) {
+              onSubmit?.(newValue);
+            }
           }}
         />
       </div>
@@ -152,10 +175,6 @@ const defaultProps = {
 };
 
 function Sender(originProps: SenderProps) {
-  const refContainer = useRef<HTMLDivElement>(null);
-  const refUpload = useRef<HTMLDivElement>(null);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-
   const props = useMemo(() => {
     return {
       ...defaultProps,
@@ -163,6 +182,9 @@ function Sender(originProps: SenderProps) {
     };
   }, [originProps]);
 
+  const refContainer = useRef<HTMLDivElement>(null);
+  const refUpload = useRef<HTMLDivElement>(null);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [dragHover, setDragHover] = useState(false);
 
   useDrop(refContainer, {
@@ -177,6 +199,11 @@ function Sender(originProps: SenderProps) {
     },
   });
 
+  const isUploading = useMemo(() => {
+    // 存在没有 url 的
+    return fileList.some((file) => !file.response?.data?.url);
+  }, [fileList]);
+
   return (
     <div
       ref={refContainer}
@@ -188,7 +215,7 @@ function Sender(originProps: SenderProps) {
       <div className="flex">
         <Text {...props} />
       </div>
-      <Actions {...props} refUpload={refUpload} />
+      <Actions {...props} refUpload={refUpload} isUploading={isUploading} />
       <FileUpload {...props} refUpload={refUpload} fileList={fileList} setFileList={setFileList} />
     </div>
   );

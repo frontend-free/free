@@ -16,8 +16,8 @@ interface SenderProps {
 
   placeholder?: string;
 
+  /** 上传文件的接口地址，约定返回的 {data: {url: string}} */
   uploadAction?: string;
-  onUpload: (file: File) => Promise<string[]>;
 }
 
 export type { SenderProps, SenderRef, SenderValue };
