@@ -11,7 +11,7 @@ const meta: Meta<typeof Sender> = {
 
 type Story = StoryObj<typeof Sender>;
 
-function Component(props: Omit<SenderProps, 'value' | 'onChange'>) {
+function Component(props: Omit<SenderProps, 'value' | 'onChange' | 'onSubmit'>) {
   const [v, setV] = useState<SenderValue | undefined>(undefined);
 
   return (
@@ -20,6 +20,9 @@ function Component(props: Omit<SenderProps, 'value' | 'onChange'>) {
       onChange={(v) => {
         console.log('newValue', v);
         setV(v);
+      }}
+      onSubmit={(value) => {
+        console.log('onSubmit', value);
       }}
       {...props}
     />

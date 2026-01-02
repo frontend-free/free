@@ -1,6 +1,7 @@
 import Icons from '@fe-free/icons';
+import type { UploadFile } from 'antd';
 import { Button, Divider } from 'antd';
-import type { RefObject } from 'react';
+import { useCallback, type RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
 import { FileAction } from './files';
 import { RecordAction } from './record';
@@ -11,6 +12,8 @@ function Actions(
   props: SenderProps & {
     refUpload: RefObject<HTMLDivElement>;
     isUploading: boolean;
+    fileList: UploadFile[];
+    setFileList: (fileList: UploadFile[]) => void;
     fileUrls: string[];
     setFileUrls: (fileUrls: string[]) => void;
   },
@@ -19,8 +22,10 @@ function Actions(
     loading,
     onSubmit,
     value,
+    onChange,
     refUpload,
     isUploading,
+    setFileList,
     fileUrls,
     setFileUrls,
     allowUpload,
@@ -28,6 +33,26 @@ function Actions(
   } = props;
 
   const isLoading = loading || isUploading;
+
+  const handleSubmit = useCallback(async () => {
+    if (isLoading) {
+      return;
+    }
+
+    const newValue = {
+      ...value,
+      text: value?.text?.trim(),
+    };
+
+    // 有内容才提交
+    if (newValue.text || (newValue.files && newValue.files.length > 0)) {
+      await Promise.resolve(onSubmit?.(newValue));
+      setFileList([]);
+      setFileUrls([]);
+
+      onChange?.({});
+    }
+  }, [isLoading, value, onSubmit, setFileList, setFileUrls, onChange]);
 
   return (
     <div className="flex items-center gap-2">
@@ -50,21 +75,7 @@ function Actions(
           icon={<Icons component={SendIcon} className="!text-lg" />}
           loading={isLoading}
           // disabled={loading}
-          onClick={() => {
-            if (isLoading) {
-              return;
-            }
-
-            const newValue = {
-              ...value,
-              text: value?.text?.trim(),
-            };
-
-            // 有内容才提交
-            if (newValue.text || (newValue.files && newValue.files.length > 0)) {
-              onSubmit?.(newValue);
-            }
-          }}
+          onClick={handleSubmit}
         />
       </div>
     </div>

@@ -12,7 +12,7 @@ interface SenderProps {
   onChange: (value?: SenderValue) => void;
 
   loading?: boolean;
-  onSubmit: (value?: SenderValue) => void;
+  onSubmit: (value?: SenderValue) => void | Promise<void>;
 
   placeholder?: string;
 

@@ -37,7 +37,8 @@ function Sender(originProps: SenderProps) {
     };
   }, [originProps]);
 
-  const { value, onChange, filesMaxCount } = props;
+  const { value, onChange, allowUpload } = props;
+  const { filesMaxCount } = allowUpload || {};
 
   const refContainer = useRef<HTMLDivElement>(null);
   const refUpload = useRef<HTMLDivElement>(null);
@@ -75,7 +76,7 @@ function Sender(originProps: SenderProps) {
       originSetFileUrls(fileUrls);
       handleFilesChange({ fileUrls, fileList });
     },
-    [fileList],
+    [fileList, handleFilesChange],
   );
 
   const setFileList = useCallback(
@@ -83,7 +84,7 @@ function Sender(originProps: SenderProps) {
       originSetFileList(fileList);
       handleFilesChange({ fileUrls, fileList });
     },
-    [fileUrls],
+    [fileUrls, handleFilesChange],
   );
 
   const isUploading = useMemo(() => {
@@ -113,6 +114,8 @@ function Sender(originProps: SenderProps) {
           {...props}
           refUpload={refUpload}
           isUploading={isUploading}
+          fileList={fileList}
+          setFileList={setFileList}
           fileUrls={fileUrls}
           setFileUrls={setFileUrls}
         />
