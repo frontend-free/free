@@ -55,4 +55,11 @@ export const AllowUpload: Story = {
   render: (props) => <Component {...props} />,
 };
 
+export const AllowSpeech: Story = {
+  render: (props) => {
+    const [recording, setRecording] = useState(false);
+    return <Component {...props} allowSpeech={{ recording, onRecordingChange: setRecording }} />;
+  },
+};
+
 export default meta;

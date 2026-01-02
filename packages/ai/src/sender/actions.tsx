@@ -3,6 +3,7 @@ import { Button, Divider } from 'antd';
 import type { RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
 import { FileAction } from './files';
+import { RecordAction } from './record';
 import './style.scss';
 import type { SenderProps } from './types';
 
@@ -14,8 +15,17 @@ function Actions(
     setFileUrls: (fileUrls: string[]) => void;
   },
 ) {
-  const { loading, onSubmit, value, refUpload, isUploading, fileUrls, setFileUrls, allowUpload } =
-    props;
+  const {
+    loading,
+    onSubmit,
+    value,
+    refUpload,
+    isUploading,
+    fileUrls,
+    setFileUrls,
+    allowUpload,
+    allowSpeech,
+  } = props;
 
   const isLoading = loading || isUploading;
 
@@ -32,7 +42,8 @@ function Actions(
         )}
       </div>
       <Divider type="vertical" />
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
+        {allowSpeech && <RecordAction {...props} />}
         <Button
           type="primary"
           shape="circle"

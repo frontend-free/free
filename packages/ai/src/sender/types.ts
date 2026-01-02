@@ -22,6 +22,14 @@ interface SenderProps {
     /** files 最大数量 */
     filesMaxCount?: number;
   };
+
+  /** 是否允许语音输入 */
+  allowSpeech?: {
+    /** 是否正在录音 */
+    recording?: boolean;
+    /** 录音状态变化时回调 */
+    onRecordingChange?: (recording: boolean) => void;
+  };
 }
 
 export type { SenderProps, SenderRef, SenderValue };
