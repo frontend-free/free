@@ -244,6 +244,9 @@ importers:
 
   packages/ai:
     dependencies:
+      '@fe-free/core':
+        specifier: workspace:*
+        version: link:../core
       '@fe-free/icons':
         specifier: workspace:*
         version: link:../icons
