@@ -14,7 +14,9 @@ function FileAction(
     setFileUrls: (fileUrls: string[]) => void;
   },
 ) {
-  const { value, refUpload, fileUrls, setFileUrls, filesMaxCount } = props;
+  const { value, refUpload, fileUrls, setFileUrls, allowUpload } = props;
+  const { filesMaxCount } = allowUpload || {};
+
   const { message } = App.useApp();
 
   const [url, setUrl] = useState<string>('');
@@ -48,7 +50,7 @@ function FileAction(
           ],
         }}
       >
-        <Button shape="circle" icon={<Icons component={PlusOutlined} />} className="text-lg" />
+        <Button shape="circle" icon={<Icons component={PlusOutlined} className="!text-lg" />} />
       </Dropdown>
       {open && (
         <Modal
@@ -86,7 +88,9 @@ function FileUpload(
     uploadMaxCount?: number;
   },
 ) {
-  const { uploadAction, refUpload, fileList, setFileList, uploadMaxCount, filesMaxCount } = props;
+  const { allowUpload, refUpload, fileList, setFileList, uploadMaxCount } = props;
+  const { uploadAction, filesMaxCount } = allowUpload || {};
+
   const { message } = App.useApp();
 
   return (

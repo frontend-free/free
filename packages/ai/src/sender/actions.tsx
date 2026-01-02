@@ -14,19 +14,22 @@ function Actions(
     setFileUrls: (fileUrls: string[]) => void;
   },
 ) {
-  const { loading, onSubmit, value, refUpload, isUploading, fileUrls, setFileUrls } = props;
+  const { loading, onSubmit, value, refUpload, isUploading, fileUrls, setFileUrls, allowUpload } =
+    props;
 
   const isLoading = loading || isUploading;
 
   return (
     <div className="flex items-center gap-2">
       <div className="flex flex-1 gap-1">
-        <FileAction
-          {...props}
-          refUpload={refUpload}
-          fileUrls={fileUrls}
-          setFileUrls={setFileUrls}
-        />
+        {allowUpload && (
+          <FileAction
+            {...props}
+            refUpload={refUpload}
+            fileUrls={fileUrls}
+            setFileUrls={setFileUrls}
+          />
+        )}
       </div>
       <Divider type="vertical" />
       <div className="flex items-center">
