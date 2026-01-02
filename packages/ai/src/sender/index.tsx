@@ -2,17 +2,19 @@ import { useDrop } from 'ahooks';
 import { Input } from 'antd';
 import type { UploadFile } from 'antd/lib';
 import classNames from 'classnames';
+import type { RefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { Actions } from './actions';
 import { FileUpload, Files } from './files';
 import './style.scss';
 import type { SenderProps, SenderRef } from './types';
 
-function Text(props: SenderProps) {
-  const { value, onChange, placeholder } = props;
+function Text(props: SenderProps & { refText: RefObject<HTMLTextAreaElement> }) {
+  const { value, onChange, placeholder, refText } = props;
 
   return (
     <Input.TextArea
+      ref={refText}
       value={value?.text}
       onChange={(e) => {
         onChange?.({ ...value, text: e.target.value });
@@ -36,6 +38,8 @@ function Sender(originProps: SenderProps) {
       ...originProps,
     };
   }, [originProps]);
+
+  const refText = useRef<HTMLTextAreaElement>(null);
 
   const { value, onChange, allowUpload } = props;
   const { filesMaxCount } = allowUpload || {};
@@ -96,9 +100,12 @@ function Sender(originProps: SenderProps) {
     <div className="fea-sender-wrap">
       <div
         ref={refContainer}
-        className={classNames('fea-sender relative flex flex-col rounded-lg border border-01 p-2', {
-          'fea-sender-drag-hover': dragHover,
-        })}
+        className={classNames(
+          'fea-sender relative flex flex-col rounded-lg border border-01 bg-white p-2',
+          {
+            'fea-sender-drag-hover': dragHover,
+          },
+        )}
       >
         <Files
           {...props}
@@ -108,10 +115,11 @@ function Sender(originProps: SenderProps) {
           setFileUrls={setFileUrls}
         />
         <div className="flex">
-          <Text {...props} />
+          <Text {...props} refText={refText} />
         </div>
         <Actions
           {...props}
+          refText={refText}
           refUpload={refUpload}
           isUploading={isUploading}
           fileList={fileList}

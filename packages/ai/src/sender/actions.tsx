@@ -10,6 +10,7 @@ import type { SenderProps } from './types';
 
 function Actions(
   props: SenderProps & {
+    refText: RefObject<HTMLTextAreaElement>;
     refUpload: RefObject<HTMLDivElement>;
     isUploading: boolean;
     fileList: UploadFile[];
@@ -19,6 +20,7 @@ function Actions(
   },
 ) {
   const {
+    refText,
     loading,
     onSubmit,
     value,
@@ -47,12 +49,16 @@ function Actions(
     // 有内容才提交
     if (newValue.text || (newValue.files && newValue.files.length > 0)) {
       await Promise.resolve(onSubmit?.(newValue));
+
+      // reset
       setFileList([]);
       setFileUrls([]);
-
       onChange?.({});
+
+      // focus
+      refText.current?.focus();
     }
-  }, [isLoading, value, onSubmit, setFileList, setFileUrls, onChange]);
+  }, [isLoading, value, onSubmit, setFileList, setFileUrls, onChange, refText]);
 
   return (
     <div className="flex items-center gap-2">
