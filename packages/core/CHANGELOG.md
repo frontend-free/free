@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 4.0.3
+
+### Patch Changes
+
+- @fe-free/icons@4.0.3
+- @fe-free/tool@4.0.3
+
 ## 4.0.2
 
 ### Patch Changes

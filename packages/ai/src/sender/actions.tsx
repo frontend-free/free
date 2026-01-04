@@ -37,7 +37,7 @@ function Actions(
   const isLoading = loading || isUploading;
 
   const handleSubmit = useCallback(async () => {
-    if (isLoading) {
+    if (isLoading || allowSpeech?.recording) {
       return;
     }
 
@@ -58,7 +58,16 @@ function Actions(
       // focus
       refText.current?.focus();
     }
-  }, [isLoading, value, onSubmit, setFileList, setFileUrls, onChange, refText]);
+  }, [
+    isLoading,
+    allowSpeech?.recording,
+    value,
+    onSubmit,
+    setFileList,
+    setFileUrls,
+    onChange,
+    refText,
+  ]);
 
   return (
     <div className="flex items-center gap-2">
