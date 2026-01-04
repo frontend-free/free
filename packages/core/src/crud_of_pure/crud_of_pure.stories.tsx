@@ -32,6 +32,9 @@ export const Basic: Story = {
         title: 'id',
         dataIndex: 'id',
         search: true,
+        formItemProps: {
+          label: '这是label',
+        },
       },
       {
         title: '名字(省略)',
