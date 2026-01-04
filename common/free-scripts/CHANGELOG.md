@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 1.3.14
+
+### Patch Changes
+
+- feat: code
+
 ## 1.3.13
 
 ## 1.3.12

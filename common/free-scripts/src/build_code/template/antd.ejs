@@ -1,6 +1,8 @@
-import React from 'react';
-import { Tag } from 'antd';
 import type { TagProps } from 'antd';
+import { Tag } from 'antd';
+import React from 'react';
+import { t } from 'i18next';
+
 
 <% Object.keys(enums).forEach(function(enumName){
   const enumItem = enums[enumName]; %>
@@ -16,7 +18,7 @@ export enum Enum<%= enumName %> {
 export const valueEnum<%= enumName %> = {
   <% Object.keys(enumItem).forEach(function(key){ %>
   [Enum<%= enumName %>.<%= key %>]: {
-    text: '<%- enumItem[key].text %>',<% if(typeof enumItem[key].value === 'number') {%>
+    text: t('enum.<%= enumName %>.<%= key %>', '<%- enumItem[key].text %>'),<% if(typeof enumItem[key].value === 'number') {%>
     value:  <%- enumItem[key].value %>,<%} else if(typeof enumItem[key].value === 'string') {%>
     value:  '<%- enumItem[key].value %>',<%} else {%>
     value:  '<%- key %>',<%}%><% if(enumItem[key].status) {%>
