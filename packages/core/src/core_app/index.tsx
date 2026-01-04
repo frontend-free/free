@@ -1,11 +1,14 @@
 import { ProConfigProvider } from '@ant-design/pro-components';
 import { useTitle } from 'ahooks';
 import { App, ConfigProvider } from 'antd';
+import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import classNames from 'classnames';
 import { merge } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { EnumLanguage, I18nProvider } from '../i18n';
 import { routeTool } from '../route';
 import { customValueTypeMap } from '../value_type_map';
 import { themeConfig } from './config';
@@ -94,8 +97,7 @@ function SetRouteTool({ basename }: { basename: string }) {
   return null;
 }
 
-/** 提供一些基础的组 APP 功能 */
-function CoreApp(props: {
+interface CoreAppProps {
   basename: string;
   name?: string;
   enableCheckUpdate?: boolean;
@@ -107,7 +109,9 @@ function CoreApp(props: {
   customConfig?: {
     hiddenFormItemLabelColon?: boolean;
   };
-}) {
+}
+/** 提供一些基础的组 APP 功能 */
+function CoreAppBase(props: CoreAppProps) {
   const {
     basename,
     name,
@@ -119,6 +123,8 @@ function CoreApp(props: {
     routerProps,
     customConfig,
   } = props;
+
+  const { i18n } = useTranslation();
 
   useTitle(name || '');
 
@@ -133,6 +139,14 @@ function CoreApp(props: {
     return merge(themeConfig, configProviderProps?.theme);
   }, [configProviderProps?.theme]);
 
+  const locale = useMemo(() => {
+    if (configProviderProps?.locale) {
+      return configProviderProps.locale;
+    }
+
+    return i18n.language === EnumLanguage.EN_US ? enUS : zhCN;
+  }, [configProviderProps?.locale, i18n.language]);
+
   return (
     <ProConfigProvider
       {...proConfigProviderProps}
@@ -140,11 +154,7 @@ function CoreApp(props: {
       valueTypeMap={{ ...customValueTypeMap, ...proConfigProviderProps?.valueTypeMap }}
     >
       {/* 集成好 locale */}
-      <ConfigProvider
-        {...configProviderProps}
-        locale={configProviderProps?.locale || zhCN}
-        theme={theme}
-      >
+      <ConfigProvider {...configProviderProps} locale={locale} theme={theme}>
         <App
           {...appProps}
           className={classNames('fec-app', appProps?.className, {
@@ -159,6 +169,14 @@ function CoreApp(props: {
         </App>
       </ConfigProvider>
     </ProConfigProvider>
+  );
+}
+
+function CoreApp(props: CoreAppProps) {
+  return (
+    <I18nProvider>
+      <CoreAppBase {...props} />
+    </I18nProvider>
   );
 }
 
