@@ -4,7 +4,7 @@
       "mainScriptNotFound": "[data-name=\"mainScript\"] not found, update reminder disabled",
       "newVersionFound": "New version found",
       "refresh": "Refresh",
-      "refreshPrompt": "Please refresh the page in time to update to avoid affecting usage",
+      "refreshPrompt": "Please refresh the page in time to update, to avoid affecting usage",
       "updateLater": "Update later"
     },
     "crud": {
@@ -17,21 +17,21 @@
       "delete": "Delete",
       "deleteConfirm": "Are you sure you want to delete \"{name}\"?",
       "deleteSuccess": "Deleted successfully",
-      "deleteWarning": "This action cannot be undone, please proceed with caution",
-      "operate": "Actions",
+      "deleteWarning": "Deletion cannot be undone, please proceed with caution",
+      "operate": "Operate",
       "read": "View",
       "requestDeleteByRecordRequired": "requestDeleteByRecord is required",
-      "selectedItems": "{count} items selected",
+      "selectedItems": "Selected {count} item(s)",
       "update": "Edit",
       "updateSuccess": "Updated successfully",
-      "warnBatchDeleteRequestDeleteByRecords": "When actions includes batch_delete, requestDeleteByRecords is required",
-      "warnCreateDetailForm": "When actions includes create, detailForm is required",
-      "warnCreateRequestCreateByValues": "When actions includes create, requestCreateByValues is required",
-      "warnDeleteProps": "When actions includes delete, deleteProps and requestDeleteByRecord are required",
-      "warnReadDetailForm": "When actions includes read, detailForm is required",
-      "warnReadRequestGetByRecord": "When actions includes read, requestGetByRecord is required",
-      "warnUpdateDetailForm": "When actions includes update, detailForm is required",
-      "warnUpdateRequest": "When actions includes update, requestGetByRecord and requestUpdateByValues are required"
+      "warnBatchDeleteRequestDeleteByRecords": "requestDeleteByRecords is required when actions includes batch_delete",
+      "warnCreateDetailForm": "detailForm is required when actions includes create",
+      "warnCreateRequestCreateByValues": "requestCreateByValues is required when actions includes create",
+      "warnDeleteProps": "deleteProps and requestDeleteByRecord are required when actions includes delete",
+      "warnReadDetailForm": "detailForm is required when actions includes read",
+      "warnReadRequestGetByRecord": "requestGetByRecord is required when actions includes read",
+      "warnUpdateDetailForm": "detailForm is required when actions includes update",
+      "warnUpdateRequest": "requestGetByRecord and requestUpdateByValues are required when actions includes update"
     },
     "crudOfList": {
       "searchPlaceholder": "Enter search",
@@ -54,7 +54,7 @@
     },
     "formList": {
       "add": "Add",
-      "duplicateValue": "Duplicate values are not allowed",
+      "duplicateValue": "Duplicates are not allowed",
       "edit": "Edit",
       "emptyOption": "Empty option exists"
     },
@@ -70,7 +70,7 @@
       "dragUpload": "Click or drag files to this area to upload",
       "fileCount": "File count ({success}/{total})",
       "localUpload": "Local upload",
-      "maxFilesWarning": "You can upload at most {count} files, the excess will be ignored.",
+      "maxFilesWarning": "A maximum of {count} file(s) can be uploaded, the excess will be ignored.",
       "pleaseSelect": "Please select"
     },
     "valueTypeMap": {
