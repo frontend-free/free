@@ -51,7 +51,7 @@ function FileCard({
 }) {
   return (
     <div
-      className={classNames('flex w-full items-center gap-1', {
+      className={classNames('flex items-center gap-1', {
         'flex-row items-center': direction === 'horizontal',
         'flex-col': direction === 'vertical',
       })}
