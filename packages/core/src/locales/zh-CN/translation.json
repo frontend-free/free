@@ -9,6 +9,7 @@
     },
     "crud": {
       "batchActionConfirm": "确定要执行 {action} 吗？",
+      "batchDelete": "批量删除",
       "cancel": "取消",
       "clearSelection": "取消选择",
       "confirm": "确定",
@@ -21,7 +22,7 @@
       "operate": "操作",
       "read": "查看",
       "requestDeleteByRecordRequired": "没有传 requestDeleteByRecord",
-      "selectedItems": "已选 {count} 项",
+      "selectedItems": "已选 {num} 项",
       "update": "编辑",
       "updateSuccess": "更新成功",
       "warnBatchDeleteRequestDeleteByRecords": "actions 包含 batch_delete 时，需要传递 requestDeleteByRecords",
@@ -70,7 +71,7 @@
       "dragUpload": "点击或拖拽到此区域进行上传",
       "fileCount": "文件数量 ({success}/{total})",
       "localUpload": "本地上传",
-      "maxFilesWarning": "最多只能上传 {count} 个文件，超出部分会忽略。",
+      "maxFilesWarning": "最多只能上传 {num} 个文件，超出部分会忽略。",
       "pleaseSelect": "请选择"
     },
     "valueTypeMap": {

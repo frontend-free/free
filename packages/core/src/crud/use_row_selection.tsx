@@ -30,7 +30,7 @@ function useRowSelection<DataSource, Key>({
       return (
         <div>
           <span>
-            {t('core.crud.selectedItems', '已选 {count} 项', { count: selectedRowKeys.length })}
+            {t('core.crud.selectedItems', '已选 {num} 项', { num: selectedRowKeys.length })}
             <a style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
               {t('core.crud.clearSelection', '取消选择')}
             </a>

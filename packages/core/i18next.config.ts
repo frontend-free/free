@@ -7,5 +7,6 @@ export default defineConfig({
     secondaryLanguages: ['en-US'],
     input: ['./src/**/*.{js,jsx,ts,tsx}'],
     output: './src/locales/{{language}}/{{namespace}}.json',
+    disablePlurals: true,
   },
 });

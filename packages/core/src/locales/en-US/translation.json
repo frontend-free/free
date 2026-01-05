@@ -9,6 +9,7 @@
     },
     "crud": {
       "batchActionConfirm": "Are you sure you want to execute {action}?",
+      "batchDelete": "Batch delete",
       "cancel": "Cancel",
       "clearSelection": "Clear selection",
       "confirm": "Confirm",
@@ -21,7 +22,7 @@
       "operate": "Operate",
       "read": "View",
       "requestDeleteByRecordRequired": "requestDeleteByRecord is required",
-      "selectedItems": "Selected {count} item(s)",
+      "selectedItems": "Selected {num} item(s)",
       "update": "Edit",
       "updateSuccess": "Updated successfully",
       "warnBatchDeleteRequestDeleteByRecords": "requestDeleteByRecords is required when actions includes batch_delete",
@@ -70,7 +71,7 @@
       "dragUpload": "Click or drag files to this area to upload",
       "fileCount": "File count ({success}/{total})",
       "localUpload": "Local upload",
-      "maxFilesWarning": "A maximum of {count} file(s) can be uploaded, the excess will be ignored.",
+      "maxFilesWarning": "A maximum of {num} file(s) can be uploaded, the excess will be ignored.",
       "pleaseSelect": "Please select"
     },
     "valueTypeMap": {

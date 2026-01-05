@@ -71,8 +71,8 @@ function useUpload(
         const index = fl.findIndex((item) => item.uid === f.uid);
         if (index >= maxCount - fileList.length) {
           message.warning(
-            t('core.upload.maxFilesWarning', '最多只能上传 {count} 个文件，超出部分会忽略。', {
-              count: maxCount,
+            t('core.upload.maxFilesWarning', '最多只能上传 {num} 个文件，超出部分会忽略。', {
+              num: maxCount,
             }),
           );
         }
