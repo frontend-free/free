@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "i18n-extract": "rm -rf ./src/locales/zh-CN && npx i18next-cli extract"
   },
   "author": "",
   "license": "ISC",
