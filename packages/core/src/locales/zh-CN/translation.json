@@ -1,0 +1,80 @@
+{
+  "core": {
+    "app": {
+      "mainScriptNotFound": "没找到 [data-name=\"mainScript\"]，不启用更新提醒",
+      "newVersionFound": "发现新版本",
+      "refresh": "刷新",
+      "refreshPrompt": "请及时刷新页面更新，以避免影响使用",
+      "updateLater": "稍后更新"
+    },
+    "crud": {
+      "batchActionConfirm": "确定要执行 {action} 吗？",
+      "cancel": "取消",
+      "clearSelection": "取消选择",
+      "confirm": "确定",
+      "create": "新建",
+      "createSuccess": "新建成功",
+      "delete": "删除",
+      "deleteConfirm": "确认删除 \"{name}\" 吗？",
+      "deleteSuccess": "删除成功",
+      "deleteWarning": "删除后不可恢复，请谨慎操作",
+      "operate": "操作",
+      "read": "查看",
+      "requestDeleteByRecordRequired": "没有传 requestDeleteByRecord",
+      "selectedItems": "已选 {count} 项",
+      "update": "编辑",
+      "updateSuccess": "更新成功",
+      "warnBatchDeleteRequestDeleteByRecords": "actions 包含 batch_delete 时，需要传递 requestDeleteByRecords",
+      "warnCreateDetailForm": "actions 包含 create 时，需要传递 detailForm",
+      "warnCreateRequestCreateByValues": "actions 包含 create 时，需要传递 requestCreateByValues",
+      "warnDeleteProps": "actions 包含 delete 时，需要传递 deleteProps 和 requestDeleteByRecord",
+      "warnReadDetailForm": "actions 包含 read 时，需要传递 detailForm",
+      "warnReadRequestGetByRecord": "actions 包含 read 时，需要传递 requestGetByRecord",
+      "warnUpdateDetailForm": "actions 包含 update 时，需要传递 detailForm",
+      "warnUpdateRequest": "actions 包含 update 时，需要传递 requestGetByRecord 和 requestUpdateByValues"
+    },
+    "crudOfList": {
+      "searchPlaceholder": "输入搜索",
+      "warnAtLeastOneSearch": "CRUDOfList 的 columns 中至少有一个 search 为 true 的列",
+      "warnOnlyOneSearch": "CRUDOfList 的 columns 中只能有一个 search 为 true 的列"
+    },
+    "crudOfPure": {
+      "inputPlaceholder": "请输入{title}",
+      "selectPlaceholder": "请选择{title}"
+    },
+    "dataViewer": {
+      "view": "查看"
+    },
+    "fileTree": {
+      "create": "新建",
+      "createSubDirectory": "新建子目录",
+      "delete": "删除",
+      "directoryName": "目录名称",
+      "update": "编辑"
+    },
+    "formList": {
+      "add": "添加",
+      "duplicateValue": "不能有重复",
+      "edit": "编辑",
+      "emptyOption": "存在空选项"
+    },
+    "infiniteList": {
+      "loadingMore": "加载更多数据中...",
+      "noMoreData": "没有更多数据"
+    },
+    "record": {
+      "inputPlaceholder": "请输入"
+    },
+    "upload": {
+      "delete": "删除",
+      "dragUpload": "点击或拖拽到此区域进行上传",
+      "fileCount": "文件数量 ({success}/{total})",
+      "localUpload": "本地上传",
+      "maxFilesWarning": "最多只能上传 {count} 个文件，超出部分会忽略。",
+      "pleaseSelect": "请选择"
+    },
+    "valueTypeMap": {
+      "view": "查看"
+    }
+  }
+}

@@ -30,7 +30,7 @@ function useRowSelection<DataSource, Key>({
       return (
         <div>
           <span>
-            {t('core.crud.selectedItems', '已选 {{count}} 项', { count: selectedRowKeys.length })}
+            {t('core.crud.selectedItems', '已选 {count} 项', { count: selectedRowKeys.length })}
             <a style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
               {t('core.crud.clearSelection', '取消选择')}
             </a>
@@ -56,7 +56,7 @@ function useRowSelection<DataSource, Key>({
                 if (action.danger) {
                   await new Promise((resolve) => {
                     modal.confirm({
-                      title: t('core.crud.batchActionConfirm', '确定要执行 {{action}} 吗？', {
+                      title: t('core.crud.batchActionConfirm', '确定要执行 {action} 吗？', {
                         action: action.btnText,
                       }),
                       onOk: () => {

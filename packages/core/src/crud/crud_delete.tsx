@@ -20,7 +20,7 @@ function useDelete(params: Params) {
   const doDelete = useCallback(async () => {
     await new Promise((resolve) => {
       modal.confirm({
-        title: t('core.crud.deleteConfirm', `确认删除 "${name}" 吗？`),
+        title: t('core.crud.deleteConfirm', '确认删除 "{name}" 吗？', { name }),
         content: desc || t('core.crud.deleteWarning', '删除后不可恢复，请谨慎操作'),
         okText: t('core.crud.confirm', '确定'),
         cancelText: t('core.crud.cancel', '取消'),

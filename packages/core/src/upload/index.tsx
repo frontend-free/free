@@ -71,7 +71,7 @@ function useUpload(
         const index = fl.findIndex((item) => item.uid === f.uid);
         if (index >= maxCount - fileList.length) {
           message.warning(
-            t('core.upload.maxFilesWarning', '最多只能上传 {{count}} 个文件，超出部分会忽略。', {
+            t('core.upload.maxFilesWarning', '最多只能上传 {count} 个文件，超出部分会忽略。', {
               count: maxCount,
             }),
           );
@@ -187,7 +187,7 @@ function UploadDragger(props: UploadDraggerProps) {
         return (
           <div>
             <div className="py-1">
-              {t('core.upload.fileCount', '文件数量 ({{success}}/{{total}})', {
+              {t('core.upload.fileCount', '文件数量 ({success}/{total})', {
                 success: successList.length,
                 total: fileList.length,
               })}

@@ -1,11 +1,22 @@
 import type { Preview } from '@storybook/react-vite';
 import { App } from 'antd';
 import { ConfigProvider } from 'antd';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ProConfigProvider } from '@ant-design/pro-components';
 import { customValueTypeMap } from '@fe-free/core';
 import { themeConfig } from '@fe-free/core/src/core_app/config';
-import { I18nProvider } from '@fe-free/core/src/i18n';
+import { EnumLanguage, I18nProvider, initI18n } from '@fe-free/core/src/i18n';
+import enUS from 'antd/locale/en_US';
+import zhCN from 'antd/locale/zh_CN';
+import i18n from 'i18next';
+import coreEnTranslation from '@fe-free/core/src/locales/en-US/translation.json';
+
+// 初始化 i18n
+initI18n({ enTranslation: {
+  ...coreEnTranslation
+} });
+
+console.log('i18n.language', i18n.language);
 
 const preview: Preview = {
   parameters: {
@@ -17,17 +28,19 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <I18nProvider>
-        <ProConfigProvider valueTypeMap={customValueTypeMap} >
-          <ConfigProvider theme={themeConfig}>
-            <App>
-              <Story />
-            </App>
-          </ConfigProvider>
-        </ProConfigProvider>
-      </I18nProvider>
-    ),
+    (Story) => {
+      return (
+        <I18nProvider>
+          <ProConfigProvider valueTypeMap={customValueTypeMap} >
+            <ConfigProvider theme={themeConfig} locale={i18n.language === EnumLanguage.EN_US ? enUS : zhCN}>
+              <App>
+                <Story />
+              </App>
+            </ConfigProvider>
+          </ProConfigProvider>
+        </I18nProvider>
+      );
+    },
   ],
 };
 
