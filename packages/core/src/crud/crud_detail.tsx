@@ -3,6 +3,7 @@ import { App, Spin } from 'antd';
 import classNames from 'classnames';
 import { isString } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { CRUDProps } from './types';
 
 /**
@@ -15,18 +16,17 @@ import type { CRUDProps } from './types';
 type action = 'create' | 'read' | 'read_detail' | 'update' | 'delete';
 
 // 先不管类型
-interface CRUDDetailProps
-  extends Pick<
-    CRUDProps,
-    | 'requestGetByRecord'
-    | 'createProps'
-    | 'readProps'
-    | 'requestCreateByValues'
-    | 'updateProps'
-    | 'requestUpdateByValues'
-    | 'detailForm'
-    | 'detailFormInstance'
-  > {
+interface CRUDDetailProps extends Pick<
+  CRUDProps,
+  | 'requestGetByRecord'
+  | 'createProps'
+  | 'readProps'
+  | 'requestCreateByValues'
+  | 'updateProps'
+  | 'requestUpdateByValues'
+  | 'detailForm'
+  | 'detailFormInstance'
+> {
   action: action;
   id?: string;
   record?: any;
@@ -55,6 +55,7 @@ function CRUDDetail(props: CRUDDetailProps) {
   const [loading, setLoading] = useState(id ? true : false);
   const [form] = ProForm.useForm(detailFormInstance);
   const { message } = App.useApp();
+  const { t } = useTranslation();
 
   const handleFinish = useCallback(
     async (values) => {
@@ -63,7 +64,7 @@ function CRUDDetail(props: CRUDDetailProps) {
         if (action === 'create' && requestCreateByValues) {
           result = await requestCreateByValues(values);
 
-          let content = '新建成功';
+          let content = t('core.crud.createSuccess', '新建成功');
           if (createProps?.successText) {
             content = isString(createProps.successText)
               ? createProps.successText
@@ -78,7 +79,7 @@ function CRUDDetail(props: CRUDDetailProps) {
         if (action === 'update' && requestUpdateByValues) {
           result = await requestUpdateByValues(values);
 
-          let content = '更新成功';
+          let content = t('core.crud.updateSuccess', '更新成功');
           if (updateProps?.successText) {
             content = isString(updateProps.successText)
               ? updateProps.successText
@@ -106,7 +107,16 @@ function CRUDDetail(props: CRUDDetailProps) {
         }, 10);
       }
     },
-    [action, requestCreateByValues, requestUpdateByValues, onSuccess, createProps, updateProps],
+    [
+      action,
+      requestCreateByValues,
+      requestUpdateByValues,
+      onSuccess,
+      t,
+      createProps,
+      message,
+      updateProps,
+    ],
   );
 
   const handleOpenChange = useCallback(
@@ -172,23 +182,23 @@ function CRUDDetail(props: CRUDDetailProps) {
 
   const title = useMemo(() => {
     if (action === 'create') {
-      return '新建';
+      return t('core.crud.create', '新建');
     }
     if (action === 'read') {
-      return '查看';
+      return t('core.crud.read', '查看');
     }
     if (action === 'update') {
-      return '编辑';
+      return t('core.crud.update', '编辑');
     }
 
     return '';
-  }, [action]);
+  }, [action, t]);
 
   const submitter = useMemo(() => {
     const result = {
       searchConfig: {
-        submitText: '确定',
-        resetText: '取消',
+        submitText: t('core.crud.confirm', '确定'),
+        resetText: t('core.crud.cancel', '取消'),
       },
     };
     if (action === 'create') {
@@ -223,6 +233,7 @@ function CRUDDetail(props: CRUDDetailProps) {
     readProps?.submitText,
     updateProps?.resetText,
     updateProps?.submitText,
+    t,
   ]);
 
   return (

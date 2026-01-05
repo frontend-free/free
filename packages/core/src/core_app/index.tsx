@@ -22,11 +22,14 @@ function getPathname(src?: string) {
 
 function CheckUpdate({ basename }: { basename: string }) {
   const { modal } = App.useApp();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const mainScript = document.querySelector('[data-name="mainScript"]');
     if (!mainScript) {
-      console.log('没找到 [data-name="mainScript"]，不启用更新提醒');
+      console.log(
+        t('core.app.mainScriptNotFound', '没找到 [data-name="mainScript"]，不启用更新提醒'),
+      );
       return;
     }
 
@@ -48,10 +51,10 @@ function CheckUpdate({ basename }: { basename: string }) {
       }
 
       modal.confirm({
-        title: '发现新版本',
-        content: '请及时刷新页面更新，以避免影响使用',
-        okText: '刷新',
-        cancelText: '稍后更新',
+        title: t('core.app.newVersionFound', '发现新版本'),
+        content: t('core.app.refreshPrompt', '请及时刷新页面更新，以避免影响使用'),
+        okText: t('core.app.refresh', '刷新'),
+        cancelText: t('core.app.updateLater', '稍后更新'),
         onOk: () => {
           window.location.reload();
         },
@@ -80,7 +83,7 @@ function CheckUpdate({ basename }: { basename: string }) {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [t]);
 
   return null;
 }

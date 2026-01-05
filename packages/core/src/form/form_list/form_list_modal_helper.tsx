@@ -2,6 +2,7 @@ import { ModalForm } from '@ant-design/pro-components';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@fe-free/icons';
 import { Button } from 'antd';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const emptyArr = [];
 
@@ -34,6 +35,7 @@ function Edit<T>(props: {
   editForm?: any;
   disabledSubmitter?: boolean;
 }) {
+  const { t } = useTranslation();
   const handleFinish = async (newValues) => {
     props.onChange(newValues as T);
 
@@ -42,7 +44,7 @@ function Edit<T>(props: {
 
   return (
     <ModalForm
-      title={props.values ? '编辑' : '添加'}
+      title={props.values ? t('core.formList.edit', '编辑') : t('core.formList.add', '添加')}
       trigger={props.children}
       onFinish={handleFinish}
       formRef={props?.editForm}
@@ -119,7 +121,7 @@ function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) 
           >
             {props.addTrigger || (
               <Button size="small" icon={<PlusOutlined />}>
-                添加
+                {t('core.formList.add', '添加')}
               </Button>
             )}
           </Edit>

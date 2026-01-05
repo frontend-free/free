@@ -2,6 +2,7 @@ import { EditOutlined, EyeOutlined } from '@fe-free/icons';
 import { App } from 'antd';
 import { isString } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { routeTool } from '../route';
 import { OperateDelete } from './crud_delete';
 import { CRUDDetail } from './crud_detail';
@@ -20,6 +21,7 @@ function useOperate(props, detailProps, actionRef) {
     requestDeleteByRecord,
   } = props;
   const { message } = App.useApp();
+  const { t } = useTranslation();
 
   const idField = tableProps.rowKey || 'id';
 
@@ -27,7 +29,7 @@ function useOperate(props, detailProps, actionRef) {
     (record) => {
       return () => {
         if (requestDeleteByRecord) {
-          let content = '删除成功';
+          let content = t('core.crud.deleteSuccess', '删除成功');
           if (deleteProps?.successText) {
             content = isString(deleteProps.successText)
               ? deleteProps.successText
@@ -42,10 +44,12 @@ function useOperate(props, detailProps, actionRef) {
           });
         }
 
-        throw new Error('没有传 requestDeleteByRecord');
+        throw new Error(
+          t('core.crud.requestDeleteByRecordRequired', '没有传 requestDeleteByRecord'),
+        );
       };
     },
-    [actionRef, deleteProps, message, requestDeleteByRecord],
+    [actionRef, deleteProps, message, requestDeleteByRecord, t],
   );
 
   const handleReload = useCallback(() => {
@@ -62,7 +66,7 @@ function useOperate(props, detailProps, actionRef) {
         if (disabled) {
           return (
             <OperateBtn
-              title="查看"
+              title={t('core.crud.read', '查看')}
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               disabled
@@ -77,7 +81,7 @@ function useOperate(props, detailProps, actionRef) {
               onSuccess={handleReload}
               trigger={
                 <OperateBtn
-                  title="查看"
+                  title={t('core.crud.read', '查看')}
                   icon={<EyeOutlined />}
                   operateText={readProps?.operateText}
                 />
@@ -90,7 +94,7 @@ function useOperate(props, detailProps, actionRef) {
       }
       return null;
     },
-    [detailProps, handleReload, idField, readProps],
+    [detailProps, handleReload, idField, readProps, t],
   );
 
   const readDetailOperate = useCallback(
@@ -101,7 +105,7 @@ function useOperate(props, detailProps, actionRef) {
         if (disabled) {
           return (
             <OperateBtn
-              title="查看"
+              title={t('core.crud.read', '查看')}
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               disabled
@@ -110,7 +114,7 @@ function useOperate(props, detailProps, actionRef) {
         } else {
           return (
             <OperateBtn
-              title="查看"
+              title={t('core.crud.read', '查看')}
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               onClick={() => {
@@ -129,7 +133,7 @@ function useOperate(props, detailProps, actionRef) {
       }
       return null;
     },
-    [detailIdIndex, readProps],
+    [detailIdIndex, readProps, t],
   );
 
   const updateOperate = useCallback(
@@ -141,7 +145,7 @@ function useOperate(props, detailProps, actionRef) {
         if (disabled) {
           return (
             <OperateBtn
-              title="编辑"
+              title={t('core.crud.update', '编辑')}
               icon={<EditOutlined />}
               operateText={updateProps?.operateText}
               disabled
@@ -156,7 +160,7 @@ function useOperate(props, detailProps, actionRef) {
               onSuccess={handleReload}
               trigger={
                 <OperateBtn
-                  title="编辑"
+                  title={t('core.crud.update', '编辑')}
                   icon={<EditOutlined />}
                   operateText={updateProps?.operateText}
                 />
@@ -170,7 +174,7 @@ function useOperate(props, detailProps, actionRef) {
 
       return null;
     },
-    [detailProps, handleReload, idField, updateProps],
+    [detailProps, handleReload, idField, updateProps, t],
   );
 
   const deleteOperate = useCallback(
@@ -196,7 +200,7 @@ function useOperate(props, detailProps, actionRef) {
 
   const newColumns = useMemo(() => {
     const operateColumn = {
-      title: '操作',
+      title: t('core.crud.operate', '操作'),
       fixed: 'right',
       align: 'center',
       width: operateColumnProps?.width || 120,
@@ -253,6 +257,7 @@ function useOperate(props, detailProps, actionRef) {
     readDetailOperate,
     updateOperate,
     deleteOperate,
+    t,
   ]);
 
   return {

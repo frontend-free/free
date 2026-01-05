@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { useImperativeHandle, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import stringify from 'safe-stable-stringify';
 import { useGlobalInfiniteScroll } from '../ahooks/use_global_infinite_scroll';
 
@@ -34,6 +35,7 @@ const InfiniteListBase = <D, P>({
   gridClassName,
   className,
 }: InfiniteListProps<D, P>) => {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
 
   const { data, loading, loadingMore, noMore, mutate, reload } = useGlobalInfiniteScroll(
@@ -103,8 +105,16 @@ const InfiniteListBase = <D, P>({
         </div>
       )}
       <div className="flex w-full items-center justify-center">
-        {noMore && <div className="my-5 text-center text-03">没有更多数据</div>}
-        {loadingMore && <div className="my-5 text-center text-03">加载更多数据中...</div>}
+        {noMore && (
+          <div className="my-5 text-center text-03">
+            {t('core.infiniteList.noMoreData', '没有更多数据')}
+          </div>
+        )}
+        {loadingMore && (
+          <div className="my-5 text-center text-03">
+            {t('core.infiniteList.loadingMore', '加载更多数据中...')}
+          </div>
+        )}
       </div>
     </div>
   );
