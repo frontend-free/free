@@ -1,5 +1,11 @@
 # @fe-free/icons
 
+## 4.1.1
+
+### Patch Changes
+
+- feat: i18n
+
 ## 4.0.5
 
 ## 4.0.4
