@@ -1,4 +1,4 @@
-import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@fe-free/icons';
+import { CloseOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@fe-free/icons';
 import type { UploadProps as AntdUploadProps, UploadFile } from 'antd';
 import { Upload as AntdUpload, App, Avatar, Button } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
@@ -272,37 +272,39 @@ interface AvatarImageUploadProps {
 }
 function AvatarImageUpload(props: AvatarImageUploadProps) {
   const { value, onChange, action, customRequest, accept = 'image/*', headers } = props;
-  const { t } = useTranslation();
 
   return (
-    <div className="flex gap-2">
-      <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
-
-      <div className="flex flex-1 flex-col justify-between">
-        <div className="text-03">{t('@fe-free/core.upload.pleaseSelect', '请选择')}</div>
-        <div className="flex gap-2">
-          <AntdUpload
-            action={action}
-            customRequest={customRequest}
-            onChange={(info) => {
-              const url = info.file.response?.data?.url;
-              if (url) {
-                onChange?.(url);
-              }
-            }}
-            itemRender={() => null}
-            accept={accept}
-            headers={headers}
-          >
-            <Button icon={<UploadOutlined />}>
-              {t('@fe-free/core.upload.localUpload', '本地上传')}
-            </Button>
-          </AntdUpload>
-          <Button icon={<DeleteOutlined />} danger onClick={() => onChange?.()}>
-            {t('@fe-free/core.upload.delete', '删除')}
-          </Button>
-        </div>
-      </div>
+    <div>
+      <AntdUpload
+        action={action}
+        customRequest={customRequest}
+        onChange={(info) => {
+          const url = info.file.response?.data?.url;
+          if (url) {
+            onChange?.(url);
+          }
+        }}
+        accept={accept}
+        headers={headers}
+        itemRender={() => null}
+      >
+        {value ? (
+          <div className="group relative h-20 w-20">
+            <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
+            <CloseOutlined
+              className="absolute right-1 top-1 cursor-pointer rounded-full bg-black/50 p-1 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100"
+              onClick={(e) => {
+                e.stopPropagation();
+                onChange?.();
+              }}
+            />
+          </div>
+        ) : (
+          <div className="flex h-20 w-20 cursor-pointer items-center justify-center rounded bg-01 shadow transition-colors hover:bg-02">
+            <PlusOutlined className="text-xl text-02" />
+          </div>
+        )}
+      </AntdUpload>
     </div>
   );
 }

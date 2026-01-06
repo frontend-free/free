@@ -141,7 +141,7 @@ function UploadFileItem({ file, onDelete }: { file: UploadFile; onDelete: () => 
           className="h-[53px] w-[53px] rounded-lg border border-01 bg-01 object-cover"
         />
       ) : (
-        <div className="flex h-[53px] w-[200px] items-center overflow-hidden rounded bg-01 px-1">
+        <div className="flex h-[53px] w-[200px] items-center rounded bg-01 px-1">
           <div className="min-w-0">
             <FileCard name={file.name} size={file.size} />
           </div>
