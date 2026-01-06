@@ -289,7 +289,7 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
         itemRender={() => null}
       >
         {value ? (
-          <div className="group relative h-20 w-20">
+          <div className="group relative h-20 w-20 cursor-pointer">
             <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
             <CloseOutlined
               className="absolute right-1 top-1 cursor-pointer rounded-full bg-black/50 p-1 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100"
