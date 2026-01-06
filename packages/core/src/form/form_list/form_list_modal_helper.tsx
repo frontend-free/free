@@ -65,6 +65,7 @@ function Edit<T>(props: {
 
 function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) {
   const options = props.value || emptyArr;
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col gap-2">
