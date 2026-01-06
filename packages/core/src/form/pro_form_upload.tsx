@@ -8,7 +8,6 @@ import type {
   ImageUploadProps,
   UploadDraggerProps,
   UploadProps,
-  UploadSingleAvatarProps,
 } from '../upload';
 import {
   AvatarImageUpload,
@@ -16,7 +15,6 @@ import {
   ImageUploadDragger,
   Upload,
   UploadDragger,
-  UploadSingleAvatar,
 } from '../upload';
 
 function ProFormUpload(props: ProFormItemProps<UploadProps>) {
@@ -97,20 +95,10 @@ function ProFormImageUploadDragger(props: ProFormItemProps<ImageUploadDraggerPro
   );
 }
 
-function ProFormUploadAvatar(props: ProFormItemProps<UploadSingleAvatarProps>) {
-  const { fieldProps, ...rest } = props;
-
-  return (
-    <ProForm.Item {...rest}>
-      <UploadSingleAvatar {...fieldProps} />
-    </ProForm.Item>
-  );
-}
 export {
   ProFormAvatarImageUpload,
   ProFormImageUpload,
   ProFormImageUploadDragger,
   ProFormUpload,
-  ProFormUploadAvatar,
   ProFormUploadDragger,
 };
