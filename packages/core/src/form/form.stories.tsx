@@ -19,6 +19,7 @@ import {
 import { sleep } from '@fe-free/tool';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { ProFormUploadAvatar } from './pro_form_upload';
 
 const meta: Meta<typeof ProForm> = {
   title: '@fe-free/core/Form',
@@ -287,6 +288,13 @@ export const ProFormUploadComponent: Story = {
         label="files_picture_card"
         name="files_picture_card"
         fieldProps={{ multiple: true, maxCount: 2, listType: 'picture-card', customRequest }}
+      />
+      <ProFormUploadAvatar
+        label="avatar"
+        name="avatar"
+        fieldProps={{
+          customRequest,
+        }}
       />
     </ProFormBase>
   ),

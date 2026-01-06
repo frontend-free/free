@@ -1,4 +1,10 @@
-import { DeleteOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@fe-free/icons';
+import {
+  CloseOutlined,
+  DeleteOutlined,
+  InboxOutlined,
+  PlusOutlined,
+  UploadOutlined,
+} from '@fe-free/icons';
 import type { UploadProps as AntdUploadProps, UploadFile } from 'antd';
 import { Upload as AntdUpload, App, Avatar, Button } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
@@ -307,11 +313,58 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
   );
 }
 
-export { AvatarImageUpload, ImageUpload, ImageUploadDragger, Upload, UploadDragger };
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface UploadSingleAvatarProps extends AvatarImageUploadProps {}
+
+function UploadSingleAvatar(props: UploadSingleAvatarProps) {
+  const { value, onChange, action, customRequest, accept = 'image/*', headers } = props;
+
+  return (
+    <div>
+      {value ? (
+        <div className="group relative h-20 w-20">
+          <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
+          <CloseOutlined
+            className="absolute right-1 top-1 cursor-pointer rounded-full bg-black/50 p-1 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100"
+            onClick={() => onChange?.()}
+          />
+        </div>
+      ) : (
+        <AntdUpload
+          action={action}
+          customRequest={customRequest}
+          onChange={(info) => {
+            const url = info.file.response?.data?.url;
+            if (url) {
+              onChange?.(url);
+            }
+          }}
+          accept={accept}
+          headers={headers}
+          itemRender={() => null}
+        >
+          <div className="flex h-20 w-20 cursor-pointer items-center justify-center rounded bg-01 shadow transition-colors hover:bg-02">
+            <PlusOutlined className="text-xl text-02" />
+          </div>
+        </AntdUpload>
+      )}
+    </div>
+  );
+}
+
+export {
+  AvatarImageUpload,
+  ImageUpload,
+  ImageUploadDragger,
+  Upload,
+  UploadDragger,
+  UploadSingleAvatar,
+};
 export type {
   AvatarImageUploadProps,
   ImageUploadDraggerProps,
   ImageUploadProps,
   UploadDraggerProps,
   UploadProps,
+  UploadSingleAvatarProps,
 };
