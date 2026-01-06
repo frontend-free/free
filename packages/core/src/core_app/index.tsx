@@ -28,7 +28,10 @@ function CheckUpdate({ basename }: { basename: string }) {
     const mainScript = document.querySelector('[data-name="mainScript"]');
     if (!mainScript) {
       console.log(
-        t('core.app.mainScriptNotFound', '没找到 [data-name="mainScript"]，不启用更新提醒'),
+        t(
+          '@fe-free/core.app.mainScriptNotFound',
+          '没找到 [data-name="mainScript"]，不启用更新提醒',
+        ),
       );
       return;
     }
@@ -51,10 +54,10 @@ function CheckUpdate({ basename }: { basename: string }) {
       }
 
       modal.confirm({
-        title: t('core.app.newVersionFound', '发现新版本'),
-        content: t('core.app.refreshPrompt', '请及时刷新页面更新，以避免影响使用'),
-        okText: t('core.app.refresh', '刷新'),
-        cancelText: t('core.app.updateLater', '稍后更新'),
+        title: t('@fe-free/core.app.newVersionFound', '发现新版本'),
+        content: t('@fe-free/core.app.refreshPrompt', '请及时刷新页面更新，以避免影响使用'),
+        okText: t('@fe-free/core.app.refresh', '刷新'),
+        cancelText: t('@fe-free/core.app.updateLater', '稍后更新'),
         onOk: () => {
           window.location.reload();
         },

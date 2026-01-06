@@ -16,7 +16,10 @@ function useTips<DataSource, Key>(props: CRUDProps<DataSource, Key>) {
       }
       if (!props.detailForm) {
         console.warn(
-          t('core.crud.warnCreateDetailForm', 'actions 包含 create 时，需要传递 detailForm'),
+          t(
+            '@fe-free/core.crud.warnCreateDetailForm',
+            'actions 包含 create 时，需要传递 detailForm',
+          ),
         );
       }
     }
@@ -32,7 +35,7 @@ function useTips<DataSource, Key>(props: CRUDProps<DataSource, Key>) {
       }
       if (!props.detailForm) {
         console.warn(
-          t('core.crud.warnReadDetailForm', 'actions 包含 read 时，需要传递 detailForm'),
+          t('@fe-free/core.crud.warnReadDetailForm', 'actions 包含 read 时，需要传递 detailForm'),
         );
       }
     }
@@ -48,7 +51,10 @@ function useTips<DataSource, Key>(props: CRUDProps<DataSource, Key>) {
       }
       if (!props.detailForm) {
         console.warn(
-          t('core.crud.warnUpdateDetailForm', 'actions 包含 update 时，需要传递 detailForm'),
+          t(
+            '@fe-free/core.crud.warnUpdateDetailForm',
+            'actions 包含 update 时，需要传递 detailForm',
+          ),
         );
       }
     }

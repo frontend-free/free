@@ -46,7 +46,7 @@ function SearchRender(props: {
   const { t } = useTranslation();
   return (
     <Input
-      placeholder={props.placeholder ?? t('core.crudOfList.searchPlaceholder', '输入搜索')}
+      placeholder={props.placeholder ?? t('@fe-free/core.crudOfList.searchPlaceholder', '输入搜索')}
       allowClear
       value={props.value}
       onChange={(e) => props.onChange(e.target.value)}

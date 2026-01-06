@@ -107,12 +107,12 @@ const InfiniteListBase = <D, P>({
       <div className="flex w-full items-center justify-center">
         {noMore && (
           <div className="my-5 text-center text-03">
-            {t('core.infiniteList.noMoreData', '没有更多数据')}
+            {t('@fe-free/core.infiniteList.noMoreData', '没有更多数据')}
           </div>
         )}
         {loadingMore && (
           <div className="my-5 text-center text-03">
-            {t('core.infiniteList.loadingMore', '加载更多数据中...')}
+            {t('@fe-free/core.infiniteList.loadingMore', '加载更多数据中...')}
           </div>
         )}
       </div>

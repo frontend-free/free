@@ -22,7 +22,7 @@ function Item({
       </div>
       <Input
         value={value}
-        placeholder={t('core.record.inputPlaceholder', '请输入')}
+        placeholder={t('@fe-free/core.record.inputPlaceholder', '请输入')}
         onChange={(e) => {
           onChange(e.target.value);
         }}

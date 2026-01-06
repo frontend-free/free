@@ -29,7 +29,7 @@ function useOperate(props, detailProps, actionRef) {
     (record) => {
       return () => {
         if (requestDeleteByRecord) {
-          let content = t('core.crud.deleteSuccess', '删除成功');
+          let content = t('@fe-free/core.crud.deleteSuccess', '删除成功');
           if (deleteProps?.successText) {
             content = isString(deleteProps.successText)
               ? deleteProps.successText
@@ -45,7 +45,7 @@ function useOperate(props, detailProps, actionRef) {
         }
 
         throw new Error(
-          t('core.crud.requestDeleteByRecordRequired', '没有传 requestDeleteByRecord'),
+          t('@fe-free/core.crud.requestDeleteByRecordRequired', '没有传 requestDeleteByRecord'),
         );
       };
     },
@@ -66,7 +66,7 @@ function useOperate(props, detailProps, actionRef) {
         if (disabled) {
           return (
             <OperateBtn
-              title={t('core.crud.read', '查看')}
+              title={t('@fe-free/core.crud.read', '查看')}
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               disabled
@@ -81,7 +81,7 @@ function useOperate(props, detailProps, actionRef) {
               onSuccess={handleReload}
               trigger={
                 <OperateBtn
-                  title={t('core.crud.read', '查看')}
+                  title={t('@fe-free/core.crud.read', '查看')}
                   icon={<EyeOutlined />}
                   operateText={readProps?.operateText}
                 />
@@ -105,7 +105,7 @@ function useOperate(props, detailProps, actionRef) {
         if (disabled) {
           return (
             <OperateBtn
-              title={t('core.crud.read', '查看')}
+              title={t('@fe-free/core.crud.read', '查看')}
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               disabled
@@ -114,7 +114,7 @@ function useOperate(props, detailProps, actionRef) {
         } else {
           return (
             <OperateBtn
-              title={t('core.crud.read', '查看')}
+              title={t('@fe-free/core.crud.read', '查看')}
               icon={<EyeOutlined />}
               operateText={readProps?.operateText}
               onClick={() => {
@@ -145,7 +145,7 @@ function useOperate(props, detailProps, actionRef) {
         if (disabled) {
           return (
             <OperateBtn
-              title={t('core.crud.update', '编辑')}
+              title={t('@fe-free/core.crud.update', '编辑')}
               icon={<EditOutlined />}
               operateText={updateProps?.operateText}
               disabled
@@ -160,7 +160,7 @@ function useOperate(props, detailProps, actionRef) {
               onSuccess={handleReload}
               trigger={
                 <OperateBtn
-                  title={t('core.crud.update', '编辑')}
+                  title={t('@fe-free/core.crud.update', '编辑')}
                   icon={<EditOutlined />}
                   operateText={updateProps?.operateText}
                 />
@@ -200,7 +200,7 @@ function useOperate(props, detailProps, actionRef) {
 
   const newColumns = useMemo(() => {
     const operateColumn = {
-      title: t('core.crud.operate', '操作'),
+      title: t('@fe-free/core.crud.operate', '操作'),
       fixed: 'right',
       align: 'center',
       width: operateColumnProps?.width || 120,

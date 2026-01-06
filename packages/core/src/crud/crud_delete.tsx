@@ -20,10 +20,10 @@ function useDelete(params: Params) {
   const doDelete = useCallback(async () => {
     await new Promise((resolve) => {
       modal.confirm({
-        title: t('core.crud.deleteConfirm', '确认删除 "{name}" 吗？', { name }),
-        content: desc || t('core.crud.deleteWarning', '删除后不可恢复，请谨慎操作'),
-        okText: t('core.crud.confirm', '确定'),
-        cancelText: t('core.crud.cancel', '取消'),
+        title: t('@fe-free/core.crud.deleteConfirm', '确认删除 "{name}" 吗？', { name }),
+        content: desc || t('@fe-free/core.crud.deleteWarning', '删除后不可恢复，请谨慎操作'),
+        okText: t('@fe-free/core.crud.confirm', '确定'),
+        cancelText: t('@fe-free/core.crud.cancel', '取消'),
         onOk: () => {
           resolve(onDelete());
         },
@@ -46,7 +46,7 @@ function OperateDelete(props: Params) {
 
   return (
     <OperateBtn
-      title={t('core.crud.delete', '删除')}
+      title={t('@fe-free/core.crud.delete', '删除')}
       icon={<DeleteOutlined />}
       operateText={operateText}
       disabled={disabled}

@@ -64,7 +64,7 @@ function CRUDDetail(props: CRUDDetailProps) {
         if (action === 'create' && requestCreateByValues) {
           result = await requestCreateByValues(values);
 
-          let content = t('core.crud.createSuccess', '新建成功');
+          let content = t('@fe-free/core.crud.createSuccess', '新建成功');
           if (createProps?.successText) {
             content = isString(createProps.successText)
               ? createProps.successText
@@ -79,7 +79,7 @@ function CRUDDetail(props: CRUDDetailProps) {
         if (action === 'update' && requestUpdateByValues) {
           result = await requestUpdateByValues(values);
 
-          let content = t('core.crud.updateSuccess', '更新成功');
+          let content = t('@fe-free/core.crud.updateSuccess', '更新成功');
           if (updateProps?.successText) {
             content = isString(updateProps.successText)
               ? updateProps.successText
@@ -182,13 +182,13 @@ function CRUDDetail(props: CRUDDetailProps) {
 
   const title = useMemo(() => {
     if (action === 'create') {
-      return t('core.crud.create', '新建');
+      return t('@fe-free/core.crud.create', '新建');
     }
     if (action === 'read') {
-      return t('core.crud.read', '查看');
+      return t('@fe-free/core.crud.read', '查看');
     }
     if (action === 'update') {
-      return t('core.crud.update', '编辑');
+      return t('@fe-free/core.crud.update', '编辑');
     }
 
     return '';
@@ -197,8 +197,8 @@ function CRUDDetail(props: CRUDDetailProps) {
   const submitter = useMemo(() => {
     const result = {
       searchConfig: {
-        submitText: t('core.crud.confirm', '确定'),
-        resetText: t('core.crud.cancel', '取消'),
+        submitText: t('@fe-free/core.crud.confirm', '确定'),
+        resetText: t('@fe-free/core.crud.cancel', '取消'),
       },
     };
     if (action === 'create') {

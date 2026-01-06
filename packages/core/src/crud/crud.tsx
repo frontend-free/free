@@ -104,7 +104,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
 
     if (actions.includes('batch_delete') && requestDeleteByRecords) {
       const batchDeleteAction = {
-        btnText: t('core.crud.batchDelete', '批量删除'),
+        btnText: t('@fe-free/core.crud.batchDelete', '批量删除'),
         danger: true,
         onClick: async (_, { selectedRows }) => {
           await requestDeleteByRecords(selectedRows);

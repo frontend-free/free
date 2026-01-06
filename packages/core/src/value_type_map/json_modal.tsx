@@ -12,7 +12,7 @@ interface JSONModalProps extends EditorJSONProps {
 
 function Render(text, props: ProFormItemProps<JSONModalProps>) {
   const { t } = useTranslation();
-  const { title = t('core.valueTypeMap.view', '查看') } = props.fieldProps || {};
+  const { title = t('@fe-free/core.valueTypeMap.view', '查看') } = props.fieldProps || {};
 
   const [show, setShow] = useState(false);
 

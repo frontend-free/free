@@ -67,7 +67,7 @@ function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
       </PageLayout>
       {maximize && (
         <Modal
-          title={t('core.dataViewer.view', '查看')}
+          title={t('@fe-free/core.dataViewer.view', '查看')}
           open
           width={'80vw'}
           onCancel={() => setMaximize(false)}

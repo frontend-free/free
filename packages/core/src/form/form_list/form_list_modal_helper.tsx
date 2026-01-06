@@ -44,7 +44,11 @@ function Edit<T>(props: {
 
   return (
     <ModalForm
-      title={props.values ? t('core.formList.edit', '编辑') : t('core.formList.add', '添加')}
+      title={
+        props.values
+          ? t('@fe-free/core.formList.edit', '编辑')
+          : t('@fe-free/core.formList.add', '添加')
+      }
       trigger={props.children}
       onFinish={handleFinish}
       formRef={props?.editForm}
@@ -121,7 +125,7 @@ function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) 
           >
             {props.addTrigger || (
               <Button size="small" icon={<PlusOutlined />}>
-                {t('core.formList.add', '添加')}
+                {t('@fe-free/core.formList.add', '添加')}
               </Button>
             )}
           </Edit>

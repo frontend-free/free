@@ -87,7 +87,7 @@ function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
               props.onChange?.(newOptions);
             }}
           >
-            {props.addText || t('core.formList.add', '添加')}
+            {props.addText || t('@fe-free/core.formList.add', '添加')}
           </Button>
         </div>
       )}

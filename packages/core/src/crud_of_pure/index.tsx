@@ -32,8 +32,12 @@ function CRUDOfPure<
         fieldProps: {
           placeholder:
             column.valueType === 'select' || column.valueEnum
-              ? t('core.crudOfPure.selectPlaceholder', '请选择{title}', { title: column.title })
-              : t('core.crudOfPure.inputPlaceholder', '请输入{title}', { title: column.title }),
+              ? t('@fe-free/core.crudOfPure.selectPlaceholder', '请选择{title}', {
+                  title: column.title,
+                })
+              : t('@fe-free/core.crudOfPure.inputPlaceholder', '请输入{title}', {
+                  title: column.title,
+                }),
           ...column.fieldProps,
         },
       };

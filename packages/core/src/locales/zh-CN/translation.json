@@ -1,5 +1,5 @@
 {
-  "core": {
+  "@fe-free/core": {
     "app": {
       "mainScriptNotFound": "没找到 [data-name=\"mainScript\"]，不启用更新提醒",
       "newVersionFound": "发现新版本",
@@ -25,19 +25,12 @@
       "selectedItems": "已选 {num} 项",
       "update": "编辑",
       "updateSuccess": "更新成功",
-      "warnBatchDeleteRequestDeleteByRecords": "actions 包含 batch_delete 时，需要传递 requestDeleteByRecords",
       "warnCreateDetailForm": "actions 包含 create 时，需要传递 detailForm",
-      "warnCreateRequestCreateByValues": "actions 包含 create 时，需要传递 requestCreateByValues",
-      "warnDeleteProps": "actions 包含 delete 时，需要传递 deleteProps 和 requestDeleteByRecord",
       "warnReadDetailForm": "actions 包含 read 时，需要传递 detailForm",
-      "warnReadRequestGetByRecord": "actions 包含 read 时，需要传递 requestGetByRecord",
-      "warnUpdateDetailForm": "actions 包含 update 时，需要传递 detailForm",
-      "warnUpdateRequest": "actions 包含 update 时，需要传递 requestGetByRecord 和 requestUpdateByValues"
+      "warnUpdateDetailForm": "actions 包含 update 时，需要传递 detailForm"
     },
     "crudOfList": {
-      "searchPlaceholder": "输入搜索",
-      "warnAtLeastOneSearch": "CRUDOfList 的 columns 中至少有一个 search 为 true 的列",
-      "warnOnlyOneSearch": "CRUDOfList 的 columns 中只能有一个 search 为 true 的列"
+      "searchPlaceholder": "输入搜索"
     },
     "crudOfPure": {
       "inputPlaceholder": "请输入{title}",
@@ -76,6 +69,19 @@
     },
     "valueTypeMap": {
       "view": "查看"
+    }
+  },
+  "core": {
+    "crud": {
+      "warnBatchDeleteRequestDeleteByRecords": "actions 包含 batch_delete 时，需要传递 requestDeleteByRecords",
+      "warnCreateRequestCreateByValues": "actions 包含 create 时，需要传递 requestCreateByValues",
+      "warnDeleteProps": "actions 包含 delete 时，需要传递 deleteProps 和 requestDeleteByRecord",
+      "warnReadRequestGetByRecord": "actions 包含 read 时，需要传递 requestGetByRecord",
+      "warnUpdateRequest": "actions 包含 update 时，需要传递 requestGetByRecord 和 requestUpdateByValues"
+    },
+    "crudOfList": {
+      "warnAtLeastOneSearch": "CRUDOfList 的 columns 中至少有一个 search 为 true 的列",
+      "warnOnlyOneSearch": "CRUDOfList 的 columns 中只能有一个 search 为 true 的列"
     }
   }
 }

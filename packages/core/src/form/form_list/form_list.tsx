@@ -123,19 +123,19 @@ function ProFormListText(props: ProFormItemProps<ListTextProps>) {
             if (value) {
               if (fieldProps?.isValueLabel) {
                 if (value?.some((item) => item.value === undefined || item.value === '')) {
-                  return Promise.reject(t('core.formList.emptyOption', '存在空选项'));
+                  return Promise.reject(t('@fe-free/core.formList.emptyOption', '存在空选项'));
                 }
                 // 不能有重复的 value
                 if (uniqBy(value, 'value').length !== value.length) {
-                  return Promise.reject(t('core.formList.duplicateValue', '不能有重复'));
+                  return Promise.reject(t('@fe-free/core.formList.duplicateValue', '不能有重复'));
                 }
               } else {
                 if (value?.some((item) => item === undefined || item === '')) {
-                  return Promise.reject(t('core.formList.emptyOption', '存在空选项'));
+                  return Promise.reject(t('@fe-free/core.formList.emptyOption', '存在空选项'));
                 }
                 // 不能有重复的 value
                 if (uniq(value).length !== value.length) {
-                  return Promise.reject(t('core.formList.duplicateValue', '不能有重复'));
+                  return Promise.reject(t('@fe-free/core.formList.duplicateValue', '不能有重复'));
                 }
               }
             }
@@ -166,19 +166,19 @@ function ProFormListNumber(props: ProFormItemProps<ListNumberProps>) {
             if (value) {
               if (fieldProps?.isValueLabel) {
                 if (value?.some((item) => item.value === undefined || item.value === null)) {
-                  return Promise.reject(t('core.formList.emptyOption', '存在空选项'));
+                  return Promise.reject(t('@fe-free/core.formList.emptyOption', '存在空选项'));
                 }
                 // 不能有重复的 value
                 if (uniqBy(value, 'value').length !== value.length) {
-                  return Promise.reject(t('core.formList.duplicateValue', '不能有重复'));
+                  return Promise.reject(t('@fe-free/core.formList.duplicateValue', '不能有重复'));
                 }
               } else {
                 if (value?.some((item) => item === undefined || item === null)) {
-                  return Promise.reject(t('core.formList.emptyOption', '存在空选项'));
+                  return Promise.reject(t('@fe-free/core.formList.emptyOption', '存在空选项'));
                 }
                 // 不能有重复的 value
                 if (uniq(value).length !== value.length) {
-                  return Promise.reject(t('core.formList.duplicateValue', '不能有重复'));
+                  return Promise.reject(t('@fe-free/core.formList.duplicateValue', '不能有重复'));
                 }
               }
             }

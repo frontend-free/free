@@ -71,9 +71,13 @@ function useUpload(
         const index = fl.findIndex((item) => item.uid === f.uid);
         if (index >= maxCount - fileList.length) {
           message.warning(
-            t('core.upload.maxFilesWarning', '最多只能上传 {num} 个文件，超出部分会忽略。', {
-              num: maxCount,
-            }),
+            t(
+              '@fe-free/core.upload.maxFilesWarning',
+              '最多只能上传 {num} 个文件，超出部分会忽略。',
+              {
+                num: maxCount,
+              },
+            ),
           );
         }
       }
@@ -112,13 +116,13 @@ function DefaultChildren(
     return (
       <button style={{ border: 0, background: 'none' }} type="button" disabled={isDisabled}>
         <PlusOutlined />
-        <div style={{ marginTop: 8 }}>{t('core.upload.localUpload', '本地上传')}</div>
+        <div style={{ marginTop: 8 }}>{t('@fe-free/core.upload.localUpload', '本地上传')}</div>
       </button>
     );
   }
   return (
     <Button icon={<UploadOutlined />} disabled={isDisabled}>
-      {t('core.upload.localUpload', '本地上传')}
+      {t('@fe-free/core.upload.localUpload', '本地上传')}
       {showCount && multiple ? `（${fileList.length}/${maxCount}）` : ''}
     </Button>
   );
@@ -187,7 +191,7 @@ function UploadDragger(props: UploadDraggerProps) {
         return (
           <div>
             <div className="py-1">
-              {t('core.upload.fileCount', '文件数量 ({success}/{total})', {
+              {t('@fe-free/core.upload.fileCount', '文件数量 ({success}/{total})', {
                 success: successList.length,
                 total: fileList.length,
               })}
@@ -238,7 +242,7 @@ function UploadDragger(props: UploadDraggerProps) {
             '!text-03': isDisabled,
           })}
         >
-          {title || t('core.upload.dragUpload', '点击或拖拽到此区域进行上传')}
+          {title || t('@fe-free/core.upload.dragUpload', '点击或拖拽到此区域进行上传')}
         </p>
         {description && <p className={classNames('ant-upload-hint')}>{description}</p>}
       </div>
@@ -275,7 +279,7 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
       <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
 
       <div className="flex flex-1 flex-col justify-between">
-        <div className="text-03">{t('core.upload.pleaseSelect', '请选择')}</div>
+        <div className="text-03">{t('@fe-free/core.upload.pleaseSelect', '请选择')}</div>
         <div className="flex gap-2">
           <AntdUpload
             action={action}
@@ -290,10 +294,12 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
             accept={accept}
             headers={headers}
           >
-            <Button icon={<UploadOutlined />}>{t('core.upload.localUpload', '本地上传')}</Button>
+            <Button icon={<UploadOutlined />}>
+              {t('@fe-free/core.upload.localUpload', '本地上传')}
+            </Button>
           </AntdUpload>
           <Button icon={<DeleteOutlined />} danger onClick={() => onChange?.()}>
-            {t('core.upload.delete', '删除')}
+            {t('@fe-free/core.upload.delete', '删除')}
           </Button>
         </div>
       </div>

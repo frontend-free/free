@@ -1,10 +1,10 @@
 {
-  "core": {
+  "@fe-free/core": {
     "app": {
-      "mainScriptNotFound": "[data-name=\"mainScript\"] not found, update reminder disabled",
+      "mainScriptNotFound": "Could not find [data-name=\"mainScript\"], update reminder is disabled",
       "newVersionFound": "New version found",
       "refresh": "Refresh",
-      "refreshPrompt": "Please refresh the page in time to update, to avoid affecting usage",
+      "refreshPrompt": "Please refresh the page in time to update to avoid affecting usage",
       "updateLater": "Update later"
     },
     "crud": {
@@ -18,26 +18,19 @@
       "delete": "Delete",
       "deleteConfirm": "Are you sure you want to delete \"{name}\"?",
       "deleteSuccess": "Deleted successfully",
-      "deleteWarning": "Deletion cannot be undone, please proceed with caution",
-      "operate": "Operate",
+      "deleteWarning": "This action cannot be undone, please proceed with caution",
+      "operate": "Actions",
       "read": "View",
       "requestDeleteByRecordRequired": "requestDeleteByRecord is required",
-      "selectedItems": "Selected {num} item(s)",
+      "selectedItems": "{num} items selected",
       "update": "Edit",
       "updateSuccess": "Updated successfully",
-      "warnBatchDeleteRequestDeleteByRecords": "requestDeleteByRecords is required when actions includes batch_delete",
-      "warnCreateDetailForm": "detailForm is required when actions includes create",
-      "warnCreateRequestCreateByValues": "requestCreateByValues is required when actions includes create",
-      "warnDeleteProps": "deleteProps and requestDeleteByRecord are required when actions includes delete",
-      "warnReadDetailForm": "detailForm is required when actions includes read",
-      "warnReadRequestGetByRecord": "requestGetByRecord is required when actions includes read",
-      "warnUpdateDetailForm": "detailForm is required when actions includes update",
-      "warnUpdateRequest": "requestGetByRecord and requestUpdateByValues are required when actions includes update"
+      "warnCreateDetailForm": "detailForm is required when actions include create",
+      "warnReadDetailForm": "detailForm is required when actions include read",
+      "warnUpdateDetailForm": "detailForm is required when actions include update"
     },
     "crudOfList": {
-      "searchPlaceholder": "Enter search",
-      "warnAtLeastOneSearch": "At least one column with search set to true is required in CRUDOfList columns",
-      "warnOnlyOneSearch": "Only one column with search set to true is allowed in CRUDOfList columns"
+      "searchPlaceholder": "Enter search"
     },
     "crudOfPure": {
       "inputPlaceholder": "Please enter {title}",
@@ -55,7 +48,7 @@
     },
     "formList": {
       "add": "Add",
-      "duplicateValue": "Duplicates are not allowed",
+      "duplicateValue": "Duplicate values are not allowed",
       "edit": "Edit",
       "emptyOption": "Empty option exists"
     },
@@ -71,11 +64,24 @@
       "dragUpload": "Click or drag files to this area to upload",
       "fileCount": "File count ({success}/{total})",
       "localUpload": "Local upload",
-      "maxFilesWarning": "A maximum of {num} file(s) can be uploaded, the excess will be ignored.",
+      "maxFilesWarning": "Only {num} files can be uploaded at most, excess files will be ignored.",
       "pleaseSelect": "Please select"
     },
     "valueTypeMap": {
       "view": "View"
+    }
+  },
+  "core": {
+    "crud": {
+      "warnBatchDeleteRequestDeleteByRecords": "requestDeleteByRecords is required when actions include batch_delete",
+      "warnCreateRequestCreateByValues": "requestCreateByValues is required when actions include create",
+      "warnDeleteProps": "deleteProps and requestDeleteByRecord are required when actions include delete",
+      "warnReadRequestGetByRecord": "requestGetByRecord is required when actions include read",
+      "warnUpdateRequest": "requestGetByRecord and requestUpdateByValues are required when actions include update"
+    },
+    "crudOfList": {
+      "warnAtLeastOneSearch": "At least one column with search set to true is required in CRUDOfList columns",
+      "warnOnlyOneSearch": "Only one column with search set to true is allowed in CRUDOfList columns"
     }
   }
 }
