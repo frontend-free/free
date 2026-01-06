@@ -4,6 +4,7 @@ import type { UploadFile } from 'antd';
 import { App, Button, Dropdown, Input, Modal, Upload } from 'antd';
 import type { RefObject } from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FilesIcon from '../svgs/files.svg?react';
 import type { SenderProps } from './types';
 
@@ -18,6 +19,7 @@ function FileAction(
   const { filesMaxCount } = allowUpload || {};
 
   const { message } = App.useApp();
+  const { t } = useTranslation();
 
   const [url, setUrl] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
@@ -31,7 +33,7 @@ function FileAction(
           items: [
             {
               key: 'add-file',
-              label: '添加图片或文件',
+              label: t('@fe-free/ai.sender.addImageOrFile', '添加图片或文件'),
               icon: <Icons component={FilesIcon} />,
               onClick: () => {
                 refUpload.current?.click();
@@ -39,7 +41,7 @@ function FileAction(
             },
             {
               key: 'add-file-url',
-              label: '添加文件URL',
+              label: t('@fe-free/ai.sender.addFileUrl', '添加文件URL'),
               icon: <Icons component={LinkOutlined} />,
               onClick: () => {
                 setUrl('');
@@ -54,12 +56,16 @@ function FileAction(
       </Dropdown>
       {open && (
         <Modal
-          title="添加文件URL"
+          title={t('@fe-free/ai.sender.addFileUrl', '添加文件URL')}
           open
           onCancel={() => setOpen(false)}
           onOk={() => {
             if (filesMaxCount && value?.files && value.files.length >= filesMaxCount) {
-              message.warning(`超过最大上传数量${filesMaxCount}`);
+              message.warning(
+                t('@fe-free/ai.sender.exceedMaxUploadCount', '超过最大上传数量{count}', {
+                  count: filesMaxCount,
+                }),
+              );
               return;
             }
 
@@ -70,7 +76,7 @@ function FileAction(
           }}
         >
           <Input.TextArea
-            placeholder="请输入文件URL"
+            placeholder={t('@fe-free/ai.sender.pleaseEnterFileUrl', '请输入文件URL')}
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
@@ -92,6 +98,7 @@ function FileUpload(
   const { uploadAction, filesMaxCount } = allowUpload || {};
 
   const { message } = App.useApp();
+  const { t } = useTranslation();
 
   return (
     <Upload.Dragger
@@ -102,7 +109,11 @@ function FileUpload(
       maxCount={uploadMaxCount ? uploadMaxCount + 1 : undefined}
       onChange={(info) => {
         if (uploadMaxCount && info.fileList.length > uploadMaxCount) {
-          message.warning(`超过最大上传数量${filesMaxCount}`);
+          message.warning(
+            t('@fe-free/ai.sender.exceedMaxUploadCount', '超过最大上传数量{count}', {
+              count: filesMaxCount,
+            }),
+          );
 
           setFileList(info.fileList.slice(-uploadMaxCount));
           return;
@@ -111,7 +122,7 @@ function FileUpload(
         setFileList(info.fileList);
       }}
     >
-      <div ref={refUpload}>在此处拖放文件</div>
+      <div ref={refUpload}>{t('@fe-free/ai.sender.dragFileHere', '在此处拖放文件')}</div>
     </Upload.Dragger>
   );
 }

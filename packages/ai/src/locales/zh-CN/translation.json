@@ -1,0 +1,13 @@
+{
+  "@fe-free/ai": {
+    "sender": {
+      "addFileUrl": "添加文件URL",
+      "addImageOrFile": "添加图片或文件",
+      "aiGeneratedDisclaimer": "内容由 AI 生成，无法确保信息的真实准确，仅供参考",
+      "describeYourQuestion": "描述你的问题",
+      "dragFileHere": "在此处拖放文件",
+      "exceedMaxUploadCount": "超过最大上传数量{count}",
+      "pleaseEnterFileUrl": "请输入文件URL"
+    }
+  }
+}

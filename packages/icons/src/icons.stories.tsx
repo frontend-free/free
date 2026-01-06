@@ -1,4 +1,3 @@
-import { DeleteOutlined } from '@ant-design/icons';
 import * as Icons from '@fe-free/icons';
 import { copyToClipboard } from '@fe-free/tool';
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -152,9 +151,6 @@ export const Usages: Story = {
 
       <div className="text-2xl">
         @fe-free/icons 图标 <Icons.DeleteOutlined />
-      </div>
-      <div className="text-2xl">
-        @ant-design/icons 图标 <DeleteOutlined />
       </div>
     </div>
   ),

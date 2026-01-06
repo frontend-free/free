@@ -10,10 +10,12 @@ import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import i18n from 'i18next';
 import coreEnTranslation from '@fe-free/core/src/locales/en-US/translation.json';
+import aiEnTranslation from '@fe-free/ai/src/locales/en-US/translation.json';
 
 // 初始化 i18n
 initI18n({ enTranslation: {
-  ...coreEnTranslation
+  ...coreEnTranslation,
+  ...aiEnTranslation
 } });
 
 console.log('i18n.language', i18n.language);

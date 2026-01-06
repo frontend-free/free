@@ -4,6 +4,7 @@ import type { UploadFile } from 'antd/lib';
 import classNames from 'classnames';
 import type { RefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Actions } from './actions';
 import { FileUpload, Files } from './files';
 import './style.scss';
@@ -27,17 +28,15 @@ function Text(props: SenderProps & { refText: RefObject<HTMLTextAreaElement> }) 
   );
 }
 
-const defaultProps = {
-  placeholder: '描述你的问题',
-};
-
 function Sender(originProps: SenderProps) {
+  const { t } = useTranslation();
   const props = useMemo(() => {
     return {
-      ...defaultProps,
+      placeholder:
+        originProps.placeholder ?? t('@fe-free/ai.sender.describeYourQuestion', '描述你的问题'),
       ...originProps,
     };
-  }, [originProps]);
+  }, [originProps, t]);
 
   const refText = useRef<HTMLTextAreaElement>(null);
 
@@ -136,7 +135,10 @@ function Sender(originProps: SenderProps) {
         />
       </div>
       <div className="mt-1 text-center text-xs text-03">
-        内容由 AI 生成，无法确保信息的真实准确，仅供参考
+        {t(
+          '@fe-free/ai.sender.aiGeneratedDisclaimer',
+          '内容由 AI 生成，无法确保信息的真实准确，仅供参考',
+        )}
       </div>
     </div>
   );
