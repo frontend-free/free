@@ -33,6 +33,8 @@ function initI18n({ enTranslation }) {
   const cacheLng = localStorage.getItem('i18nextLng') || EnumLanguage.ZH_CN;
   const lng = listLanguage.find((item) => item.value === cacheLng) ? cacheLng : EnumLanguage.ZH_CN;
 
+  console.log('initI18n', 'cacheLng', cacheLng, 'lng', lng);
+
   i18n
     .use(LanguageDetector)
     .use(initReactI18next)
@@ -59,5 +61,8 @@ function initI18n({ enTranslation }) {
 function I18nProvider({ children }: { children: React.ReactNode }) {
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }
+
+// @ts-ignore
+window._i18n = i18n;
 
 export { EnumLanguage, I18nProvider, initI18n, listLanguage, valueEnumLanguage };

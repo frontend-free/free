@@ -2,6 +2,7 @@ import type { ActionType } from '@ant-design/pro-components';
 import { Button } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CRUDDetail } from './crud_detail';
 import './style.scss';
 import { getTableScroll, Table } from './table';
@@ -33,6 +34,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
     ref,
   } = props;
 
+  const { t } = useTranslation();
   useTips(props);
 
   const actionRef = useRef<ActionType | undefined>(undefined);
@@ -102,7 +104,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
 
     if (actions.includes('batch_delete') && requestDeleteByRecords) {
       const batchDeleteAction = {
-        btnText: '批量删除',
+        btnText: t('@fe-free/core.crud.batchDelete', '批量删除'),
         danger: true,
         onClick: async (_, { selectedRows }) => {
           await requestDeleteByRecords(selectedRows);
@@ -112,7 +114,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
     }
 
     return bas;
-  }, [actions, originBatchActions, requestDeleteByRecords]);
+  }, [actions, originBatchActions, requestDeleteByRecords, t]);
 
   const { rowSelection, tableAlertRender, tableAlertOptionRender } = useRowSelection<
     DataSource,

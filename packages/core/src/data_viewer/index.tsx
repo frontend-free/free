@@ -1,6 +1,7 @@
 import { ArrowsAltOutlined } from '@fe-free/icons';
 import { Button, Modal, Select } from 'antd';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Editor } from '../editor';
 import { PageLayout } from '../page_layout';
 
@@ -19,6 +20,7 @@ const options = [
 ];
 
 function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
+  const { t } = useTranslation();
   const [maximize, setMaximize] = useState(false);
   const [language, setLanguage] = useState<DataViewerLanguage>(
     options[0].value as DataViewerLanguage,
@@ -64,7 +66,13 @@ function DataViewer({ data, title, enableMaximize }: DataViewerProps) {
         </div>
       </PageLayout>
       {maximize && (
-        <Modal title="查看" open width={'80vw'} onCancel={() => setMaximize(false)} footer={null}>
+        <Modal
+          title={t('@fe-free/core.dataViewer.view', '查看')}
+          open
+          width={'80vw'}
+          onCancel={() => setMaximize(false)}
+          footer={null}
+        >
           <div className="h-[80vh]">
             <Editor
               value={value}

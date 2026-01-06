@@ -1,6 +1,7 @@
 import { Divider, Input } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ProFormListHelper } from '../form';
 
 function Item({
@@ -12,6 +13,7 @@ function Item({
   label?: string;
   onChange: (value: string) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-1">
@@ -20,7 +22,7 @@ function Item({
       </div>
       <Input
         value={value}
-        placeholder={'请输入'}
+        placeholder={t('@fe-free/core.record.inputPlaceholder', '请输入')}
         onChange={(e) => {
           onChange(e.target.value);
         }}

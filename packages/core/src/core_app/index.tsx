@@ -22,11 +22,17 @@ function getPathname(src?: string) {
 
 function CheckUpdate({ basename }: { basename: string }) {
   const { modal } = App.useApp();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const mainScript = document.querySelector('[data-name="mainScript"]');
     if (!mainScript) {
-      console.log('没找到 [data-name="mainScript"]，不启用更新提醒');
+      console.log(
+        t(
+          '@fe-free/core.app.mainScriptNotFound',
+          '没找到 [data-name="mainScript"]，不启用更新提醒',
+        ),
+      );
       return;
     }
 
@@ -48,10 +54,10 @@ function CheckUpdate({ basename }: { basename: string }) {
       }
 
       modal.confirm({
-        title: '发现新版本',
-        content: '请及时刷新页面更新，以避免影响使用',
-        okText: '刷新',
-        cancelText: '稍后更新',
+        title: t('@fe-free/core.app.newVersionFound', '发现新版本'),
+        content: t('@fe-free/core.app.refreshPrompt', '请及时刷新页面更新，以避免影响使用'),
+        okText: t('@fe-free/core.app.refresh', '刷新'),
+        cancelText: t('@fe-free/core.app.updateLater', '稍后更新'),
         onOk: () => {
           window.location.reload();
         },
@@ -80,7 +86,7 @@ function CheckUpdate({ basename }: { basename: string }) {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [t]);
 
   return null;
 }
@@ -148,13 +154,12 @@ function CoreAppBase(props: CoreAppProps) {
   }, [configProviderProps?.locale, i18n.language]);
 
   return (
-    <ProConfigProvider
-      {...proConfigProviderProps}
-      // 集成好 customValueTypeMap
-      valueTypeMap={{ ...customValueTypeMap, ...proConfigProviderProps?.valueTypeMap }}
-    >
-      {/* 集成好 locale */}
-      <ConfigProvider {...configProviderProps} locale={locale} theme={theme}>
+    <ConfigProvider {...configProviderProps} locale={locale} theme={theme}>
+      <ProConfigProvider
+        {...proConfigProviderProps}
+        // 集成好 customValueTypeMap
+        valueTypeMap={{ ...customValueTypeMap, ...proConfigProviderProps?.valueTypeMap }}
+      >
         <App
           {...appProps}
           className={classNames('fec-app', appProps?.className, {
@@ -167,8 +172,8 @@ function CoreAppBase(props: CoreAppProps) {
             {children}
           </Router>
         </App>
-      </ConfigProvider>
-    </ProConfigProvider>
+      </ProConfigProvider>
+    </ConfigProvider>
   );
 }
 

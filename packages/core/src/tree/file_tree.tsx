@@ -4,6 +4,7 @@ import { Dropdown } from 'antd';
 import type { DataNode } from 'antd/es/tree';
 import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { OperateDelete } from '../crud/crud_delete';
 import { FileCard } from '../file';
 import type { TreeProps } from './tree';
@@ -46,13 +47,14 @@ function Detail<D extends DataNode>({
   requestUpdateByValues?: FileTreeProps<D>['requestUpdateByValues'];
   trigger: React.ReactElement;
 }) {
+  const { t } = useTranslation();
   const title = useMemo(() => {
     if (action === 'create') {
-      return '新建';
+      return t('@fe-free/core.fileTree.create', '新建');
     }
 
-    return '编辑';
-  }, [action]);
+    return t('@fe-free/core.fileTree.update', '编辑');
+  }, [action, t]);
 
   return (
     <ModalForm
@@ -83,7 +85,12 @@ function Detail<D extends DataNode>({
       labelCol={{ span: 6 }}
     >
       <ProFormText name="key" hidden />
-      <ProFormText name="title" label="目录名称" required rules={[{ required: true }]} />
+      <ProFormText
+        name="title"
+        label={t('@fe-free/core.fileTree.directoryName', '目录名称')}
+        required
+        rules={[{ required: true }]}
+      />
     </ModalForm>
   );
 }
@@ -98,6 +105,7 @@ function More({
   updateProps,
   deleteProps,
 }) {
+  const { t } = useTranslation();
   const isCreateDisabled = createProps?.operateIsDisabled?.(nodeData);
   const isCreateHidden = createProps?.operateIsHidden?.(nodeData);
   const isUpdateDisabled = updateProps?.operateIsDisabled?.(nodeData);
@@ -109,13 +117,15 @@ function More({
     actions?.includes('create') &&
       !isCreateHidden && {
         label: isCreateDisabled ? (
-          <div className="cursor-not-allowed text-03">新建子目录</div>
+          <div className="cursor-not-allowed text-03">
+            {t('@fe-free/core.fileTree.createSubDirectory', '新建子目录')}
+          </div>
         ) : (
           <Detail
             action="create"
             nodeData={{ key: nodeData.key }}
             requestCreateByValues={(values) => requestCreateByValues?.({ ...values })}
-            trigger={<div>新建子目录</div>}
+            trigger={<div>{t('@fe-free/core.fileTree.createSubDirectory', '新建子目录')}</div>}
           />
         ),
         key: 'create',
@@ -123,13 +133,15 @@ function More({
     actions?.includes('update') &&
       !isUpdateHidden && {
         label: isUpdateDisabled ? (
-          <div className="cursor-not-allowed text-03">编辑</div>
+          <div className="cursor-not-allowed text-03">
+            {t('@fe-free/core.fileTree.update', '编辑')}
+          </div>
         ) : (
           <Detail
             action="update"
             nodeData={nodeData}
             requestUpdateByValues={(values) => requestUpdateByValues?.({ ...values })}
-            trigger={<div>编辑</div>}
+            trigger={<div>{t('@fe-free/core.fileTree.update', '编辑')}</div>}
           />
         ),
         key: 'update',
@@ -137,11 +149,13 @@ function More({
     actions?.includes('delete') &&
       !isDeleteHidden && {
         label: isDeleteDisabled ? (
-          <div className="cursor-not-allowed text-03">删除</div>
+          <div className="cursor-not-allowed text-03">
+            {t('@fe-free/core.fileTree.delete', '删除')}
+          </div>
         ) : (
           <OperateDelete
             name={nodeData.title}
-            operateText="删除"
+            operateText={t('@fe-free/core.fileTree.delete', '删除')}
             onDelete={() => requestDeleteByRecord?.({ key: nodeData.key })}
           />
         ),

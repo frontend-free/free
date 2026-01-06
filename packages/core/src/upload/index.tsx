@@ -5,6 +5,7 @@ import type { UploadChangeParam } from 'antd/es/upload';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import { useCallback, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './style.scss';
 
 interface UploadBaseProps {
@@ -28,6 +29,7 @@ function useUpload(
   props: ImageUploadProps & { onChangeOriginal?: (info: UploadChangeParam<UploadFile>) => void },
 ) {
   const { message } = App.useApp();
+  const { t } = useTranslation();
   const { value, onChange, multiple, maxCount, onChangeOriginal } = props;
   // 转换成 Upload 格式。
   const defaultFileList = useMemo(() => {
@@ -68,13 +70,21 @@ function useUpload(
       if (multiple && maxCount && maxCount > 1) {
         const index = fl.findIndex((item) => item.uid === f.uid);
         if (index >= maxCount - fileList.length) {
-          message.warning(`最多只能上传 ${maxCount} 个文件，超出部分会忽略。`);
+          message.warning(
+            t(
+              '@fe-free/core.upload.maxFilesWarning',
+              '最多只能上传 {num} 个文件，超出部分会忽略。',
+              {
+                num: maxCount,
+              },
+            ),
+          );
         }
       }
 
       return true;
     },
-    [multiple, maxCount, fileList.length, message],
+    [multiple, maxCount, fileList.length, message, t],
   );
 
   // 多选情况下，超出则上传按钮 disabled
@@ -94,24 +104,26 @@ function useUpload(
   };
 }
 
-function defaultChildren(
+function DefaultChildren(
   props: ImageUploadProps,
   otherProps: { fileList: UploadFile[]; isDisabled: boolean },
 ) {
   const { listType, showCount, multiple, maxCount } = props;
   const { fileList, isDisabled } = otherProps;
+  const { t } = useTranslation();
 
   if (listType === 'picture-card') {
     return (
       <button style={{ border: 0, background: 'none' }} type="button" disabled={isDisabled}>
         <PlusOutlined />
-        <div style={{ marginTop: 8 }}>本地上传</div>
+        <div style={{ marginTop: 8 }}>{t('@fe-free/core.upload.localUpload', '本地上传')}</div>
       </button>
     );
   }
   return (
     <Button icon={<UploadOutlined />} disabled={isDisabled}>
-      本地上传{showCount && multiple ? `（${fileList.length}/${maxCount}）` : ''}
+      {t('@fe-free/core.upload.localUpload', '本地上传')}
+      {showCount && multiple ? `（${fileList.length}/${maxCount}）` : ''}
     </Button>
   );
 }
@@ -125,7 +137,7 @@ function Upload(props: ImageUploadProps) {
     listType,
     accept,
     directory,
-    children = defaultChildren,
+    children = DefaultChildren,
   } = props;
   const { onChange, beforeUpload, isDisabled, fileList } = useUpload(props);
 
@@ -169,6 +181,7 @@ function UploadDragger(props: UploadDraggerProps) {
     directory,
   } = props;
   const { onChange, beforeUpload, isDisabled, fileList, successList } = useUpload(props);
+  const { t } = useTranslation();
 
   const itemRender = useCallback(
     (originNode, file, fileList) => {
@@ -178,7 +191,10 @@ function UploadDragger(props: UploadDraggerProps) {
         return (
           <div>
             <div className="py-1">
-              文件数量 ({successList.length}/{fileList.length})
+              {t('@fe-free/core.upload.fileCount', '文件数量 ({success}/{total})', {
+                success: successList.length,
+                total: fileList.length,
+              })}
             </div>
             {originNode}
           </div>
@@ -187,7 +203,7 @@ function UploadDragger(props: UploadDraggerProps) {
 
       return originNode;
     },
-    [maxCount, showStatus, successList.length],
+    [maxCount, showStatus, successList.length, t],
   );
 
   return (
@@ -226,7 +242,7 @@ function UploadDragger(props: UploadDraggerProps) {
             '!text-03': isDisabled,
           })}
         >
-          {title || '点击或拖拽到此区域进行上传'}
+          {title || t('@fe-free/core.upload.dragUpload', '点击或拖拽到此区域进行上传')}
         </p>
         {description && <p className={classNames('ant-upload-hint')}>{description}</p>}
       </div>
@@ -256,13 +272,14 @@ interface AvatarImageUploadProps {
 }
 function AvatarImageUpload(props: AvatarImageUploadProps) {
   const { value, onChange, action, customRequest, accept = 'image/*', headers } = props;
+  const { t } = useTranslation();
 
   return (
     <div className="flex gap-2">
       <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
 
       <div className="flex flex-1 flex-col justify-between">
-        <div className="text-03">请选择</div>
+        <div className="text-03">{t('@fe-free/core.upload.pleaseSelect', '请选择')}</div>
         <div className="flex gap-2">
           <AntdUpload
             action={action}
@@ -277,10 +294,12 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
             accept={accept}
             headers={headers}
           >
-            <Button icon={<UploadOutlined />}>本地上传</Button>
+            <Button icon={<UploadOutlined />}>
+              {t('@fe-free/core.upload.localUpload', '本地上传')}
+            </Button>
           </AntdUpload>
           <Button icon={<DeleteOutlined />} danger onClick={() => onChange?.()}>
-            删除
+            {t('@fe-free/core.upload.delete', '删除')}
           </Button>
         </div>
       </div>

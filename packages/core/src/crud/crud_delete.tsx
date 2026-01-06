@@ -1,6 +1,7 @@
 import { DeleteOutlined } from '@fe-free/icons';
 import { App } from 'antd';
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { OperateBtn } from './helper';
 
 interface Params {
@@ -14,14 +15,15 @@ interface Params {
 function useDelete(params: Params) {
   const { name, desc, onDelete } = params;
   const { modal } = App.useApp();
+  const { t } = useTranslation();
 
   const doDelete = useCallback(async () => {
     await new Promise((resolve) => {
       modal.confirm({
-        title: `确认删除 “${name}” 吗？`,
-        content: desc || '删除后不可恢复，请谨慎操作',
-        okText: '确定',
-        cancelText: '取消',
+        title: t('@fe-free/core.crud.deleteConfirm', '确认删除 "{name}" 吗？', { name }),
+        content: desc || t('@fe-free/core.crud.deleteWarning', '删除后不可恢复，请谨慎操作'),
+        okText: t('@fe-free/core.crud.confirm', '确定'),
+        cancelText: t('@fe-free/core.crud.cancel', '取消'),
         onOk: () => {
           resolve(onDelete());
         },
@@ -30,7 +32,7 @@ function useDelete(params: Params) {
         },
       });
     });
-  }, [modal, name, desc, onDelete]);
+  }, [modal, name, desc, onDelete, t]);
 
   return {
     doDelete,
@@ -40,10 +42,11 @@ function useDelete(params: Params) {
 function OperateDelete(props: Params) {
   const { name, desc, onDelete, operateText, disabled } = props;
   const { doDelete } = useDelete({ name, desc, onDelete, operateText });
+  const { t } = useTranslation();
 
   return (
     <OperateBtn
-      title="删除"
+      title={t('@fe-free/core.crud.delete', '删除')}
       icon={<DeleteOutlined />}
       operateText={operateText}
       disabled={disabled}

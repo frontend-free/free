@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { CRUDProps } from '../crud';
 import { CRUD } from '../crud';
 import './style.scss';
@@ -17,6 +18,7 @@ function CRUDOfPure<
   DataSource extends Record<string, any> = any,
   Key extends string | number = string,
 >(props: CRUDOfPureProps<DataSource, Key>) {
+  const { t } = useTranslation();
   const newColumns = props.tableProps.columns?.map((column) => {
     if (column.search) {
       return {
@@ -30,8 +32,12 @@ function CRUDOfPure<
         fieldProps: {
           placeholder:
             column.valueType === 'select' || column.valueEnum
-              ? `请选择${column.title}`
-              : `请输入${column.title}`,
+              ? t('@fe-free/core.crudOfPure.selectPlaceholder', '请选择{title}', {
+                  title: column.title,
+                })
+              : t('@fe-free/core.crudOfPure.inputPlaceholder', '请输入{title}', {
+                  title: column.title,
+                }),
           ...column.fieldProps,
         },
       };

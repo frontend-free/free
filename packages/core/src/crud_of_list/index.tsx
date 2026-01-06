@@ -2,6 +2,7 @@ import { useDebounce } from 'ahooks';
 import { Input } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { CRUDProps } from '../crud';
 import { CRUD } from '../crud';
 import './style.scss';
@@ -15,15 +16,26 @@ interface CRUDOfListProps<
 }
 
 function useTips(props) {
+  const { t } = useTranslation();
   useEffect(() => {
     const count = props.tableProps.columns?.filter((column) => column.search).length;
     if (!count) {
-      console.warn('CRUDOfList 的 columns 中至少有一个 search 为 true 的列');
+      console.warn(
+        t(
+          'core.crudOfList.warnAtLeastOneSearch',
+          'CRUDOfList 的 columns 中至少有一个 search 为 true 的列',
+        ),
+      );
     }
     if (count > 1) {
-      console.warn('CRUDOfList 的 columns 中只能有一个 search 为 true 的列');
+      console.warn(
+        t(
+          'core.crudOfList.warnOnlyOneSearch',
+          'CRUDOfList 的 columns 中只能有一个 search 为 true 的列',
+        ),
+      );
     }
-  }, []);
+  }, [t]);
 }
 
 function SearchRender(props: {
@@ -31,9 +43,10 @@ function SearchRender(props: {
   value?: string;
   onChange: (value: string) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <Input
-      placeholder={props.placeholder ?? '输入搜索'}
+      placeholder={props.placeholder ?? t('@fe-free/core.crudOfList.searchPlaceholder', '输入搜索')}
       allowClear
       value={props.value}
       onChange={(e) => props.onChange(e.target.value)}

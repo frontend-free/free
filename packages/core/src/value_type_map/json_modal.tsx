@@ -1,6 +1,7 @@
 import type { ProFormItemProps } from '@ant-design/pro-components';
 import { Modal } from 'antd';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { EditorJSONProps } from '../editor_json';
 import { EditorJSON } from '../editor_json';
 
@@ -10,7 +11,8 @@ interface JSONModalProps extends EditorJSONProps {
 }
 
 function Render(text, props: ProFormItemProps<JSONModalProps>) {
-  const { title = '查看' } = props.fieldProps || {};
+  const { t } = useTranslation();
+  const { title = t('@fe-free/core.valueTypeMap.view', '查看') } = props.fieldProps || {};
 
   const [show, setShow] = useState(false);
 

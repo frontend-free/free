@@ -2,6 +2,7 @@ import type { ActionType } from '@ant-design/pro-components';
 import { App } from 'antd';
 import type { MutableRefObject } from 'react';
 import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '../button';
 import type { CRUDProps } from './types';
 
@@ -15,6 +16,7 @@ function useRowSelection<DataSource, Key>({
   actionRef?: MutableRefObject<ActionType | undefined>;
 }) {
   const { modal } = App.useApp();
+  const { t } = useTranslation();
 
   const rowSelection = useMemo(
     () => ({
@@ -23,18 +25,23 @@ function useRowSelection<DataSource, Key>({
     [originRowSelection],
   );
 
-  const tableAlertRender = useCallback(({ selectedRowKeys, onCleanSelected }) => {
-    return (
-      <div>
-        <span>
-          已选 {selectedRowKeys.length} 项
-          <a style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
-            取消选择
-          </a>
-        </span>
-      </div>
-    );
-  }, []);
+  const tableAlertRender = useCallback(
+    ({ selectedRowKeys, onCleanSelected }) => {
+      return (
+        <div>
+          <span>
+            {t('@fe-free/core.crud.selectedItems', '已选 {num} 项', {
+              num: selectedRowKeys.length,
+            })}
+            <a style={{ marginInlineStart: 8 }} onClick={onCleanSelected}>
+              {t('@fe-free/core.crud.clearSelection', '取消选择')}
+            </a>
+          </span>
+        </div>
+      );
+    },
+    [t],
+  );
 
   const tableAlertOptionRender = useCallback(
     ({ selectedRowKeys, selectedRows }) => {
@@ -51,7 +58,13 @@ function useRowSelection<DataSource, Key>({
                 if (action.danger) {
                   await new Promise((resolve) => {
                     modal.confirm({
-                      title: `确定要执行 ${action.btnText} 吗？`,
+                      title: t(
+                        '@fe-free/core.crud.batchActionConfirm',
+                        '确定要执行 {action} 吗？',
+                        {
+                          action: action.btnText,
+                        },
+                      ),
                       onOk: () => {
                         resolve(
                           action.onClick(event, {
@@ -81,7 +94,7 @@ function useRowSelection<DataSource, Key>({
         </div>
       );
     },
-    [actionRef, batchActions, modal],
+    [actionRef, batchActions, modal, t],
   );
 
   if (!batchActions || batchActions.length === 0) {

@@ -1,6 +1,7 @@
 import { DeleteOutlined, PlusOutlined } from '@fe-free/icons';
 import { Button } from 'antd';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 interface ProFormListHelperProps<T> {
   value?: T[];
@@ -27,6 +28,7 @@ interface ProFormListHelperProps<T> {
 
 const emptyArr = [];
 function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
+  const { t } = useTranslation();
   const options = props.value || emptyArr;
 
   return (
@@ -85,7 +87,7 @@ function ProFormListHelper<T = any>(props: ProFormListHelperProps<T>) {
               props.onChange?.(newOptions);
             }}
           >
-            {props.addText || '添加'}
+            {props.addText || t('@fe-free/core.formList.add', '添加')}
           </Button>
         </div>
       )}
