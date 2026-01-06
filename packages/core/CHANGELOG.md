@@ -1,5 +1,16 @@
 # @fe-free/core
 
+## 5.0.0
+
+### Minor Changes
+
+- feat: i18n
+
+### Patch Changes
+
+- @fe-free/icons@5.0.0
+- @fe-free/tool@5.0.0
+
 ## 4.0.5
 
 ### Patch Changes
