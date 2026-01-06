@@ -154,13 +154,12 @@ function CoreAppBase(props: CoreAppProps) {
   }, [configProviderProps?.locale, i18n.language]);
 
   return (
-    <ProConfigProvider
-      {...proConfigProviderProps}
-      // 集成好 customValueTypeMap
-      valueTypeMap={{ ...customValueTypeMap, ...proConfigProviderProps?.valueTypeMap }}
-    >
-      {/* 集成好 locale */}
-      <ConfigProvider {...configProviderProps} locale={locale} theme={theme}>
+    <ConfigProvider {...configProviderProps} locale={locale} theme={theme}>
+      <ProConfigProvider
+        {...proConfigProviderProps}
+        // 集成好 customValueTypeMap
+        valueTypeMap={{ ...customValueTypeMap, ...proConfigProviderProps?.valueTypeMap }}
+      >
         <App
           {...appProps}
           className={classNames('fec-app', appProps?.className, {
@@ -173,8 +172,8 @@ function CoreAppBase(props: CoreAppProps) {
             {children}
           </Router>
         </App>
-      </ConfigProvider>
-    </ProConfigProvider>
+      </ProConfigProvider>
+    </ConfigProvider>
   );
 }
 

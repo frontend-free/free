@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import { App } from 'antd';
 import { ConfigProvider } from 'antd';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ProConfigProvider } from '@ant-design/pro-components';
 import { customValueTypeMap } from '@fe-free/core';
 import { themeConfig } from '@fe-free/core/src/core_app/config';
@@ -31,13 +31,13 @@ const preview: Preview = {
     (Story) => {
       return (
         <I18nProvider>
-          <ProConfigProvider valueTypeMap={customValueTypeMap} >
-            <ConfigProvider theme={themeConfig} locale={i18n.language === EnumLanguage.EN_US ? enUS : zhCN}>
+          <ConfigProvider theme={themeConfig} locale={i18n.language === EnumLanguage.EN_US ? enUS : zhCN}>
+            <ProConfigProvider valueTypeMap={customValueTypeMap} >
               <App>
                 <Story />
               </App>
-            </ConfigProvider>
-          </ProConfigProvider>
+            </ProConfigProvider>
+          </ConfigProvider>
         </I18nProvider>
       );
     },
