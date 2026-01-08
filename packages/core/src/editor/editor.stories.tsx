@@ -115,3 +115,11 @@ This is a markdown file.
   },
   render: (props) => <BasicDemo {...props} />,
 };
+
+export const HTML: Story = {
+  args: {
+    language: 'html',
+    value: '<html><body><h1>Hello, World!</h1></body></html>',
+  },
+  render: (props) => <BasicDemo {...props} />,
+};

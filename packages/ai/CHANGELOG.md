@@ -1,5 +1,14 @@
 # @fe-free/ai
 
+## 4.1.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @fe-free/core@4.1.4
+  - @fe-free/icons@4.1.4
+  - @fe-free/tool@4.1.4
+
 ## 4.1.3
 
 ### Patch Changes

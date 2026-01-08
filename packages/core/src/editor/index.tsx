@@ -1,3 +1,4 @@
+import { html } from '@codemirror/lang-html';
 import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
 import { markdown } from '@codemirror/lang-markdown';
@@ -9,7 +10,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { useCallback, useMemo } from 'react';
 
 interface EditorProps {
-  language?: 'javascript' | 'python' | 'json' | 'markdown';
+  language?: 'javascript' | 'python' | 'json' | 'markdown' | 'html';
   value?: string;
   onChange?: (value: string) => void;
   autoFocus?: boolean;
@@ -73,12 +74,15 @@ function Editor(props: EditorProps) {
       case 'markdown':
         result.push(markdown());
         break;
+      case 'html':
+        result.push(html());
+        break;
       default:
         break;
     }
 
     return result;
-  }, [language, originExtensions]);
+  }, [language, originExtensions, lineWrapping]);
 
   const handleChange = useCallback(
     (value: string) => {
@@ -89,7 +93,7 @@ function Editor(props: EditorProps) {
 
   return (
     <CodeMirror
-      className="w-full h-full"
+      className="h-full w-full"
       height={height || '100%'}
       width={width || '100%'}
       value={value}

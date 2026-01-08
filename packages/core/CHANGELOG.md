@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.1.4
+
+### Patch Changes
+
+- feat: editor
+  - @fe-free/icons@4.1.4
+  - @fe-free/tool@4.1.4
+
 ## 4.1.3
 
 ### Patch Changes
