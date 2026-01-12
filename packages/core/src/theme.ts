@@ -28,7 +28,7 @@ const themeVariables = {
     '01': '#15191e', // 主要
     '02': '#444444', // 次要
     '03': '#777777', // 描述
-    '04': '#94999f', // placeholder
+    '04': '#bfbfbf', // placeholder
   },
   borderColor: {
     '01': '#e2e7f0', // 主要

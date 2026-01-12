@@ -1,0 +1,27 @@
+@keyframes sender-rectangle-white {
+  0%,
+  80%,
+  100% {
+    height: 4px;
+    box-shadow: 0 0 theme('colors.white');
+  }
+
+  40% {
+    height: 6px;
+    box-shadow: 0 -6px theme('colors.white');
+  }
+}
+
+@keyframes sender-rectangle-primary {
+  0%,
+  80%,
+  100% {
+    height: 4px;
+    box-shadow: 0 0 theme('colors.primary');
+  }
+
+  40% {
+    height: 6px;
+    box-shadow: 0 -6px theme('colors.primary');
+  }
+}

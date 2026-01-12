@@ -1,5 +1,6 @@
 import { AudioOutlined } from '@fe-free/icons';
 import { Button } from 'antd';
+import { RecordLoading } from '../helper';
 import type { SenderProps } from './types';
 
 function RecordAction(props: SenderProps) {
@@ -9,12 +10,7 @@ function RecordAction(props: SenderProps) {
   if (recording) {
     return (
       <Button type="text" shape="circle" onClick={() => onRecordingChange?.(false)}>
-        <div className="fea-sender-spinner">
-          <div className="fea-sender-spinner-line fea-sender-spinner-line1" />
-          <div className="fea-sender-spinner-line fea-sender-spinner-line2" />
-          <div className="fea-sender-spinner-line fea-sender-spinner-line3" />
-          <div className="fea-sender-spinner-line fea-sender-spinner-line4" />
-        </div>
+        <RecordLoading count={4} color="primary" />
       </Button>
     );
   }
