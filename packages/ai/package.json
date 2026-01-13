@@ -16,7 +16,8 @@
   "dependencies": {
     "@fe-free/core": "workspace:*",
     "ahooks": "^3.7.8",
-    "classnames": "^2.5.1"
+    "classnames": "^2.5.1",
+    "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
     "@fe-free/icons": "workspace:*",
