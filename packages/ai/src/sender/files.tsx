@@ -5,6 +5,7 @@ import { App, Button, Dropdown, Input, Modal, Upload } from 'antd';
 import type { RefObject } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FileView } from '../files';
 import FilesIcon from '../svgs/files.svg?react';
 import type { SenderProps } from './types';
 
@@ -136,16 +137,9 @@ function UploadFileItem({ file, onDelete }: { file: UploadFile; onDelete: () => 
   return (
     <div className="group relative">
       {isImage ? (
-        <img
-          src={file.originFileObj && URL.createObjectURL(file.originFileObj)}
-          className="h-[53px] w-[53px] rounded-lg border border-01 bg-01 object-cover"
-        />
+        <FileView url={URL.createObjectURL(file.originFileObj!)} isImage={isImage} />
       ) : (
-        <div className="flex h-[53px] w-[200px] items-center rounded bg-01 px-1">
-          <div className="min-w-0">
-            <FileCard name={file.name} size={file.size} />
-          </div>
-        </div>
+        <FileView url={file.name} />
       )}
       {!isDone && (
         <div className="absolute inset-0 flex items-center justify-center bg-01/80">
@@ -163,7 +157,7 @@ function UploadFileItem({ file, onDelete }: { file: UploadFile; onDelete: () => 
 function UrlFileItem({ url, onDelete }: { url: string; onDelete: () => void }) {
   return (
     <div className="group relative">
-      <div className="flex h-[53px] w-[200px] items-center rounded bg-01 px-2">
+      <div className="flex h-[60px] w-[250px] items-center rounded bg-01 px-2">
         <div className="line-clamp-2">{url}</div>
       </div>
       <CloseOutlined
@@ -186,7 +180,7 @@ function Files(
 
   return (
     <>
-      {fileList && fileList.length > 0 && (
+      {((fileList && fileList.length > 0) || (fileUrls && fileUrls.length > 0)) && (
         <div className="scrollbar-hide mb-2 flex gap-2 overflow-x-auto">
           {fileList.map((file) => (
             <UploadFileItem
