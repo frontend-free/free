@@ -18,7 +18,7 @@ function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement> })
       }}
       placeholder={placeholder}
       autoSize={{ minRows: 1, maxRows: 3 }}
-      className="mb-[1px] px-1 py-0"
+      className="mb-[1px] px-2 py-0"
       variant="borderless"
     />
   );

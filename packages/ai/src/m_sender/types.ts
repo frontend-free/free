@@ -18,10 +18,10 @@ interface MSenderProps {
 
   /** 是否允许语音输入 */
   allowSpeech?: {
-    /** 是否正在录音 */
-    recording?: boolean;
-    /** 录音状态变化时回调 */
-    onRecordingChange?: (recording: boolean) => void;
+    /** 录音开始时回调，如果没权限，则 reject */
+    onRecordStart?: () => Promise<void>;
+    /** 录音结束时回调, isSend 为 true 则发送，否则取消 */
+    onRecordEnd?: (isSend: boolean) => Promise<void>;
   };
 
   defaultType: 'input' | 'record';

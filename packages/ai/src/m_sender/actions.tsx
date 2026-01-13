@@ -9,20 +9,12 @@ function Actions(
     refText: RefObject<HTMLTextAreaElement>;
   },
 ) {
-  const {
-    refText,
-    loading,
-    onSubmit,
-    value,
-    onChange,
-
-    allowSpeech,
-  } = props;
+  const { refText, loading, onSubmit, value, onChange } = props;
 
   const isLoading = loading;
 
   const handleSubmit = useCallback(async () => {
-    if (isLoading || allowSpeech?.recording) {
+    if (isLoading) {
       return;
     }
 
@@ -41,19 +33,17 @@ function Actions(
       // focus
       refText.current?.focus();
     }
-  }, [isLoading, allowSpeech?.recording, value, onSubmit, onChange, refText]);
+  }, [isLoading, value, onSubmit, onChange, refText]);
 
   return (
     <div className="flex items-center gap-2">
       <Button
         shape="circle"
         size="small"
-        color="default"
-        variant="outlined"
-        className="select-none !border-current !text-current"
+        type="primary"
         icon={<Icons component={SendIcon} />}
         loading={isLoading}
-        // disabled={loading}
+        disabled={!value?.text}
         onClick={handleSubmit}
       />
     </div>

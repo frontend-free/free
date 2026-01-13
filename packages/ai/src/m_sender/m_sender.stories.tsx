@@ -1,6 +1,7 @@
 import { MSender } from '@fe-free/ai';
+import { sleep } from '@fe-free/tool';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { MSenderProps, MSenderValue } from './types';
 
 const meta: Meta<typeof MSender> = {
@@ -50,22 +51,60 @@ export const Loading: Story = {
 
 export const AllowSpeech: Story = {
   render: (props) => {
-    const [recording, setRecording] = useState(false);
+    // 假设是字符串，实则是 buffer
+    const [recordVoice, setRecordVoice] = useState<string | undefined>(undefined);
+
+    const handleSubmit = (value: MSenderValue) => {
+      console.log('handleSubmit', value);
+    };
+
+    const handleRecordStart = useCallback(async () => {
+      // 假设这是录音的文本
+      setRecordVoice('这是录音的文本');
+
+      return;
+    }, []);
+
+    const handleRecordEnd = useCallback(
+      async (isSend: boolean) => {
+        console.log('handleRecordEnd isSend', isSend);
+        if (isSend) {
+          await sleep(1000);
+          const recordResult = recordVoice;
+
+          handleSubmit({ ...(props.value || {}), text: recordResult });
+          alert('submit');
+        }
+      },
+      [props.value, recordVoice],
+    );
 
     return (
       <div>
-        <Component {...props} allowSpeech={{ recording, onRecordingChange: setRecording }} />
-
         <Component
           {...props}
-          defaultType="record"
-          allowSpeech={{ recording, onRecordingChange: setRecording }}
+          allowSpeech={{
+            onRecordStart: handleRecordStart,
+            onRecordEnd: handleRecordEnd,
+          }}
         />
 
         <Component
           {...props}
           defaultType="record"
-          allowSpeech={{ recording: true, onRecordingChange: setRecording }}
+          allowSpeech={{
+            onRecordStart: handleRecordStart,
+            onRecordEnd: handleRecordEnd,
+          }}
+        />
+
+        <Component
+          {...props}
+          defaultType="record"
+          allowSpeech={{
+            onRecordStart: () => Promise.reject(new Error('no permission')),
+            onRecordEnd: handleRecordEnd,
+          }}
         />
       </div>
     );
