@@ -5,7 +5,6 @@ import { useCallback, type RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
 import { FileAction } from './files';
 import { RecordAction } from './record';
-import './style.scss';
 import type { SenderProps } from './types';
 
 function Actions(

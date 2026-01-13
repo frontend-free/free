@@ -1,10 +1,9 @@
 import { Input } from 'antd';
 import classNames from 'classnames';
-import { useMemo, useRef, type RefObject } from 'react';
+import { useMemo, useRef, useState, type RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RecordLoading } from '../helper';
 import { Actions } from './actions';
-import { RecordAction } from './record';
+import { InputRecordSwitch, RecordAction } from './record';
 import type { MSenderProps, MSenderRef } from './types';
 
 function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement> }) {
@@ -19,7 +18,7 @@ function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement> })
       }}
       placeholder={placeholder}
       autoSize={{ minRows: 1, maxRows: 3 }}
-      className="px-1 py-0"
+      className="mb-[1px] px-1 py-0"
       variant="borderless"
     />
   );
@@ -30,6 +29,7 @@ function useProps(originProps: MSenderProps) {
 
   return useMemo(() => {
     return {
+      ...originProps,
       placeholder:
         originProps.placeholder ?? t('@fe-free/ai.sender.describeYourQuestion', '描述你的问题'),
       statement:
@@ -38,7 +38,7 @@ function useProps(originProps: MSenderProps) {
           '@fe-free/ai.sender.aiGeneratedDisclaimer',
           '内容由 AI 生成，无法确保信息的真实准确，仅供参考',
         ),
-      ...originProps,
+      defaultType: originProps.defaultType ?? 'input',
     };
   }, [originProps, t]);
 }
@@ -47,7 +47,9 @@ function MSender(originProps: MSenderProps) {
   const refText = useRef<HTMLTextAreaElement>(null);
 
   const props = useProps(originProps);
-  const { value, statement, allowSpeech } = props;
+  const { value, statement, allowSpeech, defaultType } = props;
+
+  const [type, setType] = useState<'input' | 'record'>(defaultType);
 
   const refContainer = useRef<HTMLDivElement>(null);
 
@@ -59,18 +61,16 @@ function MSender(originProps: MSenderProps) {
           'fea-m-sender relative flex items-end rounded-full border border-01 bg-white p-2',
         )}
       >
-        {allowSpeech && !value?.text && <RecordAction {...props} />}
+        {allowSpeech && !value?.text && (
+          <InputRecordSwitch {...props} type={type} setType={setType} />
+        )}
         <div className="flex flex-1">
           <Text {...props} refText={refText} />
         </div>
         <Actions {...props} refText={refText} />
-        {allowSpeech?.recording && (
-          <div className="absolute inset-0 flex items-center justify-center rounded-full bg-primary">
-            <RecordLoading count={30} gap={4} />
-          </div>
-        )}
+        {type === 'record' && <RecordAction {...props} setType={setType} />}
       </div>
-      {statement && <div className="mt-1 text-center text-xs text-04">{statement}</div>}
+      {statement && <div className="mt-1 text-center text-xs text-04">*{statement}</div>}
     </div>
   );
 }

@@ -24,6 +24,7 @@ interface MSenderProps {
     onRecordingChange?: (recording: boolean) => void;
   };
 
+  defaultType: 'input' | 'record';
   statement?: string | false;
 }
 

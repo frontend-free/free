@@ -2,7 +2,6 @@ import Icons from '@fe-free/icons';
 import { Button } from 'antd';
 import { useCallback, type RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
-import './style.scss';
 import type { MSenderProps } from './types';
 
 function Actions(

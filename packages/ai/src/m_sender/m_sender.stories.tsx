@@ -56,7 +56,17 @@ export const AllowSpeech: Story = {
       <div>
         <Component {...props} allowSpeech={{ recording, onRecordingChange: setRecording }} />
 
-        <Component {...props} allowSpeech={{ recording: true, onRecordingChange: setRecording }} />
+        <Component
+          {...props}
+          defaultType="record"
+          allowSpeech={{ recording, onRecordingChange: setRecording }}
+        />
+
+        <Component
+          {...props}
+          defaultType="record"
+          allowSpeech={{ recording: true, onRecordingChange: setRecording }}
+        />
       </div>
     );
   },
