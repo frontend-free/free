@@ -4,8 +4,8 @@ import type { ChatMessage } from '../store/types';
 
 interface MessagesProps<AIData> {
   messages?: ChatMessage<AIData>[];
-  renderMessageOfUser?: (message: ChatMessage<AIData>) => React.ReactNode;
-  renderMessageOfAI?: (message: ChatMessage<AIData>) => React.ReactNode;
+  renderMessageOfUser?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  renderMessageOfAI?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
 }
 
 function Messages<AIData>(props: MessagesProps<AIData>) {
@@ -55,8 +55,8 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
       <div ref={ref} className="flex h-full flex-col overflow-y-auto">
         {messages?.map((message) => (
           <div key={message.uuid} data-uuid={message.uuid} className="flex flex-col">
-            <div className="flex justify-end">{renderMessageOfUser?.(message)}</div>
-            <div className="flex justify-start">{renderMessageOfAI?.(message)}</div>
+            <div className="flex justify-end">{renderMessageOfUser?.({ message })}</div>
+            <div className="flex justify-start">{renderMessageOfAI?.({ message })}</div>
           </div>
         ))}
       </div>

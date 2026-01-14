@@ -9,6 +9,7 @@ import {
 } from '@fe-free/ai';
 import { sleep } from '@fe-free/tool';
 import type { Meta } from '@storybook/react-vite';
+import { set } from 'lodash-es';
 import { useCallback, useEffect, useMemo } from 'react';
 
 const meta: Meta = {
@@ -85,11 +86,6 @@ function Component() {
       user: {
         ...v,
       },
-      ai: {
-        data: {
-          text: '',
-        },
-      },
     };
 
     addMessage(message);
@@ -99,7 +95,9 @@ function Component() {
       onUpdate: ({ event, data }) => {
         if (event === 'message') {
           message.status = EnumChatMessageStatus.STREAMING;
-          message.ai!.data!.text += data;
+
+          const preText = message.ai?.data?.text || '';
+          set(message, 'ai.data.text', preText + data);
 
           updateMessage({
             ...message,
@@ -131,12 +129,12 @@ function Component() {
       >
         <Messages
           messages={messages}
-          renderMessageOfUser={(message) => (
+          renderMessageOfUser={({ message }) => (
             <div className="p-2">
               <div className="rounded-xl bg-primary p-2 text-white">{message.user?.text}</div>
             </div>
           )}
-          renderMessageOfAI={(message) => (
+          renderMessageOfAI={({ message }) => (
             <div className="p-2">
               <div>{message.status}</div>
               <pre className="whitespace-pre-wrap">{message.ai?.data?.text}</pre>
