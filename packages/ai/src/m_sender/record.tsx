@@ -159,7 +159,7 @@ function RecordAction(props: MSenderProps & { setType }) {
 
   return (
     <div
-      className={classNames('absolute inset-0 flex items-center justify-center rounded-full', {
+      className={classNames('absolute inset-0 flex items-center justify-center rounded-xl', {
         'bg-white': !isRecording,
         'bg-red-500': isRecording && isCancel,
         'bg-primary': isRecording && !isCancel,

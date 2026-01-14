@@ -100,7 +100,7 @@ function Sender(originProps: SenderProps) {
       <div
         ref={refContainer}
         className={classNames(
-          'fea-sender relative flex flex-col rounded-lg border border-01 bg-white p-2',
+          'fea-sender relative flex flex-col rounded-xl border border-01 bg-white p-2',
           {
             'fea-sender-drag-hover': dragHover,
           },
