@@ -9,10 +9,10 @@ interface MSenderValue {
 
 interface MSenderProps {
   value?: MSenderValue;
-  onChange: (value?: MSenderValue) => void;
+  onChange?: (value?: MSenderValue) => void;
 
   loading?: boolean;
-  onSubmit: (value?: MSenderValue) => void | Promise<void>;
+  onSubmit?: (value?: MSenderValue) => void | Promise<void>;
 
   placeholder?: string;
 
@@ -24,7 +24,7 @@ interface MSenderProps {
     onRecordEnd?: (isSend: boolean) => Promise<void>;
   };
 
-  defaultType: 'input' | 'record';
+  defaultType?: 'input' | 'record';
   statement?: string | false;
 }
 

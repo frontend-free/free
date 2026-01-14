@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { range } from 'lodash-es';
+import { v4 as uuidv4 } from 'uuid';
 
 function RecordLoading({
   count = 4,
@@ -28,4 +29,8 @@ function RecordLoading({
   );
 }
 
-export { RecordLoading };
+function generateUUID() {
+  return uuidv4();
+}
+
+export { generateUUID, RecordLoading };

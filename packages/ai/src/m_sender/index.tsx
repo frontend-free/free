@@ -58,7 +58,7 @@ function MSender(originProps: MSenderProps) {
       <div
         ref={refContainer}
         className={classNames(
-          'fea-m-sender relative flex items-end rounded-full border border-01 bg-white p-2',
+          'fea-m-sender relative flex items-end rounded-xl border border-01 bg-white p-2',
         )}
       >
         {allowSpeech && !value?.text && (

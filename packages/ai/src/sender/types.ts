@@ -9,10 +9,10 @@ interface SenderValue {
 
 interface SenderProps {
   value?: SenderValue;
-  onChange: (value?: SenderValue) => void;
+  onChange?: (value?: SenderValue) => void;
 
   loading?: boolean;
-  onSubmit: (value?: SenderValue) => void | Promise<void>;
+  onSubmit?: (value?: SenderValue) => void | Promise<void>;
 
   placeholder?: string;
 
