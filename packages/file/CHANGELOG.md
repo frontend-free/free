@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 4.1.7
+
+### Patch Changes
+
+- feat: ai
+
 ## 4.1.6
 
 ## 4.1.5
