@@ -117,7 +117,15 @@ function Component() {
     <div className="h-[800px] w-[500px] border border-red-500">
       <Chat
         end={
-          <div className="p-2">
+          <div
+            className="p-2"
+            onFocus={() => {
+              console.log('onFocus');
+            }}
+            onBlur={() => {
+              console.log('onBlur');
+            }}
+          >
             <MSender
               value={senderValue}
               onChange={(v) => setSenderValue(v)}

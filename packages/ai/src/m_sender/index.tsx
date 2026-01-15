@@ -7,12 +7,13 @@ import { InputRecordSwitch, RecordAction } from './record';
 import type { MSenderProps, MSenderRef } from './types';
 
 function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement> }) {
-  const { value, onChange, placeholder, refText } = props;
+  const { value, onChange, placeholder, refText, autoFocus } = props;
 
   return (
     <Input.TextArea
       ref={refText}
       value={value?.text}
+      autoFocus={autoFocus}
       onChange={(e) => {
         onChange?.({ ...value, text: e.target.value });
       }}

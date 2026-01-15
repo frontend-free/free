@@ -39,6 +39,16 @@ export const Default: Story = {
   },
 };
 
+export const AutoFocus: Story = {
+  render: (props) => <Component {...props} />,
+  args: {
+    autoFocus: true,
+    onSubmit: (value) => {
+      console.log(value);
+    },
+  },
+};
+
 export const Loading: Story = {
   args: {
     loading: true,

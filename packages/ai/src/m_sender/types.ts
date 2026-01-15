@@ -14,6 +14,7 @@ interface MSenderProps {
   loading?: boolean;
   onSubmit?: (value?: MSenderValue) => void | Promise<void>;
 
+  autoFocus?: boolean;
   placeholder?: string;
 
   /** 是否允许语音输入 */
