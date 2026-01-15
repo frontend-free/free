@@ -3,6 +3,7 @@ import {
   Chat,
   createChatStore,
   EnumChatMessageStatus,
+  EnumChatMessageType,
   generateUUID,
   MessageActions,
   Messages,
@@ -11,6 +12,7 @@ import {
 import { sleep } from '@fe-free/tool';
 import type { Meta } from '@storybook/react-vite';
 import { useDebounce, useUpdateEffect } from 'ahooks';
+import { Button, Divider } from 'antd';
 import { set } from 'lodash-es';
 import { useCallback, useEffect, useMemo } from 'react';
 
@@ -91,70 +93,101 @@ function Component() {
           const preText = message.ai?.data?.text || '';
           set(message, 'ai.data.text', preText + data);
 
-          updateMessage({
-            ...message,
-          });
+          // 假设有 session_id
+          set(message, 'ai.session_id', '123');
+
+          updateMessage(message);
         }
         if (event === 'done') {
           message.status = EnumChatMessageStatus.DONE;
-          updateMessage({
-            ...message,
-          });
+          updateMessage(message);
         }
       },
     });
   }, []);
 
   return (
-    <div className="h-[800px] w-[500px] border border-red-500">
-      <Chat
-        end={
-          <div
-            className="p-2"
-            onFocus={() => {
-              console.log('onFocus');
-            }}
-            onBlur={() => {
-              console.log('onBlur');
-            }}
-          >
-            <MSender
-              value={senderValue}
-              onChange={(v) => setSenderValue(v)}
-              loading={loading}
-              onSubmit={handleSubmit}
-            />
-          </div>
-        }
-      >
-        <Messages
-          messages={messages}
-          renderMessageOfUser={({ message }) => (
-            <div className="p-2">
-              <div className="rounded-xl bg-primary p-2 text-white">{message.user?.text}</div>
+    <div>
+      <div>
+        <Button
+          onClick={() => {
+            addMessage({
+              uuid: generateUUID(),
+              type: EnumChatMessageType.SYSTEM,
+              system: {
+                data: {
+                  type: 'new_session',
+                },
+              },
+            });
+          }}
+        >
+          Add New Session
+        </Button>
+      </div>
+      <div className="h-[800px] w-[500px] border border-red-500">
+        <Chat
+          end={
+            <div
+              className="p-2"
+              onFocus={() => {
+                console.log('onFocus');
+              }}
+              onBlur={() => {
+                console.log('onBlur');
+              }}
+            >
+              <MSender
+                value={senderValue}
+                onChange={(v) => setSenderValue(v)}
+                loading={loading}
+                onSubmit={handleSubmit}
+              />
             </div>
-          )}
-          renderMessageOfAI={({ message }) => (
-            <div className="p-2">
-              <div>{message.status}</div>
-              <pre className="whitespace-pre-wrap">{message.ai?.data?.text}</pre>
-              <div className="flex gap-2">
-                <MessageActions.Copy value={message.ai?.data?.text || ''} />
-                <MessageActions.Like
-                  onClick={async () => {
-                    // some thing
-                  }}
-                />
-                <MessageActions.Dislike
-                  onClick={async () => {
-                    // some thing
-                  }}
-                />
-              </div>
-            </div>
-          )}
-        />
-      </Chat>
+          }
+        >
+          <Messages
+            messages={messages}
+            renderMessageOfSystem={({ message }) => {
+              if (message.system?.data?.type === 'new_session') {
+                return <Divider>让我们聊点新内容吧</Divider>;
+              }
+
+              return null;
+            }}
+            renderMessageOfUser={({ message }) => {
+              return (
+                <div className="p-2">
+                  <div className="rounded-xl bg-primary p-2 text-white">{message.user?.text}</div>
+                </div>
+              );
+            }}
+            renderMessageOfAI={({ message }) => {
+              return (
+                <div className="p-2">
+                  <div>
+                    status: {message.status} session_id: {message.ai?.session_id}
+                  </div>
+                  <pre className="whitespace-pre-wrap">{message.ai?.data?.text}</pre>
+                  <div className="flex gap-2">
+                    <MessageActions.Copy value={message.ai?.data?.text || ''} />
+                    <MessageActions.Like
+                      onClick={async () => {
+                        // some thing
+                      }}
+                    />
+                    <MessageActions.Dislike
+                      onClick={async () => {
+                        // some thing
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            }}
+          />
+        </Chat>
+      </div>
     </div>
   );
 }

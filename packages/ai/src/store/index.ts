@@ -26,7 +26,14 @@ function createChatStore<Value extends BaseSenderValue | undefined, AIData>() {
     },
     messages: [],
     setMessages: (messages) => {
-      set(() => ({ messages }));
+      set(() => ({
+        messages: messages.map((message) => ({
+          // 如果没有，则用当前的时间
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          ...message,
+        })),
+      }));
     },
     addMessage: (message) => {
       set((state) => ({
@@ -34,6 +41,8 @@ function createChatStore<Value extends BaseSenderValue | undefined, AIData>() {
           ...state.messages,
           {
             ...message,
+            // 覆盖
+            createdAt: Date.now(),
             updatedAt: Date.now(),
           },
         ],
@@ -45,6 +54,7 @@ function createChatStore<Value extends BaseSenderValue | undefined, AIData>() {
           if (m.uuid === message.uuid) {
             return {
               ...message,
+              // 覆盖
               updatedAt: Date.now(),
             };
           }

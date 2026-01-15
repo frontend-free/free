@@ -9,6 +9,10 @@ enum EnumChatMessageStatus {
   ERROR = 'error',
 }
 
+interface ChatMessageOfSystem {
+  data?: any;
+}
+
 interface ChatMessageOfUser {
   text?: string;
   files?: string[];
@@ -16,15 +20,24 @@ interface ChatMessageOfUser {
 
 interface ChatMessageOfAI<AIData> {
   data?: AIData;
+  /** 按需存取 */
+  session_id?: string;
 }
 
 interface ChatMessage<AIData> {
   uuid: string;
-  updatedAt?: number;
-  type?: EnumChatMessageType;
+
   status?: EnumChatMessageStatus;
+
+  type?: EnumChatMessageType;
+  system?: ChatMessageOfSystem;
   user?: ChatMessageOfUser;
   ai?: ChatMessageOfAI<AIData>;
+
+  /** 自动生成 */
+  createdAt?: number;
+  /** 自动更新 */
+  updatedAt?: number;
 }
 
 export { EnumChatMessageStatus, EnumChatMessageType };

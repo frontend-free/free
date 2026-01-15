@@ -1,5 +1,14 @@
 # @fe-free/ai
 
+## 4.1.11
+
+### Patch Changes
+
+- feat: ai
+  - @fe-free/core@4.1.11
+  - @fe-free/icons@4.1.11
+  - @fe-free/tool@4.1.11
+
 ## 4.1.10
 
 ### Patch Changes

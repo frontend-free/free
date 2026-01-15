@@ -1,15 +1,22 @@
 import { PageLayout } from '@fe-free/core';
 import { useEffect, useMemo, useRef } from 'react';
-import type { ChatMessage } from '../store/types';
+import { EnumChatMessageType, type ChatMessage } from '../store/types';
 
 interface MessagesProps<AIData> {
   messages?: ChatMessage<AIData>[];
+  /** 含所有 */
+  renderMessage?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  /** 系统消息 */
+  renderMessageOfSystem?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  /** 用户消息 */
   renderMessageOfUser?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  /** AI消息 */
   renderMessageOfAI?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
 }
 
 function Messages<AIData>(props: MessagesProps<AIData>) {
-  const { messages, renderMessageOfUser, renderMessageOfAI } = props;
+  const { messages, renderMessage, renderMessageOfSystem, renderMessageOfUser, renderMessageOfAI } =
+    props;
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,12 +60,29 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
   return (
     <PageLayout>
       <div ref={ref} className="flex h-full flex-col overflow-y-auto">
-        {messages?.map((message) => (
-          <div key={message.uuid} data-uuid={message.uuid} className="flex flex-col">
-            <div className="flex justify-end">{renderMessageOfUser?.({ message })}</div>
-            <div className="flex justify-start">{renderMessageOfAI?.({ message })}</div>
-          </div>
-        ))}
+        {messages?.map((message) => {
+          return (
+            <div key={message.uuid} data-uuid={message.uuid} className="flex flex-col">
+              {renderMessage ? (
+                renderMessage?.({ message })
+              ) : (
+                <>
+                  {message.type === EnumChatMessageType.SYSTEM && message.system && (
+                    <div className="flex justify-center">
+                      {renderMessageOfSystem?.({ message })}
+                    </div>
+                  )}
+                  {message.type !== EnumChatMessageType.SYSTEM && message.user && (
+                    <div className="flex justify-end">{renderMessageOfUser?.({ message })}</div>
+                  )}
+                  {message.type !== EnumChatMessageType.SYSTEM && message.ai && (
+                    <div className="flex justify-start">{renderMessageOfAI?.({ message })}</div>
+                  )}
+                </>
+              )}
+            </div>
+          );
+        })}
       </div>
     </PageLayout>
   );
