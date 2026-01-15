@@ -30,7 +30,7 @@ function RecordLoading({
           style={{
             height: '4px',
             width: '2px',
-            animation: `sender-rectangle-${color} infinite 1s ease-in-out ${getAnimationDelay(index)}s`,
+            animation: `fea-sender-rectangle-${color} infinite 1s ease-in-out ${getAnimationDelay(index)}s`,
           }}
         />
       ))}

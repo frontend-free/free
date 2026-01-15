@@ -6,7 +6,7 @@ interface BaseSenderValue {
   text?: string;
   files?: string[];
 }
-interface ChatStore<Value extends BaseSenderValue | undefined, AIData> {
+interface ChatStore<Value extends BaseSenderValue | undefined, AIData, ContextData = any> {
   senderValue?: Value;
   setSenderValue: (senderValue?: Value) => void;
 
@@ -14,6 +14,10 @@ interface ChatStore<Value extends BaseSenderValue | undefined, AIData> {
   setMessages: (messages: ChatMessage<AIData>[]) => void;
   addMessage: (message: ChatMessage<AIData>) => void;
   updateMessage: (message: ChatMessage<AIData>) => void;
+
+  /** 存放Chat的上下文数据 */
+  contextData?: ContextData;
+  setContextData: (contextData?: ContextData) => void;
 
   reset: () => void;
 }
@@ -61,6 +65,10 @@ function createChatStore<Value extends BaseSenderValue | undefined, AIData>() {
           return m;
         }),
       }));
+    },
+    contextData: undefined,
+    setContextData: (contextData) => {
+      set(() => ({ contextData }));
     },
     reset: () => {
       set(store.getInitialState());

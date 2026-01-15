@@ -1,4 +1,4 @@
-@keyframes sender-rectangle-white {
+@keyframes fea-sender-rectangle-white {
   0%,
   80%,
   100% {
@@ -12,7 +12,7 @@
   }
 }
 
-@keyframes sender-rectangle-primary {
+@keyframes fea-sender-rectangle-primary {
   0%,
   80%,
   100% {
@@ -23,5 +23,16 @@
   40% {
     height: 8px;
     box-shadow: 0 -8px theme('colors.primary');
+  }
+}
+
+.fea-message-think {
+  &:not(.fea-message-think-deep-seek) {
+    .ant-think-content {
+      border-inline-start: none;
+      background-color: theme('backgroundColor.01');
+      padding: 12px 16px;
+      border-radius: 8px;
+    }
   }
 }
