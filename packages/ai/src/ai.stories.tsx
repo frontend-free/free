@@ -10,6 +10,7 @@ import {
 } from '@fe-free/ai';
 import { sleep } from '@fe-free/tool';
 import type { Meta } from '@storybook/react-vite';
+import { useDebounce, useUpdateEffect } from 'ahooks';
 import { set } from 'lodash-es';
 import { useCallback, useEffect, useMemo } from 'react';
 
@@ -46,37 +47,27 @@ function Component() {
   const senderValue = useChatStore((state) => state.senderValue);
   const setSenderValue = useChatStore((state) => state.setSenderValue);
   const messages = useChatStore((state) => state.messages);
+  const setMessages = useChatStore((state) => state.setMessages);
   const addMessage = useChatStore((state) => state.addMessage);
   const updateMessage = useChatStore((state) => state.updateMessage);
   const { chatStatus } = useChatStoreComputed();
 
+  const debounceCacheMessages = useDebounce(messages, { wait: 500 });
+
+  // init from cache
+  useEffect(() => {
+    const cacheMessages = localStorage.getItem('chatMessages');
+    if (cacheMessages) {
+      setMessages(JSON.parse(cacheMessages));
+    }
+  }, []);
+  // cache
+  useUpdateEffect(() => {
+    localStorage.setItem('chatMessages', JSON.stringify(debounceCacheMessages));
+  }, [debounceCacheMessages]);
+
   const loading =
     chatStatus === EnumChatMessageStatus.PENDING || chatStatus === EnumChatMessageStatus.STREAMING;
-
-  useEffect(() => {
-    addMessage({
-      uuid: generateUUID(),
-      user: {
-        text: 'hello',
-      },
-      ai: {
-        data: {
-          text: '你好，\n我是AI，很高兴认识你',
-        },
-      },
-    });
-    addMessage({
-      uuid: generateUUID(),
-      user: {
-        text: 'hello',
-      },
-      ai: {
-        data: {
-          text: '你\n好，\n我\n是\nAI，\n很\n高\n兴\n认\n识\n你\n你\n好，\n我\n是\nAI，\n很\n高\n兴\n认\n识\n你\n很\n高\n兴\n认\n识\n你\n',
-        },
-      },
-    });
-  }, []);
 
   const handleSubmit = useCallback((v) => {
     console.log('onSubmit', v);

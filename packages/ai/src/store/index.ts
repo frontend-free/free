@@ -2,24 +2,32 @@ import { useMemo } from 'react';
 import { create } from 'zustand';
 import type { ChatMessage } from './types';
 
-interface ChatStore<Value, AIData> {
+interface BaseSenderValue {
+  text?: string;
+  files?: string[];
+}
+interface ChatStore<Value extends BaseSenderValue | undefined, AIData> {
   senderValue?: Value;
   setSenderValue: (senderValue?: Value) => void;
 
   messages: ChatMessage<AIData>[];
+  setMessages: (messages: ChatMessage<AIData>[]) => void;
   addMessage: (message: ChatMessage<AIData>) => void;
   updateMessage: (message: ChatMessage<AIData>) => void;
 
   reset: () => void;
 }
 
-function createChatStore<Value, AIData>() {
+function createChatStore<Value extends BaseSenderValue | undefined, AIData>() {
   const useChatStore = create<ChatStore<Value, AIData>>((set, get, store) => ({
     senderValue: undefined,
     setSenderValue: (senderValue) => {
       set(() => ({ senderValue }));
     },
     messages: [],
+    setMessages: (messages) => {
+      set(() => ({ messages }));
+    },
     addMessage: (message) => {
       set((state) => ({
         messages: [
