@@ -1,20 +1,23 @@
 import Icons from '@fe-free/icons';
 import { Button } from 'antd';
 import { useCallback, type RefObject } from 'react';
+import IconRecord from '../svgs/record.svg?react';
 import SendIcon from '../svgs/send.svg?react';
 import type { MSenderProps } from './types';
 
 function Actions(
   props: MSenderProps & {
     refText: RefObject<HTMLTextAreaElement>;
+    type: 'input' | 'record';
+    setType: (type: 'input' | 'record') => void;
   },
 ) {
-  const { refText, loading, onSubmit, value, onChange } = props;
+  const { refText, loading, onSubmit, value, onChange, setType, allowSpeech } = props;
 
   const isLoading = loading;
 
   const handleSubmit = useCallback(async () => {
-    if (isLoading) {
+    if (isLoading || value?.text?.trim() === '') {
       return;
     }
 
@@ -36,16 +39,23 @@ function Actions(
   }, [isLoading, value, onSubmit, onChange, refText]);
 
   return (
-    <div className="flex items-center gap-2">
-      <Button
-        shape="circle"
-        size="small"
-        type="primary"
-        icon={<Icons component={SendIcon} />}
-        loading={isLoading}
-        disabled={!value?.text}
-        onClick={handleSubmit}
-      />
+    <div className="mr-1 flex items-center gap-2">
+      {allowSpeech && !value?.text ? (
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<Icons component={IconRecord} />}
+          onClick={() => setType('record')}
+        />
+      ) : (
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<Icons component={SendIcon} />}
+          loading={isLoading}
+          onClick={handleSubmit}
+        />
+      )}
     </div>
   );
 }

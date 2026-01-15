@@ -26,7 +26,7 @@ interface MSenderProps {
   };
 
   defaultType?: 'input' | 'record';
-  statement?: string | false;
+  statement?: string;
 }
 
 export type { MSenderProps, MSenderRef, MSenderValue };

@@ -13,10 +13,11 @@ interface CopyProps {
   children?: React.ReactNode;
   /** 复制成功后的回调 */
   onCopied?: () => void;
+  className?: string;
 }
 
 function Copy(props: CopyProps) {
-  const { value, showIcon, hoverIcon, children, onCopied } = props;
+  const { value, showIcon, hoverIcon, children, onCopied, className } = props;
 
   const handleCopy = useCallback(async () => {
     await copyToClipboard(value);
@@ -26,13 +27,17 @@ function Copy(props: CopyProps) {
   if (showIcon || hoverIcon) {
     return (
       <div
-        className={classNames('flex gap-1', {
-          group: hoverIcon,
-        })}
+        className={classNames(
+          'flex gap-1',
+          {
+            group: hoverIcon,
+          },
+          className,
+        )}
       >
         {children}
         <div
-          className={classNames('cursor-pointer text-primary', {
+          className={classNames('cursor-pointer', {
             hidden: hoverIcon,
             'group-hover:block': hoverIcon,
           })}

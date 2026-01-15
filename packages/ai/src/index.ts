@@ -4,7 +4,7 @@ export { FileView, FileViewList } from './files';
 export { generateUUID } from './helper';
 export { MSender } from './m_sender';
 export type { MSenderProps, MSenderRef } from './m_sender';
-export { Messages } from './messages';
+export { MessageActions, Messages } from './messages';
 export type { MessagesProps } from './messages';
 export { Sender } from './sender';
 export type { SenderProps, SenderRef } from './sender';

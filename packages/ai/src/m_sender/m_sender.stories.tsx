@@ -12,7 +12,7 @@ const meta: Meta<typeof MSender> = {
 
 type Story = StoryObj<typeof MSender>;
 
-function Component(props: Omit<MSenderProps, 'value' | 'onChange' | 'onSubmit'>) {
+function Component(props: MSenderProps) {
   const [v, setV] = useState<MSenderValue | undefined>(undefined);
 
   return (
@@ -83,14 +83,13 @@ export const AllowSpeech: Story = {
           const recordResult = recordVoice;
 
           handleSubmit({ ...(props.value || {}), text: recordResult });
-          alert('submit');
         }
       },
       [props.value, recordVoice],
     );
 
     return (
-      <div>
+      <div className="flex flex-col gap-10">
         <Component
           {...props}
           allowSpeech={{
@@ -100,19 +99,21 @@ export const AllowSpeech: Story = {
         />
 
         <Component
+          value={{ text: 'test' } as MSenderValue}
           {...props}
-          defaultType="record"
           allowSpeech={{
             onRecordStart: handleRecordStart,
             onRecordEnd: handleRecordEnd,
           }}
         />
 
+        <div />
+
         <Component
           {...props}
           defaultType="record"
           allowSpeech={{
-            onRecordStart: () => Promise.reject(new Error('no permission')),
+            onRecordStart: handleRecordStart,
             onRecordEnd: handleRecordEnd,
           }}
         />

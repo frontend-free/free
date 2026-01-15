@@ -4,40 +4,7 @@ import classNames from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RecordLoading } from '../helper';
 import IconKeyboard from '../svgs/keyboard.svg?react';
-import IconRecord from '../svgs/record.svg?react';
 import type { MSenderProps } from './types';
-
-function InputRecordSwitch(
-  props: MSenderProps & { type: 'input' | 'record'; setType: (type: 'input' | 'record') => void },
-) {
-  const { allowSpeech, type, setType } = props;
-
-  if (!allowSpeech) {
-    return null;
-  }
-
-  if (type === 'record') {
-    return (
-      <Button
-        type="text"
-        shape="circle"
-        size="small"
-        icon={<Icons component={IconKeyboard} className="!text-[24px]" />}
-        onClick={() => setType('input')}
-      />
-    );
-  }
-
-  return (
-    <Button
-      type="text"
-      shape="circle"
-      size="small"
-      icon={<Icons component={IconRecord} className="!text-[24px]" />}
-      onClick={() => setType('record')}
-    />
-  );
-}
 
 function RecordAction(props: MSenderProps & { setType }) {
   const { allowSpeech, setType } = props;
@@ -160,37 +127,35 @@ function RecordAction(props: MSenderProps & { setType }) {
   return (
     <div
       className={classNames('absolute inset-0 flex items-center justify-center rounded-xl', {
-        'bg-white': !isRecording,
-        'bg-red-500': isRecording && isCancel,
-        'bg-primary': isRecording && !isCancel,
+        'bg-red-500': isCancel,
+        'bg-primary': !isCancel,
       })}
     >
       {isRecording ? (
         <>
           <RecordLoading count={30} gap={4} />
-          {isCancel && <div className="absolute top-0 -mt-[2em] text-red08">松手取消</div>}
+          {isCancel && <div className="absolute top-0 -mt-[2.5em] text-red08">松开取消</div>}
           {!isCancel && (
-            <div className="absolute top-0 -mt-[2em] text-primary">松开发送，上移取消</div>
+            <div className="absolute top-0 -mt-[2.5em] text-03">松开发送，上移取消</div>
           )}
         </>
       ) : (
-        <div>按住说话</div>
+        <div className="text-base text-white">按住说话</div>
       )}
       <div className="absolute inset-0" ref={containerRef} />
       {!isRecording && (
         <Button
           type="text"
           shape="circle"
-          size="small"
-          icon={<Icons component={IconKeyboard} className="!text-[24px]" />}
+          icon={<Icons component={IconKeyboard} className="!text-xl text-white" />}
           onClick={() => {
             setType('input');
           }}
-          className="absolute left-2"
+          className="absolute right-4"
         />
       )}
     </div>
   );
 }
 
-export { InputRecordSwitch, RecordAction };
+export { RecordAction };

@@ -4,6 +4,7 @@ import {
   createChatStore,
   EnumChatMessageStatus,
   generateUUID,
+  MessageActions,
   Messages,
   MSender,
 } from '@fe-free/ai';
@@ -146,6 +147,19 @@ function Component() {
             <div className="p-2">
               <div>{message.status}</div>
               <pre className="whitespace-pre-wrap">{message.ai?.data?.text}</pre>
+              <div className="flex gap-2">
+                <MessageActions.Copy value={message.ai?.data?.text || ''} />
+                <MessageActions.Like
+                  onClick={async () => {
+                    // some thing
+                  }}
+                />
+                <MessageActions.Dislike
+                  onClick={async () => {
+                    // some thing
+                  }}
+                />
+              </div>
             </div>
           )}
         />
