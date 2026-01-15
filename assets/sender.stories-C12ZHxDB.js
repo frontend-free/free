@@ -1,0 +1,32 @@
+import{j as o,r as d}from"./iframe-B2t26p-v.js";import{S as u}from"./index-BeFwLqWx.js";import"./preload-helper-PPVm8Dsz.js";import"./Icon-CWFLi4sS.js";const f={title:"@fe-free/ai/Sender",component:u,tags:["autodocs"]};function p(e){const[c,l]=d.useState(void 0);return o.jsx(u,{value:c,onChange:r=>{console.log("newValue",r),l(r)},onSubmit:r=>{console.log("onSubmit",r)},...e})}const n={render:e=>o.jsx(p,{...e}),args:{onSubmit:e=>{console.log(e)}}},a={args:{loading:!0,onSubmit:e=>{console.log(e)}},render:e=>o.jsx(p,{...e})},s={args:{allowUpload:{uploadAction:"/api/ai-service/v1/file_upload/upload",filesMaxCount:3}},render:e=>o.jsx(p,{...e})},t={render:e=>{const[c,l]=d.useState(!0);return o.jsx(p,{...e,allowSpeech:{recording:c,onRecordingChange:l}})}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
+  render: props => <Component {...props} />,
+  args: {
+    onSubmit: value => {
+      console.log(value);
+    }
+  }
+}`,...n.parameters?.docs?.source}}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  args: {
+    loading: true,
+    onSubmit: value => {
+      console.log(value);
+    }
+  },
+  render: props => <Component {...props} />
+}`,...a.parameters?.docs?.source}}};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: {
+    allowUpload: {
+      uploadAction: '/api/ai-service/v1/file_upload/upload',
+      filesMaxCount: 3
+    }
+  },
+  render: props => <Component {...props} />
+}`,...s.parameters?.docs?.source}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+  render: props => {
+    const [recording, setRecording] = useState(true);
+    return <Component {...props} allowSpeech={{
+      recording,
+      onRecordingChange: setRecording
+    }} />;
+  }
+}`,...t.parameters?.docs?.source}}};const x=["Default","Loading","AllowUpload","AllowSpeech"];export{t as AllowSpeech,s as AllowUpload,n as Default,a as Loading,x as __namedExportsOrder,f as default};
