@@ -11,7 +11,6 @@ import {
 } from '@fe-free/ai';
 import { sleep } from '@fe-free/tool';
 import type { Meta } from '@storybook/react-vite';
-import { useDebounce, useUpdateEffect } from 'ahooks';
 import { Button, Divider } from 'antd';
 import { set } from 'lodash-es';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -54,8 +53,6 @@ function Component() {
   const updateMessage = useChatStore((state) => state.updateMessage);
   const { chatStatus } = useChatStoreComputed();
 
-  const debounceCacheMessages = useDebounce(messages, { wait: 500 });
-
   // init from cache
   useEffect(() => {
     const cacheMessages = localStorage.getItem('chatMessages');
@@ -63,10 +60,6 @@ function Component() {
       setMessages(JSON.parse(cacheMessages));
     }
   }, []);
-  // cache
-  useUpdateEffect(() => {
-    localStorage.setItem('chatMessages', JSON.stringify(debounceCacheMessages));
-  }, [debounceCacheMessages]);
 
   const loading =
     chatStatus === EnumChatMessageStatus.PENDING || chatStatus === EnumChatMessageStatus.STREAMING;
