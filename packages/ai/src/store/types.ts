@@ -20,6 +20,7 @@ interface ChatMessageOfUser {
 
 interface ChatMessageOfAI<AIData> {
   data?: AIData;
+  error?: any;
   // 其他字段，根据业务需要使用
   session_id?: string;
 }

@@ -10,6 +10,10 @@
     }
   }
 
+  .ant-codeHighlighter-header {
+    padding: 8px 12px;
+  }
+
   &.x-markdown-light pre code:not([class$='-highlightCode-code'] pre code) {
     padding: 0 !important;
     background-color: transparent !important;

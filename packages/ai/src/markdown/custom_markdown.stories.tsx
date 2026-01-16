@@ -11,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof CustomMarkdown>;
 
-export const Default: Story = {
+export const CustomThink: Story = {
   args: {
     content: `<think>
 好的，我现在需要处理用户的问题。用户一开始用中文打招呼“你好”，然后我的回应应该遵循之前设定的角色和技能。首先，我需要确认用户是否是前端工程师求职者，或者他们需要哪方面的帮助。根据角色设定，我应该先了解他们的具体情况，比如技术栈、工作年限、项目经验和目标城市。

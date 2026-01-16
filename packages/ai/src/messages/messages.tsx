@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { EnumChatMessageType, type ChatMessage } from '../store/types';
 
 interface MessagesProps<AIData> {
+  refList?: React.RefObject<HTMLDivElement>;
   messages?: ChatMessage<AIData>[];
   /** 含所有 */
   renderMessage?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
@@ -15,10 +16,17 @@ interface MessagesProps<AIData> {
 }
 
 function Messages<AIData>(props: MessagesProps<AIData>) {
-  const { messages, renderMessage, renderMessageOfSystem, renderMessageOfUser, renderMessageOfAI } =
-    props;
+  const {
+    refList,
+    messages,
+    renderMessage,
+    renderMessageOfSystem,
+    renderMessageOfUser,
+    renderMessageOfAI,
+  } = props;
 
-  const ref = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const ref = refList || innerRef;
 
   const lastMessage = useMemo(() => {
     return messages?.[messages.length - 1];
@@ -55,7 +63,7 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
     if (isVisible) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [lastMessage?.updatedAt, lastMessage?.uuid]);
+  }, [lastMessage?.updatedAt, lastMessage?.uuid, ref]);
 
   return (
     <PageLayout>

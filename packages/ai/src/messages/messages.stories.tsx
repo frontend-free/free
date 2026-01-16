@@ -38,7 +38,6 @@ export const DeepSeek: Story = {
     title: '思考中...',
     loading: true,
     children: '这是 Think 的内容',
-    type: 'deepSeek',
   },
 };
 
