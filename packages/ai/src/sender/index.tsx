@@ -7,7 +7,6 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Actions } from './actions';
 import { FileUpload, Files } from './files';
-import './style.scss';
 import type { SenderProps, SenderRef } from './types';
 
 function Text(props: SenderProps & { refText: RefObject<HTMLTextAreaElement> }) {

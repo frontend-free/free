@@ -7,7 +7,6 @@ import classNames from 'classnames';
 import { useMemo } from 'react';
 import { CodeComponent } from './code';
 import { KnowledgeRefBlock, processWithKnowledgeRef } from './knowledge_ref';
-import './style.scss';
 import { ThinkComponent, compatibleWithDeepSeek } from './think';
 
 interface MarkdownProps {
