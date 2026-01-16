@@ -34,13 +34,21 @@ function MessageActionOfCopy({ value, onCopied }: { value: string; onCopied?: ()
   );
 }
 
-function MessageActionOfLike({ onClick }: { onClick?: (active: boolean) => Promise<void> }) {
-  const [active, setActive] = useState(false);
+function MessageActionOfLike({
+  active: propsActive,
+  onClick,
+}: {
+  active?: boolean;
+  onClick?: (active: boolean) => Promise<void>;
+}) {
+  const { message } = App.useApp();
+  const [active, setActive] = useState(propsActive || false);
 
   const handleClick = useCallback(async () => {
     await Promise.resolve(onClick?.(!active));
     setActive(!active);
-  }, [onClick, active]);
+    message.success(!active ? '点赞成功' : '取消点赞成功');
+  }, [onClick, active, message]);
 
   return (
     <Tooltip title={active ? '取消点赞' : '点赞'}>
@@ -55,13 +63,21 @@ function MessageActionOfLike({ onClick }: { onClick?: (active: boolean) => Promi
   );
 }
 
-function MessageActionOfDislike({ onClick }: { onClick?: (active: boolean) => Promise<void> }) {
-  const [active, setActive] = useState(false);
+function MessageActionOfDislike({
+  active: propsActive,
+  onClick,
+}: {
+  active?: boolean;
+  onClick?: (active: boolean) => Promise<void>;
+}) {
+  const [active, setActive] = useState(propsActive || false);
+  const { message } = App.useApp();
 
   const handleClick = useCallback(async () => {
     await Promise.resolve(onClick?.(!active));
     setActive(!active);
-  }, [onClick, active]);
+    message.success(!active ? '点踩成功' : '取消点踩成功');
+  }, [onClick, active, message]);
 
   return (
     <Tooltip title={active ? '取消点踩' : '点踩'}>
