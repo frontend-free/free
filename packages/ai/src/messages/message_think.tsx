@@ -8,24 +8,38 @@ interface MessageThinkProps {
   icon?: React.ReactNode;
   loading?: boolean;
   children?: React.ReactNode;
-  type?: 'deepSeek';
+  expanded?: boolean;
+  onClick?: () => void;
+  className?: string;
 }
 
-function MessageThink({ title, icon, loading, children, type }: MessageThinkProps) {
+function MessageThink({
+  title,
+  icon,
+  loading,
+  children,
+  expanded,
+  onClick,
+  className,
+}: MessageThinkProps) {
   return (
     <Think
       title={title}
       icon={icon || <Icons component={ThinkIcon} className="!text-sm" />}
       loading={loading}
       blink={loading}
-      className={classNames('fea-message-think', {
-        'fea-message-think-deep-seek': type === 'deepSeek',
-      })}
+      expanded={expanded}
+      onClick={onClick}
+      className={classNames('fea-message-think', className)}
     >
       {children}
     </Think>
   );
 }
 
-export { MessageThink };
+function MessageThinkOfDeepSeek(props: MessageThinkProps) {
+  return <MessageThink {...props} className="fea-message-think-deep-seek" />;
+}
+
+export { MessageThink, MessageThinkOfDeepSeek };
 export type { MessageThinkProps };

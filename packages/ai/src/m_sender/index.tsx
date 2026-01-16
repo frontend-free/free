@@ -55,6 +55,9 @@ function MSender(originProps: MSenderProps) {
         className={classNames(
           'fea-m-sender relative flex items-end rounded-xl border border-01 bg-white p-2.5',
         )}
+        style={{
+          boxShadow: '0px 2px 12px 0px #00000014',
+        }}
       >
         <div className="flex flex-1">
           <Text {...props} refText={refText} />

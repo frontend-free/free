@@ -4,6 +4,8 @@ export { FileView, FileViewList } from './files';
 export { generateUUID } from './helper';
 export { MSender } from './m_sender';
 export type { MSenderProps, MSenderRef } from './m_sender';
+export { CustomMarkdown, Markdown } from './markdown';
+export type { CustomMarkdownProps, MarkdownProps } from './markdown';
 export { MessageActions, MessageThink, Messages } from './messages';
 export type { MessageThinkProps, MessagesProps } from './messages';
 export { Sender } from './sender';

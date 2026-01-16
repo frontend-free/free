@@ -105,6 +105,9 @@ function Sender(originProps: SenderProps) {
             'fea-sender-drag-hover': dragHover,
           },
         )}
+        style={{
+          boxShadow: '0px 2px 12px 0px #00000014',
+        }}
       >
         <Files
           {...props}

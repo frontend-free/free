@@ -64,40 +64,43 @@ function Component() {
   const loading =
     chatStatus === EnumChatMessageStatus.PENDING || chatStatus === EnumChatMessageStatus.STREAMING;
 
-  const handleSubmit = useCallback((v) => {
-    console.log('onSubmit', v);
+  const handleSubmit = useCallback(
+    (v) => {
+      console.log('onSubmit', v);
 
-    const message: ChatMessage<AIData> = {
-      uuid: generateUUID(),
-      status: EnumChatMessageStatus.PENDING,
-      user: {
-        ...v,
-      },
-    };
+      const message: ChatMessage<AIData> = {
+        uuid: generateUUID(),
+        status: EnumChatMessageStatus.PENDING,
+        user: {
+          ...v,
+        },
+      };
 
-    addMessage(message);
+      addMessage(message);
 
-    // fake
-    fakeFetchStream(v, {
-      onUpdate: ({ event, data }) => {
-        if (event === 'message') {
-          message.status = EnumChatMessageStatus.STREAMING;
+      // fake
+      fakeFetchStream(v, {
+        onUpdate: ({ event, data }) => {
+          if (event === 'message') {
+            message.status = EnumChatMessageStatus.STREAMING;
 
-          const preText = message.ai?.data?.text || '';
-          set(message, 'ai.data.text', preText + data);
+            const preText = message.ai?.data?.text || '';
+            set(message, 'ai.data.text', preText + data);
 
-          // 假设有 session_id
-          set(message, 'ai.session_id', '123');
+            // 假设有 session_id
+            set(message, 'ai.session_id', '123');
 
-          updateMessage(message);
-        }
-        if (event === 'done') {
-          message.status = EnumChatMessageStatus.DONE;
-          updateMessage(message);
-        }
-      },
-    });
-  }, []);
+            updateMessage(message);
+          }
+          if (event === 'done') {
+            message.status = EnumChatMessageStatus.DONE;
+            updateMessage(message);
+          }
+        },
+      });
+    },
+    [addMessage, updateMessage],
+  );
 
   return (
     <div>
