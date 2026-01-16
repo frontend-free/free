@@ -8,7 +8,7 @@ import {
   LikeOutlined,
 } from '@fe-free/icons';
 import { App, Button, Tooltip } from 'antd';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function MessageActionOfCopy({ value, onCopied }: { value: string; onCopied?: () => void }) {
   const [active, setActive] = useState(false);
@@ -44,6 +44,10 @@ function MessageActionOfLike({
   const { message } = App.useApp();
   const [active, setActive] = useState(propsActive || false);
 
+  useEffect(() => {
+    setActive(!!propsActive);
+  }, [propsActive]);
+
   const handleClick = useCallback(async () => {
     await Promise.resolve(onClick?.(!active));
     setActive(!active);
@@ -73,6 +77,10 @@ function MessageActionOfDislike({
   const [active, setActive] = useState(propsActive || false);
   const { message } = App.useApp();
 
+  useEffect(() => {
+    setActive(!!propsActive);
+  }, [propsActive]);
+
   const handleClick = useCallback(async () => {
     await Promise.resolve(onClick?.(!active));
     setActive(!active);
@@ -92,10 +100,46 @@ function MessageActionOfDislike({
   );
 }
 
+function MessageActionOfLinkAndDislike({
+  value: propsValue,
+  onChange,
+}: {
+  value?: -1 | 0 | 1;
+  onChange?: (value: -1 | 0 | 1) => void;
+}) {
+  const [value, setValue] = useState<(-1 | 0 | 1) | undefined>(propsValue);
+
+  useEffect(() => {
+    setValue(propsValue);
+  }, [propsValue]);
+
+  return (
+    <>
+      <MessageActionOfLike
+        active={value === 1}
+        onClick={async () => {
+          const newValue = value === 1 ? 0 : 1;
+          await Promise.resolve(onChange?.(newValue));
+          setValue(newValue);
+        }}
+      />
+      <MessageActionOfDislike
+        active={value === -1}
+        onClick={async () => {
+          const newValue = value === -1 ? 0 : -1;
+          await Promise.resolve(onChange?.(newValue));
+          setValue(newValue);
+        }}
+      />
+    </>
+  );
+}
+
 const MessageActions = {
   Copy: MessageActionOfCopy,
   Like: MessageActionOfLike,
   Dislike: MessageActionOfDislike,
+  LinkAndDislike: MessageActionOfLinkAndDislike,
 };
 
 export { MessageActions };
