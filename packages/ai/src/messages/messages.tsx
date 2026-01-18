@@ -28,25 +28,34 @@ function useScrollWidth() {
 }
 
 function useScrollToBottom({ ref }) {
-  const [isNearBottom, setIsNearBottom] = useState(false);
+  const [showScrollBottom, setShowScrollBottom] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!ref.current) {
+        return;
+      }
+
+      const { scrollTop, clientHeight, scrollHeight } = ref.current;
+
       const isNearBottom =
-        ref.current?.scrollTop + ref.current?.clientHeight >= ref.current?.scrollHeight - 200;
-      setIsNearBottom(isNearBottom);
+        scrollHeight > clientHeight && scrollTop + clientHeight + 200 <= scrollHeight;
+      setShowScrollBottom(isNearBottom);
     };
 
     if (ref.current) {
       ref.current.addEventListener('scroll', handleScroll);
     }
 
+    // first
+    handleScroll();
+
     return () => {
       ref.current?.removeEventListener('scroll', handleScroll);
     };
   }, [ref]);
 
-  return isNearBottom;
+  return showScrollBottom;
 }
 
 function Messages<AIData>(props: MessagesProps<AIData>) {
@@ -113,7 +122,7 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
 
   const scrollWidth = useScrollWidth();
 
-  const isNearBottom = useScrollToBottom({ ref });
+  const showScrollBottom = useScrollToBottom({ ref });
 
   return (
     <PageLayout>
@@ -163,7 +172,7 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
             }}
             className="bg-white shadow-lg"
             style={{
-              transform: `translateY(${isNearBottom ? 30 : 0}px) scale(${isNearBottom ? 0.1 : 1})`,
+              transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0.1})`,
             }}
           />
         </div>
