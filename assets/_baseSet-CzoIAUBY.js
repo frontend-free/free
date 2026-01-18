@@ -1,0 +1,1 @@
+import{Y as e,Z as x,$ as _,a0 as g,a1 as l}from"./iframe-Dbz12fmw.js";function I(r,n,o,m){if(!e(r))return r;n=x(n,r);for(var t=-1,d=n.length,u=d-1,i=r;i!=null&&++t<d;){var s=_(n[t]),a=o;if(s==="__proto__"||s==="constructor"||s==="prototype")return r;if(t!=u){var f=i[s];a=void 0,a===void 0&&(a=e(f)?f:g(n[t+1])?[]:{})}l(i,s,a),i=i[s]}return r}export{I as b};
