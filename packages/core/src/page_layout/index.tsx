@@ -12,9 +12,13 @@ interface PageLayoutProps {
   /** beta equalParts */
   equalParts?: boolean;
   className?: string;
+  style?: React.CSSProperties;
   startClassName?: string;
+  startStyle?: React.CSSProperties;
   childrenClassName?: string;
+  childrenStyle?: React.CSSProperties;
   endClassName?: string;
+  endStyle?: React.CSSProperties;
 }
 
 function PageLayout({
@@ -24,9 +28,13 @@ function PageLayout({
   end,
   equalParts,
   className,
+  style,
   startClassName,
+  startStyle,
   childrenClassName,
+  childrenStyle,
   endClassName,
+  endStyle,
 }: PageLayoutProps) {
   return (
     <div
@@ -38,6 +46,7 @@ function PageLayout({
         },
         className,
       )}
+      style={style}
     >
       {start && (
         <div
@@ -48,6 +57,7 @@ function PageLayout({
             },
             startClassName,
           )}
+          style={startStyle}
         >
           {start}
         </div>
@@ -60,6 +70,7 @@ function PageLayout({
           },
           childrenClassName,
         )}
+        style={childrenStyle}
       >
         {children}
       </div>
@@ -72,6 +83,7 @@ function PageLayout({
             },
             endClassName,
           )}
+          style={endStyle}
         >
           {end}
         </div>

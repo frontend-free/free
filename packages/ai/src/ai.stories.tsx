@@ -121,7 +121,7 @@ function Component() {
           Add New Session
         </Button>
       </div>
-      <div className="h-[800px] w-[500px] border border-red-500">
+      <div className="h-[500px] w-[500px] border border-red-500">
         <Chat
           end={
             <div
