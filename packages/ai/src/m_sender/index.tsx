@@ -6,7 +6,7 @@ import { Actions } from './actions';
 import { RecordAction } from './record';
 import type { MSenderProps, MSenderRef } from './types';
 
-function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement> }) {
+function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement | null> }) {
   const { value, onChange, placeholder, refText, autoFocus } = props;
 
   return (

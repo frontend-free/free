@@ -1,7 +1,7 @@
 import Icons from '@fe-free/icons';
 import type { UploadFile } from 'antd';
-import { Button, Divider } from 'antd';
-import { useCallback, type RefObject } from 'react';
+import { Button } from 'antd';
+import type { RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
 import { FileAction } from './files';
 import { RecordAction } from './record';
@@ -9,64 +9,28 @@ import type { SenderProps } from './types';
 
 function Actions(
   props: SenderProps & {
-    refText: RefObject<HTMLTextAreaElement>;
-    refUpload: RefObject<HTMLDivElement>;
+    refText: RefObject<HTMLTextAreaElement | null>;
+    refUpload: RefObject<HTMLDivElement | null>;
     isUploading: boolean;
     fileList: UploadFile[];
     setFileList: (fileList: UploadFile[]) => void;
     fileUrls: string[];
     setFileUrls: (fileUrls: string[]) => void;
+    onSubmit: () => Promise<void>;
   },
 ) {
   const {
-    refText,
-    loading,
-    onSubmit,
-    value,
-    onChange,
     refUpload,
     isUploading,
-    setFileList,
     fileUrls,
     setFileUrls,
     allowUpload,
     allowSpeech,
+    loading,
+    onSubmit,
   } = props;
 
   const isLoading = loading || isUploading;
-
-  const handleSubmit = useCallback(async () => {
-    if (isLoading || allowSpeech?.recording) {
-      return;
-    }
-
-    const newValue = {
-      ...value,
-      text: value?.text?.trim(),
-    };
-
-    // 有内容才提交
-    if (newValue.text || (newValue.files && newValue.files.length > 0)) {
-      await Promise.resolve(onSubmit?.(newValue));
-
-      // reset
-      setFileList([]);
-      setFileUrls([]);
-      onChange?.({});
-
-      // focus
-      refText.current?.focus();
-    }
-  }, [
-    isLoading,
-    allowSpeech?.recording,
-    value,
-    onSubmit,
-    setFileList,
-    setFileUrls,
-    onChange,
-    refText,
-  ]);
 
   return (
     <div className="flex items-center gap-2">
@@ -80,7 +44,7 @@ function Actions(
           />
         )}
       </div>
-      <Divider type="vertical" />
+      {/* <Divider type="vertical" /> */}
       <div className="flex items-center gap-2">
         {allowSpeech && <RecordAction {...props} />}
         <Button
@@ -89,7 +53,7 @@ function Actions(
           icon={<Icons component={SendIcon} className="!text-lg" />}
           loading={isLoading}
           // disabled={loading}
-          onClick={handleSubmit}
+          onClick={onSubmit}
         />
       </div>
     </div>

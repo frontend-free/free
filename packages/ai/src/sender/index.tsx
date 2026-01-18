@@ -9,8 +9,29 @@ import { Actions } from './actions';
 import { FileUpload, Files } from './files';
 import type { SenderProps, SenderRef } from './types';
 
-function Text(props: SenderProps & { refText: RefObject<HTMLTextAreaElement> }) {
-  const { value, onChange, placeholder, refText } = props;
+function Text(
+  props: SenderProps & {
+    refText: RefObject<HTMLTextAreaElement | null>;
+    onSubmit?: () => void;
+  },
+) {
+  const { value, onChange, placeholder, refText, onSubmit } = props;
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      // Shift + Enter: 换行（默认行为）
+      if (e.key === 'Enter' && e.shiftKey) {
+        return;
+      }
+
+      // Enter: 提交
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        onSubmit?.();
+      }
+    },
+    [onSubmit],
+  );
 
   return (
     <Input.TextArea
@@ -19,6 +40,7 @@ function Text(props: SenderProps & { refText: RefObject<HTMLTextAreaElement> }) 
       onChange={(e) => {
         onChange?.({ ...value, text: e.target.value });
       }}
+      onKeyDown={handleKeyDown}
       placeholder={placeholder}
       autoSize={{ minRows: 2, maxRows: 8 }}
       className="mb-1 px-1 py-0"
@@ -32,21 +54,22 @@ function Sender(originProps: SenderProps) {
   const props = useMemo(() => {
     return {
       placeholder:
-        originProps.placeholder ?? t('@fe-free/ai.sender.describeYourQuestion', '描述你的问题'),
+        originProps.placeholder ??
+        t('@fe-free/ai.sender.describeYourQuestion', '描述你的问题， shift + enter 换行'),
       ...originProps,
     };
   }, [originProps, t]);
 
   const refText = useRef<HTMLTextAreaElement>(null);
 
-  const { value, onChange, allowUpload } = props;
+  const { value, onChange, allowUpload, onSubmit, loading, allowSpeech } = props;
   const { filesMaxCount } = allowUpload || {};
 
   const refContainer = useRef<HTMLDivElement>(null);
   const refUpload = useRef<HTMLDivElement>(null);
   const [dragHover, setDragHover] = useState(false);
 
-  useDrop(refContainer, {
+  useDrop(allowUpload ? refContainer : null, {
     onDragEnter: () => {
       setDragHover(true);
     },
@@ -94,6 +117,41 @@ function Sender(originProps: SenderProps) {
     return fileList.some((file) => !file.response?.data?.url);
   }, [fileList]);
 
+  const handleSubmit = useCallback(async () => {
+    const isLoading = loading || isUploading;
+
+    if (isLoading || allowSpeech?.recording) {
+      return;
+    }
+
+    const newValue = {
+      ...value,
+      text: value?.text?.trim(),
+    };
+
+    // 有内容才提交
+    if (newValue.text || (newValue.files && newValue.files.length > 0)) {
+      await Promise.resolve(onSubmit?.(newValue));
+
+      // reset
+      setFileList([]);
+      setFileUrls([]);
+      onChange?.({});
+
+      // focus
+      refText.current?.focus();
+    }
+  }, [
+    loading,
+    isUploading,
+    allowSpeech?.recording,
+    value,
+    onSubmit,
+    setFileList,
+    setFileUrls,
+    onChange,
+  ]);
+
   return (
     <div className="fea-sender-wrap">
       <div
@@ -116,7 +174,7 @@ function Sender(originProps: SenderProps) {
           setFileUrls={setFileUrls}
         />
         <div className="flex">
-          <Text {...props} refText={refText} />
+          <Text {...props} refText={refText} onSubmit={handleSubmit} />
         </div>
         <Actions
           {...props}
@@ -127,14 +185,17 @@ function Sender(originProps: SenderProps) {
           setFileList={setFileList}
           fileUrls={fileUrls}
           setFileUrls={setFileUrls}
+          onSubmit={handleSubmit}
         />
-        <FileUpload
-          {...props}
-          refUpload={refUpload}
-          fileList={fileList}
-          setFileList={setFileList}
-          uploadMaxCount={filesMaxCount ? filesMaxCount - fileUrls.length : undefined}
-        />
+        {allowUpload && (
+          <FileUpload
+            {...props}
+            refUpload={refUpload}
+            fileList={fileList}
+            setFileList={setFileList}
+            uploadMaxCount={filesMaxCount ? filesMaxCount - fileUrls.length : undefined}
+          />
+        )}
       </div>
       <div className="mt-1 text-center text-xs text-03">
         {t(

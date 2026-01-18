@@ -7,7 +7,7 @@ import type { MSenderProps } from './types';
 
 function Actions(
   props: MSenderProps & {
-    refText: RefObject<HTMLTextAreaElement>;
+    refText: RefObject<HTMLTextAreaElement | null>;
     type: 'input' | 'record';
     setType: (type: 'input' | 'record') => void;
   },

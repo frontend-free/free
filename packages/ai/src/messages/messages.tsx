@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { EnumChatMessageType, type ChatMessage } from '../store/types';
 
 interface MessagesProps<AIData> {
-  refList?: React.RefObject<HTMLDivElement>;
+  refList?: React.RefObject<HTMLDivElement | null>;
   messages?: ChatMessage<AIData>[];
   /** 含所有 */
   renderMessage?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
@@ -42,7 +42,7 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
     setTimeout(() => {
       const element = document.querySelector(`[data-uuid="${lastMessage.uuid}"]`);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
     }, 100);
   }, [lastMessage?.uuid]);
@@ -66,7 +66,7 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
       // 如果最后一个元素可见，则滚动到底部
       const isVisible = top < listBottom && bottom > listTop;
       if (isVisible) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
     }, 100);
   }, [lastMessage?.updatedAt, lastMessage?.uuid, ref]);

@@ -11,7 +11,7 @@ import type { SenderProps } from './types';
 
 function FileAction(
   props: SenderProps & {
-    refUpload: RefObject<HTMLDivElement>;
+    refUpload: RefObject<HTMLDivElement | null>;
     fileUrls: string[];
     setFileUrls: (fileUrls: string[]) => void;
   },
@@ -89,7 +89,7 @@ function FileAction(
 
 function FileUpload(
   props: SenderProps & {
-    refUpload: RefObject<HTMLDivElement>;
+    refUpload: RefObject<HTMLDivElement | null>;
     fileList: UploadFile[];
     setFileList: (fileList: UploadFile[]) => void;
     uploadMaxCount?: number;
