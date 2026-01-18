@@ -31,21 +31,20 @@ function useScrollToBottom({ ref }) {
   const [isNearBottom, setIsNearBottom] = useState(false);
 
   useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-
     const handleScroll = () => {
       const isNearBottom =
         ref.current?.scrollTop + ref.current?.clientHeight >= ref.current?.scrollHeight - 200;
       setIsNearBottom(isNearBottom);
     };
-    ref.current.addEventListener('scroll', handleScroll);
+
+    if (ref.current) {
+      ref.current.addEventListener('scroll', handleScroll);
+    }
 
     return () => {
-      ref.current.removeEventListener('scroll', handleScroll);
+      ref.current?.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [ref]);
 
   return isNearBottom;
 }
@@ -83,8 +82,10 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
 
   // 首次和更新时滚动到最新消息
   useEffect(() => {
-    scrollToBottom();
-  }, [scrollToBottom]);
+    if (lastMessage?.uuid) {
+      scrollToBottom();
+    }
+  }, [scrollToBottom, lastMessage?.uuid]);
 
   // 数据更新是，如果 dom 处于可视区域，则滚动
   useEffect(() => {
@@ -153,7 +154,7 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
             </div>
           );
         })}
-        <div className="sticky bottom-2 left-0 right-0 flex justify-center">
+        <div className="sticky bottom-2 mx-auto flex justify-center">
           <Button
             shape="circle"
             icon={<AngleLeftOutlined rotate={-90} />}
