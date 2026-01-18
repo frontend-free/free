@@ -1,5 +1,0 @@
-import{F as e}from"./index-CRjGZWhx.js";import"./iframe-B-DcF0Kn.js";import"./Icon-MYDpoWFz.js";import"./preload-helper-PPVm8Dsz.js";import"./index-DrFu-skq.js";const r={title:"@fe-free/ai/FileViewList",component:e,tags:["autodocs"]},t={args:{urls:["https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png","https://minio-api-dev.pre-ai.pivotecho.cn/ai-agent/YWIW_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260108121456_230_1.png","https://minio-api-dev.pre-ai.pivotecho.cn/ai-agent/3Uck_%E5%8D%8E%E4%BD%8FAI%E9%A2%84%E8%AE%A2%E7%AC%AC%E4%BA%8C%E8%BD%AEPOC%E8%A6%81%E6%B1%82%282%29.pdf"]}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
-  args: {
-    urls: ['https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png', 'https://minio-api-dev.pre-ai.pivotecho.cn/ai-agent/YWIW_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260108121456_230_1.png', 'https://minio-api-dev.pre-ai.pivotecho.cn/ai-agent/3Uck_%E5%8D%8E%E4%BD%8FAI%E9%A2%84%E8%AE%A2%E7%AC%AC%E4%BA%8C%E8%BD%AEPOC%E8%A6%81%E6%B1%82%282%29.pdf']
-  }
-}`,...t.parameters?.docs?.source}}};const c=["Default"];export{t as Default,c as __namedExportsOrder,r as default};
