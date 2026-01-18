@@ -38,10 +38,13 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
       return;
     }
 
-    const element = document.querySelector(`[data-uuid="${lastMessage.uuid}"]`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // 延迟下，因为 markdown 可能没渲染出来
+    setTimeout(() => {
+      const element = document.querySelector(`[data-uuid="${lastMessage.uuid}"]`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   }, [lastMessage?.uuid]);
 
   // 数据更新是，如果 dom 处于可视区域，则滚动
@@ -50,19 +53,22 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
       return;
     }
 
-    const element = document.querySelector(`[data-uuid="${lastMessage.uuid}"]`);
-    if (!element) {
-      return;
-    }
+    // 延迟下，因为 markdown 可能没渲染出来
+    setTimeout(() => {
+      const element = document.querySelector(`[data-uuid="${lastMessage.uuid}"]`);
+      if (!element) {
+        return;
+      }
 
-    const { top: listTop, bottom: listBottom } = ref.current!.getBoundingClientRect();
-    const { top, bottom } = element.getBoundingClientRect();
+      const { top: listTop, bottom: listBottom } = ref.current!.getBoundingClientRect();
+      const { top, bottom } = element.getBoundingClientRect();
 
-    // 如果最后一个元素可见，则滚动到底部
-    const isVisible = top < listBottom && bottom > listTop;
-    if (isVisible) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+      // 如果最后一个元素可见，则滚动到底部
+      const isVisible = top < listBottom && bottom > listTop;
+      if (isVisible) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   }, [lastMessage?.updatedAt, lastMessage?.uuid, ref]);
 
   return (
