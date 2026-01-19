@@ -1,6 +1,7 @@
 import { Think } from '@ant-design/x';
 import Icons from '@fe-free/icons';
 import classNames from 'classnames';
+import { useCallback, useEffect, useState } from 'react';
 import ThinkIcon from '../svgs/think.svg?react';
 
 interface MessageThinkProps {
@@ -18,10 +19,28 @@ function MessageThink({
   icon,
   loading,
   children,
-  expanded,
+  expanded: propsExpanded,
   onClick,
   className,
 }: MessageThinkProps) {
+  const [expanded, setExpanded] = useState(propsExpanded || false);
+
+  useEffect(() => {
+    setExpanded(propsExpanded || false);
+  }, [propsExpanded]);
+
+  useEffect(() => {
+    // 如果 propsExpanded 未定义，则根据 loading 状态设置 expanded
+    if (propsExpanded === undefined && loading !== undefined) {
+      setExpanded(loading ? true : false);
+    }
+  }, [propsExpanded, loading]);
+
+  const handleClick = useCallback(() => {
+    setExpanded(!expanded);
+    onClick?.();
+  }, [expanded, onClick]);
+
   return (
     <Think
       title={title}
@@ -29,7 +48,7 @@ function MessageThink({
       loading={loading}
       blink={loading}
       expanded={expanded}
-      onClick={onClick}
+      onClick={handleClick}
       className={classNames('fea-message-think', className)}
     >
       {children}
