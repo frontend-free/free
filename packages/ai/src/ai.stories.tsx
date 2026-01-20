@@ -5,6 +5,7 @@ import {
   EnumChatMessageStatus,
   EnumChatMessageType,
   generateUUID,
+  Markdown,
   MessageActions,
   Messages,
   MSender,
@@ -121,7 +122,7 @@ function Component() {
           Add New Session
         </Button>
       </div>
-      <div className="h-[800px] w-[500px] border border-red-500">
+      <div className="h-[800px] w-[500px] max-w-full border border-red-500">
         <Chat
           end={
             <div
@@ -160,11 +161,11 @@ function Component() {
             }}
             renderMessageOfAI={({ message }) => {
               return (
-                <div className="p-2">
+                <div className="max-w-full p-2">
                   <div>
                     status: {message.status} session_id: {message.ai?.session_id}
                   </div>
-                  <pre className="whitespace-pre-wrap">{message.ai?.data?.text}</pre>
+                  <Markdown content={message.ai?.data?.text || ''} />
                   <div className="flex gap-2">
                     <MessageActions.Copy value={message.ai?.data?.text || ''} />
                     <MessageActions.Like
