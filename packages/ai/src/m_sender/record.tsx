@@ -1,13 +1,16 @@
 import Icons from '@fe-free/icons';
 import { Button } from 'antd';
 import classNames from 'classnames';
+import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RecordLoading } from '../helper';
 import IconKeyboard from '../svgs/keyboard.svg?react';
 import type { MSenderProps } from './types';
 
-function RecordAction(props: MSenderProps & { setType }) {
-  const { allowSpeech, setType } = props;
+function RecordAction(
+  props: MSenderProps & { setType; refText: RefObject<HTMLTextAreaElement | null> },
+) {
+  const { allowSpeech, setType, refText } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartYRef = useRef<number>(0);
@@ -126,17 +129,20 @@ function RecordAction(props: MSenderProps & { setType }) {
 
   return (
     <div
-      className={classNames('absolute inset-0 flex items-center justify-center rounded-xl', {
-        'bg-red-500': isCancel,
-        'bg-primary': !isCancel,
-      })}
+      className={classNames(
+        'fea-m-sender-record absolute inset-0 flex items-center justify-center rounded-xl',
+        {
+          'bg-red-500': isCancel,
+          'bg-primary': !isCancel,
+        },
+      )}
     >
       {isRecording ? (
         <>
           <RecordLoading count={30} gap={4} />
           {isCancel && <div className="absolute top-0 -mt-[2.5em] text-red08">松开取消</div>}
           {!isCancel && (
-            <div className="absolute top-0 -mt-[2.5em] text-03">松开发送，上移取消</div>
+            <div className="absolute top-0 -mt-[2.5em] text-03">松开发送&nbsp;&nbsp;上移取消</div>
           )}
         </>
       ) : (
@@ -150,6 +156,8 @@ function RecordAction(props: MSenderProps & { setType }) {
           icon={<Icons component={IconKeyboard} className="!text-xl text-white" />}
           onClick={() => {
             setType('input');
+
+            refText.current?.focus();
           }}
           className="absolute right-4"
         />

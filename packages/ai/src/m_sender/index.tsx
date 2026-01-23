@@ -63,7 +63,7 @@ function MSender(originProps: MSenderProps) {
           <Text {...props} refText={refText} />
         </div>
         <Actions {...props} refText={refText} type={type} setType={setType} />
-        {type === 'record' && <RecordAction {...props} setType={setType} />}
+        {type === 'record' && <RecordAction {...props} refText={refText} setType={setType} />}
       </div>
       {statement && <div className="mt-1 text-center text-xs text-04">*{statement}</div>}
     </div>

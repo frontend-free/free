@@ -45,7 +45,9 @@ function Actions(
           type="primary"
           shape="circle"
           icon={<Icons component={IconRecord} />}
-          onClick={() => setType('record')}
+          onClick={() => {
+            setType('record');
+          }}
         />
       ) : (
         <Button
