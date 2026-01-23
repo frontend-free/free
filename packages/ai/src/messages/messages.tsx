@@ -170,9 +170,11 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
             onClick={() => {
               scrollToBottom();
             }}
-            className="h-[44px] w-[44px] bg-white shadow-[0px_1px_12px_0px_#2921391F]"
+            className="bg-white text-2xl shadow-[0px_1px_12px_0px_#2921391F]"
             style={{
               transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0.1})`,
+              width: 44,
+              height: 44,
             }}
           />
         </div>
