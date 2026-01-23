@@ -61,6 +61,61 @@ export const Loading: Story = {
 
 export const AllowSpeech: Story = {
   render: (props) => {
+    const handleSubmit = (value: MSenderValue) => {
+      console.log('handleSubmit', value);
+    };
+
+    const handleRecordStart = useCallback(async () => {
+      // fake
+    }, []);
+
+    const handleRecordEnd = useCallback(
+      async (isSend) => {
+        console.log('handleRecordEnd isSend', isSend);
+
+        if (isSend) {
+          handleSubmit({ ...(props.value || {}), text: '假设这是识别的文字' });
+        }
+      },
+      [props.value],
+    );
+
+    return (
+      <div className="flex flex-col gap-10">
+        <Component
+          {...props}
+          allowSpeech={{
+            onRecordStart: handleRecordStart,
+            onRecordEnd: handleRecordEnd,
+          }}
+        />
+
+        <Component
+          value={{ text: 'test' } as MSenderValue}
+          {...props}
+          allowSpeech={{
+            onRecordStart: handleRecordStart,
+            onRecordEnd: handleRecordEnd,
+          }}
+        />
+
+        <div />
+
+        <Component
+          {...props}
+          defaultType="record"
+          allowSpeech={{
+            onRecordStart: handleRecordStart,
+            onRecordEnd: handleRecordEnd,
+          }}
+        />
+      </div>
+    );
+  },
+};
+
+export const AllowSpeechPCM: Story = {
+  render: (props) => {
     const { message } = App.useApp();
 
     const { start: startRecord, stop: stopRecord } = useMemo(() => {
@@ -104,40 +159,19 @@ export const AllowSpeech: Story = {
     );
 
     return (
-      <div className="flex flex-col gap-10">
-        <Component
-          {...props}
-          allowSpeech={{
-            onRecordStart: handleRecordStart,
-            onRecordEnd: handleRecordEnd,
-          }}
-        />
-
-        <Component
-          value={{ text: 'test' } as MSenderValue}
-          {...props}
-          allowSpeech={{
-            onRecordStart: handleRecordStart,
-            onRecordEnd: handleRecordEnd,
-          }}
-        />
-
-        <div />
-
-        <Component
-          {...props}
-          defaultType="record"
-          allowSpeech={{
-            onRecordStart: handleRecordStart,
-            onRecordEnd: handleRecordEnd,
-          }}
-        />
-      </div>
+      <Component
+        {...props}
+        defaultType="record"
+        allowSpeech={{
+          onRecordStart: handleRecordStart,
+          onRecordEnd: handleRecordEnd,
+        }}
+      />
     );
   },
 };
 
-export const AllowSpeech2: Story = {
+export const AllowSpeechBlob: Story = {
   render: (props) => {
     const { message } = App.useApp();
 
@@ -182,16 +216,14 @@ export const AllowSpeech2: Story = {
     );
 
     return (
-      <div className="flex flex-col gap-10">
-        <Component
-          {...props}
-          defaultType="record"
-          allowSpeech={{
-            onRecordStart: handleRecordStart,
-            onRecordEnd: handleRecordEnd,
-          }}
-        />
-      </div>
+      <Component
+        {...props}
+        defaultType="record"
+        allowSpeech={{
+          onRecordStart: handleRecordStart,
+          onRecordEnd: handleRecordEnd,
+        }}
+      />
     );
   },
 };
