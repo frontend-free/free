@@ -15,4 +15,4 @@ export { EnumChatMessageStatus, EnumChatMessageType } from './store/types';
 export type { ChatMessage, ChatMessageOfAI, ChatMessageOfUser } from './store/types';
 export { fetchStream } from './stream';
 export { Tip } from './tip';
-export { recordAudioOfPCM } from './voice';
+export { getRecordAudioOfPCM } from './voice';

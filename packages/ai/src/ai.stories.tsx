@@ -5,6 +5,7 @@ import {
   EnumChatMessageStatus,
   EnumChatMessageType,
   generateUUID,
+  getRecordAudioOfPCM,
   Markdown,
   MessageActions,
   Messages,
@@ -103,6 +104,10 @@ function Component() {
     [addMessage, updateMessage],
   );
 
+  const { start: startRecord, stop: stopRecord } = useMemo(() => {
+    return getRecordAudioOfPCM();
+  }, []);
+
   return (
     <div>
       <div>
@@ -139,6 +144,21 @@ function Component() {
                 onChange={(v) => setSenderValue(v)}
                 loading={loading}
                 onSubmit={handleSubmit}
+                allowSpeech={{
+                  onRecordStart: async () => {
+                    console.log('onRecordStart');
+                    await startRecord({
+                      onAudio: (data) => {
+                        console.log('onAudio', data);
+                      },
+                    });
+                  },
+                  onRecordEnd: async (isSend) => {
+                    console.log('onRecordEnd', isSend);
+                    const voiceData = await stopRecord();
+                    console.log('voiceData', voiceData);
+                  },
+                }}
               />
             </div>
           }

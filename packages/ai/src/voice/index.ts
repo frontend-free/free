@@ -1,33 +1,54 @@
-async function recordAudioOfPCM({ onAudio }: { onAudio: (data: ArrayBufferLike) => void }) {
-  // --- 初始化音频 ---
-  const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const audioContext = new AudioContext({ sampleRate: 16000 });
-  const sourceNode = audioContext.createMediaStreamSource(micStream);
-  // ScriptProcessorNode（4096 是稳定 buffer）
-  const processorNode = audioContext.createScriptProcessor(4096, 1, 1);
+function getRecordAudioOfPCM() {
+  let processorNode: ScriptProcessorNode | null = null;
+  let sourceNode: MediaStreamAudioSourceNode | null = null;
+  let audioContext: AudioContext | null = null;
+  let micStream: MediaStream | null = null;
 
-  processorNode.onaudioprocess = function (event) {
-    const float32Data = event.inputBuffer.getChannelData(0); // float32
+  let data: ArrayBufferLike[] = [];
 
-    // === 转成 Int16 PCM ===
-    const pcm16 = new Int16Array(float32Data.length);
-    for (let i = 0; i < float32Data.length; i++) {
-      const s = Math.max(-1, Math.min(1, float32Data[i]));
-      pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
-    }
+  async function start({ onAudio }: { onAudio: (data: ArrayBufferLike) => void }): Promise<void> {
+    // --- 初始化音频 ---
+    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioContext = new AudioContext({ sampleRate: 16000 });
+    sourceNode = audioContext.createMediaStreamSource(micStream);
+    // ScriptProcessorNode（4096 是稳定 buffer）
+    processorNode = audioContext.createScriptProcessor(4096, 1, 1);
 
-    onAudio(pcm16.buffer);
-  };
+    processorNode.onaudioprocess = function (event) {
+      const float32Data = event.inputBuffer.getChannelData(0); // float32
 
-  sourceNode.connect(processorNode);
-  processorNode.connect(audioContext.destination);
+      // === 转成 Int16 PCM ===
+      const pcm16 = new Int16Array(float32Data.length);
+      for (let i = 0; i < float32Data.length; i++) {
+        const s = Math.max(-1, Math.min(1, float32Data[i]));
+        pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+      }
 
-  return () => {
+      data.push(pcm16.buffer);
+
+      onAudio(pcm16.buffer);
+    };
+
+    sourceNode.connect(processorNode);
+    processorNode.connect(audioContext.destination);
+  }
+
+  async function stop(): Promise<ArrayBufferLike[]> {
     if (processorNode) processorNode.disconnect();
     if (sourceNode) sourceNode.disconnect();
     if (audioContext) audioContext.close();
     if (micStream) micStream.getTracks().forEach((track) => track.stop());
+
+    const result = data;
+    data = [];
+
+    return result;
+  }
+
+  return {
+    start,
+    stop,
   };
 }
 
-export { recordAudioOfPCM };
+export { getRecordAudioOfPCM };
