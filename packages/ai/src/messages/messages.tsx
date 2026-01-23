@@ -1,5 +1,5 @@
 import { PageLayout } from '@fe-free/core';
-import { AngleLeftOutlined } from '@fe-free/icons';
+import { ArrowDownOutlined } from '@fe-free/icons';
 import { useMemoizedFn } from 'ahooks';
 import { Button } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -166,11 +166,11 @@ function Messages<AIData>(props: MessagesProps<AIData>) {
         <div className="sticky bottom-2 mx-auto flex justify-center">
           <Button
             shape="circle"
-            icon={<AngleLeftOutlined rotate={-90} />}
+            icon={<ArrowDownOutlined />}
             onClick={() => {
               scrollToBottom();
             }}
-            className="bg-white shadow-lg"
+            className="h-[44px] w-[44px] bg-white shadow-[0px_1px_12px_0px_#2921391F]"
             style={{
               transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0.1})`,
             }}
