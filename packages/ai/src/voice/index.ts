@@ -6,31 +6,51 @@ function getRecordAudioOfPCM() {
 
   let data: ArrayBufferLike[] = [];
 
-  async function start({ onAudio }: { onAudio: (data: ArrayBufferLike) => void }): Promise<void> {
-    // --- 初始化音频 ---
-    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioContext = new AudioContext({ sampleRate: 16000 });
-    sourceNode = audioContext.createMediaStreamSource(micStream);
-    // ScriptProcessorNode（4096 是稳定 buffer）
-    processorNode = audioContext.createScriptProcessor(4096, 1, 1);
+  async function start({
+    onAudio,
+    onError,
+  }: {
+    onAudio: (data: ArrayBufferLike) => void;
+    onError?: (error: Error) => void;
+  }): Promise<void> {
+    try {
+      // --- 初始化音频 ---
+      micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioContext = new AudioContext({ sampleRate: 16000 });
+      sourceNode = audioContext.createMediaStreamSource(micStream);
+      // ScriptProcessorNode（4096 是稳定 buffer）
+      processorNode = audioContext.createScriptProcessor(4096, 1, 1);
 
-    processorNode.onaudioprocess = function (event) {
-      const float32Data = event.inputBuffer.getChannelData(0); // float32
+      processorNode.onaudioprocess = function (event) {
+        const float32Data = event.inputBuffer.getChannelData(0); // float32
 
-      // === 转成 Int16 PCM ===
-      const pcm16 = new Int16Array(float32Data.length);
-      for (let i = 0; i < float32Data.length; i++) {
-        const s = Math.max(-1, Math.min(1, float32Data[i]));
-        pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+        // === 转成 Int16 PCM ===
+        const pcm16 = new Int16Array(float32Data.length);
+        for (let i = 0; i < float32Data.length; i++) {
+          const s = Math.max(-1, Math.min(1, float32Data[i]));
+          pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+        }
+
+        data.push(pcm16.buffer);
+
+        onAudio(pcm16.buffer);
+      };
+
+      sourceNode.connect(processorNode);
+      processorNode.connect(audioContext.destination);
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'NotAllowedError') {
+        onError?.(new Error('请允许麦克风权限'));
+      } else if (err instanceof DOMException && err.name === 'NotFoundError') {
+        onError?.(new Error('未找到麦克风设备'));
+      } else if (err instanceof DOMException && err.name === 'NotReadableError') {
+        onError?.(new Error('麦克风被其他应用占用'));
+      } else {
+        onError?.(new Error('启动录音失败'));
       }
 
-      data.push(pcm16.buffer);
-
-      onAudio(pcm16.buffer);
-    };
-
-    sourceNode.connect(processorNode);
-    processorNode.connect(audioContext.destination);
+      throw err;
+    }
   }
 
   async function stop(): Promise<ArrayBufferLike[]> {

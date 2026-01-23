@@ -13,7 +13,7 @@ import {
 } from '@fe-free/ai';
 import { sleep } from '@fe-free/tool';
 import type { Meta } from '@storybook/react-vite';
-import { Button, Divider } from 'antd';
+import { App, Button, Divider } from 'antd';
 import { set } from 'lodash-es';
 import { useCallback, useEffect, useMemo } from 'react';
 
@@ -54,6 +54,8 @@ function Component() {
   const addMessage = useChatStore((state) => state.addMessage);
   const updateMessage = useChatStore((state) => state.updateMessage);
   const { chatStatus } = useChatStoreComputed();
+
+  const { message } = App.useApp();
 
   // init from cache
   useEffect(() => {
@@ -147,11 +149,18 @@ function Component() {
                 allowSpeech={{
                   onRecordStart: async () => {
                     console.log('onRecordStart');
-                    await startRecord({
-                      onAudio: (data) => {
-                        console.log('onAudio', data);
-                      },
-                    });
+                    try {
+                      await startRecord({
+                        onAudio: (data) => {
+                          console.log('onAudio', data);
+                        },
+                        onError: (err) => {
+                          message.error(err.message);
+                        },
+                      });
+                    } catch (err) {
+                      console.error(err);
+                    }
                   },
                   onRecordEnd: async (isSend) => {
                     console.log('onRecordEnd', isSend);
