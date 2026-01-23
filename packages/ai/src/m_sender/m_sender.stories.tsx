@@ -1,7 +1,7 @@
-import { MSender } from '@fe-free/ai';
-import { sleep } from '@fe-free/tool';
+import { getRecordAudioOfBlob, getRecordAudioOfPCM, MSender } from '@fe-free/ai';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useCallback, useState } from 'react';
+import { App } from 'antd';
+import { useCallback, useMemo, useState } from 'react';
 import type { MSenderProps, MSenderValue } from './types';
 
 const meta: Meta<typeof MSender> = {
@@ -61,8 +61,11 @@ export const Loading: Story = {
 
 export const AllowSpeech: Story = {
   render: (props) => {
-    // 假设是字符串，实则是 buffer
-    const [recordVoice, setRecordVoice] = useState<string | undefined>(undefined);
+    const { message } = App.useApp();
+
+    const { start: startRecord, stop: stopRecord } = useMemo(() => {
+      return getRecordAudioOfPCM();
+    }, []);
 
     const handleSubmit = (value: MSenderValue) => {
       console.log('handleSubmit', value);
@@ -70,22 +73,34 @@ export const AllowSpeech: Story = {
 
     const handleRecordStart = useCallback(async () => {
       // 假设这是录音的文本
-      setRecordVoice('这是录音的文本');
+      try {
+        await startRecord({
+          onAudio: (data) => {
+            console.log('onAudio', data);
+          },
+          onError: (err) => {
+            message.error(err.message);
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
 
       return;
     }, []);
 
     const handleRecordEnd = useCallback(
-      async (isSend: boolean) => {
+      async (isSend) => {
         console.log('handleRecordEnd isSend', isSend);
-        if (isSend) {
-          await sleep(1000);
-          const recordResult = recordVoice;
 
-          handleSubmit({ ...(props.value || {}), text: recordResult });
+        const voiceData = await stopRecord();
+        console.log('voiceData', voiceData);
+
+        if (isSend) {
+          handleSubmit({ ...(props.value || {}), text: '假设这是识别的文字' });
         }
       },
-      [props.value, recordVoice],
+      [props.value, stopRecord],
     );
 
     return (
@@ -109,6 +124,65 @@ export const AllowSpeech: Story = {
 
         <div />
 
+        <Component
+          {...props}
+          defaultType="record"
+          allowSpeech={{
+            onRecordStart: handleRecordStart,
+            onRecordEnd: handleRecordEnd,
+          }}
+        />
+      </div>
+    );
+  },
+};
+
+export const AllowSpeech2: Story = {
+  render: (props) => {
+    const { message } = App.useApp();
+
+    const { start: startRecord, stop: stopRecord } = useMemo(() => {
+      return getRecordAudioOfBlob();
+    }, []);
+
+    const handleSubmit = (value: MSenderValue) => {
+      console.log('handleSubmit', value);
+    };
+
+    const handleRecordStart = useCallback(async () => {
+      // 假设这是录音的文本
+      try {
+        await startRecord({
+          onAudio: (data) => {
+            console.log('onAudio', data);
+          },
+          onError: (err) => {
+            message.error(err.message);
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+
+      return;
+    }, []);
+
+    const handleRecordEnd = useCallback(
+      async (isSend) => {
+        console.log('handleRecordEnd isSend', isSend);
+
+        const voiceData = await stopRecord();
+        console.log('voiceData', voiceData);
+
+        if (isSend) {
+          handleSubmit({ ...(props.value || {}), text: '假设这是识别的文字' });
+        }
+      },
+      [props.value, stopRecord],
+    );
+
+    return (
+      <div className="flex flex-col gap-10">
         <Component
           {...props}
           defaultType="record"
