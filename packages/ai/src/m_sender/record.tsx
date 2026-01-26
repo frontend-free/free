@@ -10,7 +10,7 @@ import type { MSenderProps } from './types';
 function RecordAction(
   props: MSenderProps & { setType; refText: RefObject<HTMLTextAreaElement | null> },
 ) {
-  const { allowSpeech, setType, refText } = props;
+  const { allowSpeech, setType, refText, loading } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartYRef = useRef<number>(0);
@@ -25,6 +25,10 @@ function RecordAction(
       // 阻止默认行为，避免触发文本选择、上下文菜单等
       e.preventDefault();
 
+      if (loading) {
+        return;
+      }
+
       await allowSpeech?.onRecordStart?.();
 
       const touch = e.touches[0];
@@ -35,7 +39,7 @@ function RecordAction(
 
       setIsRecording(true);
     },
-    [allowSpeech],
+    [allowSpeech, loading],
   );
 
   const handleTouchMove = useCallback(
@@ -71,7 +75,7 @@ function RecordAction(
     async (e: TouchEvent) => {
       e.preventDefault();
 
-      // 没有考试，不继续
+      // 没有录音，不继续
       if (!isRecording) {
         return;
       }

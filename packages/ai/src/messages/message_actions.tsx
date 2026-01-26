@@ -117,7 +117,7 @@ function MessageActionOfDislike({
   );
 }
 
-function MessageActionOfLinkAndDislike({
+function MessageActionOfLikeAndDislike({
   value: propsValue,
   onChange,
   className,
@@ -160,7 +160,7 @@ const MessageActions = {
   Copy: MessageActionOfCopy,
   Like: MessageActionOfLike,
   Dislike: MessageActionOfDislike,
-  LinkAndDislike: MessageActionOfLinkAndDislike,
+  LikeAndDislike: MessageActionOfLikeAndDislike,
 };
 
 export { MessageActions };
