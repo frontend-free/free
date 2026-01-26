@@ -12,7 +12,7 @@ function Actions(
     setType: (type: 'input' | 'record') => void;
   },
 ) {
-  const { refText, loading, onSubmit, value, onChange, setType, allowSpeech } = props;
+  const { loading, onSubmit, value, onChange, setType, allowSpeech } = props;
 
   const isLoading = loading;
 
@@ -33,10 +33,10 @@ function Actions(
       // reset
       onChange?.({});
 
-      // focus
-      refText.current?.focus();
+      // 移动端 不 focus
+      // refText.current?.focus();
     }
-  }, [isLoading, value, onSubmit, onChange, refText]);
+  }, [isLoading, value, onSubmit, onChange]);
 
   return (
     <div className="mr-1 flex items-center gap-2">
@@ -44,7 +44,7 @@ function Actions(
         <Button
           type="primary"
           shape="circle"
-          icon={<Icons component={IconRecord} />}
+          icon={<Icons component={IconRecord} className="!text-lg" />}
           onClick={() => {
             setType('record');
           }}
@@ -53,7 +53,7 @@ function Actions(
         <Button
           type="primary"
           shape="circle"
-          icon={<Icons component={SendIcon} />}
+          icon={<Icons component={SendIcon} className="!text-lg" />}
           loading={isLoading}
           onClick={handleSubmit}
         />
