@@ -8,9 +8,18 @@ import {
   LikeOutlined,
 } from '@fe-free/icons';
 import { App, Button, Tooltip } from 'antd';
+import classNames from 'classnames';
 import { useCallback, useEffect, useState } from 'react';
 
-function MessageActionOfCopy({ value, onCopied }: { value: string; onCopied?: () => void }) {
+function MessageActionOfCopy({
+  value,
+  onCopied,
+  className,
+}: {
+  value: string;
+  onCopied?: () => void;
+  className?: string;
+}) {
   const [active, setActive] = useState(false);
   const { message } = App.useApp();
 
@@ -22,7 +31,11 @@ function MessageActionOfCopy({ value, onCopied }: { value: string; onCopied?: ()
 
   return (
     <Tooltip title="复制">
-      <Copy value={value} className="cursor-pointer text-03" onCopied={handleCopied}>
+      <Copy
+        value={value}
+        className={classNames('cursor-pointer text-03', className)}
+        onCopied={handleCopied}
+      >
         <Button
           type="text"
           size="small"
@@ -37,9 +50,11 @@ function MessageActionOfCopy({ value, onCopied }: { value: string; onCopied?: ()
 function MessageActionOfLike({
   active: propsActive,
   onClick,
+  className,
 }: {
   active?: boolean;
   onClick?: (active: boolean) => Promise<void>;
+  className?: string;
 }) {
   const { message } = App.useApp();
   const [active, setActive] = useState(propsActive || false);
@@ -60,7 +75,7 @@ function MessageActionOfLike({
         type="text"
         onClick={handleClick}
         size="small"
-        className="text-03"
+        className={classNames('text-03', className)}
         icon={active ? <LikeFilled /> : <LikeOutlined />}
       />
     </Tooltip>
@@ -70,9 +85,11 @@ function MessageActionOfLike({
 function MessageActionOfDislike({
   active: propsActive,
   onClick,
+  className,
 }: {
   active?: boolean;
   onClick?: (active: boolean) => Promise<void>;
+  className?: string;
 }) {
   const [active, setActive] = useState(propsActive || false);
   const { message } = App.useApp();
@@ -93,7 +110,7 @@ function MessageActionOfDislike({
         type="text"
         onClick={handleClick}
         size="small"
-        className="text-03"
+        className={classNames('text-03', className)}
         icon={active ? <DislikeFilled /> : <DislikeOutlined />}
       />
     </Tooltip>
@@ -103,9 +120,11 @@ function MessageActionOfDislike({
 function MessageActionOfLinkAndDislike({
   value: propsValue,
   onChange,
+  className,
 }: {
   value?: -1 | 0 | 1;
   onChange?: (value: -1 | 0 | 1) => void;
+  className?: string;
 }) {
   const [value, setValue] = useState<(-1 | 0 | 1) | undefined>(propsValue);
 
@@ -122,6 +141,7 @@ function MessageActionOfLinkAndDislike({
           await Promise.resolve(onChange?.(newValue));
           setValue(newValue);
         }}
+        className={className}
       />
       <MessageActionOfDislike
         active={value === -1}
@@ -130,6 +150,7 @@ function MessageActionOfLinkAndDislike({
           await Promise.resolve(onChange?.(newValue));
           setValue(newValue);
         }}
+        className={className}
       />
     </>
   );
