@@ -129,7 +129,7 @@ function Component() {
           Add New Session
         </Button>
       </div>
-      <div className="h-[800px] w-[500px] max-w-full border border-red-500">
+      <div className="h-[500px] w-[500px] max-w-full border border-red-500">
         <Chat
           end={
             <div
@@ -141,6 +141,7 @@ function Component() {
                 console.log('onBlur');
               }}
             >
+              <div>这里是 suggestion 区域这里是 suggestion 区域</div>
               <MSender
                 value={senderValue}
                 onChange={(v) => setSenderValue(v)}

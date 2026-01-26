@@ -144,10 +144,10 @@ function RecordAction(
       {isRecording ? (
         <>
           <RecordLoading count={30} gap={4} />
-          {isCancel && <div className="absolute top-0 -mt-[2.5em] text-red08">松开取消</div>}
-          {!isCancel && (
-            <div className="absolute top-0 -mt-[2.5em] text-03">松开发送&nbsp;&nbsp;上移取消</div>
-          )}
+          <div className="absolute left-0 right-0 top-0 -mt-[50px] flex h-[50px] items-end justify-center bg-white pb-2 text-03">
+            {isCancel && <div className="text-red08">松开取消</div>}
+            {!isCancel && <div className="text-03">松开发送&nbsp;&nbsp;上移取消</div>}
+          </div>
         </>
       ) : (
         <div className="text-base text-white">按住说话</div>
