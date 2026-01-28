@@ -13,6 +13,7 @@ interface MarkdownProps {
   content?: string;
   isStreaming?: boolean;
   components?: XMarkdownProps['components'];
+  getComponents?: (components: XMarkdownProps['components']) => XMarkdownProps['components'];
 }
 
 function useMarkdownTheme() {
@@ -30,7 +31,18 @@ function useMarkdownTheme() {
   return [className];
 }
 
-function Markdown({ content, isStreaming, components: propsComponents }: MarkdownProps) {
+function defaultGetComponents(components: XMarkdownProps['components']) {
+  return {
+    ...components,
+  };
+}
+
+function Markdown({
+  content,
+  isStreaming,
+  components: propsComponents,
+  getComponents = defaultGetComponents,
+}: MarkdownProps) {
   const [className] = useMarkdownTheme();
 
   const config = useMemo(() => {
@@ -46,12 +58,12 @@ function Markdown({ content, isStreaming, components: propsComponents }: Markdow
   }, [isStreaming]);
 
   const components = useMemo(() => {
-    return {
+    return getComponents({
       code: CodeComponent,
       think: ThinkComponent,
-      ...(propsComponents || {}),
-    };
-  }, [propsComponents]);
+      ...propsComponents,
+    });
+  }, [getComponents, propsComponents]);
 
   return (
     <XMarkdown

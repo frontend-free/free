@@ -1,3 +1,4 @@
+import type { ComponentProps, XMarkdownProps } from '@ant-design/x-markdown';
 import { CustomMarkdown } from '@fe-free/ai';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -439,14 +440,14 @@ export const KnowledgeWithoutData: Story = {
   },
 };
 
-export const PPTPartialHtml: Story = {
+export const GetComponents: Story = {
   args: {
     content: `
 # 测试
 
 啊沙发沙发发按时发
 
-\`\`\`pptpartialhtml
+\`\`\`balabala
 <!DOCTYPE html>
 <html>
 <head>
@@ -456,66 +457,29 @@ export const PPTPartialHtml: Story = {
   <div>案发时发发</div>
   <div>案发时发发</div>
   <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-  <div>案发时发发</div>
-</body>
-</html>
+  <div>案发时发
 \`\`\`
 
 ababa
     `,
-    onKnowledgeRef: (id?: string) => {
-      console.log('onKnowledgeRef', id);
+    getComponents: (components: XMarkdownProps['components']) => {
+      return {
+        ...components,
+        code: (props: ComponentProps) => {
+          const CodeComponent = components?.code as React.ComponentType<ComponentProps>;
+          const lang = props.className?.match(/language-(\w+)/)?.[1] || '';
+
+          if (lang === 'balabala') {
+            return <div className="bg-red-100">{props.children}</div>;
+          }
+
+          if (!CodeComponent) {
+            return null;
+          }
+
+          return <CodeComponent {...props} />;
+        },
+      };
     },
   },
 };
