@@ -438,3 +438,84 @@ export const KnowledgeWithoutData: Story = {
     },
   },
 };
+
+export const PPTPartialHtml: Story = {
+  args: {
+    content: `
+# 测试
+
+啊沙发沙发发按时发
+
+\`\`\`pptpartialhtml
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+  <div>案发时发发</div>
+</body>
+</html>
+\`\`\`
+
+ababa
+    `,
+    onKnowledgeRef: (id?: string) => {
+      console.log('onKnowledgeRef', id);
+    },
+  },
+};
