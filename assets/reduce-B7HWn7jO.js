@@ -1,0 +1,1 @@
+import{aA as d,ay as g,aw as b}from"./iframe-DIgKWlJl.js";function p(e,f,n,t){var s=-1,i=e==null?0:e.length;for(t&&i&&(n=e[++s]);++s<i;)n=f(n,e[s],s,e);return n}function u(e,f,n,t,s){return s(e,function(i,r,h){n=t?(t=!1,i):f(n,i,r,h)}),n}function x(e,f,n){var t=g(e)?p:u,s=arguments.length<3;return t(e,d(f),n,s,b)}export{x as r};
