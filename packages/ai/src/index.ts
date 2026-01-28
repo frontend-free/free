@@ -2,6 +2,7 @@ import './style.scss';
 export { Chat } from './chat';
 export { FileView, FileViewList } from './files';
 export { generateUUID } from './helper';
+export { completeHtml, completeJson } from './helper/complete';
 export { MSender } from './m_sender';
 export type { MSenderProps, MSenderRef } from './m_sender';
 export { CustomMarkdown, Markdown } from './markdown';
