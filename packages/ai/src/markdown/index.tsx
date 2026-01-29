@@ -86,8 +86,9 @@ function CustomMarkdown(props: CustomMarkdownProps) {
   const { content: propsContent = '', knowledgeRefs, onKnowledgeRef } = props;
 
   const content = useMemo(() => {
-    return processWithKnowledgeRef(compatibleWithDeepSeek(propsContent));
-  }, [propsContent]);
+    const newContent = compatibleWithDeepSeek(propsContent);
+    return processWithKnowledgeRef(newContent, knowledgeRefs);
+  }, [propsContent, knowledgeRefs]);
 
   const KnowledgeRefComponent = useMemo(
     () => (p: any) => {
