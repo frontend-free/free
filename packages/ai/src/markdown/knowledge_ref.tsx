@@ -44,7 +44,6 @@ function processWithKnowledgeRef(text: string, knowledgeRefs?: { id: string }[])
     return `<knowledge-ref data-id="${id}">${id}</knowledge-ref>`;
   });
 
-  console.log('newText', newText);
   if (count > 0 && knowledgeRefs && knowledgeRefs.length > 0) {
     newText = `${newText}\n\n<knowledge-ref>来源&gt;&gt;</knowledge-ref>`;
   }

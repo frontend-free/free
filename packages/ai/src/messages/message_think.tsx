@@ -57,7 +57,12 @@ function MessageThink({
 }
 
 function MessageThinkOfDeepSeek(props: MessageThinkProps) {
-  return <MessageThink {...props} className="fea-message-think-deep-seek" />;
+  return (
+    <MessageThink
+      {...props}
+      className={classNames('fea-message-think-deep-seek', props.className)}
+    />
+  );
 }
 
 export { MessageThink, MessageThinkOfDeepSeek };
