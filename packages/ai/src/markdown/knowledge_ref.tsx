@@ -13,12 +13,12 @@ function KnowledgeRefBlock(props: any) {
 
     // 没有数据的时候显示 id
     if (index === -1 || index === undefined) {
-      return <span>[^knowledge:{id}]</span>;
+      return <span data-knowledge-ref-id={id} />;
     }
 
     return (
       <span
-        data-id={id}
+        data-knowledge-ref-id={id}
         onClick={handleClick}
         className="mx-1 inline-flex h-[15px] min-w-[15px] cursor-pointer items-center justify-center rounded-full border border-primary text-center text-[10px] text-primary"
       >
