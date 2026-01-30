@@ -20,7 +20,7 @@ function KnowledgeRefBlock(props: any) {
       <span
         data-id={id}
         onClick={handleClick}
-        className="fea-markdown-body-block-knowledge-ref mx-1 h-[16px] min-w-[16px] cursor-pointer rounded-full border border-blue-500 text-center text-[12px] text-blue-600"
+        className="mx-1 inline-flex h-[15px] min-w-[15px] cursor-pointer items-center justify-center rounded-full border border-primary text-center text-[10px] text-primary"
       >
         {index + 1}
       </span>
@@ -28,7 +28,7 @@ function KnowledgeRefBlock(props: any) {
   }
 
   return (
-    <span className="fea-markdown-body-block-knowledge-ref-source" onClick={handleClick}>
+    <span className="cursor-pointer text-primary" onClick={handleClick}>
       来源&gt;&gt;
     </span>
   );
