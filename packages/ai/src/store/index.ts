@@ -6,14 +6,18 @@ interface BaseSenderValue {
   text?: string;
   files?: string[];
 }
-interface ChatStore<Value extends BaseSenderValue | undefined, AIData, ContextData = any> {
-  senderValue?: Value;
-  setSenderValue: (senderValue?: Value) => void;
+interface ChatStore<
+  UserData extends BaseSenderValue,
+  AIData,
+  ContextData extends Record<string, any>,
+> {
+  senderValue?: UserData;
+  setSenderValue: (senderValue?: UserData) => void;
 
-  messages: ChatMessage<AIData>[];
-  setMessages: (messages: ChatMessage<AIData>[]) => void;
-  addMessage: (message: ChatMessage<AIData>) => void;
-  updateMessage: (message: ChatMessage<AIData>) => void;
+  messages: ChatMessage<UserData, AIData>[];
+  setMessages: (messages: ChatMessage<UserData, AIData>[]) => void;
+  addMessage: (message: ChatMessage<UserData, AIData>) => void;
+  updateMessage: (message: ChatMessage<UserData, AIData>) => void;
 
   /** 存放Chat的上下文数据 */
   contextData?: ContextData;
@@ -22,8 +26,12 @@ interface ChatStore<Value extends BaseSenderValue | undefined, AIData, ContextDa
   reset: () => void;
 }
 
-function createChatStore<Value extends BaseSenderValue | undefined, AIData>() {
-  const useChatStore = create<ChatStore<Value, AIData>>((set, get, store) => ({
+function createChatStore<
+  UserData extends BaseSenderValue,
+  AIData,
+  ContextData extends Record<string, any>,
+>() {
+  const useChatStore = create<ChatStore<UserData, AIData, ContextData>>((set, get, store) => ({
     senderValue: undefined,
     setSenderValue: (senderValue) => {
       set(() => ({ senderValue }));

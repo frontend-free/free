@@ -25,14 +25,14 @@ interface ChatMessageOfAI<AIData> {
   session_id?: string;
 }
 
-interface ChatMessage<AIData> {
+interface ChatMessage<UserData, AIData> {
   uuid: string;
 
   status?: EnumChatMessageStatus;
 
   type?: EnumChatMessageType;
   system?: ChatMessageOfSystem;
-  user?: ChatMessageOfUser;
+  user?: UserData;
   ai?: ChatMessageOfAI<AIData>;
 
   /** 自动生成 */
