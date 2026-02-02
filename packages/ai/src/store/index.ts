@@ -34,7 +34,7 @@ interface ChatStore<
 function createChatStore<
   UserData extends BaseSenderValue,
   AIData,
-  ContextData extends Record<string, any>,
+  ContextData extends Record<string, any> = any,
 >() {
   const useChatStore = create<ChatStore<UserData, AIData, ContextData>>((set, get, store) => ({
     contextData: undefined,

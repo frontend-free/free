@@ -1,9 +1,8 @@
-import { PageLayout } from '@fe-free/core';
+import { PageLayout, ScrollFixed } from '@fe-free/core';
 import { ArrowDownOutlined } from '@fe-free/icons';
 import { useMemoizedFn } from 'ahooks';
 import { Button } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { getScrollbarWidth } from '../helper';
 import { EnumChatMessageType, type ChatMessage } from '../store/types';
 
 interface MessagesProps<UserData, AIData> {
@@ -17,14 +16,6 @@ interface MessagesProps<UserData, AIData> {
   renderMessageOfUser?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
   /** AI消息 */
   renderMessageOfAI?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
-}
-
-function useScrollWidth() {
-  const width = useMemo(() => {
-    return getScrollbarWidth();
-  }, []);
-
-  return width;
 }
 
 function useScrollToBottom({ ref }) {
@@ -120,14 +111,12 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
     }, 100);
   }, [lastMessage?.updatedAt, lastMessage?.uuid, ref, scrollToBottom]);
 
-  const scrollWidth = useScrollWidth();
-
   const showScrollBottom = useScrollToBottom({ ref });
 
   return (
     <PageLayout>
-      <div
-        ref={ref}
+      <ScrollFixed
+        refScroll={ref}
         className="fea-messages-scroll relative flex h-full flex-col overflow-y-auto overflow-x-hidden"
         style={{
           transform: `translateZ(0)`,
@@ -135,14 +124,7 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
       >
         {messages?.map((message) => {
           return (
-            <div
-              key={message.uuid}
-              data-uuid={message.uuid}
-              className="flex flex-col"
-              style={{
-                marginRight: `-${scrollWidth}px`,
-              }}
-            >
+            <div key={message.uuid} data-uuid={message.uuid} className="flex flex-col">
               {renderMessage ? (
                 renderMessage?.({ message })
               ) : (
@@ -172,13 +154,13 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
             }}
             className="bg-white text-2xl shadow-[0px_1px_12px_0px_#2921391F]"
             style={{
-              transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0.1})`,
+              transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0})`,
               width: 44,
               height: 44,
             }}
           />
         </div>
-      </div>
+      </ScrollFixed>
     </PageLayout>
   );
 }

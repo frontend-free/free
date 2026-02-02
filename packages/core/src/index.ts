@@ -58,6 +58,7 @@ export type { PageLayoutProps, PageLayoutTabsProps } from './page_layout';
 export { Record, RecordArray } from './record';
 export type { RecordArrayProps, RecordProps } from './record';
 export { routeTool } from './route';
+export { ScrollFixed, getScrollbarWidth, useScrollFixed } from './scroll';
 export { NumberSlider, PercentageSlider } from './slider';
 export type { NumberSliderProps, PercentageSliderProps } from './slider';
 export { Tabs } from './tabs';
