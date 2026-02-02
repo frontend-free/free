@@ -11,6 +11,14 @@ interface ChatStore<
   AIData,
   ContextData extends Record<string, any>,
 > {
+  /** 存放Chat的上下文数据 */
+  contextData?: ContextData;
+  setContextData: (contextData?: ContextData) => void;
+  setContextDataWithField: (
+    field: keyof ContextData,
+    contextDataValue: ContextData[keyof ContextData],
+  ) => void;
+
   senderValue?: UserData;
   setSenderValue: (senderValue?: UserData) => void;
 
@@ -18,10 +26,7 @@ interface ChatStore<
   setMessages: (messages: ChatMessage<UserData, AIData>[]) => void;
   addMessage: (message: ChatMessage<UserData, AIData>) => void;
   updateMessage: (message: ChatMessage<UserData, AIData>) => void;
-
-  /** 存放Chat的上下文数据 */
-  contextData?: ContextData;
-  setContextData: (contextData?: ContextData) => void;
+  setMessagesBefore: (messages: ChatMessage<UserData, AIData>[]) => void;
 
   reset: () => void;
 }
@@ -32,10 +37,24 @@ function createChatStore<
   ContextData extends Record<string, any>,
 >() {
   const useChatStore = create<ChatStore<UserData, AIData, ContextData>>((set, get, store) => ({
+    contextData: undefined,
+    setContextData: (contextData) => {
+      set({ contextData });
+    },
+    setContextDataWithField: (field, contextDataValue) => {
+      const preContextData = get().contextData;
+      set({
+        contextData: {
+          ...preContextData,
+          [field]: contextDataValue,
+        } as ContextData,
+      });
+    },
     senderValue: undefined,
     setSenderValue: (senderValue) => {
       set(() => ({ senderValue }));
     },
+
     messages: [],
     setMessages: (messages) => {
       set(() => ({
@@ -74,9 +93,19 @@ function createChatStore<
         }),
       }));
     },
-    contextData: undefined,
-    setContextData: (contextData) => {
-      set(() => ({ contextData }));
+    setMessagesBefore: (messagesBefore) => {
+      const messages = get().messages;
+
+      const lastMessageBefore = messagesBefore[messagesBefore.length - 1];
+      const index = messages.findIndex((message) => message.uuid === lastMessageBefore.uuid);
+
+      // 如果 index 非 -1，则合并
+      // 如果 index -1，-1 + 1 为 0，即全取 message，也适用
+      const newMessages = [...messagesBefore, ...messages.slice(index + 1)];
+
+      set({
+        messages: newMessages,
+      });
     },
     reset: () => {
       set(store.getInitialState());

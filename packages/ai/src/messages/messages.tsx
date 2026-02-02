@@ -6,17 +6,17 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { getScrollbarWidth } from '../helper';
 import { EnumChatMessageType, type ChatMessage } from '../store/types';
 
-interface MessagesProps<AIData> {
+interface MessagesProps<UserData, AIData> {
   refList?: React.RefObject<HTMLDivElement | null>;
-  messages?: ChatMessage<AIData>[];
+  messages?: ChatMessage<UserData, AIData>[];
   /** 含所有 */
-  renderMessage?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  renderMessage?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
   /** 系统消息 */
-  renderMessageOfSystem?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  renderMessageOfSystem?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
   /** 用户消息 */
-  renderMessageOfUser?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  renderMessageOfUser?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
   /** AI消息 */
-  renderMessageOfAI?: (props: { message: ChatMessage<AIData> }) => React.ReactNode;
+  renderMessageOfAI?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
 }
 
 function useScrollWidth() {
@@ -58,7 +58,7 @@ function useScrollToBottom({ ref }) {
   return showScrollBottom;
 }
 
-function Messages<AIData>(props: MessagesProps<AIData>) {
+function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
   const {
     refList,
     messages,
