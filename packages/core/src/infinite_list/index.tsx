@@ -5,6 +5,7 @@ import { useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import stringify from 'safe-stable-stringify';
 import { useGlobalInfiniteScroll } from '../ahooks/use_global_infinite_scroll';
+import { ScrollFixed } from '../scroll';
 
 interface ActionType {
   reload: () => void;
@@ -22,6 +23,7 @@ interface InfiniteListProps<D, P> {
   gridClassName: string;
   className?: string;
   actionRef?: React.Ref<ActionType | undefined>;
+  scrollFixed?: boolean;
 }
 
 const emptyParams = {};
@@ -34,6 +36,7 @@ const InfiniteListBase = <D, P>({
   pageSize,
   gridClassName,
   className,
+  scrollFixed = false,
 }: InfiniteListProps<D, P>) => {
   const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
@@ -91,7 +94,7 @@ const InfiniteListBase = <D, P>({
   }));
 
   return (
-    <div ref={ref} className={classNames('h-full overflow-y-auto', className)}>
+    <ScrollFixed refScroll={ref} className={className} disabled={!scrollFixed}>
       {loading && (
         <div className="flex h-full w-full items-center justify-center">
           <Spin />
@@ -116,7 +119,7 @@ const InfiniteListBase = <D, P>({
           </div>
         )}
       </div>
-    </div>
+    </ScrollFixed>
   );
 };
 

@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.1.40
+
+### Patch Changes
+
+- fix: ScrollFixed
+  - @fe-free/icons@4.1.40
+  - @fe-free/tool@4.1.40
+
 ## 4.1.39
 
 ### Patch Changes
