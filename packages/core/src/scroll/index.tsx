@@ -49,7 +49,11 @@ function ScrollFixed({
   const { marginRight } = useScrollFixed({ ref });
 
   return (
-    <div ref={ref} {...rest} className={classNames('h-full w-full overflow-y-auto', className)}>
+    <div
+      ref={ref}
+      {...rest}
+      className={classNames('h-full w-full overflow-y-auto overflow-x-hidden', className)}
+    >
       <div style={{ marginRight: `-${marginRight || 0}px` }}>{children}</div>
     </div>
   );
