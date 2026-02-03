@@ -129,6 +129,7 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
     if (fullPage) {
       return {
         ...tableProps,
+        rowKey: tableProps.rowKey || 'id',
         scroll: {
           ...getTableScroll(newColumns),
           y: '100%',
@@ -136,7 +137,10 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
       };
     }
 
-    return tableProps;
+    return {
+      ...tableProps,
+      rowKey: tableProps.rowKey || 'id',
+    };
   }, [fullPage, tableProps, newColumns]);
 
   return (
@@ -150,7 +154,6 @@ function CRUD<DataSource extends Record<string, any> = any, Key extends string |
       )}
     >
       <Table<DataSource>
-        rowKey="id"
         {...newTableProps}
         actionRef={actionRef}
         toolBarRender={toolBarRender}

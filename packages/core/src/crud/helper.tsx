@@ -15,7 +15,7 @@ function OperateBtn({
 }) {
   if (disabled) {
     if (operateText) {
-      return <span className="cursor-not-allowed text-lg text-03">{operateText || icon}</span>;
+      return <span className="cursor-not-allowed text-03">{operateText}</span>;
     } else {
       return (
         <Tooltip title={title}>
@@ -27,7 +27,7 @@ function OperateBtn({
 
   if (operateText) {
     return (
-      <span className="cursor-pointer text-lg text-primary" onClick={onClick}>
+      <span className="cursor-pointer text-primary" onClick={onClick}>
         {operateText}
       </span>
     );
@@ -36,7 +36,7 @@ function OperateBtn({
   return (
     <Tooltip title={title}>
       <span className="cursor-pointer text-lg text-primary" onClick={onClick}>
-        {operateText || icon}
+        {icon}
       </span>
     </Tooltip>
   );

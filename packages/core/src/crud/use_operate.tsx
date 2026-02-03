@@ -224,7 +224,7 @@ function useOperate(props, detailProps, actionRef) {
         }
 
         return (
-          <div className="fec-crud-operate-column flex justify-center gap-4">
+          <div className="fec-crud-operate-column flex items-center justify-center gap-4">
             {operateColumnProps?.moreOperator && operateColumnProps.moreOperator(record)}
             {btns}
             {operateColumnProps?.moreOperatorAfter && operateColumnProps.moreOperatorAfter(record)}

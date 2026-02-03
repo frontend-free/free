@@ -4,8 +4,13 @@ import classNames from 'classnames';
 import { useMemo } from 'react';
 import './style.scss';
 
-interface TableProps<DataSource = any, Params = any, ValueType = 'text'>
-  extends ProTableProps<DataSource, Params, ValueType> {
+interface TableProps<DataSource = any, Params = any, ValueType = 'text'> extends ProTableProps<
+  DataSource,
+  Params,
+  ValueType
+> {
+  // 要求 rowKey 必须存在
+  rowKey: string;
   /** 区别 ProTable columns，默认 search: false */
   columns?: ProTableProps<DataSource, Params, ValueType>['columns'];
 }
