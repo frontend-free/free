@@ -2,6 +2,7 @@ import type { ProRenderFieldPropsType } from '@ant-design/pro-components';
 import { dateRender } from './date';
 import { jsonRender } from './json';
 import { jsonModalRender } from './json_modal';
+import { markdownModalRender } from './markdown_modal';
 import { switchNumberRender, switchOptionsRender } from './switch';
 
 enum CustomValueTypeEnum {
@@ -13,6 +14,8 @@ enum CustomValueTypeEnum {
   CustomJSON = 'CustomJSON',
   /** JSON Modal */
   CustomJSONModal = 'CustomJSONModal',
+  /** Markdown Modal */
+  CustomMarkdownModal = 'CustomMarkdownModal',
   /** 渲染开关 */
   CustomSwitchNumber = 'CustomSwitchNumber',
   CustomSwitchOptions = 'CustomSwitchOptions',
@@ -36,6 +39,10 @@ const customValueTypeMap: Record<string, ProRenderFieldPropsType> = {
   [CustomValueTypeEnum.CustomJSONModal]: {
     render: jsonModalRender.render,
     renderFormItem: jsonModalRender.renderFormItem,
+  },
+  [CustomValueTypeEnum.CustomMarkdownModal]: {
+    render: markdownModalRender.render,
+    renderFormItem: markdownModalRender.renderFormItem,
   },
   [CustomValueTypeEnum.CustomSwitchNumber]: {
     render: switchNumberRender.render,

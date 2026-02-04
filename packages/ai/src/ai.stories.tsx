@@ -72,7 +72,7 @@ function Component() {
     (v) => {
       console.log('onSubmit', v);
 
-      const message: ChatMessage<AIData> = {
+      const message: ChatMessage<MSenderProps['value'], AIData> = {
         uuid: generateUUID(),
         status: EnumChatMessageStatus.PENDING,
         user: {

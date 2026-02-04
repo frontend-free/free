@@ -1,6 +1,6 @@
 import type { ComponentProps } from '@ant-design/x-markdown';
 import { memo, useEffect, useState } from 'react';
-import { MessageThinkOfDeepSeek } from '../messages';
+import { MessageThinkOfDeepSeek } from './messages/message_think';
 
 const ThinkComponent = memo((props: ComponentProps) => {
   const [title, setTitle] = useState('思考中...');

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
 const meta: Meta<typeof Markdown> = {
-  title: '@fe-free/ai/Markdown',
+  title: '@fe-free/core/Markdown',
   component: Markdown,
   tags: ['autodocs'],
 };

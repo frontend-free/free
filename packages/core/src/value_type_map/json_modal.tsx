@@ -31,21 +31,23 @@ function Render(text, props: ProFormItemProps<JSONModalProps>) {
   return (
     <>
       <a onClick={() => setShow(true)}>{title}</a>
-      <Modal
-        title={title}
-        open={show}
-        onCancel={() => setShow(false)}
-        onOk={() => setShow(false)}
-        cancelButtonProps={{
-          style: {
-            display: 'none',
-          },
-        }}
-      >
-        <div className="h-[500px]">
-          <EditorJSON value={jsonText} readonly />
-        </div>
-      </Modal>
+      {show && (
+        <Modal
+          title={title}
+          open
+          onCancel={() => setShow(false)}
+          onOk={() => setShow(false)}
+          cancelButtonProps={{
+            style: {
+              display: 'none',
+            },
+          }}
+        >
+          <div className="h-[500px]">
+            <EditorJSON value={jsonText} readonly />
+          </div>
+        </Modal>
+      )}
     </>
   );
 }

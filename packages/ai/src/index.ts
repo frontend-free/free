@@ -1,12 +1,13 @@
 import './style.scss';
+
+export { CustomMarkdown, Markdown } from '@fe-free/core';
+export type { CustomMarkdownProps, MarkdownProps } from '@fe-free/core';
 export { Chat } from './chat';
 export { FileView, FileViewList } from './files';
 export { generateUUID } from './helper';
 export { completeHtml, completeJson } from './helper/complete';
 export { MSender } from './m_sender';
 export type { MSenderProps, MSenderRef } from './m_sender';
-export { CustomMarkdown, Markdown } from './markdown';
-export type { CustomMarkdownProps, MarkdownProps } from './markdown';
 export { MessageActions, MessageThink, MessageThinkOfDeepSeek, Messages } from './messages';
 export type { MessageThinkProps, MessagesProps } from './messages';
 export { Sender } from './sender';

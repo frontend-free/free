@@ -1,5 +1,15 @@
 # @fe-free/ai
 
+## 4.1.42
+
+### Patch Changes
+
+- feat: add valueType CustomMarkdownModal
+- Updated dependencies
+  - @fe-free/core@4.1.42
+  - @fe-free/icons@4.1.42
+  - @fe-free/tool@4.1.42
+
 ## 4.1.41
 
 ### Patch Changes

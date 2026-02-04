@@ -265,9 +265,6 @@ importers:
       '@ant-design/x':
         specifier: ^2.1.3
         version: 2.1.3(antd@5.29.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@ant-design/x-markdown':
-        specifier: ^2.1.3
-        version: 2.1.3(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@ant-design/x-sdk':
         specifier: ^2.1.3
         version: 2.1.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -325,6 +322,12 @@ importers:
       '@ant-design/pro-components':
         specifier: 2.8.9
         version: 2.8.9(antd@5.29.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(rc-field-form@2.7.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@ant-design/x':
+        specifier: ^2.1.3
+        version: 2.1.3(antd@5.29.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@ant-design/x-markdown':
+        specifier: ^2.1.3
+        version: 2.1.3(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@codemirror/lang-html':
         specifier: ^6.4.9
         version: 6.4.11

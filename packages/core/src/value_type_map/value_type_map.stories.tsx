@@ -25,6 +25,7 @@ async function fakeRequest() {
     dateNumber: +dayjs('2024-10-01'),
     seconds: Math.abs(+dayjs('2024-10-01') / 1000),
     jsonText: JSON.stringify({ name: 'hello world hello world hello world' }),
+    markdownText: `# Hello World\n\nThis is a markdown text.`,
     switchNumber: Math.random() > 0.5 ? 1 : 0,
     switchOptions: Math.random() > 0.5 ? 'ON' : 'OFF',
   }));
@@ -85,6 +86,12 @@ const Table = () => {
       valueType: CustomValueTypeEnum.CustomJSONModal,
     },
     {
+      title: 'markdownModal',
+      dataIndex: 'markdownText',
+      ellipsis: true,
+      valueType: CustomValueTypeEnum.CustomMarkdownModal,
+    },
+    {
       title: '开关 number',
       dataIndex: 'switchNumber',
       valueType: CustomValueTypeEnum.CustomSwitchNumber,
@@ -104,6 +111,7 @@ const Table = () => {
     <CRUD
       actions={[]}
       tableProps={{
+        rowKey: 'id',
         columns,
         request: fakeRequest,
       }}
