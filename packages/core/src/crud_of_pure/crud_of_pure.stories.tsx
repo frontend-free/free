@@ -56,6 +56,7 @@ export const Basic: Story = {
       <CRUDOfPure
         actions={['create', 'delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           search: {
@@ -118,6 +119,7 @@ export const WithCreate: Story = {
       <CRUDOfPure
         actions={['create', 'delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           pagination: false,
@@ -179,6 +181,7 @@ export const NoSearch: Story = {
       <CRUDOfPure
         actions={['create', 'delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           pagination: false,
@@ -233,6 +236,7 @@ export const SpecialToolbar: Story = {
         specialToolbar
         actions={['create', 'delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           pagination: false,
@@ -258,7 +262,7 @@ export const SpecialToolbar: Story = {
   },
 };
 
-export const SpecialToolbar2: Story = {
+export const SpecialToolbarWithToolBarRender: Story = {
   render: () => {
     const columns = [
       {
@@ -287,6 +291,7 @@ export const SpecialToolbar2: Story = {
         specialToolbar
         actions={['delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           pagination: false,
@@ -346,6 +351,7 @@ export const FullPage: Story = {
           specialToolbar
           actions={['create', 'delete']}
           tableProps={{
+            rowKey: 'id',
             columns,
             request: fakeRequest,
             search: {

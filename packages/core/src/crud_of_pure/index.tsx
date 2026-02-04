@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useMemo } from 'react';
+import { useEffect, useId, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { CRUDProps } from '../crud';
 import { CRUD } from '../crud';
@@ -14,11 +14,60 @@ interface CRUDOfPureProps<
   specialToolbar?: boolean;
 }
 
+function useSpecialToolbar({ specialToolbar, id }: { specialToolbar?: boolean; id: string }) {
+  useEffect(() => {
+    if (!specialToolbar) return;
+
+    const container = document.querySelector(
+      `.fec-crud-of-pure-${id}.fec-crud-of-pure-special-toolbar`,
+    );
+    if (!container) return;
+
+    const connect = () => {
+      const toolbarRightDiv = container.querySelector('.ant-pro-table-list-toolbar-right > div');
+      const queryFilter = container.querySelector('.ant-pro-query-filter') as HTMLElement | null;
+      if (!toolbarRightDiv || !queryFilter) return null;
+
+      const applyPadding = (width: number) => {
+        // 16 是原本的 padding-right。 20 是预留间隔
+        queryFilter.style.paddingRight = `${width + 16 + 20}px`;
+      };
+
+      const ro = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          applyPadding(entry.contentRect.width);
+        }
+      });
+      ro.observe(toolbarRightDiv);
+
+      applyPadding((toolbarRightDiv as HTMLElement).getBoundingClientRect().width);
+      return () => ro.disconnect();
+    };
+
+    let disconnect: (() => void) | null = connect();
+    if (!disconnect) {
+      const mo = new MutationObserver(() => {
+        disconnect = connect();
+        if (disconnect) mo.disconnect();
+      });
+      mo.observe(container, { childList: true, subtree: true });
+      return () => {
+        mo.disconnect();
+        disconnect?.();
+      };
+    }
+    return disconnect;
+  }, [id, specialToolbar]);
+}
+
 function CRUDOfPure<
   DataSource extends Record<string, any> = any,
   Key extends string | number = string,
 >(props: CRUDOfPureProps<DataSource, Key>) {
+  const id = useId();
+
   const { t } = useTranslation();
+  useSpecialToolbar({ specialToolbar: props.specialToolbar, id });
   const newColumns = props.tableProps.columns?.map((column) => {
     if (column.search) {
       return {
@@ -54,6 +103,7 @@ function CRUDOfPure<
       {...props}
       className={classNames(
         'fec-crud-of-pure',
+        `fec-crud-of-pure-${id}`,
         {
           'fec-crud-of-pure-no-search': noSearch,
           'fec-crud-of-pure-special-toolbar': props.specialToolbar,
@@ -70,7 +120,7 @@ function CRUDOfPure<
           if (typeof props.tableProps.toolBarRender === 'function') {
             originRender = props.tableProps.toolBarRender(...args);
           }
-          return [...originRender, <div key="fake" style={{ height: '32px' }} />];
+          return [...originRender];
         },
       }}
     />
