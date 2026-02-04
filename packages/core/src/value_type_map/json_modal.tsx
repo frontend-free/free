@@ -43,7 +43,7 @@ function Render(text, props: ProFormItemProps<JSONModalProps>) {
             },
           }}
         >
-          <div className="h-[500px]">
+          <div>
             <EditorJSON value={jsonText} readonly />
           </div>
         </Modal>

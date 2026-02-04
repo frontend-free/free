@@ -12,8 +12,8 @@ function Render(text) {
   return (
     <>
       <div onClick={() => setShow(true)} className="flex cursor-pointer items-center">
-        <div className="truncate">{text}</div>
-        <span className="text-primary">查看</span>
+        <div className="flex-1 truncate">{text}</div>
+        <span className="min-w-0 text-primary">查看</span>
       </div>
       {show && (
         <Modal
@@ -26,8 +26,9 @@ function Render(text) {
               display: 'none',
             },
           }}
+          width={900}
         >
-          <div className="h-[500px]">
+          <div>
             <Markdown content={text} />
           </div>
         </Modal>

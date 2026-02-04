@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.1.43
+
+### Patch Changes
+
+- fix: valueType
+  - @fe-free/icons@4.1.43
+  - @fe-free/tool@4.1.43
+
 ## 4.1.42
 
 ### Patch Changes
