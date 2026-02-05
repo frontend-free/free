@@ -60,6 +60,7 @@ export const Normal: Story = {
       <CRUD
         actions={['create', 'read', 'delete', 'update']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -105,6 +106,7 @@ export const ReadDetail: Story = {
       <CRUD
         actions={['read_detail']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -119,6 +121,7 @@ export const BatchDelete: Story = {
       <CRUD
         actions={['batch_delete']}
         tableProps={{
+          rowKey: 'id',
           columns: [
             {
               title: 'id',
@@ -169,6 +172,7 @@ export const MoreCustom: Story = {
       <CRUD
         actions={['create', 'read', 'delete', 'update']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           toolBarRender: () => {
@@ -250,7 +254,7 @@ export const MoreCustom: Story = {
 
 // 表格表单和详情表单 ref
 const FormRefComponent = () => {
-  const formRef = useRef<any>();
+  const formRef = useRef<any>(null);
   const [detailFormInstance] = ProForm.useForm();
 
   const columns = [
@@ -270,6 +274,7 @@ const FormRefComponent = () => {
     <CRUD
       actions={['create', 'read', 'update']}
       tableProps={{
+        rowKey: 'id',
         formRef,
         columns,
         request: fakeRequest,
@@ -322,6 +327,7 @@ const ActionRefComponent = () => {
         ref={ref}
         actions={[]}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -396,6 +402,7 @@ export const RemoteData: Story = {
       <CRUD
         actions={[]}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -422,6 +429,7 @@ export const NoSearch: Story = {
       <CRUD
         actions={[]}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           search: false,
@@ -451,6 +459,7 @@ export const CustomText: Story = {
       <CRUD
         actions={['create', 'read', 'delete', 'update']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -495,6 +504,7 @@ export const RowSelection: Story = {
       <CRUD
         actions={[]}
         tableProps={{
+          rowKey: 'id',
           columns: [
             {
               title: 'id',
@@ -552,6 +562,7 @@ export const ExpandedRowRender: Story = {
       <CRUD
         actions={['create', 'read', 'delete', 'update']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
           defaultExpandAllRows: true,
@@ -614,6 +625,7 @@ export const FullPage: Story = {
           fullPage
           actions={['create', 'read', 'delete', 'update']}
           tableProps={{
+            rowKey: 'id',
             columns,
             request: fakeRequest,
           }}

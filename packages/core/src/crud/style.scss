@@ -67,6 +67,25 @@
           scrollbar-width: thin;
         }
       }
+
+      &.ant-table-bordered {
+        .ant-table-container {
+          border-inline-start: none !important;
+          border-bottom: 1px solid var(--ant-table-border-color) !important;
+
+          .ant-table-thead {
+            & > tr > th:first-child {
+              border-inline-start: 1px solid var(--ant-table-border-color) !important;
+            }
+          }
+
+          .ant-table-row {
+            & > td:first-child {
+              border-inline-start: 1px solid var(--ant-table-border-color) !important;
+            }
+          }
+        }
+      }
     }
   }
 }
