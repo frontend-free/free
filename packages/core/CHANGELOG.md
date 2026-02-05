@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.1.44
+
+### Patch Changes
+
+- feat: crud of list
+  - @fe-free/icons@4.1.44
+  - @fe-free/tool@4.1.44
+
 ## 4.1.43
 
 ### Patch Changes

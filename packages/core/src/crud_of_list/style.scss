@@ -34,4 +34,31 @@
       padding-block: 0;
     }
   }
+
+  &.fec-crud-of-list-toolbar-sticky {
+    .ant-pro-table-list-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: #fff;
+    }
+  }
+
+  .fec-crud-of-list-operate-btn {
+    font-size: 14px !important;
+    line-height: var(--ant-line-height) !important;
+  }
+
+  .ant-table-bordered {
+    .ant-table-container {
+      border-top: none !important;
+      border-left: none !important;
+
+      .ant-table-row {
+        .ant-table-cell {
+          border-inline-end: none !important;
+        }
+      }
+    }
+  }
 }

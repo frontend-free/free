@@ -12,7 +12,7 @@ interface CRUDOfListProps<
   DataSource extends Record<string, any> = any,
   Key extends string | number = string,
 > extends CRUDProps<DataSource, Key> {
-  // nothing
+  toolbarSticky?: boolean;
 }
 
 function useTips(props) {
@@ -104,6 +104,7 @@ function CRUDOfList(props: CRUDOfListProps) {
         {
           // 先这样实现
           'fec-crud-of-list-no-toolbar': !searchDataIndex && !props.actions.includes('create'),
+          'fec-crud-of-list-toolbar-sticky': props.toolbarSticky,
         },
         props.className,
       )}

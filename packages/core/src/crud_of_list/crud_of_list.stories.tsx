@@ -54,6 +54,7 @@ export const Basic: Story = {
           ref={ref}
           actions={[]}
           tableProps={{
+            rowKey: 'id',
             columns,
             request: fakeRequest,
           }}
@@ -88,6 +89,42 @@ export const WithSearch: Story = {
       <CRUDOfList
         actions={['delete']}
         tableProps={{
+          rowKey: 'id',
+          columns,
+          request: fakeRequest,
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'name',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText name="name" label="名字" required rules={[{ required: true }]} />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
+      />
+    );
+  },
+};
+
+export const WithToolbarSticky: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+    ];
+
+    return (
+      <CRUDOfList
+        toolbarSticky
+        actions={['delete']}
+        tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -121,6 +158,7 @@ export const WithCreateDelete: Story = {
       <CRUDOfList
         actions={['create', 'delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
@@ -153,6 +191,7 @@ export const NoSearch: Story = {
       <CRUDOfList
         actions={['create', 'delete']}
         tableProps={{
+          rowKey: 'id',
           columns,
           request: fakeRequest,
         }}
