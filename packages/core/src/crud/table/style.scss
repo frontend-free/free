@@ -5,22 +5,6 @@
     }
   }
 
-  .ant-table-container {
-    border-inline-start-color: transparent !important;
-
-    .ant-table-thead {
-      & > tr > th:last-child {
-        border-inline-end-color: transparent !important;
-      }
-    }
-
-    .ant-table-row {
-      & > td:last-child {
-        border-inline-end-color: transparent !important;
-      }
-    }
-  }
-
   .ant-pagination {
     // gap: 8px;
 
@@ -32,12 +16,12 @@
     .ant-pagination-prev,
     .ant-pagination-next {
       .ant-pagination-item-link {
-        border: 1px solid #e2e7f0;
+        border: 1px solid var(--ant-color-border);
       }
     }
 
     .ant-pagination-item {
-      border: 1px solid #e2e7f0;
+      border: 1px solid var(--ant-color-border);
 
       &.ant-pagination-item-active {
         color: theme('colors.theme08');

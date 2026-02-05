@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.1.45
+
+### Patch Changes
+
+- feat: curd table ui
+  - @fe-free/icons@4.1.45
+  - @fe-free/tool@4.1.45
+
 ## 4.1.44
 
 ### Patch Changes
