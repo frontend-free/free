@@ -1,5 +1,14 @@
 # @fe-free/ai
 
+## 4.1.47
+
+### Patch Changes
+
+- fix: chatStore
+  - @fe-free/core@4.1.47
+  - @fe-free/icons@4.1.47
+  - @fe-free/tool@4.1.47
+
 ## 4.1.46
 
 ### Patch Changes

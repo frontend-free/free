@@ -94,6 +94,10 @@ function createChatStore<
       }));
     },
     setMessagesBefore: (messagesBefore) => {
+      if (messagesBefore.length === 0) {
+        return;
+      }
+
       const messages = get().messages;
 
       const lastMessageBefore = messagesBefore[messagesBefore.length - 1];
