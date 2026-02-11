@@ -96,6 +96,9 @@ export const WithSearch: Story = {
         requestDeleteByRecord={fakeDeleteByRecord}
         deleteProps={{
           nameIndex: 'name',
+          operateIsHidden: (record) => {
+            return record.id === '1';
+          },
         }}
         detailForm={() => (
           <>

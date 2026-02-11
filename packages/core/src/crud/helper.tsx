@@ -15,15 +15,11 @@ function OperateBtn({
 }) {
   if (disabled) {
     if (operateText) {
-      return (
-        <span className="fec-crud-of-list-operate-btn cursor-not-allowed text-03">
-          {operateText}
-        </span>
-      );
+      return <span className="fec-crud-operate-btn cursor-not-allowed text-03">{operateText}</span>;
     } else {
       return (
         <Tooltip title={title}>
-          <span className="fec-crud-of-list-operate-btn cursor-not-allowed text-lg text-03">
+          <span className="fec-crud-operate-btn fec-crud-operate-btn-icon cursor-not-allowed text-lg text-03">
             {icon}
           </span>
         </Tooltip>
@@ -33,7 +29,7 @@ function OperateBtn({
 
   if (operateText) {
     return (
-      <span className="fec-crud-of-list-operate-btn cursor-pointer text-primary" onClick={onClick}>
+      <span className="fec-crud-operate-btn cursor-pointer text-primary" onClick={onClick}>
         {operateText}
       </span>
     );
@@ -42,7 +38,7 @@ function OperateBtn({
   return (
     <Tooltip title={title}>
       <span
-        className="fec-crud-of-list-operate-btn cursor-pointer text-lg text-primary"
+        className="fec-crud-operate-btn fec-crud-operate-btn-icon cursor-pointer text-lg text-primary"
         onClick={onClick}
       >
         {icon}
