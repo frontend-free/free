@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.2.0
+
+### minor Changes
+
+- fix: crud bug
+  - @fe-free/icons@4.2.0
+  - @fe-free/tool@4.2.0
+
 ## 4.1.47
 
 ### Patch Changes

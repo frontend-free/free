@@ -12,6 +12,11 @@
     &:hover {
       .ant-table-cell-fix-right {
         display: block;
+
+        // 如果操作列没有内容，则隐藏操作列
+        &:has(.fec-crud-operate-column:empty) {
+          display: none;
+        }
       }
     }
   }
