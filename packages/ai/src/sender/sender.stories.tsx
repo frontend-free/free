@@ -66,4 +66,11 @@ export const AllowSpeech: Story = {
   },
 };
 
+export const Statement: Story = {
+  args: {
+    statement: '内容由 AI 生成，无法确保信息的真实准确，仅供参考',
+  },
+  render: (props) => <Component {...props} />,
+};
+
 export default meta;

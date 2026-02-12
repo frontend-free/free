@@ -30,6 +30,8 @@ interface SenderProps {
     /** 录音状态变化时回调 */
     onRecordingChange?: (recording: boolean) => void;
   };
+
+  statement?: string;
 }
 
 export type { SenderProps, SenderRef, SenderValue };

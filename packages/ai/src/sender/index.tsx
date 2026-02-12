@@ -197,12 +197,7 @@ function Sender(originProps: SenderProps) {
           />
         )}
       </div>
-      <div className="mt-1 text-center text-xs text-03">
-        {t(
-          '@fe-free/ai.sender.aiGeneratedDisclaimer',
-          '内容由 AI 生成，无法确保信息的真实准确，仅供参考',
-        )}
-      </div>
+      {props.statement && <div className="mt-1 text-center text-xs text-03">{props.statement}</div>}
     </div>
   );
 }
