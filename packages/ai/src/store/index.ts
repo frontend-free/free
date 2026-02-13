@@ -11,14 +11,6 @@ interface ChatStore<
   AIData,
   ContextData extends Record<string, any>,
 > {
-  /** 存放Chat的上下文数据 */
-  contextData?: ContextData;
-  setContextData: (contextData?: ContextData) => void;
-  setContextDataWithField: (
-    field: keyof ContextData,
-    contextDataValue: ContextData[keyof ContextData],
-  ) => void;
-
   senderValue?: UserData;
   setSenderValue: (senderValue?: UserData) => void;
 
@@ -27,6 +19,16 @@ interface ChatStore<
   addMessage: (message: ChatMessage<UserData, AIData>) => void;
   updateMessage: (message: ChatMessage<UserData, AIData>) => void;
   setMessagesBefore: (messages: ChatMessage<UserData, AIData>[]) => void;
+  setMessagesAfter: (messages: ChatMessage<UserData, AIData>[]) => void;
+
+  /** 存放Chat的上下文数据 */
+  contextData?: ContextData;
+  setContextData: (contextData?: ContextData) => void;
+  setContextDataWithField: (
+    field: keyof ContextData,
+    contextDataValue: ContextData[keyof ContextData],
+  ) => void;
+  setContextDataPartial: (contextDataPartial: Partial<ContextData>) => void;
 
   reset: () => void;
 }
@@ -37,19 +39,6 @@ function createChatStore<
   ContextData extends Record<string, any> = any,
 >() {
   const useChatStore = create<ChatStore<UserData, AIData, ContextData>>((set, get, store) => ({
-    contextData: undefined,
-    setContextData: (contextData) => {
-      set({ contextData });
-    },
-    setContextDataWithField: (field, contextDataValue) => {
-      const preContextData = get().contextData;
-      set({
-        contextData: {
-          ...preContextData,
-          [field]: contextDataValue,
-        } as ContextData,
-      });
-    },
     senderValue: undefined,
     setSenderValue: (senderValue) => {
       set(() => ({ senderValue }));
@@ -109,6 +98,46 @@ function createChatStore<
 
       set({
         messages: newMessages,
+      });
+    },
+    setMessagesAfter: (messagesAfter) => {
+      if (messagesAfter.length === 0) {
+        return;
+      }
+
+      const messages = get().messages;
+
+      const firstMessageAfter = messagesAfter[0];
+      const index = messages.findIndex((message) => message.uuid === firstMessageAfter.uuid);
+
+      // 如果 index 非 -1，则合并
+      // 如果 index -1，-1 + 1 为 0，即全取 message，也适用
+      const newMessages = [...messages.slice(0, index), ...messagesAfter];
+
+      set({
+        messages: newMessages,
+      });
+    },
+    contextData: undefined,
+    setContextData: (contextData) => {
+      set({ contextData });
+    },
+    setContextDataWithField: (field, contextDataValue) => {
+      const preContextData = get().contextData;
+      set({
+        contextData: {
+          ...preContextData,
+          [field]: contextDataValue,
+        } as ContextData,
+      });
+    },
+    setContextDataPartial: (contextDataPartial) => {
+      const preContextData = get().contextData;
+      set({
+        contextData: {
+          ...preContextData,
+          ...contextDataPartial,
+        } as ContextData,
       });
     },
     reset: () => {
