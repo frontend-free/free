@@ -1,0 +1,1 @@
+import{bG as h,bE as d,bC as g}from"./iframe-BYmmJCK5.js";function p(e,f,n,t){var s=-1,i=e==null?0:e.length;for(t&&i&&(n=e[++s]);++s<i;)n=f(n,e[s],s,e);return n}function u(e,f,n,t,s){return s(e,function(i,b,r){n=t?(t=!1,i):f(n,i,b,r)}),n}function E(e,f,n){var t=d(e)?p:u,s=arguments.length<3;return t(e,h(f),n,s,g)}export{E as r};
