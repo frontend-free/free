@@ -145,14 +145,14 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
             </div>
           );
         })}
-        <div className="sticky bottom-2 mx-auto flex justify-center">
+        <div className="pointer-events-none sticky bottom-2 mx-auto flex justify-center">
           <Button
             shape="circle"
             icon={<ArrowDownOutlined />}
             onClick={() => {
               scrollToBottom();
             }}
-            className="bg-white text-2xl shadow-[0px_1px_12px_0px_#2921391F]"
+            className="pointer-events-auto bg-white text-2xl shadow-[0px_1px_12px_0px_#2921391F]"
             style={{
               transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0})`,
               width: 44,
