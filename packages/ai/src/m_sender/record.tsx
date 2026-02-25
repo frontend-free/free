@@ -144,7 +144,7 @@ function RecordAction(
       {isRecording ? (
         <>
           <RecordLoading count={30} gap={4} />
-          <div className="absolute left-0 right-0 top-0 -mt-[50px] flex h-[50px] items-end justify-center bg-white pb-2 text-03">
+          <div className="text-03 absolute top-0 right-0 left-0 -mt-[50px] flex h-[50px] items-end justify-center bg-white pb-2">
             {isCancel && <div className="text-red08">松开取消</div>}
             {!isCancel && <div className="text-03">松开发送&nbsp;&nbsp;上移取消</div>}
           </div>
@@ -157,13 +157,13 @@ function RecordAction(
         <Button
           type="text"
           shape="circle"
-          icon={<Icons component={IconKeyboard} className="!text-xl text-white" />}
+          icon={<Icons component={IconKeyboard} className="h-[28px]! text-xl! text-white!" />}
           onClick={() => {
             setType('input');
 
             refText.current?.focus();
           }}
-          className="absolute right-4"
+          className="absolute! right-4!"
         />
       )}
     </div>

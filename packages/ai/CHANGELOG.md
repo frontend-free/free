@@ -1,5 +1,15 @@
 # @fe-free/ai
 
+## 6.0.1
+
+### Patch Changes
+
+- feat: tailwindcss4
+- Updated dependencies
+  - @fe-free/icons@6.0.1
+  - @fe-free/core@6.0.1
+  - @fe-free/tool@6.0.1
+
 ## 4.2.4
 
 ### Patch Changes

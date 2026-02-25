@@ -24,9 +24,9 @@
       border: 1px solid var(--ant-color-border);
 
       &.ant-pagination-item-active {
-        color: theme('colors.theme08');
-        background-color: theme('colors.theme03');
-        border-color: theme('colors.theme05');
+        color: var(--color-theme08);
+        background-color: var(--color-theme03);
+        border-color: var(--color-theme05);
       }
     }
   }

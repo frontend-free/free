@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from "vite-plugin-svgr";
+import tailwindcss from '@tailwindcss/vite';
 
 const config: StorybookConfig = {
   stories: [
@@ -18,7 +19,7 @@ const config: StorybookConfig = {
     options: {},
   },
   viteFinal: (config) => {
-    config.plugins = [ ...(config.plugins || []), svgr()];
+    config.plugins = [ ...(config.plugins || []), svgr(), tailwindcss()];
 
     config.server = {
       proxy: {

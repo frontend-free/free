@@ -117,7 +117,7 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
     <PageLayout>
       <ScrollFixed
         refScroll={ref}
-        className="fea-messages-scroll relative flex h-full flex-col overflow-y-auto overflow-x-hidden"
+        className="fea-messages-scroll relative flex h-full flex-col overflow-x-hidden overflow-y-auto"
         style={{
           transform: `translateZ(0)`,
         }}
@@ -152,7 +152,7 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
             onClick={() => {
               scrollToBottom();
             }}
-            className="pointer-events-auto bg-white text-2xl shadow-[0px_1px_12px_0px_#2921391F]"
+            className="pointer-events-auto! bg-white! text-2xl! shadow-[0px_1px_12px_0px_#2921391F]!"
             style={{
               transform: `translateY(${showScrollBottom ? 0 : 30}px) scale(${showScrollBottom ? 1 : 0})`,
               width: 44,

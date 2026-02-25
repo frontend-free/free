@@ -19,7 +19,7 @@ function RecordAction(props: SenderProps) {
     <Button
       type="text"
       shape="circle"
-      icon={<AudioOutlined className="!text-lg" />}
+      icon={<AudioOutlined className="text-lg!" />}
       onClick={() => onRecordingChange?.(true)}
     />
   );

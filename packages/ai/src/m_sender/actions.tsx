@@ -44,7 +44,7 @@ function Actions(
         <Button
           type="primary"
           shape="circle"
-          icon={<Icons component={IconRecord} className="!text-lg" />}
+          icon={<Icons component={IconRecord} className="h-[28px]! text-lg!" />}
           onClick={() => {
             setType('record');
           }}
@@ -53,7 +53,7 @@ function Actions(
         <Button
           type="primary"
           shape="circle"
-          icon={<Icons component={SendIcon} className="!text-lg" />}
+          icon={<Icons component={SendIcon} className="h-[28px]! text-lg!" />}
           loading={isLoading}
           onClick={handleSubmit}
         />

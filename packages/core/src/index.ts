@@ -1,4 +1,5 @@
 import './style.scss';
+import './tailwind.css';
 
 export { useGlobalInfiniteScroll } from './ahooks/use_global_infinite_scroll';
 export { useGlobalRequest } from './ahooks/use_global_request';

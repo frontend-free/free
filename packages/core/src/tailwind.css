@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+/* stylelint-disable-next-line */
+@theme {
+  --color-primary: #0374e9;
+  --color-theme09: #0368d2;
+  --color-theme08: #0374e9;
+  --color-theme05: #a2cbf7;
+  --color-theme03: #e6f1fd;
+  --color-theme02: #f0f7fe;
+  --color-red09: #e64547;
+  --color-red08: #ff4d4f;
+  --color-red05: #ffb8b9;
+  --color-red03: #ffeded;
+  --color-green09: #01a468;
+  --color-green08: #01b673;
+  --color-green05: #9be5c8;
+  --color-green03: #ddf9ec;
+  --color-yellow09: #bf7a05;
+  --color-yellow08: #faad14;
+  --color-yellow05: #eecf9b;
+  --color-yellow03: #f6e7cd;
+  --text-color-01: #15191e;
+  --text-color-02: #444;
+  --text-color-03: #777;
+  --text-color-04: #bfbfbf;
+  --border-color-01: #e2e7f0;
+  --border-color-02: #d5dde9;
+  --border-color-03: #c0c7d2;
+  --background-color-01: #f1f3f5;
+  --background-color-02: #ececec;
+  --background-color-03: #d9d9d9;
+  --background-color-04: #c0c0c0;
+}
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
