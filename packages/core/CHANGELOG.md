@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 4.2.5
+
+### Patch Changes
+
+- fix: crud ui bug
+  - @fe-free/icons@4.2.5
+  - @fe-free/tool@4.2.5
+
 ## 4.2.4
 
 ### Patch Changes
