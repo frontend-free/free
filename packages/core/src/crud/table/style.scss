@@ -8,6 +8,11 @@
   .ant-pagination {
     // gap: 8px;
 
+    // 奇怪的问题。 full page 的时候会有滚动条。 需要 overflow: hidden;
+    & > li {
+      overflow: hidden;
+    }
+
     .ant-pagination-options {
       order: -1;
       margin-right: 8px;
