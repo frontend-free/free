@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 6.0.2
+
+### Patch Changes
+
+- fix: crud ui
+  - @fe-free/icons@6.0.2
+  - @fe-free/tool@6.0.2
+
 ## 6.0.1
 
 ### Patch Changes
