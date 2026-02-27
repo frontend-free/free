@@ -37,7 +37,7 @@
     "@fe-free/file": "workspace:^",
     "@fe-free/icons": "workspace:^",
     "@fe-free/tool": "workspace:^",
-    "antd": "^6.0.0",
+    "antd": "^6.2.1",
     "classnames": "^2.5.1",
     "dayjs": "~1.11.10",
     "i18next": "^25.7.2",

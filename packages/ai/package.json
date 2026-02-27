@@ -1,6 +1,6 @@
 {
   "name": "@fe-free/ai",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "",
   "main": "./src/index.ts",
   "scripts": {
@@ -27,7 +27,7 @@
   "peerDependencies": {
     "@fe-free/icons": "workspace:*",
     "@fe-free/tool": "workspace:*",
-    "antd": "^6.0.0",
+    "antd": "^6.2.1",
     "dayjs": "~1.11.10",
     "i18next": "^25.7.2",
     "i18next-browser-languagedetector": "^8.2.0",

@@ -27,7 +27,7 @@ importers:
         specifier: workspace:^
         version: link:packages/tool
       antd:
-        specifier: ^6.0.0
+        specifier: ^6.2.1
         version: 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       classnames:
         specifier: ^2.5.1
@@ -284,7 +284,7 @@ importers:
         specifier: ^3.7.8
         version: 3.9.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       antd:
-        specifier: ^6.0.0
+        specifier: ^6.2.1
         version: 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       classnames:
         specifier: ^2.5.1
@@ -380,7 +380,7 @@ importers:
         specifier: ^3.7.8
         version: 3.9.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       antd:
-        specifier: ^6.0.0
+        specifier: ^6.2.1
         version: 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       axios:
         specifier: ^1.6.5
