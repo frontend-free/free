@@ -1,5 +1,11 @@
 # @fe-free/eslint-config-base
 
+## 6.0.1
+
+### Patch Changes
+
+- feat: some
+
 ## 1.3.14
 
 ## 1.3.13
