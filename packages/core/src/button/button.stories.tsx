@@ -1,5 +1,6 @@
 import { LoadingButton } from '@fe-free/core';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Tag } from 'antd';
 
 const meta: Meta<typeof LoadingButton> = {
   title: '@fe-free/core/LoadingButton',
@@ -37,5 +38,16 @@ export const Reject = {
         setTimeout(reject, 1000);
       });
     },
+  },
+};
+
+export const Debug = {
+  render: () => {
+    return (
+      <div>
+        <Tag>xxx</Tag>
+        <Tag>xxx</Tag>
+      </div>
+    );
   },
 };

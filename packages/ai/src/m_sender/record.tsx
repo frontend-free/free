@@ -1,5 +1,6 @@
 import Icons from '@fe-free/icons';
 import { Button } from 'antd';
+import type { TextAreaRef } from 'antd/es/input/TextArea';
 import classNames from 'classnames';
 import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -7,9 +8,7 @@ import { RecordLoading } from '../helper';
 import IconKeyboard from '../svgs/keyboard.svg?react';
 import type { MSenderProps } from './types';
 
-function RecordAction(
-  props: MSenderProps & { setType; refText: RefObject<HTMLTextAreaElement | null> },
-) {
+function RecordAction(props: MSenderProps & { setType; refText: RefObject<TextAreaRef | null> }) {
   const { allowSpeech, setType, refText, loading } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);

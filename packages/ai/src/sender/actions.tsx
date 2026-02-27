@@ -1,6 +1,7 @@
 import Icons from '@fe-free/icons';
 import type { UploadFile } from 'antd';
 import { Button } from 'antd';
+import type { TextAreaRef } from 'antd/es/input/TextArea';
 import type { RefObject } from 'react';
 import SendIcon from '../svgs/send.svg?react';
 import { FileAction } from './files';
@@ -9,7 +10,7 @@ import type { SenderProps } from './types';
 
 function Actions(
   props: SenderProps & {
-    refText: RefObject<HTMLTextAreaElement | null>;
+    refText: RefObject<TextAreaRef | null>;
     refUpload: RefObject<HTMLDivElement | null>;
     isUploading: boolean;
     fileList: UploadFile[];

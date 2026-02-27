@@ -1,4 +1,5 @@
 import { Input } from 'antd';
+import type { TextAreaRef } from 'antd/es/input/TextArea';
 import classNames from 'classnames';
 import { useMemo, useRef, useState, type RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +7,7 @@ import { Actions } from './actions';
 import { RecordAction } from './record';
 import type { MSenderProps, MSenderRef } from './types';
 
-function Text(props: MSenderProps & { refText: RefObject<HTMLTextAreaElement | null> }) {
+function Text(props: MSenderProps & { refText: RefObject<TextAreaRef | null> }) {
   const { value, onChange, placeholder, refText, autoFocus } = props;
 
   return (
@@ -39,7 +40,7 @@ function useProps(originProps: MSenderProps) {
 }
 
 function MSender(originProps: MSenderProps) {
-  const refText = useRef<HTMLTextAreaElement>(null);
+  const refText = useRef<TextAreaRef | null>(null);
 
   const props = useProps(originProps);
   const { statement, defaultType } = props;
@@ -53,7 +54,7 @@ function MSender(originProps: MSenderProps) {
       <div
         ref={refContainer}
         className={classNames(
-          'fea-m-sender relative flex items-end rounded-xl border border-01 bg-white p-2.5',
+          'fea-m-sender border-01 relative flex items-end rounded-xl border bg-white p-2.5',
         )}
         style={{
           boxShadow: '0px 2px 12px 0px #00000014',
@@ -65,7 +66,7 @@ function MSender(originProps: MSenderProps) {
         <Actions {...props} refText={refText} type={type} setType={setType} />
         {type === 'record' && <RecordAction {...props} refText={refText} setType={setType} />}
       </div>
-      {statement && <div className="mt-1 text-center text-xs text-04">*{statement}</div>}
+      {statement && <div className="text-04 mt-1 text-center text-xs">*{statement}</div>}
     </div>
   );
 }

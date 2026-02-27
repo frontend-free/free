@@ -1,5 +1,6 @@
 import Icons from '@fe-free/icons';
 import { Button } from 'antd';
+import type { TextAreaRef } from 'antd/es/input/TextArea';
 import { useCallback, type RefObject } from 'react';
 import IconRecord from '../svgs/record.svg?react';
 import SendIcon from '../svgs/send.svg?react';
@@ -7,7 +8,7 @@ import type { MSenderProps } from './types';
 
 function Actions(
   props: MSenderProps & {
-    refText: RefObject<HTMLTextAreaElement | null>;
+    refText: RefObject<TextAreaRef | null>;
     type: 'input' | 'record';
     setType: (type: 'input' | 'record') => void;
   },

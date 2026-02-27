@@ -18,7 +18,12 @@ interface UploadBaseProps {
   listType?: AntdUploadProps['listType'];
   accept?: string;
   directory?: AntdUploadProps['directory'];
-  children?: ReactNode | ((props: { isDisabled: boolean }) => ReactNode);
+  children?:
+    | ReactNode
+    | ((
+        props: ImageUploadProps,
+        other: { fileList: UploadFile[]; isDisabled: boolean },
+      ) => ReactNode);
 }
 
 interface UploadProps extends UploadBaseProps {
@@ -292,7 +297,7 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
           <div className="group relative h-20 w-20 cursor-pointer">
             <Avatar size={80} src={value} shape="square" className="bg-01 shadow" />
             <CloseOutlined
-              className="absolute right-1 top-1 cursor-pointer rounded-full bg-black/50 p-1 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100"
+              className="absolute top-1 right-1 cursor-pointer rounded-full bg-black/50 p-1 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100"
               onClick={(e) => {
                 e.stopPropagation();
                 onChange?.();
@@ -300,8 +305,8 @@ function AvatarImageUpload(props: AvatarImageUploadProps) {
             />
           </div>
         ) : (
-          <div className="flex h-20 w-20 cursor-pointer items-center justify-center rounded bg-01 shadow transition-colors hover:bg-02">
-            <PlusOutlined className="text-xl text-02" />
+          <div className="bg-01 hover:bg-02 flex h-20 w-20 cursor-pointer items-center justify-center rounded shadow transition-colors">
+            <PlusOutlined className="text-02 text-xl" />
           </div>
         )}
       </AntdUpload>

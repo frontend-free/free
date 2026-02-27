@@ -1,5 +1,6 @@
 import { useDrop } from 'ahooks';
 import { Input } from 'antd';
+import type { TextAreaRef } from 'antd/es/input/TextArea';
 import type { UploadFile } from 'antd/lib';
 import classNames from 'classnames';
 import type { RefObject } from 'react';
@@ -11,7 +12,7 @@ import type { SenderProps, SenderRef } from './types';
 
 function Text(
   props: SenderProps & {
-    refText: RefObject<HTMLTextAreaElement | null>;
+    refText: RefObject<TextAreaRef | null>;
     onSubmit?: () => void;
   },
 ) {
@@ -60,7 +61,7 @@ function Sender(originProps: SenderProps) {
     };
   }, [originProps, t]);
 
-  const refText = useRef<HTMLTextAreaElement>(null);
+  const refText = useRef<TextAreaRef | null>(null);
 
   const { value, onChange, allowUpload, onSubmit, loading, allowSpeech } = props;
   const { filesMaxCount } = allowUpload || {};
@@ -157,7 +158,7 @@ function Sender(originProps: SenderProps) {
       <div
         ref={refContainer}
         className={classNames(
-          'fea-sender relative flex flex-col rounded-xl border border-01 bg-white p-2',
+          'fea-sender border-01 relative flex flex-col rounded-xl border bg-white p-2',
           {
             'fea-sender-drag-hover': dragHover,
           },
@@ -197,7 +198,7 @@ function Sender(originProps: SenderProps) {
           />
         )}
       </div>
-      {props.statement && <div className="mt-1 text-center text-xs text-03">{props.statement}</div>}
+      {props.statement && <div className="text-03 mt-1 text-center text-xs">{props.statement}</div>}
     </div>
   );
 }
