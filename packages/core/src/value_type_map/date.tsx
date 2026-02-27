@@ -15,9 +15,10 @@ const renderMap = {
   },
 };
 
-const renderFormItemMap = {
+const formItemRenderMap = {
   dateRange: (_, props) => {
     // @ts-ignore onBlur 类型错误
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { onBlur, fieldProps, ...rest } = props;
 
     return (
@@ -38,6 +39,6 @@ const renderFormItemMap = {
   },
 };
 
-const dateRender = { renderMap, renderFormItemMap };
+const dateRender = { renderMap, formItemRenderMap };
 
 export { dateRender };

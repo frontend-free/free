@@ -54,7 +54,7 @@ function Render(text, props: ProFormItemProps<JSONModalProps>) {
 
 const jsonModalRender = {
   render: Render,
-  renderFormItem: () => <></>,
+  formItemRender: () => <></>,
 };
 
 export { jsonModalRender };

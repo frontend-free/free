@@ -11,7 +11,7 @@ const switchNumberRender = {
 
     return <SwitchNumber value={text} />;
   },
-  renderFormItem: (_, props) => {
+  formItemRender: (_, props) => {
     return <ProFormSwitchNumber {...props} />;
   },
 };
@@ -23,7 +23,7 @@ const switchOptionsRender = {
 
     return <SwitchOptions value={text} {...props.fieldProps} />;
   },
-  renderFormItem: (_, props) => {
+  formItemRender: (_, props) => {
     return <ProFormSwitchOptions {...props} />;
   },
 };

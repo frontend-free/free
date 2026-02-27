@@ -13,7 +13,7 @@ function Render(text) {
     <>
       <div onClick={() => setShow(true)} className="flex cursor-pointer items-center">
         <div className="flex-1 truncate">{text}</div>
-        <span className="min-w-0 text-primary">查看</span>
+        <span className="text-primary min-w-0">查看</span>
       </div>
       {show && (
         <Modal
@@ -39,7 +39,7 @@ function Render(text) {
 
 const markdownModalRender = {
   render: Render,
-  renderFormItem: () => <></>,
+  formItemRender: () => <></>,
 };
 
 export { markdownModalRender };

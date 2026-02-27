@@ -38,7 +38,7 @@ function render(text) {
 
 const jsonRender = {
   render,
-  renderFormItem: () => <></>,
+  formItemRender: () => <></>,
 };
 
 export { jsonRender };
