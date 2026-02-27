@@ -36,6 +36,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     // 禁止直接导入 antd 的 Modal 和 message，必须使用 App.useApp() 提供的 modal 和 message
+    // 禁止使用 ahooks 的 useRequest，请使用 @fe-free/core 的 useGlobalRequest
     'no-restricted-imports': [
       'error',
       {
@@ -45,6 +46,12 @@ module.exports = {
             importNames: ['message'],
             message:
               '禁止直接使用 antd 的 message，请使用 App.useApp() 提供的 message。示例：const { message } = App.useApp();',
+          },
+          {
+            name: 'ahooks',
+            importNames: ['useRequest', 'useInfiniteScroll'],
+            message:
+              '禁止调用 ahooks 的 useRequest useInfiniteScroll，请使用 @fe-free/core 提供的 useGlobalRequest useGlobalInfiniteScroll',
           },
         ],
       },
