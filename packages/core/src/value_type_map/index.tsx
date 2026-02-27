@@ -26,35 +26,35 @@ enum CustomValueTypeEnum {
 const customValueTypeMap: Record<string, ProRenderFieldPropsType> = {
   [CustomValueTypeEnum.CustomDateTimeAndDateRange]: {
     render: dateRender.renderMap.dateTime,
-    renderFormItem: dateRender.renderFormItemMap.dateRange,
+    formItemRender: dateRender.renderFormItemMap.dateRange,
   },
   [CustomValueTypeEnum.CustomDateAndDateRange]: {
     render: dateRender.renderMap.date,
-    renderFormItem: dateRender.renderFormItemMap.dateRange,
+    formItemRender: dateRender.renderFormItemMap.dateRange,
   },
   [CustomValueTypeEnum.CustomJSON]: {
     render: jsonRender.render,
-    renderFormItem: jsonRender.renderFormItem,
+    formItemRender: jsonRender.renderFormItem,
   },
   [CustomValueTypeEnum.CustomJSONModal]: {
     render: jsonModalRender.render,
-    renderFormItem: jsonModalRender.renderFormItem,
+    formItemRender: jsonModalRender.renderFormItem,
   },
   [CustomValueTypeEnum.CustomMarkdownModal]: {
     render: markdownModalRender.render,
-    renderFormItem: markdownModalRender.renderFormItem,
+    formItemRender: markdownModalRender.renderFormItem,
   },
   [CustomValueTypeEnum.CustomSwitchNumber]: {
     render: switchNumberRender.render,
-    renderFormItem: switchNumberRender.renderFormItem,
+    formItemRender: switchNumberRender.renderFormItem,
   },
   [CustomValueTypeEnum.CustomSwitchOptions]: {
     render: switchOptionsRender.render,
-    renderFormItem: switchOptionsRender.renderFormItem,
+    formItemRender: switchOptionsRender.renderFormItem,
   },
   [CustomValueTypeEnum.CustomSerialNumber]: {
     render: () => <></>,
-    renderFormItem: () => <></>,
+    formItemRender: () => <></>,
   },
 };
 

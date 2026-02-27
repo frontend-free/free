@@ -3,14 +3,14 @@
     border-bottom: 1px solid #f0f0f0;
   }
 
-  .ant-table-cell-fix-right {
+  .ant-table-cell-fix-end {
     position: absolute !important;
     display: none;
   }
 
   .ant-table-row {
     &:hover {
-      .ant-table-cell-fix-right {
+      .ant-table-cell-fix-end {
         display: block;
 
         // 如果操作列没有内容，则隐藏操作列

@@ -47,10 +47,10 @@
   },
   "peerDependencies": {
     "@ant-design/plots": "^2.5.0",
-    "@ant-design/pro-components": "2.8.9",
+    "@ant-design/pro-components": "3.1.6-0",
     "@fe-free/icons": "workspace:*",
     "@fe-free/tool": "workspace:*",
-    "antd": "^5.27.1",
+    "antd": "^6.0.0",
     "dayjs": "~1.11.10",
     "i18next": "^25.7.2",
     "i18next-browser-languagedetector": "^8.2.0",
