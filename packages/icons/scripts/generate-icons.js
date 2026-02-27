@@ -70,7 +70,7 @@ ${exports}
 // 主函数
 function main() {
   // 支持的子目录
-  const subDirs = ['filled', 'outlined'];
+  const subDirs = ['filled', 'outlined', 'twotone'];
   const components = [];
 
   // 遍历每个子目录
