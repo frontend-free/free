@@ -262,6 +262,61 @@ export const SpecialToolbar: Story = {
   },
 };
 
+export const SpecialToolbarEmpty: Story = {
+  render: () => {
+    const columns = [
+      {
+        title: 'id',
+        dataIndex: 'id',
+        search: true,
+      },
+      {
+        title: '名字(省略)',
+        dataIndex: 'name',
+        search: true,
+        ellipsis: true,
+      },
+      {
+        title: 'city',
+        dataIndex: 'city',
+      },
+      {
+        title: 'area',
+        dataIndex: 'area',
+      },
+    ];
+
+    return (
+      <CRUDOfPure
+        specialToolbar="empty"
+        actions={['delete']}
+        tableProps={{
+          rowKey: 'id',
+          columns,
+          request: fakeRequest,
+          pagination: false,
+        }}
+        requestDeleteByRecord={fakeDeleteByRecord}
+        deleteProps={{
+          nameIndex: 'id',
+        }}
+        detailForm={() => (
+          <>
+            <ProFormText
+              name="name"
+              label="名字"
+              required
+              rules={[{ required: true }]}
+              extra="extra extra extra extra"
+            />
+          </>
+        )}
+        requestCreateByValues={fakeCreate}
+      />
+    );
+  },
+};
+
 export const SpecialToolbarWithToolBarRender: Story = {
   render: () => {
     const columns = [

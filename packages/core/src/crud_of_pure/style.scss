@@ -77,5 +77,11 @@
         pointer-events: auto;
       }
     }
+
+    &.fec-crud-of-pure-special-toolbar-empty {
+      .ant-pro-card:not(.ant-pro-table-search) {
+        margin-top: -16px;
+      }
+    }
   }
 }

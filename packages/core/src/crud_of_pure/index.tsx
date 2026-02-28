@@ -10,11 +10,20 @@ interface CRUDOfPureProps<
   DataSource extends Record<string, any> = any,
   Key extends string | number = string,
 > extends CRUDProps<DataSource, Key> {
-  /** 特殊位置的 toolbar，向上 margin，是的 search 和 toolbar 一起。仅适用于 search 很少的情况。 */
-  specialToolbar?: boolean;
+  /**
+   * 特殊位置的 toolbar，margin 为 -48px，使得 search 和 toolbar 一起。
+   * empty 表示toolbar 为空的情况，margin 为 -16px。
+   * */
+  specialToolbar?: boolean | 'empty';
 }
 
-function useSpecialToolbar({ specialToolbar, id }: { specialToolbar?: boolean; id: string }) {
+function useSpecialToolbar({
+  specialToolbar,
+  id,
+}: {
+  specialToolbar?: boolean | 'empty';
+  id: string;
+}) {
   useEffect(() => {
     if (!specialToolbar) return;
 
@@ -107,6 +116,7 @@ function CRUDOfPure<
         {
           'fec-crud-of-pure-no-search': noSearch,
           'fec-crud-of-pure-special-toolbar': props.specialToolbar,
+          'fec-crud-of-pure-special-toolbar-empty': props.specialToolbar === 'empty',
         },
         props.className,
       )}
