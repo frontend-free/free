@@ -2,33 +2,33 @@
   "name": "@fe-free/icons",
   "version": "6.0.5",
   "description": "Icon components library for @fe-free packages",
+  "license": "ISC",
+  "author": "",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
     ".": {
+      "types": "./src/index.ts",
       "import": "./src/index.ts",
-      "require": "./src/index.ts",
-      "types": "./src/index.ts"
+      "require": "./src/index.ts"
     }
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node scripts/generate-icons.js; prettier --write ./src/icons && prettier --write ./src/index.ts",
-    "prepublishOnly": "npm run build"
-  },
-  "author": "",
-  "license": "ISC",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "peerDependencies": {
-    "@ant-design/icons": "^6.1.0",
-    "react": "^19.2.0"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/generate-icons.js; oxfmt ./src/icons ./src/index.ts",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@ant-design/icons": "^6.1.0",
     "fs": "0.0.1-security",
     "path": "^0.12.7"
+  },
+  "peerDependencies": {
+    "@ant-design/icons": "^6.1.0",
+    "react": "^19.2.0"
   }
 }

@@ -3,16 +3,9 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [
-    [
-      "@fe-free/core",
-      "@fe-free/file",
-      "@fe-free/icons",
-      "@fe-free/tool",
-      "@fe-free/ai"
-    ],
+    ["@fe-free/core", "@fe-free/file", "@fe-free/icons", "@fe-free/tool", "@fe-free/ai"],
     [
       "@fe-free/commit-lint",
-      "@fe-free/eslint-config-base",
       "@fe-free/style-lint",
       "@fe-free/free-scripts",
       "@fe-free/vite-plugin-remove-svg-color"
