@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 6.0.2
+
+### Patch Changes
+
+- feat: json
+
 ## 6.0.1
 
 ## 1.3.14

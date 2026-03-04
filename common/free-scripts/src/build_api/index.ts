@@ -1,6 +1,7 @@
+import path from 'path';
+
 import fs from 'fs-extra';
 import fetch from 'node-fetch';
-import path from 'path';
 import { generateApi } from 'swagger-typescript-api';
 
 async function code({ name, options }) {
@@ -69,7 +70,7 @@ async function swaggerJsonByDocUrl({ docUrl }) {
 
   for (const item of resources) {
     const data = await fetch(
-      item.url.startsWith('/') ? `${docUrl}${item.url}` : `${docUrl}${item.url}`
+      item.url.startsWith('/') ? `${docUrl}${item.url}` : `${docUrl}${item.url}`,
     ).then((response) => response.json());
 
     merge(mergeJSON, data);
@@ -79,6 +80,11 @@ async function swaggerJsonByDocUrl({ docUrl }) {
   mergeJSON.info.termsOfService = docUrl;
 
   return mergeJSON;
+}
+
+async function swaggerJsonByJsonFile({ jsonFile }) {
+  const json = await fs.readJSONSync(jsonFile);
+  return json;
 }
 
 async function swaggerJsonByJsonUrl({ jsonUrl }) {
@@ -103,7 +109,7 @@ function writeSwaggerJson({ output, docName, json }) {
   const outputDir = path.resolve(output);
   fs.writeFileSync(
     path.resolve(outputDir, `./swagger/${docName}.json`),
-    JSON.stringify(json, null, 2)
+    JSON.stringify(json, null, 2),
   );
 }
 
@@ -151,7 +157,9 @@ async function buildApi(options: Options) {
       (async function () {
         let json;
         // 获得 json
-        if (item.docUrl) {
+        if (item.jsonFile) {
+          json = await swaggerJsonByJsonFile({ jsonFile: item.jsonFile });
+        } else if (item.docUrl) {
           json = await swaggerJsonByDocUrl({ docUrl: item.docUrl });
         } else if (item.jsonUrl) {
           json = await swaggerJsonByJsonUrl({ jsonUrl: item.jsonUrl });
@@ -166,7 +174,7 @@ async function buildApi(options: Options) {
         await code({ name: item.docName, options });
 
         console.log(`build-api success ${item.docName}`);
-      })()
+      })(),
     );
   }
 

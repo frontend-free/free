@@ -1,5 +1,7 @@
 # @fe-free/vite-plugin-remove-svg-color
 
+## 6.0.2
+
 ## 6.0.1
 
 ## 1.3.14
