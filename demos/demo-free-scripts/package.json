@@ -1,0 +1,21 @@
+{
+  "name": "@demos/demo-free-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-api": "free-scripts build-api  && oxfmt ./src",
+    "build-code": "free-scripts build-code && oxfmt ./src/code"
+  },
+  "devDependencies": {
+    "@fe-free/free-scripts": "workspace:*"
+  },
+  "peerDependencies": {
+    "@fe-free/core": "^6.0.5",
+    "antd": "^5.19.3",
+    "axios": "^1.7.9"
+  }
+}

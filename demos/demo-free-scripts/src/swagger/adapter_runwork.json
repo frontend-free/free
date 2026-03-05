@@ -1,0 +1,471 @@
+{
+  "info": {
+    "description": "润工作适配服务 API，提供健康检查、飞书 OAuth、华润 ECSB 等接口。",
+    "contact": {
+      "name": "API Support"
+    },
+    "title": "Adapter Runwork API",
+    "version": "v1"
+  },
+  "tags": [
+    {
+      "name": "health",
+      "description": "健康检查"
+    },
+    {
+      "name": "feishu",
+      "description": "飞书 OAuth 相关接口"
+    },
+    {
+      "name": "ecsb",
+      "description": "华润 ECSB 网关接口"
+    }
+  ],
+  "paths": {
+    "/api/adapter_runwork/health": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suc_HealthResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "健康检查",
+        "tags": ["health"],
+        "description": "服务健康检查接口，用于探活和监控",
+        "operationId": "adapterRunworkHealth"
+      }
+    },
+    "/api/adapter_runwork/feishu/access_token": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suc_FeishuAccessTokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeishuAccessTokenRequest"
+              }
+            }
+          }
+        },
+        "summary": "授权码换 access_token 及用户信息",
+        "tags": ["feishu"],
+        "description": "使用飞书授权回调的 code 换取 access_token，同时返回用户信息（单点信息）",
+        "operationId": "adapterRunworkFeishuAccessToken"
+      }
+    },
+    "/api/adapter_runwork/feishu/ticket": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suc_FeishuJssdkTicketResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "获取 JSSDK ticket",
+        "tags": ["feishu"],
+        "description": "调用飞书 open-apis/jssdk/ticket/get。access_token 从请求头 Authorization: Bearer <access_token> 获取，用于前端 JSSDK 鉴权",
+        "operationId": "adapterRunworkFeishuTicket"
+      }
+    },
+    "/api/adapter_runwork/ecsb/jwt_token_by_run3token": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suc_EcsbJwtTokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EcsbUserInfoRequest"
+              }
+            }
+          }
+        },
+        "summary": "根据 run3token 获取用户 jwtToken",
+        "tags": ["ecsb"],
+        "description": "调用 ECSB 获取用户信息，若 RETURN_DATA 含 jwt_token 则返回；否则需配置独立 jwtToken 服务",
+        "operationId": "adapterRunworkEcsbJwtTokenByRun3token"
+      }
+    }
+  },
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Error name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "errors": {
+            "type": "object",
+            "description": "Errors",
+            "additionalProperties": {}
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaginationMetadata": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "total_pages": {
+            "type": "integer"
+          },
+          "first_page": {
+            "type": "integer"
+          },
+          "last_page": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "previous_page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "description": "服务名称",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "status": {
+            "type": "string",
+            "description": "服务状态",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "version": {
+            "type": "string",
+            "description": "服务版本",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "uptime": {
+            "type": "number",
+            "default": null,
+            "description": "运行时间（秒）",
+            "example": 0,
+            "examples": [0],
+            "nullable": true
+          },
+          "last_check": {
+            "type": "string",
+            "default": null,
+            "description": "最后检查时间",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          }
+        },
+        "required": ["service", "status", "version"],
+        "additionalProperties": false
+      },
+      "Suc_HealthResponse": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "integer",
+            "default": 1,
+            "description": "1为成功，0为失败",
+            "example": 1,
+            "examples": [1],
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "default": "success",
+            "description": "返回信息",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/HealthResponse"
+          }
+        },
+        "required": ["data"],
+        "additionalProperties": false
+      },
+      "FeishuAccessTokenRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "飞书授权后返回的临时授权码",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "app_id": {
+            "type": "string",
+            "default": null,
+            "description": "飞书应用 App ID，不传则使用配置",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          }
+        },
+        "required": ["code"],
+        "additionalProperties": false
+      },
+      "FeishuAccessTokenResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "用户访问凭证",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "凭证有效期(秒)",
+            "example": 1,
+            "examples": [1]
+          },
+          "user_info": {
+            "description": "用户信息",
+            "nullable": true
+          }
+        },
+        "required": ["access_token", "expires_in"],
+        "additionalProperties": false
+      },
+      "Suc_FeishuAccessTokenResponse": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "integer",
+            "default": 1,
+            "description": "1为成功，0为失败",
+            "example": 1,
+            "examples": [1],
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "default": "success",
+            "description": "返回信息",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/FeishuAccessTokenResponse"
+          }
+        },
+        "required": ["data"],
+        "additionalProperties": false
+      },
+      "FeishuJssdkTicketResponse": {
+        "type": "object",
+        "properties": {
+          "ticket": {
+            "type": "string",
+            "description": "JSSDK 鉴权票据",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "expire_in": {
+            "type": "integer",
+            "description": "票据有效期（秒）",
+            "example": 1,
+            "examples": [1]
+          }
+        },
+        "required": ["expire_in", "ticket"],
+        "additionalProperties": false
+      },
+      "Suc_FeishuJssdkTicketResponse": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "integer",
+            "default": 1,
+            "description": "1为成功，0为失败",
+            "example": 1,
+            "examples": [1],
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "default": "success",
+            "description": "返回信息",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/FeishuJssdkTicketResponse"
+          }
+        },
+        "required": ["data"],
+        "additionalProperties": false
+      },
+      "EcsbUserInfoRequest": {
+        "type": "object",
+        "properties": {
+          "run3token": {
+            "type": "string",
+            "description": "润工作新单点 run3token",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "app_id": {
+            "type": "string",
+            "default": null,
+            "description": "飞书应用 App ID，用于请求头，不传则使用配置",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          }
+        },
+        "required": ["run3token"],
+        "additionalProperties": false
+      },
+      "EcsbJwtTokenResponse": {
+        "type": "object",
+        "properties": {
+          "jwt_token": {
+            "type": "string",
+            "description": "用户 JWT 凭证",
+            "example": "string",
+            "examples": ["string"]
+          },
+          "user_id": {
+            "type": "string",
+            "default": null,
+            "description": "用户 ldap 账号",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          }
+        },
+        "required": ["jwt_token"],
+        "additionalProperties": false
+      },
+      "Suc_EcsbJwtTokenResponse": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "integer",
+            "default": 1,
+            "description": "1为成功，0为失败",
+            "example": 1,
+            "examples": [1],
+            "nullable": true
+          },
+          "msg": {
+            "type": "string",
+            "default": "success",
+            "description": "返回信息",
+            "example": "string",
+            "examples": ["string"],
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/EcsbJwtTokenResponse"
+          }
+        },
+        "required": ["data"],
+        "additionalProperties": false
+      }
+    },
+    "responses": {
+      "DEFAULT_ERROR": {
+        "description": "Default error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "UNPROCESSABLE_ENTITY": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

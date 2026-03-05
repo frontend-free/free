@@ -4,20 +4,28 @@ import fs from 'fs-extra';
 import fetch from 'node-fetch';
 import { generateApi } from 'swagger-typescript-api';
 
-async function code({ name, options }) {
-  const outputDir = path.resolve(options.output);
-  const filename = path.resolve(outputDir, `./swagger/${name}.json`);
+import type { BuildApiConfig, BuildApiConfigItem } from '../types';
+
+async function code({
+  name,
+  outputDir,
+  moduleNameIndex = 0,
+}: {
+  name: string;
+  outputDir: string;
+  moduleNameIndex?: number;
+}) {
+  const resolvedOutput = path.resolve(outputDir);
+  const filename = path.resolve(resolvedOutput, `./swagger/${name}.json`);
 
   console.log('code', filename);
 
   return generateApi({
     fileName: `${name}.ts`,
-    output: path.resolve(outputDir, './api'),
+    output: path.resolve(resolvedOutput, './api'),
     input: filename,
     httpClientType: 'axios',
-    // eg: /auth/registry, 于是 moduleIndex 为 0
-    // eg: /api/:module/xxxx, 于是 moduleIndex 为 1
-    moduleNameIndex: options.moduleNameIndex || 0,
+    moduleNameIndex,
     // @ts-ignore
     primitiveTypeConstructs: () => ({
       integer: (schema) => {
@@ -30,13 +38,9 @@ async function code({ name, options }) {
   });
 }
 
-// /auth/login moduleNameIndex 为 0，则得到 login
-function toCamelCase({ url, options }) {
-  const moduleNameIndex = options.moduleNameIndex || 0;
+function toCamelCase(url: string, moduleNameIndex: number) {
   let parts = url.split('/').slice(moduleNameIndex + 2);
-
   parts = parts.join('/').replace(/-/g, '/').replace(/_/g, '/').split('/');
-
   const camelCase =
     parts[0] +
     parts
@@ -46,140 +50,75 @@ function toCamelCase({ url, options }) {
   return camelCase;
 }
 
-function merge(mergeJSON, json) {
-  Object.assign(mergeJSON, {
-    swagger: json.swagger,
-    info: json.info,
-    host: json.host,
-    basePath: json.basePath,
-    paths: {
-      ...mergeJSON.paths,
-      ...json.paths,
-    },
-    definitions: {
-      ...mergeJSON.definitions,
-      ...json.definitions,
-    },
-  });
+async function swaggerJsonByJsonFile(jsonFile: string) {
+  return fs.readJson(jsonFile);
 }
 
-async function swaggerJsonByDocUrl({ docUrl }) {
-  const mergeJSON: any = {};
-
-  const resources = await fetch(`${docUrl}/swagger-resources`).then((response) => response.json());
-
-  for (const item of resources) {
-    const data = await fetch(
-      item.url.startsWith('/') ? `${docUrl}${item.url}` : `${docUrl}${item.url}`,
-    ).then((response) => response.json());
-
-    merge(mergeJSON, data);
-  }
-
-  // fix，否则跑不通 generateApi
-  mergeJSON.info.termsOfService = docUrl;
-
-  return mergeJSON;
+async function swaggerJsonByJsonUrl(jsonUrl: string) {
+  const res = await fetch(jsonUrl);
+  return res.json();
 }
 
-async function swaggerJsonByJsonFile({ jsonFile }) {
-  const json = await fs.readJSONSync(jsonFile);
-  return json;
-}
-
-async function swaggerJsonByJsonUrl({ jsonUrl }) {
-  const json = await fetch(jsonUrl).then((response) => response.json());
-  return json;
-}
-
-function processJson({ json, options }) {
-  // operationId 不采用原先值（后端没维护好），于是采用 url
+function processJson(
+  json: { paths: Record<string, Record<string, { operationId: string }>> },
+  moduleNameIndex: number,
+) {
   for (const apiPath in json.paths) {
-    const funName = toCamelCase({ url: apiPath, options });
-    // 只有一个方法，get post ...
+    const funName = toCamelCase(apiPath, moduleNameIndex);
     for (const method in json.paths[apiPath]) {
       json.paths[apiPath][method].operationId = funName;
     }
   }
-
   return json;
 }
 
-function writeSwaggerJson({ output, docName, json }) {
-  const outputDir = path.resolve(output);
+function writeSwaggerJson(outputDir: string, docName: string, json: object) {
+  const resolved = path.resolve(outputDir);
   fs.writeFileSync(
-    path.resolve(outputDir, `./swagger/${docName}.json`),
+    path.resolve(resolved, `./swagger/${docName}.json`),
     JSON.stringify(json, null, 2),
   );
 }
 
-function prepare({ options }) {
-  const outputDir = path.resolve(options.output);
-  fs.rmSync(path.resolve(outputDir, './api'), { recursive: true, force: true });
-  fs.rmSync(path.resolve(outputDir, './swagger'), { recursive: true, force: true });
-  fs.mkdirSync(path.resolve(outputDir, './api'));
-  fs.mkdirSync(path.resolve(outputDir, './swagger'));
+function prepare(outputDir: string) {
+  const resolved = path.resolve(outputDir);
+  fs.rmSync(path.resolve(resolved, './api'), { recursive: true, force: true });
+  fs.rmSync(path.resolve(resolved, './swagger'), { recursive: true, force: true });
+  fs.mkdirSync(path.resolve(resolved, './api'));
+  fs.mkdirSync(path.resolve(resolved, './swagger'));
 }
 
-interface Options {
-  input?: string;
-  output?: string;
-  moduleNameIndex?: number;
-}
+async function buildApi(config: BuildApiConfig, configDir: string) {
+  const outputDir = path.resolve(configDir, './src');
+  const moduleNameIndex = config.moduleNameIndex ?? 0;
 
-async function buildApi(options: Options) {
-  console.log('buildApi', options);
+  console.log('buildApi', { outputDir, moduleNameIndex, items: config.items });
 
-  // 检查输入和输出目录
-  if (
-    !options.output ||
-    !options.input ||
-    !fs.existsSync(options.output) ||
-    !fs.existsSync(options.input)
-  ) {
-    throw new Error('请指定有效输入目录和输出目录');
+  if (!config.items?.length) {
+    throw new Error('buildApi.items 不能为空');
   }
 
-  // 读取 package.json 配置
-  const packageJSON = fs.readJSONSync(path.resolve(options.input, './package.json'));
-  if (!packageJSON.swaggerDocs) {
-    throw new Error('package.json swaggerDocs 未配置');
-  }
+  prepare(outputDir);
 
-  // 准备目录
-  prepare({ options });
+  const ps = config.items.map(async (item: BuildApiConfigItem) => {
+    let json: object;
+    if (item.jsonFile) {
+      const jsonPath = path.resolve(configDir, item.jsonFile);
+      json = await swaggerJsonByJsonFile(jsonPath);
+    } else if (item.jsonUrl) {
+      json = await swaggerJsonByJsonUrl(item.jsonUrl);
+    } else {
+      throw new Error(`buildApi.items[].docName="${item.docName}" 需配置 jsonUrl 或 jsonFile`);
+    }
 
-  const ps: any[] = [];
+    json = processJson(json as any, moduleNameIndex);
+    writeSwaggerJson(outputDir, item.docName, json);
+    await code({ name: item.docName, outputDir, moduleNameIndex });
 
-  // 生成 api
-  for (const item of packageJSON.swaggerDocs) {
-    ps.push(
-      (async function () {
-        let json;
-        // 获得 json
-        if (item.jsonFile) {
-          json = await swaggerJsonByJsonFile({ jsonFile: item.jsonFile });
-        } else if (item.docUrl) {
-          json = await swaggerJsonByDocUrl({ docUrl: item.docUrl });
-        } else if (item.jsonUrl) {
-          json = await swaggerJsonByJsonUrl({ jsonUrl: item.jsonUrl });
-        }
-
-        // 处理 json
-        json = processJson({ json, options });
-
-        // 写入 json
-        writeSwaggerJson({ output: options.output, docName: item.docName, json });
-        // 生成 ts 文件
-        await code({ name: item.docName, options });
-
-        console.log(`build-api success ${item.docName}`);
-      })(),
-    );
-  }
+    console.log(`build-api success ${item.docName}`);
+  });
 
   await Promise.all(ps);
-
   console.log('build-api all success');
 }
 

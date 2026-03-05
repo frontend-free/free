@@ -1,5 +1,11 @@
 # @fe-free/style-lint
 
+## 7.0.1
+
+### Patch Changes
+
+- feat: scripts
+
 ## 6.0.2
 
 ## 6.0.1

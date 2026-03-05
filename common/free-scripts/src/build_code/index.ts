@@ -1,34 +1,28 @@
-import ejs from 'ejs';
-import fs from 'fs-extra';
 import path from 'path';
 
-interface Options {
-  input?: string;
-  output?: string;
-  template?: string;
-}
+import ejs from 'ejs';
+import fs from 'fs-extra';
 
-function buildCode(options: Options) {
-  console.log('buildCode', options);
+import type { BuildCodeConfig } from '../types';
 
-  if (!options.output || !options.input) {
-    throw new Error('请指定有效输入文件和输出目录');
+function buildCode(config: BuildCodeConfig, configDir: string) {
+  const outputDir = path.resolve(configDir, './src');
+  const template = config.template ?? 'antd';
+  const enumsConfigPath = path.resolve(configDir, config.enumsConfig);
+
+  console.log('buildCode', { enumsConfig: config.enumsConfig, outputDir, template });
+
+  if (!fs.existsSync(enumsConfigPath)) {
+    throw new Error(`enumsConfig 文件不存在: ${enumsConfigPath}`);
   }
 
-  const outputDir = path.resolve(options.output);
+  const { enums } = require(enumsConfigPath);
 
-  // console.log('新建 /enums 目录');
-  // fs.rmSync(path.resolve(outputDir, './enums'), { recursive: true, force: true });
-  // fs.mkdirSync(path.resolve(outputDir, './enums'));
-
-  const { enums } = require(path.resolve(options.input));
-
-  const temp = fs
-    .readFileSync(path.resolve(__dirname, `./template/${options.template || 'pure'}.ejs`))
-    .toString();
+  const temp = fs.readFileSync(path.resolve(__dirname, `./template/${template}.ejs`)).toString();
   const result = ejs.render(temp, { enums });
 
-  fs.writeFileSync(path.resolve(outputDir, './enums.tsx'), result);
+  fs.ensureDirSync(path.resolve(outputDir, './code'));
+  fs.writeFileSync(path.resolve(outputDir, './code/enums.tsx'), result);
 
   console.log('buildCode success');
 }

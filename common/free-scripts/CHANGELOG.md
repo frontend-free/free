@@ -1,5 +1,11 @@
 # @fe-free/free-scripts
 
+## 7.0.1
+
+### Patch Changes
+
+- feat: scripts
+
 ## 6.0.2
 
 ### Patch Changes
