@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { Fragment, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
 import type { TabsProps } from '../tabs';
 import { Tabs } from '../tabs';
 
@@ -53,7 +54,7 @@ function PageLayout({
           className={classNames(
             {
               'flex-none': !equalParts,
-              'min-w-0 flex-1 flex-shrink-0 overflow-auto': equalParts,
+              'min-w-0 flex-1 shrink-0 overflow-auto': equalParts,
             },
             startClassName,
           )}
@@ -66,7 +67,7 @@ function PageLayout({
         className={classNames(
           'flex-1 overflow-auto',
           {
-            'min-w-0 flex-shrink-0': equalParts,
+            'min-w-0 shrink-0': equalParts,
           },
           childrenClassName,
         )}
@@ -79,7 +80,7 @@ function PageLayout({
           className={classNames(
             {
               'flex-none': !equalParts,
-              'min-w-0 flex-1 flex-shrink-0 overflow-auto': equalParts,
+              'min-w-0 flex-1 shrink-0 overflow-auto': equalParts,
             },
             endClassName,
           )}
