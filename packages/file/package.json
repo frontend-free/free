@@ -1,17 +1,17 @@
 {
   "name": "@fe-free/file",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "description": "",
-  "main": "./src/index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "i18n-extract": "rm -rf ./src/locales/zh-CN && npx i18next-cli extract"
-  },
-  "author": "",
   "license": "ISC",
+  "author": "",
+  "main": "./src/index.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "i18n-extract": "rm -rf ./src/locales/zh-CN && npx i18next-cli extract"
   },
   "dependencies": {
     "classnames": "^2.5.1",

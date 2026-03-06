@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 6.0.6
+
+### Patch Changes
+
+- fix: mobile scrollbar
+  - @fe-free/icons@6.0.6
+  - @fe-free/tool@6.0.6
+
 ## 6.0.5
 
 ### Patch Changes
