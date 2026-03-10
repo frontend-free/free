@@ -7,7 +7,7 @@ export { LoadingButton } from './button';
 export { Copy } from './copy';
 export type { CopyProps } from './copy';
 export { CoreApp } from './core_app';
-export { CRUD, CRUDDetail, OperateDelete, useDelete } from './crud';
+export { CRUD, OperateDelete, useDelete } from './crud';
 export type { CRUDDetailProps, CRUDProps, CRUDRef } from './crud';
 export { CRUDOfList } from './crud_of_list';
 export type { CRUDOfListProps } from './crud_of_list';
@@ -32,8 +32,8 @@ export {
   ProFormEditor,
   ProFormImageUpload,
   ProFormImageUploadDragger,
-  ProFormJSON,
   ProFormJavascript,
+  ProFormJSON,
   ProFormListBoolean,
   ProFormListHelper,
   ProFormListModalHelper,
@@ -41,15 +41,15 @@ export {
   ProFormListText,
   ProFormRecord,
   ProFormRecordArray,
+  proFormSelectSearchProps,
   ProFormSwitchNumber,
   ProFormSwitchOptions,
   ProFormUpload,
   ProFormUploadDragger,
   SwitchNumber,
   SwitchOptions,
-  proFormSelectSearchProps,
 } from './form';
-export { RequestError, initErrorHandle } from './global/error';
+export { initErrorHandle, RequestError } from './global/error';
 export { downloadInterceptor } from './global/interceptors';
 export { InfiniteList } from './infinite_list';
 export type { InfiniteListProps } from './infinite_list';
@@ -60,13 +60,13 @@ export type { PageLayoutProps, PageLayoutTabsProps } from './page_layout';
 export { Record, RecordArray } from './record';
 export type { RecordArrayProps, RecordProps } from './record';
 export { routeTool } from './route';
-export { ScrollFixed, getScrollbarWidth, useScrollFixed } from './scroll';
+export { getScrollbarWidth, ScrollFixed, useScrollFixed } from './scroll';
 export { NumberSlider, PercentageSlider } from './slider';
 export type { NumberSliderProps, PercentageSliderProps } from './slider';
 export { Tabs } from './tabs';
 export type { TabsProps } from './tabs';
 export { themeVariables } from './theme';
-export { FileTree, Tree, flatToTreeData } from './tree';
+export { FileTree, flatToTreeData, Tree } from './tree';
 export type { FileTreeProps, TreeProps } from './tree';
 export {
   AvatarImageUpload,

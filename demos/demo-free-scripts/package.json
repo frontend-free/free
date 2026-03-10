@@ -15,7 +15,7 @@
     "@fe-free/free-scripts": "workspace:*"
   },
   "peerDependencies": {
-    "@fe-free/core": "^6.0.6",
+    "@fe-free/core": "^6.0.7",
     "antd": "^5.19.3",
     "axios": "^1.7.9"
   }
