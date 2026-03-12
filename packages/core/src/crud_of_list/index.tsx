@@ -3,8 +3,10 @@ import { Input } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import type { CRUDProps } from '../crud';
 import { CRUD } from '../crud';
+
 import './style.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -35,7 +37,7 @@ function useTips(props) {
         ),
       );
     }
-  }, [t]);
+  }, [t]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 function SearchRender(props: {
@@ -91,7 +93,7 @@ function CRUDOfList(props: CRUDOfListProps) {
 
   const newParams = useMemo(() => {
     return {
-      ...(tableProps.params || {}),
+      ...tableProps.params,
       [searchDataIndex]: debouncedSearchValue,
     };
   }, [debouncedSearchValue, searchDataIndex, tableProps.params]);
