@@ -14,11 +14,10 @@
     "i18n-extract": "rm -rf ./src/locales/zh-CN && npx i18next-cli extract"
   },
   "dependencies": {
-    "@ant-design/plots": "^2.5.0",
     "@ant-design/x": "^2.1.3",
     "@ant-design/x-sdk": "^2.1.3",
     "@fe-free/core": "workspace:*",
-    "ahooks": "^3.7.8",
+    "ahooks": "^3.9.6",
     "classnames": "^2.5.1",
     "lodash-es": "^4.17.21",
     "uuid": "^13.0.0",

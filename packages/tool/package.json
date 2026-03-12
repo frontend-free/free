@@ -16,6 +16,6 @@
     "lodash-es": "^4.17.21"
   },
   "peerDependencies": {
-    "ahooks": "^3.8.4"
+    "ahooks": "^3.9.6"
   }
 }
