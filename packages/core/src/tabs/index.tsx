@@ -12,15 +12,15 @@ interface TabsProps {
   withSearchParams?: boolean;
   /** 设置 searchParams 的类型，默认 set */
   searchParamsType?: 'set' | 'change';
-  /** 默认 tab */
+  /** url 上字段的名字，默认 tab */
   tabKey?: string;
-
-  tabProps?: AntdTabsProps;
+  /** antd Tabs 的 props */
+  tabsProps?: AntdTabsProps;
 }
 
 function Tabs(props: TabsProps) {
-  const { withSearchParams, searchParamsType = 'set', tabKey = 'tab', tabProps } = props;
-  const { className, activeKey, onChange, ...rest } = tabProps || {};
+  const { withSearchParams, searchParamsType = 'set', tabKey = 'tab', tabsProps } = props;
+  const { className, activeKey, onChange, ...rest } = tabsProps || {};
 
   const [searchParams] = useSearchParams();
   const tab = searchParams.get(tabKey) || undefined;

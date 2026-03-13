@@ -1,3 +1,4 @@
+import type { TabsProps as AntdTabsProps } from 'antd';
 import classNames from 'classnames';
 import { Fragment, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -94,47 +95,55 @@ function PageLayout({
 }
 
 interface PageLayoutTabsProps extends PageLayoutProps {
-  tabsProps: Omit<TabsProps, 'items' | 'withSearchParams'> & {
-    items: {
-      key: string;
-      label: React.ReactNode;
-      children: React.ReactNode;
-    }[];
+  tabsProps: Omit<TabsProps, 'withSearchParams' | 'tabsProps'> & {
+    tabsProps: Omit<AntdTabsProps, 'items'> & {
+      items: {
+        key: string;
+        label: React.ReactNode;
+        children: React.ReactNode;
+      }[];
+    };
   };
 }
 
 function PageLayoutTabs(props: PageLayoutTabsProps) {
   const { tabsProps, ...rest } = props;
+  const { tabsProps: antdTabsProps, ...tabsPropsRest } = tabsProps;
+  const { items: antdItems, ...antdTabsPropsRest } = antdTabsProps;
 
   const [searchParams] = useSearchParams();
   const tab = searchParams.get(tabsProps.tabKey || 'tab') || undefined;
 
   const { children, newItems } = useMemo(() => {
-    const items = props.tabsProps.items;
+    const items = antdItems ?? [];
 
-    const item = items.find((item) => item.key === tab);
-    const children = item?.children || items[0]?.children;
+    const item = items.find((v) => v.key === tab);
+    const child = item?.children || items[0]?.children;
 
-    const newItems = items.map((item) => ({
-      ...item,
-      children: undefined,
-    }));
-
-    return { children, newItems };
-  }, [props.tabsProps.items, tab]);
+    return {
+      children: child,
+      newItems: items.map((v) => ({
+        ...v,
+        children: undefined,
+      })),
+    };
+  }, [antdItems, tab]);
 
   return (
     <PageLayout
       direction="vertical"
       start={
         <Tabs
-          tabBarExtraContent={{
-            left: <div className="w-4" />,
-            right: <div className="w-4" />,
+          tabsProps={{
+            tabBarExtraContent: {
+              left: <div className="w-4" />,
+              right: <div className="w-4" />,
+            },
+            ...antdTabsPropsRest,
+            items: newItems,
           }}
-          {...tabsProps}
-          items={newItems}
           withSearchParams
+          {...tabsPropsRest}
         />
       }
       {...rest}
