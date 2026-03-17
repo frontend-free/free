@@ -17,7 +17,7 @@ function EditorJSON({ value, onChange, readonly, mode, mainMenuBar }: EditorJSON
   const refOnChange = useRef(onChange);
 
   useEffect(() => {
-    refEditor.current?.update({
+    void refEditor.current?.update({
       text: value || '',
     });
   }, [value]);

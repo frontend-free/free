@@ -4,7 +4,11 @@
   "commit": false,
   "fixed": [
     ["@fe-free/core", "@fe-free/file", "@fe-free/icons", "@fe-free/tool", "@fe-free/ai"],
-    ["@fe-free/free-scripts", "@fe-free/vite-plugin-remove-svg-color"]
+    [
+      "@fe-free/free-scripts",
+      "@fe-free/vite-plugin-remove-svg-color",
+      "@fe-free/vite-plugin-react-router-pages"
+    ]
   ],
   "linked": [],
   "access": "public",

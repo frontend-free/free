@@ -1,5 +1,5 @@
 {
-  "name": "@fe-free/vite-plugin-remove-svg-color",
+  "name": "@fe-free/vite-plugin-react-router-pages",
   "version": "7.0.2",
   "keywords": [],
   "license": "ISC",
@@ -14,11 +14,17 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@rollup/pluginutils": "^5.1.3",
-    "@svgr/core": "^8.1.0",
-    "@svgr/plugin-jsx": "^8.1.0"
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.10",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
   },
   "peerDependencies": {
-    "vite-plugin-svgr": "^4.3.0"
+    "lodash-es": "^4.17.21",
+    "react": "^19.2.0",
+    "react-router-dom": "^6.25.1",
+    "vite": "^7.0.0"
   }
 }

@@ -1,5 +1,7 @@
 # @fe-free/vite-plugin-remove-svg-color
 
+## 7.0.2
+
 ## 7.0.1
 
 ### Patch Changes
