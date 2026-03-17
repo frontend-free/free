@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node scripts/generate-icons.js; oxfmt ./src/icons ./src/index.ts",
+    "build": "node scripts/generate-icons.js; vp fmt ./src/icons ./src/index.ts",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {

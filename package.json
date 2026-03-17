@@ -9,12 +9,12 @@
   "main": "./src/index.ts",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install",
+    "prepare": "husky",
     "typecheck": "tsc --noEmit",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
-    "format": "oxfmt",
-    "format:check": "oxfmt --check",
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
     "changeset": "changeset",
     "npm_publish": "pnpm release; pnpm release:publish;",
     "release": "changeset version; git add .; git commit -m 'chore: changeset Version Packages';",
@@ -59,12 +59,10 @@
     "autoprefixer": "^10.4.20",
     "eslint-plugin-storybook": "^10.1.11",
     "fs-extra": "^11.2.0",
-    "husky": "^8.0.0",
+    "husky": "^9.1.7",
     "less": "^4.2.1",
     "lint-staged": "^13.2.0",
     "only-allow": "^1.2.1",
-    "oxfmt": "^0.36.0",
-    "oxlint": "^1.51.0",
     "path": "^0.12.7",
     "postcss": "^8.4.49",
     "resolve-url-loader": "^5.0.0",
@@ -73,14 +71,15 @@
     "stylelint": "^16.6.1",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.1.2",
-    "vite-plugin-svgr": "^4.3.0"
+    "vite-plugin-svgr": "^4.3.0",
+    "vite-plus": "catalog:"
   },
   "engines": {
     "changeset": "^2.26.2",
-    "node": ">=16.19.1",
-    "pnpm": "^10.8.0"
+    "node": ">=24.14.0",
+    "pnpm": "^10.32.1"
   },
-  "packageManager": "pnpm@10.8.0",
+  "packageManager": "pnpm@10.32.1",
   "pnpm": {
     "overrides": {}
   }

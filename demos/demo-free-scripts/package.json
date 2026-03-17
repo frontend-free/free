@@ -8,8 +8,8 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-api": "free-scripts build-api  && oxfmt ./src",
-    "build-code": "free-scripts build-code && oxfmt ./src/code"
+    "build-api": "free-scripts build-api  && vp fmt ./src",
+    "build-code": "free-scripts build-code && vp fmt ./src/code"
   },
   "devDependencies": {
     "@fe-free/free-scripts": "workspace:*"
