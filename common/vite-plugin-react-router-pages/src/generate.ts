@@ -1,4 +1,5 @@
 import path from 'path';
+
 import fs from 'fs-extra';
 import { globSync } from 'glob';
 
@@ -90,7 +91,7 @@ function generate(config: Config) {
   let files = getFiles(config);
 
   // 读取模板文件
-  const temp = fs.readFileSync(path.resolve(__dirname, './react-pages.temp.mjs'), 'utf-8');
+  const temp = fs.readFileSync(path.resolve(__dirname, './react-pages.temp.js'), 'utf-8');
   // 替换模板文件中的占位符，生成 routes and Routes
   return temp
     .replace('const willBeReplaceModules = {};', getModulesString(files))
@@ -102,7 +103,7 @@ function generateDeclare(config: Config) {
 
   // 生成 react-pages.d.ts 文件
   if (config.declarePath) {
-    const file = path.resolve(process.cwd(), config.declarePath!);
+    const file = path.resolve(process.cwd(), config.declarePath);
 
     fs.writeFileSync(file, getDeclareString(files), 'utf-8');
 
