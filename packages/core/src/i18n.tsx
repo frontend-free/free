@@ -35,7 +35,7 @@ function initI18n({ enTranslation }) {
 
   console.log('initI18n', 'cacheLng', cacheLng, 'lng', lng);
 
-  i18n
+  void i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .use(ICU)
