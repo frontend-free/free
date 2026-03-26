@@ -8,6 +8,7 @@ import { merge } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+
 import { EnumLanguage, I18nProvider } from '../i18n';
 import { routeTool } from '../route';
 import { customValueTypeMap } from '../value_type_map';
@@ -86,7 +87,7 @@ function CheckUpdate({ basename }: { basename: string }) {
     return () => {
       clearInterval(timer);
     };
-  }, [t]);
+  }, [t, basename, modal]);
 
   return null;
 }
@@ -139,7 +140,7 @@ function CoreAppBase(props: CoreAppProps) {
     if (window.location.pathname === '/' && basename !== '/' && basename !== '') {
       window.location.href = basename;
     }
-  }, []);
+  }, [basename]);
 
   const theme = useMemo(() => {
     return merge(themeConfig, configProviderProps?.theme);

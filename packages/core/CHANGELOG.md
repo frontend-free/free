@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 6.0.10
+
+### Patch Changes
+
+- feat: i18n
+  - @fe-free/icons@6.0.10
+  - @fe-free/tool@6.0.10
+
 ## 6.0.9
 
 ### Patch Changes

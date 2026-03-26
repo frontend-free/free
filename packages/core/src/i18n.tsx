@@ -29,40 +29,60 @@ const listLanguage = Object.keys(valueEnumLanguage).map((key) => {
   };
 });
 
-function initI18n({ enTranslation }) {
-  const cacheLng = localStorage.getItem('i18nextLng') || EnumLanguage.ZH_CN;
+let hasSetupPlugins = false;
+
+function getDefaultLng() {
+  if (typeof window === 'undefined') {
+    return EnumLanguage.ZH_CN;
+  }
+
+  const cacheLng = window.localStorage.getItem('i18nextLng') || EnumLanguage.ZH_CN;
   const lng = listLanguage.find((item) => item.value === cacheLng) ? cacheLng : EnumLanguage.ZH_CN;
 
-  console.log('initI18n', 'cacheLng', cacheLng, 'lng', lng);
+  return lng;
+}
 
-  void i18n
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .use(ICU)
-    .init({
-      resources: {
-        [EnumLanguage.ZH_CN]: {
-          translation: {},
-        },
-        [EnumLanguage.EN_US]: {
-          translation: {
-            ...enTranslation,
-          },
-        },
+function initI18n({ enTranslation = {} }: { enTranslation?: Record<string, unknown> } = {}) {
+  if (i18n.isInitialized) {
+    i18n.addResourceBundle(EnumLanguage.EN_US, 'translation', enTranslation, true, true);
+    return;
+  }
+
+  if (!hasSetupPlugins) {
+    i18n.use(LanguageDetector).use(initReactI18next).use(ICU);
+    hasSetupPlugins = true;
+  }
+
+  const lng = getDefaultLng();
+  console.log('initI18n', lng);
+
+  void i18n.init({
+    resources: {
+      [EnumLanguage.ZH_CN]: {
+        translation: {},
       },
-      lng,
-      fallbackLng: EnumLanguage.ZH_CN,
-      interpolation: {
-        escapeValue: false,
+      [EnumLanguage.EN_US]: {
+        translation: enTranslation,
       },
-    });
+    },
+    lng,
+    fallbackLng: EnumLanguage.ZH_CN,
+    interpolation: {
+      escapeValue: false,
+    },
+  });
 }
 
 function I18nProvider({ children }: { children: React.ReactNode }) {
+  initI18n();
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }
 
-// @ts-ignore
-window._i18n = i18n;
+initI18n();
+
+if (typeof window !== 'undefined') {
+  // @ts-ignore
+  window._i18n = i18n;
+}
 
 export { EnumLanguage, I18nProvider, initI18n, listLanguage, valueEnumLanguage };
