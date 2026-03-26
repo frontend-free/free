@@ -117,10 +117,6 @@ import '@fe-free/core/src/tailwind.css';
 
 ### 主题
 
-| 导出             | 说明     |
-| ---------------- | -------- |
-| `themeVariables` | 主题变量 |
-
 ### Tailwind Token 参考（tailwind.css）
 
 `tailwind.css` 通过 `@theme` 定义了以下 CSS 变量，引入后可在项目中使用对应 Tailwind 类名（如 `text-primary`、`bg-theme03`、`text-text-color-03` 等）。完整定义见 `packages/core/src/tailwind.css`。
@@ -157,7 +153,7 @@ import '@fe-free/core/src/tailwind.css';
 |               | `--background-color-03` | 背景中    |
 |               | `--background-color-04` | 背景深    |
 
-使用示例：`className="text-primary"`、`className="bg-theme03"`、`className="text-text-color-03"`。与 Antd 主题变量（`themeVariables`）配合时，可保持整站色彩一致。
+使用示例：`className="text-primary"`、`className="bg-theme03"`、`className="text-text-color-03"`。
 
 当你在本仓库或引用 `@fe-free/core` 的项目中编写代码时，可参考以下约定：
 

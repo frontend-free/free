@@ -1,4 +1,6 @@
+// @ts-ignore
 import './style.scss';
+// @ts-ignore
 import './tailwind.css';
 
 export { useGlobalInfiniteScroll } from './ahooks/use_global_infinite_scroll';
@@ -65,7 +67,6 @@ export { NumberSlider, PercentageSlider } from './slider';
 export type { NumberSliderProps, PercentageSliderProps } from './slider';
 export { Tabs } from './tabs';
 export type { TabsProps } from './tabs';
-export { themeVariables } from './theme';
 export { FileTree, flatToTreeData, Tree } from './tree';
 export type { FileTreeProps, TreeProps } from './tree';
 export {

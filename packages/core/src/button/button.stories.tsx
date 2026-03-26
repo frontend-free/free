@@ -21,6 +21,7 @@ type Story = StoryObj<typeof LoadingButton>;
 
 export const Resolve: Story = {
   args: {
+    type: 'primary',
     children: 'click and resolve',
     onClick: () => {
       return new Promise((resolve) => {
