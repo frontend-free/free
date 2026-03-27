@@ -1,7 +1,5 @@
 // @ts-ignore
 import './style.scss';
-// @ts-ignore
-import './tailwind.css';
 
 export { useGlobalInfiniteScroll } from './ahooks/use_global_infinite_scroll';
 export { useGlobalRequest } from './ahooks/use_global_request';

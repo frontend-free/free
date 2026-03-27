@@ -2,6 +2,8 @@ import { ProConfigProvider } from '@ant-design/pro-components';
 import { customValueTypeMap } from '@fe-free/core';
 import { themeConfig } from '@fe-free/core/src/core_app/config';
 import { EnumLanguage, I18nProvider } from '@fe-free/core/src/i18n';
+
+import '@fe-free/core/src/tailwind.css';
 import type { Preview } from '@storybook/react-vite';
 import { App, ConfigProvider } from 'antd';
 import enUS from 'antd/locale/en_US';

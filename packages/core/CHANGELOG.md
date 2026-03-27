@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 6.0.13
+
+### Patch Changes
+
+- tailwind
+  - @fe-free/icons@6.0.13
+  - @fe-free/tool@6.0.13
+
 ## 6.0.12
 
 ### Patch Changes
