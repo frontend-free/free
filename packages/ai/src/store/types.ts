@@ -1,39 +1,34 @@
-enum EnumChatMessageType {
+enum EnumMessageType {
   SYSTEM = 'system',
 }
 
-enum EnumChatMessageStatus {
+enum EnumMessageStatus {
   PENDING = 'pending',
   STREAMING = 'streaming',
   DONE = 'done',
   ERROR = 'error',
 }
 
-interface ChatMessageOfSystem {
-  data?: any;
+interface MessageOfSystem<SystemData> {
+  data?: SystemData;
 }
 
-interface ChatMessageOfUser {
-  text?: string;
-  files?: string[];
-}
-
-interface ChatMessageOfAI<AIData> {
+interface MessageOfAI<AIData> {
   data?: AIData;
   error?: any;
   // 其他字段，根据业务需要使用
   session_id?: string;
 }
 
-interface ChatMessage<UserData, AIData> {
+interface Message<UserData, AIData, SystemData> {
   uuid: string;
 
-  status?: EnumChatMessageStatus;
+  status?: EnumMessageStatus;
 
-  type?: EnumChatMessageType;
-  system?: ChatMessageOfSystem;
+  type?: EnumMessageType;
+  system?: MessageOfSystem<SystemData>;
   user?: UserData;
-  ai?: ChatMessageOfAI<AIData>;
+  ai?: MessageOfAI<AIData>;
 
   /** 自动生成 */
   createdAt?: number;
@@ -41,6 +36,6 @@ interface ChatMessage<UserData, AIData> {
   updatedAt?: number;
 }
 
-export { EnumChatMessageStatus, EnumChatMessageType };
+export { EnumMessageStatus, EnumMessageType };
 
-export type { ChatMessage, ChatMessageOfAI, ChatMessageOfUser };
+export type { Message, MessageOfAI, MessageOfSystem };

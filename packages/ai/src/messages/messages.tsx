@@ -3,27 +3,35 @@ import { ArrowDownOutlined } from '@fe-free/icons';
 import { useMemoizedFn } from 'ahooks';
 import { Button } from 'antd';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { EnumChatMessageType, type ChatMessage } from '../store/types';
 
-interface MessagesProps<UserData, AIData> {
+import { EnumMessageType, type Message } from '../store/types';
+
+interface MessagesProps<UserData, AIData, SystemData> {
   refList?: React.RefObject<HTMLDivElement | null>;
-  messages?: ChatMessage<UserData, AIData>[];
+  messages?: Message<UserData, AIData, SystemData>[];
   /** 含所有 */
-  renderMessage?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
+  renderMessage?: (props: { message: Message<UserData, AIData, SystemData> }) => React.ReactNode;
   /** 系统消息 */
-  renderMessageOfSystem?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
+  renderMessageOfSystem?: (props: {
+    message: Message<UserData, AIData, SystemData>;
+  }) => React.ReactNode;
   /** 用户消息 */
-  renderMessageOfUser?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
+  renderMessageOfUser?: (props: {
+    message: Message<UserData, AIData, SystemData>;
+  }) => React.ReactNode;
   /** AI消息 */
-  renderMessageOfAI?: (props: { message: ChatMessage<UserData, AIData> }) => React.ReactNode;
+  renderMessageOfAI?: (props: {
+    message: Message<UserData, AIData, SystemData>;
+  }) => React.ReactNode;
 }
 
 function useScrollToBottom({ ref }) {
   const [showScrollBottom, setShowScrollBottom] = useState(false);
 
   useEffect(() => {
+    const el = ref.current;
     const handleScroll = () => {
-      if (!ref.current) {
+      if (!el) {
         return;
       }
 
@@ -42,14 +50,18 @@ function useScrollToBottom({ ref }) {
     handleScroll();
 
     return () => {
-      ref.current?.removeEventListener('scroll', handleScroll);
+      if (el) {
+        el.removeEventListener('scroll', handleScroll);
+      }
     };
   }, [ref]);
 
   return showScrollBottom;
 }
 
-function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
+function Messages<UserData, AIData, SystemData>(
+  props: MessagesProps<UserData, AIData, SystemData>,
+) {
   const {
     refList,
     messages,
@@ -129,15 +141,15 @@ function Messages<UserData, AIData>(props: MessagesProps<UserData, AIData>) {
                 renderMessage?.({ message })
               ) : (
                 <>
-                  {message.type === EnumChatMessageType.SYSTEM && message.system && (
+                  {message.type === EnumMessageType.SYSTEM && message.system && (
                     <div className="flex justify-center">
                       {renderMessageOfSystem?.({ message })}
                     </div>
                   )}
-                  {message.type !== EnumChatMessageType.SYSTEM && message.user && (
+                  {message.type !== EnumMessageType.SYSTEM && message.user && (
                     <div className="flex justify-end">{renderMessageOfUser?.({ message })}</div>
                   )}
-                  {message.type !== EnumChatMessageType.SYSTEM && message.ai && (
+                  {message.type !== EnumMessageType.SYSTEM && message.ai && (
                     <div className="flex justify-start">{renderMessageOfAI?.({ message })}</div>
                   )}
                 </>

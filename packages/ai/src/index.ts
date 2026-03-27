@@ -1,3 +1,4 @@
+// @ts-ignore
 import './style.scss';
 
 export { CustomMarkdown, Markdown } from '@fe-free/core';
@@ -8,13 +9,13 @@ export { generateUUID } from './helper';
 export { completeHtml, completeJson } from './helper/complete';
 export { MSender } from './m_sender';
 export type { MSenderProps, MSenderRef } from './m_sender';
-export { MessageActions, MessageThink, MessageThinkOfDeepSeek, Messages } from './messages';
-export type { MessageThinkProps, MessagesProps } from './messages';
+export { MessageActions, Messages, MessageThink, MessageThinkOfDeepSeek } from './messages';
+export type { MessagesProps, MessageThinkProps } from './messages';
 export { Sender } from './sender';
 export type { SenderProps, SenderRef } from './sender';
 export { createChatStore } from './store';
-export { EnumChatMessageStatus, EnumChatMessageType } from './store/types';
-export type { ChatMessage, ChatMessageOfAI, ChatMessageOfUser } from './store/types';
+export { EnumMessageStatus, EnumMessageType } from './store/types';
+export type { Message, MessageOfAI } from './store/types';
 export { fetchStream } from './stream';
 export { Tip } from './tip';
 export { getRecordAudioOfBlob, getRecordAudioOfPCM } from './voice';

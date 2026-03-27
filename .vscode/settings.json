@@ -1,10 +1,11 @@
 {
-  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.configPath": "./vite.config.ts",
+  "oxc.fmt.configPath": "./vite.config.ts",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always",
-    "source.organizeImports": "always"
+    "source.organizeImports": "always",
+    "source.fixAll.oxc": "always"
   },
   "oxc.typeAware": true,
   "[javascript]": {

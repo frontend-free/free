@@ -1,9 +1,9 @@
-import type { ChatMessage, MSenderProps } from '@fe-free/ai';
+import type { Message, MSenderProps } from '@fe-free/ai';
 import {
   Chat,
   createChatStore,
-  EnumChatMessageStatus,
-  EnumChatMessageType,
+  EnumMessageStatus,
+  EnumMessageType,
   generateUUID,
   getRecordAudioOfPCM,
   Markdown,
@@ -15,18 +15,16 @@ import { sleep } from '@fe-free/tool';
 import type { Meta } from '@storybook/react-vite';
 import { App, Button, Divider } from 'antd';
 import { set } from 'lodash-es';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useEffectEvent, useMemo } from 'react';
 
 const meta: Meta = {
   title: '@fe-free/ai/Example',
   tags: ['autodocs'],
 };
 
-interface AIData {
-  text?: string;
-}
+async function fakeFetchStream(value: UserData, { onUpdate }) {
+  console.log('fakeFetchStream', value);
 
-async function fakeFetchStream(v: MSenderProps['value'], { onUpdate }) {
   // 这里模拟 fetchStream
   await sleep(1000);
 
@@ -42,11 +40,30 @@ async function fakeFetchStream(v: MSenderProps['value'], { onUpdate }) {
   }, 300);
 }
 
-function Component() {
-  const { useChatStore, useChatStoreComputed } = useMemo(() => {
-    return createChatStore<MSenderProps['value'], AIData>();
-  }, []);
+/**
 
+如何接入(具体见下面的代码)
+- store.ts
+  - types.ts 定义类型
+  - 使用 createChatStore 创建 store
+- chat.ts
+  - 接入 Chat 组件
+  - 接入 Messages 组件，实现 renderMessageOfXXX
+  - 接入 Sender or MSender 组件
+  - 数据相关从 useChatStore 中获取
+ */
+
+type UserData = NonNullable<MSenderProps['value']>;
+interface AIData {
+  text?: string;
+}
+interface SystemData {
+  type?: string;
+}
+
+const { useChatStore, useChatStoreComputed } = createChatStore<UserData, AIData, SystemData>();
+
+function Component() {
   const senderValue = useChatStore((state) => state.senderValue);
   const setSenderValue = useChatStore((state) => state.setSenderValue);
   const messages = useChatStore((state) => state.messages);
@@ -54,51 +71,54 @@ function Component() {
   const addMessage = useChatStore((state) => state.addMessage);
   const updateMessage = useChatStore((state) => state.updateMessage);
   const { chatStatus } = useChatStoreComputed();
+  const loading =
+    chatStatus === EnumMessageStatus.PENDING || chatStatus === EnumMessageStatus.STREAMING;
 
-  const { message } = App.useApp();
+  const { message: appMessage } = App.useApp();
 
-  // init from cache
-  useEffect(() => {
+  const handleLoaded = useEffectEvent(() => {
     const cacheMessages = localStorage.getItem('chatMessages');
     if (cacheMessages) {
       setMessages(JSON.parse(cacheMessages));
     }
-  }, []);
+  });
 
-  const loading =
-    chatStatus === EnumChatMessageStatus.PENDING || chatStatus === EnumChatMessageStatus.STREAMING;
+  // init from cache
+  useEffect(() => {
+    handleLoaded();
+  }, []);
 
   const handleSubmit = useCallback(
     (v) => {
       console.log('onSubmit', v);
 
-      const message: ChatMessage<MSenderProps['value'], AIData> = {
+      const chatMessage: Message<UserData, AIData, SystemData> = {
         uuid: generateUUID(),
-        status: EnumChatMessageStatus.PENDING,
+        status: EnumMessageStatus.PENDING,
         user: {
           ...v,
         },
       };
 
-      addMessage(message);
+      addMessage(chatMessage);
 
       // fake
-      fakeFetchStream(v, {
+      void fakeFetchStream(v, {
         onUpdate: ({ event, data }) => {
           if (event === 'message') {
-            message.status = EnumChatMessageStatus.STREAMING;
+            chatMessage.status = EnumMessageStatus.STREAMING;
 
-            const preText = message.ai?.data?.text || '';
-            set(message, 'ai.data.text', preText + data);
+            const preText = chatMessage.ai?.data?.text || '';
+            set(chatMessage, 'ai.data.text', preText + data);
 
             // 假设有 session_id
-            set(message, 'ai.session_id', '123');
+            set(chatMessage, 'ai.session_id', '123');
 
-            updateMessage(message);
+            updateMessage(chatMessage);
           }
           if (event === 'done') {
-            message.status = EnumChatMessageStatus.DONE;
-            updateMessage(message);
+            chatMessage.status = EnumMessageStatus.DONE;
+            updateMessage(chatMessage);
           }
         },
       });
@@ -117,7 +137,7 @@ function Component() {
           onClick={() => {
             addMessage({
               uuid: generateUUID(),
-              type: EnumChatMessageType.SYSTEM,
+              type: EnumMessageType.SYSTEM,
               system: {
                 data: {
                   type: 'new_session',
@@ -156,7 +176,7 @@ function Component() {
                           console.log('onAudio', data);
                         },
                         onError: (err) => {
-                          message.error(err.message);
+                          appMessage.error(err.message);
                         },
                       });
                     } catch (err) {
@@ -175,29 +195,29 @@ function Component() {
         >
           <Messages
             messages={messages}
-            renderMessageOfSystem={({ message }) => {
-              if (message.system?.data?.type === 'new_session') {
+            renderMessageOfSystem={({ message: msg }) => {
+              if (msg.system?.data?.type === 'new_session') {
                 return <Divider>让我们聊点新内容吧</Divider>;
               }
 
               return null;
             }}
-            renderMessageOfUser={({ message }) => {
+            renderMessageOfUser={({ message: msg }) => {
               return (
                 <div className="p-2">
-                  <div className="rounded-xl bg-primary p-2 text-white">{message.user?.text}</div>
+                  <div className="bg-primary rounded-xl p-2 text-white">{msg.user?.text}</div>
                 </div>
               );
             }}
-            renderMessageOfAI={({ message }) => {
+            renderMessageOfAI={({ message: msg }) => {
               return (
                 <div className="max-w-full p-2">
                   <div>
-                    status: {message.status} session_id: {message.ai?.session_id}
+                    status: {msg.status} session_id: {msg.ai?.session_id}
                   </div>
-                  <Markdown content={message.ai?.data?.text || ''} />
+                  <Markdown content={msg.ai?.data?.text || ''} />
                   <div className="flex gap-2">
-                    <MessageActions.Copy value={message.ai?.data?.text || ''} />
+                    <MessageActions.Copy value={msg.ai?.data?.text || ''} />
                     <MessageActions.Like
                       onClick={async () => {
                         // some thing
