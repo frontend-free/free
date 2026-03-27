@@ -39,7 +39,7 @@ function createChatStore<
   UserData extends BaseSenderValue,
   AIData,
   SystemData,
-  ContextData extends Record<string, any> = any,
+  ContextData extends Record<string, any>,
 >() {
   const useChatStore = create<ChatStore<UserData, AIData, SystemData, ContextData>>(
     (set, get, store) => ({
