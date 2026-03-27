@@ -5,6 +5,7 @@ import { App, Button, Dropdown, Input, Modal, Upload } from 'antd';
 import type { RefObject } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { FileView } from '../files';
 import FilesIcon from '../svgs/files.svg?react';
 import type { SenderProps } from './types';
@@ -53,7 +54,10 @@ function FileAction(
           ],
         }}
       >
-        <Button shape="circle" icon={<Icons component={PlusOutlined} className="!text-lg" />} />
+        <Button
+          shape="circle"
+          icon={<Icons component={PlusOutlined} className="h-[28px]! text-lg!" />}
+        />
       </Dropdown>
       {open && (
         <Modal
@@ -96,7 +100,7 @@ function FileUpload(
   },
 ) {
   const { allowUpload, refUpload, fileList, setFileList, uploadMaxCount } = props;
-  const { uploadAction, filesMaxCount } = allowUpload || {};
+  const { uploadAction, filesMaxCount, accept } = allowUpload || {};
 
   const { message } = App.useApp();
   const { t } = useTranslation();
@@ -104,6 +108,7 @@ function FileUpload(
   return (
     <Upload.Dragger
       action={uploadAction}
+      accept={accept}
       fileList={fileList}
       multiple
       pastable
@@ -142,12 +147,12 @@ function UploadFileItem({ file, onDelete }: { file: UploadFile; onDelete: () => 
         <FileView url={file.name} />
       )}
       {!isDone && (
-        <div className="absolute inset-0 flex items-center justify-center bg-01/80">
+        <div className="bg-01/80 absolute inset-0 flex items-center justify-center">
           {(file.percent ?? 0).toFixed(0)}%
         </div>
       )}
       <CloseOutlined
-        className="absolute right-1 top-1 hidden cursor-pointer rounded-full bg-04 text-white group-hover:block"
+        className="bg-04 absolute top-1 right-1 hidden cursor-pointer rounded-full text-white group-hover:block"
         onClick={onDelete}
       />
     </div>
@@ -157,11 +162,11 @@ function UploadFileItem({ file, onDelete }: { file: UploadFile; onDelete: () => 
 function UrlFileItem({ url, onDelete }: { url: string; onDelete: () => void }) {
   return (
     <div className="group relative">
-      <div className="flex h-[60px] w-[250px] items-center rounded bg-01 px-2">
+      <div className="bg-01 flex h-[60px] w-[250px] items-center rounded px-2">
         <div className="line-clamp-2">{url}</div>
       </div>
       <CloseOutlined
-        className="absolute right-1 top-1 hidden cursor-pointer rounded-full bg-04 text-white group-hover:block"
+        className="bg-04 absolute top-1 right-1 hidden cursor-pointer rounded-full text-white group-hover:block"
         onClick={onDelete}
       />
     </div>

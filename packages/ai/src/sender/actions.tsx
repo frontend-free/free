@@ -3,6 +3,7 @@ import type { UploadFile } from 'antd';
 import { Button } from 'antd';
 import type { TextAreaRef } from 'antd/es/input/TextArea';
 import type { RefObject } from 'react';
+
 import SendIcon from '../svgs/send.svg?react';
 import { FileAction } from './files';
 import { RecordAction } from './record';
@@ -21,6 +22,7 @@ function Actions(
   },
 ) {
   const {
+    value,
     refUpload,
     isUploading,
     fileUrls,
@@ -36,7 +38,7 @@ function Actions(
   return (
     <div className="flex items-center gap-2">
       <div className="flex flex-1 gap-1">
-        {allowUpload && (
+        {allowUpload && !allowUpload.renderUpload && (
           <FileAction
             {...props}
             refUpload={refUpload}
@@ -44,6 +46,12 @@ function Actions(
             setFileUrls={setFileUrls}
           />
         )}
+        {allowUpload &&
+          allowUpload.renderUpload &&
+          allowUpload.renderUpload({
+            value,
+            refUpload,
+          })}
       </div>
       {/* <Divider type="vertical" /> */}
       <div className="flex items-center gap-2">

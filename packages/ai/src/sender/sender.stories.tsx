@@ -1,6 +1,9 @@
 import { Sender } from '@fe-free/ai';
+import Icons, { PlusOutlined } from '@fe-free/icons';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Button } from 'antd';
 import { useState } from 'react';
+
 import type { SenderProps, SenderValue } from './types';
 
 const meta: Meta<typeof Sender> = {
@@ -17,9 +20,9 @@ function Component(props: Omit<SenderProps, 'value' | 'onChange' | 'onSubmit'>) 
   return (
     <Sender
       value={v}
-      onChange={(v) => {
-        console.log('newValue', v);
-        setV(v);
+      onChange={(nextValue) => {
+        console.log('newValue', nextValue);
+        setV(nextValue);
       }}
       onSubmit={(value) => {
         console.log('onSubmit', value);
@@ -53,6 +56,34 @@ export const AllowUpload: Story = {
     allowUpload: {
       uploadAction: '/api/ai-service/v1/file_upload/upload',
       filesMaxCount: 3,
+    },
+  },
+  render: (props) => <Component {...props} />,
+};
+
+export const AllowUploadWithAccept: Story = {
+  args: {
+    allowUpload: {
+      uploadAction: '/api/ai-service/v1/file_upload/upload',
+      filesMaxCount: 3,
+      accept: 'image/*,.pdf',
+    },
+  },
+  render: (props) => <Component {...props} />,
+};
+
+export const RenderUpload: Story = {
+  args: {
+    allowUpload: {
+      uploadAction: '/api/ai-service/v1/file_upload/upload',
+      accept: 'image/*',
+      renderUpload: (props) => (
+        <Button
+          type="text"
+          shape="circle"
+          icon={<Icons component={PlusOutlined} onClick={() => props.refUpload.current?.click()} />}
+        />
+      ),
     },
   },
   render: (props) => <Component {...props} />,

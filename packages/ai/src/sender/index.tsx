@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import type { RefObject } from 'react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Actions } from './actions';
 import { FileUpload, Files } from './files';
 import type { SenderProps, SenderRef } from './types';
@@ -28,7 +29,8 @@ function Text(
       // Enter: 提交
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        onSubmit?.();
+        // 兼容 onSubmit 返回 Promise 的情况：在 keydown 事件里不需要等待结果
+        void onSubmit?.();
       }
     },
     [onSubmit],
@@ -88,27 +90,27 @@ function Sender(originProps: SenderProps) {
   const [fileList, originSetFileList] = useState<UploadFile[]>([]);
 
   const handleFilesChange = useCallback(
-    ({ fileUrls, fileList }) => {
+    ({ fileUrls: urls, fileList: list }) => {
       onChange?.({
         ...value,
-        files: [...(fileList.map((file) => file.response?.data?.url) || []), ...fileUrls],
+        files: [...(list.map((file) => file.response?.data?.url) || []), ...urls],
       });
     },
     [value, onChange],
   );
 
   const setFileUrls = useCallback(
-    (fileUrls: string[]) => {
-      originSetFileUrls(fileUrls);
-      handleFilesChange({ fileUrls, fileList });
+    (urls: string[]) => {
+      originSetFileUrls(urls);
+      handleFilesChange({ fileUrls: urls, fileList });
     },
     [fileList, handleFilesChange],
   );
 
   const setFileList = useCallback(
-    (fileList: UploadFile[]) => {
-      originSetFileList(fileList);
-      handleFilesChange({ fileUrls, fileList });
+    (list: UploadFile[]) => {
+      originSetFileList(list);
+      handleFilesChange({ fileUrls, fileList: list });
     },
     [fileUrls, handleFilesChange],
   );
