@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { isString } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import type { CRUDProps } from './types';
 
 /**
@@ -121,14 +122,26 @@ function CRUDDetail(props: CRUDDetailProps) {
 
   const handleOpenChange = useCallback(
     async (open) => {
-      if (!open) {
-        // 关闭重置
-        form?.resetFields();
-        setIsOpen(open);
+      // pro-components 有 bug，handleOpenChange 会重复调用，导致调用多次。
+
+      let isSame = false;
+      setIsOpen((v) => {
+        if (open === v) {
+          isSame = true;
+        }
+
+        return open;
+      });
+      if (isSame) {
         return;
       }
 
-      setIsOpen(open);
+      if (!open) {
+        // 关闭重置
+        form?.resetFields();
+
+        return;
+      }
 
       if (id) {
         setLoading(true);
