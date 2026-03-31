@@ -1,5 +1,11 @@
 # @ones-wb/file
 
+## 6.0.17
+
+### Patch Changes
+
+- feat: i18n
+
 ## 6.0.16
 
 ## 6.0.15

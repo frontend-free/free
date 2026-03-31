@@ -1,0 +1,13 @@
+{
+  "@fe-free/ai": {
+    "sender": {
+      "addFileUrl": "新增檔案 URL",
+      "addImageOrFile": "新增圖片或檔案",
+      "aiGeneratedDisclaimer": "內容由 AI 生成，無法保證資訊的真實準確，僅供參考",
+      "describeYourQuestion": "描述你的問題",
+      "dragFileHere": "在此處拖放檔案",
+      "exceedMaxUploadCount": "超過最大上傳數量{count}",
+      "pleaseEnterFileUrl": "請輸入檔案 URL"
+    }
+  }
+}

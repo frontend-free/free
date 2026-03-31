@@ -3,6 +3,7 @@ import { useTitle } from 'ahooks';
 import { App, ConfigProvider } from 'antd';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
+import zhHK from 'antd/locale/zh_HK';
 import classNames from 'classnames';
 import { merge } from 'lodash-es';
 import { useEffect, useMemo } from 'react';
@@ -151,7 +152,15 @@ function CoreAppBase(props: CoreAppProps) {
       return configProviderProps.locale;
     }
 
-    return i18n.language === EnumLanguage.EN_US ? enUS : zhCN;
+    if (i18n.language === EnumLanguage.EN_US) {
+      return enUS;
+    }
+
+    if (i18n.language === EnumLanguage.ZH_HK) {
+      return zhHK;
+    }
+
+    return zhCN;
   }, [configProviderProps?.locale, i18n.language]);
 
   return (

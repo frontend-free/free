@@ -3,8 +3,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import ICU from 'i18next-icu';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 
+import enUSTranslation from './locales/en-US/translation.json';
+import zhHKTranslation from './locales/zh-HK/translation.json';
+
 enum EnumLanguage {
   ZH_CN = 'zh-CN',
+  ZH_HK = 'zh-HK',
   EN_US = 'en-US',
 }
 
@@ -12,6 +16,10 @@ const valueEnumLanguage = {
   [EnumLanguage.ZH_CN]: {
     text: '中文',
     value: EnumLanguage.ZH_CN,
+  },
+  [EnumLanguage.ZH_HK]: {
+    text: '繁體中文',
+    value: EnumLanguage.ZH_HK,
   },
   [EnumLanguage.EN_US]: {
     text: '英文',
@@ -42,9 +50,18 @@ function getDefaultLng() {
   return lng;
 }
 
-function initI18n({ enTranslation = {} }: { enTranslation?: Record<string, unknown> } = {}) {
+function initI18n(
+  resources: {
+    enTranslation?: Record<string, unknown>;
+    zhHKTranslation?: Record<string, unknown>;
+  } = {},
+) {
+  const mergedEnTranslation = { ...enUSTranslation, ...resources.enTranslation };
+  const mergedZhHKTranslation = { ...zhHKTranslation, ...resources.zhHKTranslation };
+
   if (i18n.isInitialized) {
-    i18n.addResourceBundle(EnumLanguage.EN_US, 'translation', enTranslation, true, true);
+    i18n.addResourceBundle(EnumLanguage.ZH_HK, 'translation', mergedZhHKTranslation, true, true);
+    i18n.addResourceBundle(EnumLanguage.EN_US, 'translation', mergedEnTranslation, true, true);
     return;
   }
 
@@ -61,8 +78,11 @@ function initI18n({ enTranslation = {} }: { enTranslation?: Record<string, unkno
       [EnumLanguage.ZH_CN]: {
         translation: {},
       },
+      [EnumLanguage.ZH_HK]: {
+        translation: mergedZhHKTranslation,
+      },
       [EnumLanguage.EN_US]: {
-        translation: enTranslation,
+        translation: mergedEnTranslation,
       },
     },
     lng,

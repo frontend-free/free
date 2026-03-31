@@ -1,0 +1,87 @@
+{
+  "@fe-free/core": {
+    "app": {
+      "mainScriptNotFound": "沒找到 [data-name=\"mainScript\"]，不啟用更新提醒",
+      "newVersionFound": "發現新版本",
+      "refresh": "重新整理",
+      "refreshPrompt": "請及時重新整理頁面更新，以避免影響使用",
+      "updateLater": "稍後更新"
+    },
+    "crud": {
+      "batchActionConfirm": "確定要執行 {action} 嗎？",
+      "batchDelete": "批次刪除",
+      "cancel": "取消",
+      "clearSelection": "取消選取",
+      "confirm": "確定",
+      "create": "新增",
+      "createSuccess": "新增成功",
+      "delete": "刪除",
+      "deleteConfirm": "確認刪除 \"{name}\" 嗎？",
+      "deleteSuccess": "刪除成功",
+      "deleteWarning": "刪除後不可恢復，請謹慎操作",
+      "operate": "操作",
+      "read": "查看",
+      "requestDeleteByRecordRequired": "沒有傳 requestDeleteByRecord",
+      "selectedItems": "已選 {num} 項",
+      "update": "編輯",
+      "updateSuccess": "更新成功",
+      "warnCreateDetailForm": "actions 包含 create 時，需要傳遞 detailForm",
+      "warnReadDetailForm": "actions 包含 read 時，需要傳遞 detailForm",
+      "warnUpdateDetailForm": "actions 包含 update 時，需要傳遞 detailForm"
+    },
+    "crudOfList": {
+      "searchPlaceholder": "輸入搜尋"
+    },
+    "crudOfPure": {
+      "inputPlaceholder": "請輸入{title}",
+      "selectPlaceholder": "請選擇{title}"
+    },
+    "dataViewer": {
+      "view": "查看"
+    },
+    "fileTree": {
+      "create": "新增",
+      "createSubDirectory": "新增子目錄",
+      "delete": "刪除",
+      "directoryName": "目錄名稱",
+      "update": "編輯"
+    },
+    "formList": {
+      "add": "新增",
+      "duplicateValue": "不能有重複",
+      "edit": "編輯",
+      "emptyOption": "存在空選項"
+    },
+    "infiniteList": {
+      "loadingMore": "載入更多資料中...",
+      "noMoreData": "沒有更多資料"
+    },
+    "record": {
+      "inputPlaceholder": "請輸入"
+    },
+    "upload": {
+      "delete": "刪除",
+      "dragUpload": "點擊或拖曳到此區域進行上傳",
+      "fileCount": "檔案數量 ({success}/{total})",
+      "localUpload": "本機上傳",
+      "maxFilesWarning": "最多只能上傳 {num} 個檔案，超出部分會忽略。",
+      "pleaseSelect": "請選擇"
+    },
+    "valueTypeMap": {
+      "view": "查看"
+    }
+  },
+  "core": {
+    "crud": {
+      "warnBatchDeleteRequestDeleteByRecords": "actions 包含 batch_delete 時，需要傳遞 requestDeleteByRecords",
+      "warnCreateRequestCreateByValues": "actions 包含 create 時，需要傳遞 requestCreateByValues",
+      "warnDeleteProps": "actions 包含 delete 時，需要傳遞 deleteProps 和 requestDeleteByRecord",
+      "warnReadRequestGetByRecord": "actions 包含 read 時，需要傳遞 requestGetByRecord",
+      "warnUpdateRequest": "actions 包含 update 時，需要傳遞 requestGetByRecord 和 requestUpdateByValues"
+    },
+    "crudOfList": {
+      "warnAtLeastOneSearch": "CRUDOfList 的 columns 中至少有一個 search 為 true 的欄位",
+      "warnOnlyOneSearch": "CRUDOfList 的 columns 中只能有一個 search 為 true 的欄位"
+    }
+  }
+}
