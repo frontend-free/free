@@ -37,8 +37,6 @@ const listLanguage = Object.keys(valueEnumLanguage).map((key) => {
   };
 });
 
-let hasSetupPlugins = false;
-
 function getDefaultLng() {
   if (typeof window === 'undefined') {
     return EnumLanguage.ZH_CN;
@@ -56,49 +54,41 @@ function initI18n(
     zhHKTranslation?: Record<string, unknown>;
   } = {},
 ) {
-  const mergedEnTranslation = { ...enUSTranslation, ...resources.enTranslation };
-  const mergedZhHKTranslation = { ...zhHKTranslation, ...resources.zhHKTranslation };
-
-  if (i18n.isInitialized) {
-    i18n.addResourceBundle(EnumLanguage.ZH_HK, 'translation', mergedZhHKTranslation, true, true);
-    i18n.addResourceBundle(EnumLanguage.EN_US, 'translation', mergedEnTranslation, true, true);
-    return;
-  }
-
-  if (!hasSetupPlugins) {
-    i18n.use(LanguageDetector).use(initReactI18next).use(ICU);
-    hasSetupPlugins = true;
-  }
-
   const lng = getDefaultLng();
-  console.log('initI18n', lng);
+  const allResources = {
+    [EnumLanguage.ZH_CN]: {
+      translation: {},
+    },
+    [EnumLanguage.ZH_HK]: {
+      translation: { ...zhHKTranslation, ...resources.zhHKTranslation },
+    },
+    [EnumLanguage.EN_US]: {
+      translation: { ...enUSTranslation, ...resources.enTranslation },
+    },
+  };
 
-  void i18n.init({
-    resources: {
-      [EnumLanguage.ZH_CN]: {
-        translation: {},
+  console.log('initI18n', lng, allResources);
+
+  // @ts-ignore
+  window._i18nResources = allResources;
+
+  void i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .use(ICU)
+    .init({
+      resources: allResources,
+      lng,
+      fallbackLng: EnumLanguage.ZH_CN,
+      interpolation: {
+        escapeValue: false,
       },
-      [EnumLanguage.ZH_HK]: {
-        translation: mergedZhHKTranslation,
-      },
-      [EnumLanguage.EN_US]: {
-        translation: mergedEnTranslation,
-      },
-    },
-    lng,
-    fallbackLng: EnumLanguage.ZH_CN,
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+    });
 }
 
 function I18nProvider({ children }: { children: React.ReactNode }) {
-  initI18n();
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }
-
-initI18n();
 
 if (typeof window !== 'undefined') {
   // @ts-ignore
