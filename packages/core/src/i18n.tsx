@@ -49,35 +49,38 @@ function getDefaultLng() {
 }
 
 function initI18n(
-  resources: {
-    enTranslation?: Record<string, unknown>;
+  params: {
+    lng?: EnumLanguage;
+    enUSTranslation?: Record<string, unknown>;
     zhHKTranslation?: Record<string, unknown>;
+    // 历史原因，保留
+    enTranslation?: Record<string, unknown>;
   } = {},
 ) {
-  const lng = getDefaultLng();
-  const allResources = {
+  const lng = params.lng || getDefaultLng();
+  const resources = {
     [EnumLanguage.ZH_CN]: {
       translation: {},
     },
     [EnumLanguage.ZH_HK]: {
-      translation: { ...zhHKTranslation, ...resources.zhHKTranslation },
+      translation: { ...zhHKTranslation, ...params.zhHKTranslation },
     },
     [EnumLanguage.EN_US]: {
-      translation: { ...enUSTranslation, ...resources.enTranslation },
+      translation: { ...enUSTranslation, ...params.enUSTranslation, ...params.enTranslation },
     },
   };
 
-  console.log('initI18n', lng, allResources);
+  console.log('initI18n', lng, resources);
 
   // @ts-ignore
-  window._i18nResources = allResources;
+  window._i18nResources = resources;
 
   void i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .use(ICU)
     .init({
-      resources: allResources,
+      resources,
       lng,
       fallbackLng: EnumLanguage.ZH_CN,
       interpolation: {
