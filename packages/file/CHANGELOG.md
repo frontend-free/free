@@ -1,5 +1,7 @@
 # @ones-wb/file
 
+## 6.0.18
+
 ## 6.0.17
 
 ### Patch Changes
