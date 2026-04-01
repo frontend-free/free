@@ -1,5 +1,14 @@
 # @fe-free/ai
 
+## 6.0.20
+
+### Patch Changes
+
+- ai
+  - @fe-free/core@6.0.20
+  - @fe-free/icons@6.0.20
+  - @fe-free/tool@6.0.20
+
 ## 6.0.19
 
 ### Patch Changes

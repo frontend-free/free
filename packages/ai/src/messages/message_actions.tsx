@@ -9,7 +9,12 @@ import {
 } from '@fe-free/icons';
 import { App, Button, Tooltip } from 'antd';
 import classNames from 'classnames';
-import { useCallback, useEffect, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useState } from 'react';
+
+type MessageActionIconProps = {
+  activeIcon?: ReactNode;
+  icon?: ReactNode;
+};
 
 function MessageActionOfCopy({
   value,
@@ -51,11 +56,13 @@ function MessageActionOfLike({
   active: propsActive,
   onClick,
   className,
+  activeIcon,
+  icon,
 }: {
   active?: boolean;
   onClick?: (active: boolean) => Promise<void>;
   className?: string;
-}) {
+} & MessageActionIconProps) {
   const { message } = App.useApp();
   const [active, setActive] = useState(propsActive || false);
 
@@ -76,7 +83,19 @@ function MessageActionOfLike({
         onClick={handleClick}
         size="small"
         className={classNames('text-03', className)}
-        icon={active ? <LikeFilled /> : <LikeOutlined />}
+        icon={
+          active ? (
+            activeIcon !== undefined ? (
+              activeIcon
+            ) : (
+              <LikeFilled />
+            )
+          ) : icon !== undefined ? (
+            icon
+          ) : (
+            <LikeOutlined />
+          )
+        }
       />
     </Tooltip>
   );
@@ -86,11 +105,13 @@ function MessageActionOfDislike({
   active: propsActive,
   onClick,
   className,
+  activeIcon,
+  icon,
 }: {
   active?: boolean;
   onClick?: (active: boolean) => Promise<void>;
   className?: string;
-}) {
+} & MessageActionIconProps) {
   const [active, setActive] = useState(propsActive || false);
   const { message } = App.useApp();
 
@@ -111,7 +132,19 @@ function MessageActionOfDislike({
         onClick={handleClick}
         size="small"
         className={classNames('text-03', className)}
-        icon={active ? <DislikeFilled /> : <DislikeOutlined />}
+        icon={
+          active ? (
+            activeIcon !== undefined ? (
+              activeIcon
+            ) : (
+              <DislikeFilled />
+            )
+          ) : icon !== undefined ? (
+            icon
+          ) : (
+            <DislikeOutlined />
+          )
+        }
       />
     </Tooltip>
   );
@@ -121,10 +154,18 @@ function MessageActionOfLikeAndDislike({
   value: propsValue,
   onChange,
   className,
+  likeActiveIcon,
+  likeIcon,
+  dislikeActiveIcon,
+  dislikeIcon,
 }: {
   value?: -1 | 0 | 1;
   onChange?: (value: -1 | 0 | 1) => void;
   className?: string;
+  likeActiveIcon?: ReactNode;
+  likeIcon?: ReactNode;
+  dislikeActiveIcon?: ReactNode;
+  dislikeIcon?: ReactNode;
 }) {
   const [value, setValue] = useState<(-1 | 0 | 1) | undefined>(propsValue);
 
@@ -136,6 +177,8 @@ function MessageActionOfLikeAndDislike({
     <>
       <MessageActionOfLike
         active={value === 1}
+        activeIcon={likeActiveIcon}
+        icon={likeIcon}
         onClick={async () => {
           const newValue = value === 1 ? 0 : 1;
           await Promise.resolve(onChange?.(newValue));
@@ -145,6 +188,8 @@ function MessageActionOfLikeAndDislike({
       />
       <MessageActionOfDislike
         active={value === -1}
+        activeIcon={dislikeActiveIcon}
+        icon={dislikeIcon}
         onClick={async () => {
           const newValue = value === -1 ? 0 : -1;
           await Promise.resolve(onChange?.(newValue));
