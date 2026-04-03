@@ -8,13 +8,13 @@ function LoadingButton(props: ButtonProps) {
   const [loading, setLoading] = useState(false);
 
   const handleClick = useCallback(
-    (event) => {
+    (event: React.MouseEvent<HTMLElement>) => {
       const result = onClick && onClick(event);
 
       if (result && typeof (result as Promise<void>).then === 'function') {
         setLoading(true);
 
-        Promise.resolve(result).finally(() => {
+        void Promise.resolve(result).finally(() => {
           setLoading(false);
         });
       }

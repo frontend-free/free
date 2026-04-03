@@ -6,9 +6,9 @@ import { AxiosError } from 'axios';
 class RequestError extends Error {
   silent: boolean | undefined;
   status: string | undefined;
-  config: AxiosRequestConfig<any> | undefined;
+  config: AxiosRequestConfig | undefined;
   request: XMLHttpRequest | undefined;
-  response: AxiosResponse<any, any> | undefined;
+  response: AxiosResponse<any> | undefined;
 
   constructor(
     message: string,
@@ -73,6 +73,10 @@ function commonHandleError(event) {
 }
 
 function initErrorHandle(onError?: (event: ErrorEvent | PromiseRejectionEvent) => void | false) {
+  if (typeof window === 'undefined') {
+    return () => {};
+  }
+
   const handleError = (event) => {
     const result = onError?.(event);
     if (result === false) {

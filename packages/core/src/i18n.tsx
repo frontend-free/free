@@ -72,8 +72,10 @@ function initI18n(
 
   console.log('initI18n', lng, resources);
 
-  // @ts-ignore
-  window._i18nResources = resources;
+  if (typeof window !== 'undefined') {
+    // @ts-ignore
+    window._i18nResources = resources;
+  }
 
   void i18n
     .use(LanguageDetector)

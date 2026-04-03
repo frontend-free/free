@@ -1,28 +1,49 @@
 import type { NavigateFunction } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 
-window.__routeTool_navigate = null;
-window.__routeTool_baseName = '';
+type RouteToolWindow = Window & {
+  __routeTool_navigate?: NavigateFunction | null;
+  __routeTool_baseName?: string;
+};
+
+function getBrowserWindow() {
+  return typeof window === 'undefined' ? null : (window as RouteToolWindow);
+}
+
+function getGlobalNavigate() {
+  return getBrowserWindow()?.__routeTool_navigate || null;
+}
+
+function getGlobalBaseName() {
+  return getBrowserWindow()?.__routeTool_baseName || '';
+}
 
 const routeTool = {
   _baseName: '' as string,
   _navigate: null as NavigateFunction | null,
   setNavigate: (navigate: NavigateFunction) => {
     routeTool._navigate = navigate;
-    window.__routeTool_navigate = navigate;
+    const currentWindow = getBrowserWindow();
+    if (currentWindow) {
+      currentWindow.__routeTool_navigate = navigate;
+    }
   },
   setBaseName: (baseName: string) => {
     routeTool._baseName = baseName;
-    window.__routeTool_baseName = baseName;
+    const currentWindow = getBrowserWindow();
+    if (currentWindow) {
+      currentWindow.__routeTool_baseName = baseName;
+    }
   },
   getNavigate: () => {
-    if (!routeTool._navigate && !window.__routeTool_navigate) {
+    const navigate = routeTool._navigate || getGlobalNavigate();
+    if (!navigate) {
       throw new Error('routeTool need set navigate first');
     }
-    return routeTool._navigate || window.__routeTool_navigate;
+    return navigate;
   },
   getBaseName: () => {
-    return routeTool._baseName || window.__routeTool_baseName;
+    return routeTool._baseName || getGlobalBaseName();
   },
   generateUrl: ({
     path,
@@ -37,7 +58,12 @@ const routeTool = {
     return `${routeTool.getBaseName()}${generatePath(path, params)}${searchParams ? `?${sp.toString()}` : ''}`;
   },
   setSearchParams: (sp: Record<string, any>) => {
-    const url = new URL(window.location.href);
+    const currentWindow = getBrowserWindow();
+    if (!currentWindow) {
+      return;
+    }
+
+    const url = new URL(currentWindow.location.href);
 
     const p = new URLSearchParams();
     Object.keys(sp).forEach((key) => {
@@ -54,7 +80,12 @@ const routeTool = {
     );
   },
   changeSearchParams: (sp: Record<string, any>) => {
-    const url = new URL(window.location.href);
+    const currentWindow = getBrowserWindow();
+    if (!currentWindow) {
+      return;
+    }
+
+    const url = new URL(currentWindow.location.href);
 
     Object.keys(sp).forEach((key) => {
       const value = sp[key];

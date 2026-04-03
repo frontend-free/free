@@ -1,5 +1,11 @@
 # @fe-free/tool
 
+## 6.0.21
+
+### Patch Changes
+
+- nextjs
+
 ## 6.0.20
 
 ## 6.0.19

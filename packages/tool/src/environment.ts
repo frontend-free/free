@@ -1,23 +1,29 @@
-const ua = window.navigator.userAgent.toLowerCase();
+function getUserAgent() {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  return window.navigator.userAgent.toLowerCase();
+}
 
 const Environment = {
   isWxWork: () => {
-    return ua.includes('wxwork');
+    return getUserAgent().includes('wxwork');
   },
   isWx: () => {
-    return ua.includes('micromessenger');
+    return getUserAgent().includes('micromessenger');
   },
   isH5: () => {
-    return ua.includes('mobile');
+    return getUserAgent().includes('mobile');
   },
   isDingTalk: () => {
-    return ua.includes('dingtalk');
+    return getUserAgent().includes('dingtalk');
   },
   isAndroid: () => {
-    return ua.includes('android');
+    return getUserAgent().includes('android');
   },
   isIOS: () => {
-    return ua.includes('iphone') || ua.includes('ipad');
+    return getUserAgent().includes('iphone') || getUserAgent().includes('ipad');
   },
 };
 

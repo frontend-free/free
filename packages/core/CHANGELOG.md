@@ -1,5 +1,14 @@
 # @fe-free/core
 
+## 6.0.21
+
+### Patch Changes
+
+- nextjs
+- Updated dependencies
+  - @fe-free/tool@6.0.21
+  - @fe-free/icons@6.0.21
+
 ## 6.0.20
 
 ### Patch Changes
