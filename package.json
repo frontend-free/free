@@ -17,7 +17,7 @@
     "format:check": "vp fmt --check",
     "changeset": "changeset",
     "npm_publish": "pnpm release; pnpm release:publish;",
-    "release": "changeset version; git add .; git commit -m 'chore: changeset Version Packages';",
+    "release": "changeset version; pnpm i; git add .; git commit -m 'chore: changeset Version Packages';",
     "release:publish": "git push origin main:main --tags; changeset publish;",
     "sync": "node ./scripts/sync.js",
     "build-storybook": "storybook build",
