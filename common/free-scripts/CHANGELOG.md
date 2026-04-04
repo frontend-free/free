@@ -1,5 +1,7 @@
 # @fe-free/free-scripts
 
+## 7.0.5
+
 ## 7.0.4
 
 ### Patch Changes
