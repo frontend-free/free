@@ -1,20 +1,21 @@
 {
   "name": "@fe-free/free-scripts",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "bin": {
-    "free-scripts": "dist/index.js"
+    "free-scripts": "dist/index.cjs"
   },
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.cts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "rm -rf ./dist; tsc; cp -r ./src/build_code/template ./dist/build_code",
+    "build": "vp pack",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

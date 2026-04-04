@@ -1,5 +1,11 @@
 # @fe-free/vite-plugin-react-router-pages
 
+## 7.0.4
+
+### Patch Changes
+
+- common
+
 ## 7.0.3
 
 ### Patch Changes
