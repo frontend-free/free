@@ -1,7 +1,11 @@
 import { forEach } from 'lodash-es';
 
-let instance;
-const pinyin = (source: string, style?: 'first_letter') => {
+type PinyinStyle = 'first_letter';
+type PinyinTransform = (source: string, style?: PinyinStyle) => string;
+
+let instance: PinyinTransform | undefined;
+
+const pinyin = (source: string, style?: PinyinStyle): string => {
   if (instance) {
     return instance(source, style);
   }
@@ -667,7 +671,7 @@ const pinyin = (source: string, style?: 'first_letter') => {
   const firstHanziCharCode = 19968; // 0x4e00
   const lastHanziCharCode = 40869; // 0x9FA5
 
-  const convert = (target, style) => {
+  const convert = (target: string, style?: PinyinStyle): string => {
     const charCode = target.charCodeAt(0);
     // 不在比对范围内
     if (charCode < firstHanziCharCode || charCode > lastHanziCharCode) {
@@ -702,12 +706,7 @@ const pinyin = (source: string, style?: 'first_letter') => {
     return style === 'first_letter' ? pinyins[index].charAt(0) : pinyins[index];
   };
 
-  const _pinyin = (source, style) => {
-    // 非字符
-    if (typeof source !== 'string') {
-      return source;
-    }
-
+  const _pinyin: PinyinTransform = (source, style) => {
     let foundPinyin = '';
 
     forEach(source, (target) => {
@@ -717,11 +716,11 @@ const pinyin = (source: string, style?: 'first_letter') => {
     return foundPinyin;
   };
 
-  return ((source, style) => {
+  return ((nextSource: string, nextStyle?: PinyinStyle) => {
     if (!instance) {
       instance = _pinyin;
     }
-    return instance(source, style);
+    return instance(nextSource, nextStyle);
   })(source, style);
 };
 

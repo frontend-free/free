@@ -1,4 +1,4 @@
-function getUserAgent() {
+function getUserAgent(): string {
   if (typeof window === 'undefined') {
     return '';
   }
@@ -7,22 +7,22 @@ function getUserAgent() {
 }
 
 const Environment = {
-  isWxWork: () => {
+  isWxWork: (): boolean => {
     return getUserAgent().includes('wxwork');
   },
-  isWx: () => {
+  isWx: (): boolean => {
     return getUserAgent().includes('micromessenger');
   },
-  isH5: () => {
+  isH5: (): boolean => {
     return getUserAgent().includes('mobile');
   },
-  isDingTalk: () => {
+  isDingTalk: (): boolean => {
     return getUserAgent().includes('dingtalk');
   },
-  isAndroid: () => {
+  isAndroid: (): boolean => {
     return getUserAgent().includes('android');
   },
-  isIOS: () => {
+  isIOS: (): boolean => {
     return getUserAgent().includes('iphone') || getUserAgent().includes('ipad');
   },
 };

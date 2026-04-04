@@ -1,8 +1,30 @@
-type SearchParamsLike = Record<string, any> | URLSearchParams | string;
+type SearchParamPrimitive = string | number | boolean | null | undefined;
+type SearchParamsRecord = Record<string, SearchParamPrimitive>;
+type SearchParamsLike = SearchParamsRecord | URLSearchParams | string;
 
-function mergeSearchParams(l, r) {
-  const lsp = new URLSearchParams(l);
-  const rsp = new URLSearchParams(r);
+function toURLSearchParams(value: SearchParamsLike): URLSearchParams {
+  if (value instanceof URLSearchParams) {
+    return new URLSearchParams(value);
+  }
+
+  if (typeof value === 'string') {
+    return new URLSearchParams(value);
+  }
+
+  const entries = Object.entries(value).flatMap(([key, currentValue]) => {
+    if (currentValue == null) {
+      return [];
+    }
+
+    return [[key, String(currentValue)]];
+  });
+
+  return new URLSearchParams(entries);
+}
+
+function mergeSearchParams(l: SearchParamsLike, r: SearchParamsLike): URLSearchParams {
+  const lsp = toURLSearchParams(l);
+  const rsp = toURLSearchParams(r);
 
   return new URLSearchParams(`${lsp.toString()}&${rsp.toString()}`);
 }
@@ -26,7 +48,7 @@ function buildURL(url: string, options?: BuildUrlOptions) {
 
   if (hashSearchParams) {
     // 转换成 URLSearchParams
-    const hashSP = new URLSearchParams(hashSearchParams);
+    const hashSP = toURLSearchParams(hashSearchParams);
     const hash = newURL.hash;
     const index = hash.indexOf('?');
 

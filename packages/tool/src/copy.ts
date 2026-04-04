@@ -1,4 +1,4 @@
-async function copyToClipboard(text) {
+async function copyToClipboard(text: string): Promise<void> {
   // 优先尝试 navigator.clipboard
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(text);

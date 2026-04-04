@@ -1,17 +1,26 @@
 import { filter, isString, map } from 'lodash-es';
 import { pinyin } from './pinyin';
 
-const defaultWhat = (v) => v;
+function defaultWhat(value: string): string {
+  return value;
+}
 /**  字符串匹配，中文首字母拼音匹配，字母小写匹配 */
-function pinyinFilter<T>(list: T[], filterText: string, what: (v: T) => string = defaultWhat) {
+function pinyinFilter(list: string[], filterText: string): string[];
+function pinyinFilter<T>(list: T[], filterText: string, what: (v: T) => string): T[];
+function pinyinFilter<T>(
+  list: T[] | string[],
+  filterText: string,
+  what?: ((v: T) => string) | ((v: string) => string)
+): T[] | string[] {
   if (!filterText) {
     return list || [];
   }
 
-  filterText = filterText.toLowerCase();
+  const loweredFilterText = filterText.toLowerCase();
+  const getValue = (what ?? defaultWhat) as (value: T | string) => string;
 
   return filter(list, (v) => {
-    return pinyinMatch(what(v), filterText);
+    return pinyinMatch(getValue(v), loweredFilterText);
   });
 }
 
