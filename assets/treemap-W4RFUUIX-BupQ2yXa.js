@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-Bj-mKKzh.js";import{h as t}from"./chunk-K5T4RW27-B4Ykvaa4.js";import{n,r}from"./chunk-LIHQZDEY-9v0G1S3c.js";e((()=>{r(),t()}))();export{n as createTreemapServices};
