@@ -1,1 +1,0 @@
-import{n as e}from"./chunk-Bj-mKKzh.js";import{h as t}from"./chunk-K5T4RW27-B4Ykvaa4.js";import{n,r}from"./chunk-67CJDMHE-kmgfPn3G.js";e((()=>{r(),t()}))();export{n as createGitGraphServices};
