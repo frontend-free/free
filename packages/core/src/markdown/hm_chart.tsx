@@ -86,15 +86,15 @@ function ChartError(props: { children?: React.ReactNode }) {
   );
 }
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component<{ children?: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: unknown) {
     console.error('ErrorBoundary:', error);
     return { hasError: true };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: unknown, info: React.ErrorInfo) {
     console.error('Error caught:', error, info);
   }
 

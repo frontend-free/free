@@ -11,9 +11,9 @@ interface ProFormListModalHelperProps<T> {
   onChange?: (value: T[]) => void;
   children: (props: { value?: T[]; item: T; index: number }) => React.ReactNode;
   readOnly?: boolean;
-  detailForm: JSX.Element;
+  detailForm: React.ReactElement;
   // 如果 addForm 存在，则使用 addForm 作为添加按钮
-  addForm?: JSX.Element;
+  addForm?: React.ReactElement;
   // 禁用添加的提交按钮
   disabledSubmitter?: boolean;
   // 禁用添加
@@ -23,15 +23,15 @@ interface ProFormListModalHelperProps<T> {
   // 禁用删除
   disabledDelete?: boolean;
   // 触发添加
-  addTrigger?: JSX.Element;
+  addTrigger?: React.ReactElement;
   editForm?: any;
 }
 
 function Edit<T>(props: {
-  children: JSX.Element;
+  children: React.ReactElement;
   values?: T;
   onChange: (values: T) => void;
-  detailForm: JSX.Element;
+  detailForm: React.ReactElement;
   editForm?: any;
   disabledSubmitter?: boolean;
 }) {
@@ -81,7 +81,7 @@ function ProFormListModalHelper<T = any>(props: ProFormListModalHelperProps<T>) 
                 })}
               </div>
               {!props.readOnly && (
-                <div className="absolute right-1 top-1 hidden items-center bg-white group-hover:flex">
+                <div className="absolute top-1 right-1 hidden items-center bg-white group-hover:flex">
                   {!props.disabledEdit && (
                     <Edit<T>
                       values={item}

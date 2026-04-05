@@ -1,6 +1,8 @@
 import { InputNumber, Slider } from 'antd';
 import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
+
+// @ts-ignore
 import './style.scss';
 
 interface NumberSliderProps {
@@ -89,7 +91,7 @@ function PercentageSlider(props: PercentageSliderProps) {
       [max]: max,
     };
 
-    [...sliderValue, max].forEach((v, i) => {
+    [...sliderValue, max].forEach((_, i) => {
       const m = value[i] / 2 + (sliderValue[i - 1] || min);
       result[m] = value[i];
       // result[v] = value[i];

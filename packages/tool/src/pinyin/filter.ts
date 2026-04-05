@@ -1,4 +1,5 @@
-import { filter, isString, map } from 'lodash-es';
+import { isString, map } from 'lodash-es';
+
 import { pinyin } from './pinyin';
 
 function defaultWhat(value: string): string {
@@ -10,7 +11,7 @@ function pinyinFilter<T>(list: T[], filterText: string, what: (v: T) => string):
 function pinyinFilter<T>(
   list: T[] | string[],
   filterText: string,
-  what?: ((v: T) => string) | ((v: string) => string)
+  what?: ((v: T) => string) | ((v: string) => string),
 ): T[] | string[] {
   if (!filterText) {
     return list || [];
@@ -19,9 +20,9 @@ function pinyinFilter<T>(
   const loweredFilterText = filterText.toLowerCase();
   const getValue = (what ?? defaultWhat) as (value: T | string) => string;
 
-  return filter(list, (v) => {
+  return list.filter((v) => {
     return pinyinMatch(getValue(v), loweredFilterText);
-  });
+  }) as T[] | string[];
 }
 
 function pinyinMatch(value: string, filterText: string) {
@@ -32,9 +33,9 @@ function pinyinMatch(value: string, filterText: string) {
   }
   w = w.toLowerCase();
   // 全拼集合
-  const normal = map(pinyin(w), (value) => value[0]).join('');
+  const normal = map(pinyin(w), (v) => v[0]).join('');
   // 首字母集合
-  const firstLetter = map(pinyin(w, 'first_letter'), (value) => value[0]).join('');
+  const firstLetter = map(pinyin(w, 'first_letter'), (v) => v[0]).join('');
 
   return (
     w.indexOf(filterText) > -1 ||
@@ -51,7 +52,7 @@ function pinyinMatchWithoutFirstLetter(value: string, filterText: string) {
   }
   w = w.toLowerCase();
   // 全拼集合
-  const normal = map(pinyin(w), (value) => value[0]).join('');
+  const normal = map(pinyin(w), (v) => v[0]).join('');
 
   return w.indexOf(filterText) > -1 || normal.indexOf(filterText) > -1;
 }
@@ -64,7 +65,7 @@ function pinyinMatchWithoutFullLetter(value: string, filterText: string) {
   }
   w = w.toLowerCase();
   // 全拼集合
-  const firstLetter = map(pinyin(w, 'first_letter'), (value) => value[0]).join('');
+  const firstLetter = map(pinyin(w, 'first_letter'), (v) => v[0]).join('');
 
   return w.indexOf(filterText) > -1 || firstLetter.indexOf(filterText) > -1;
 }

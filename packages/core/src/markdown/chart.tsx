@@ -25,9 +25,6 @@ interface LineChartConfig {
   title: string;
 }
 
-// @ts-ignore
-interface ChartConfig extends ChartConfigBase, ChartConfigLine {}
-
 // 错误处理组件
 function ChartError(props: { children?: React.ReactNode }) {
   const { children } = props;
@@ -38,15 +35,15 @@ function ChartError(props: { children?: React.ReactNode }) {
   );
 }
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component<{ children?: React.ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: unknown) {
     console.error('ErrorBoundary:', error);
     return { hasError: true };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: unknown, info: React.ErrorInfo) {
     console.error('Error caught:', error, info);
   }
 
@@ -70,7 +67,7 @@ function ChartContainer(props: { title: string; children: React.ReactNode }) {
 }
 
 // 饼图组件
-function PieChart(props: { data: ChartData; chart: ChartConfig }) {
+function PieChart(props: { data: ChartData; chart: ChartConfigBase }) {
   const { data, chart } = props;
   const { columns, rows } = data;
   const { angle_field, color_field } = chart;
@@ -186,7 +183,7 @@ function LineChart(props: { data: ChartData; chart: LineChartConfig }) {
 }
 
 // 柱状图组件
-function BarChart(props: { data: ChartData; chart: ChartConfig }) {
+function BarChart(props: { data: ChartData; chart: ChartConfigBase }) {
   const { data, chart } = props;
   const { columns, rows } = data;
   const { x_field, y_field } = chart;
@@ -217,7 +214,7 @@ function BarChart(props: { data: ChartData; chart: ChartConfig }) {
   return <Column {...config} />;
 }
 
-function ScatterChart(props: { data: ChartData; chart: ChartConfig }) {
+function ScatterChart(props: { data: ChartData; chart: ChartConfigBase }) {
   const { data, chart } = props;
   const { columns, rows } = data;
   const { x_field, y_field } = chart;

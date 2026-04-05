@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+
 import type { IconComponentProps } from './types';
 
 /**
@@ -99,7 +100,6 @@ function createIcon(
           height={'1em'}
           fill="currentColor"
           style={mergedStyle}
-          {...restProps}
           dangerouslySetInnerHTML={{ __html: innerContent }}
         />
       </span>
