@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-Bj-mKKzh.js";import{cr as t,sr as n}from"./iframe-CnGw9fmU.js";var r,i=e((()=>{t(),r=class{constructor(e){this.init=e,this.records=this.init()}static{n(this,`ImperativeState`)}reset(){this.records=this.init()}}}));export{i as n,r as t};

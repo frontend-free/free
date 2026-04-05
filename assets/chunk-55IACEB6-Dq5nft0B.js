@@ -1,1 +1,0 @@
-import{n as e}from"./chunk-Bj-mKKzh.js";import{Gt as t,cr as n,sr as r,yn as i}from"./iframe-CLFZ225d.js";var a,o=e((()=>{n(),t(),a=r((e,t)=>{let n;return t===`sandbox`&&(n=i(`#i`+e)),i(t===`sandbox`?n.nodes()[0].contentDocument.body:`body`).select(`[id="${e}"]`)},`getDiagramElement`)}));export{o as n,a as t};
