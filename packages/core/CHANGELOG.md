@@ -1,5 +1,13 @@
 # @fe-free/core
 
+## 6.0.22
+
+### Patch Changes
+
+- types
+  - @fe-free/icons@6.0.22
+  - @fe-free/tool@6.0.22
+
 ## 6.0.21
 
 ### Patch Changes

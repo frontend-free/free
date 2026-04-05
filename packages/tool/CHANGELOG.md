@@ -1,5 +1,7 @@
 # @fe-free/tool
 
+## 6.0.22
+
 ## 6.0.21
 
 ### Patch Changes

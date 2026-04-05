@@ -1,5 +1,14 @@
 # @fe-free/ai
 
+## 6.0.22
+
+### Patch Changes
+
+- Updated dependencies
+  - @fe-free/core@6.0.22
+  - @fe-free/icons@6.0.22
+  - @fe-free/tool@6.0.22
+
 ## 6.0.21
 
 ### Patch Changes
