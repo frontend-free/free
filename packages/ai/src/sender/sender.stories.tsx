@@ -72,6 +72,20 @@ export const AllowUploadWithAccept: Story = {
   render: (props) => <Component {...props} />,
 };
 
+export const AllowUploadWithHeaders: Story = {
+  args: {
+    allowUpload: {
+      uploadAction: '/api/ai-service/v1/file_upload/upload',
+      filesMaxCount: 3,
+      uploadHeaders: {
+        Authorization: 'Bearer mock-token',
+        'X-Trace-Id': 'storybook-demo',
+      },
+    },
+  },
+  render: (props) => <Component {...props} />,
+};
+
 export const RenderUpload: Story = {
   args: {
     allowUpload: {

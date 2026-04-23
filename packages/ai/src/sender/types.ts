@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { RefObject } from 'react';
+import type { UploadProps } from 'antd';
+import type { ReactNode, RefObject } from 'react';
 
 interface SenderRef {
   focus: () => void;
@@ -22,6 +22,8 @@ interface SenderProps {
   allowUpload?: {
     /** 上传文件的接口地址，约定返回的 {data: {url: string}} */
     uploadAction?: string;
+    /** 上传文件时附带的请求头 */
+    uploadHeaders?: UploadProps['headers'];
     /** 限制可上传文件类型，语法同 input.accept，如 image/*,.pdf */
     accept?: string;
     /** files 最大数量 */

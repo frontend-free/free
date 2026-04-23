@@ -100,7 +100,7 @@ function FileUpload(
   },
 ) {
   const { allowUpload, refUpload, fileList, setFileList, uploadMaxCount } = props;
-  const { uploadAction, filesMaxCount, accept } = allowUpload || {};
+  const { uploadAction, uploadHeaders, filesMaxCount, accept } = allowUpload || {};
 
   const { message } = App.useApp();
   const { t } = useTranslation();
@@ -108,6 +108,7 @@ function FileUpload(
   return (
     <Upload.Dragger
       action={uploadAction}
+      headers={uploadHeaders}
       accept={accept}
       fileList={fileList}
       multiple

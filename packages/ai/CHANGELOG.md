@@ -1,5 +1,14 @@
 # @fe-free/ai
 
+## 6.0.25
+
+### Patch Changes
+
+- sender
+  - @fe-free/core@6.0.25
+  - @fe-free/icons@6.0.25
+  - @fe-free/tool@6.0.25
+
 ## 6.0.24
 
 ### Patch Changes
