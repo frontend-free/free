@@ -1,10 +1,11 @@
 {
   "name": "@fe-free/tool",
-  "version": "6.0.25",
+  "version": "6.0.26",
   "description": "",
   "license": "ISC",
   "author": "",
   "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
