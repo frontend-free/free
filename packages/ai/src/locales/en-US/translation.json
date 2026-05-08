@@ -1,5 +1,17 @@
 {
   "@fe-free/ai": {
+    "messageActions": {
+      "cancelDislike": "Cancel dislike",
+      "cancelDislikeSuccess": "Dislike removed",
+      "cancelLike": "Cancel like",
+      "cancelLikeSuccess": "Like removed",
+      "copy": "Copy",
+      "copySuccess": "Copied successfully",
+      "dislike": "Dislike",
+      "dislikeSuccess": "Disliked successfully",
+      "like": "Like",
+      "likeSuccess": "Liked successfully"
+    },
     "sender": {
       "addFileUrl": "Add file URL",
       "addImageOrFile": "Add image or file",

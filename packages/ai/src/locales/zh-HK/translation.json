@@ -1,5 +1,17 @@
 {
   "@fe-free/ai": {
+    "messageActions": {
+      "cancelDislike": "取消點踩",
+      "cancelDislikeSuccess": "取消點踩成功",
+      "cancelLike": "取消點讚",
+      "cancelLikeSuccess": "取消點讚成功",
+      "copy": "複製",
+      "copySuccess": "複製成功",
+      "dislike": "點踩",
+      "dislikeSuccess": "點踩成功",
+      "like": "點讚",
+      "likeSuccess": "點讚成功"
+    },
     "sender": {
       "addFileUrl": "新增檔案 URL",
       "addImageOrFile": "新增圖片或檔案",
