@@ -9,6 +9,8 @@ import { EnumMessageType, type Message } from '../store/types';
 interface MessagesProps<UserData, AIData, SystemData> {
   refList?: React.RefObject<HTMLDivElement | null>;
   messages?: Message<UserData, AIData, SystemData>[];
+  /** 是否开启滚动条固定 */
+  scrollFixed?: boolean;
   /** 含所有 */
   renderMessage?: (props: { message: Message<UserData, AIData, SystemData> }) => React.ReactNode;
   /** 系统消息 */
@@ -65,6 +67,7 @@ function Messages<UserData, AIData, SystemData>(
   const {
     refList,
     messages,
+    scrollFixed = true,
     renderMessage,
     renderMessageOfSystem,
     renderMessageOfUser,
@@ -133,6 +136,7 @@ function Messages<UserData, AIData, SystemData>(
         style={{
           transform: `translateZ(0)`,
         }}
+        disabled={!scrollFixed}
       >
         {messages?.map((message) => {
           return (
