@@ -18,7 +18,7 @@ function FileAction(
   },
 ) {
   const { value, refUpload, fileUrls, setFileUrls, allowUpload } = props;
-  const { filesMaxCount } = allowUpload || {};
+  const { filesMaxCount, multiple = true } = allowUpload || {};
 
   const { message } = App.useApp();
   const { t } = useTranslation();
@@ -65,6 +65,14 @@ function FileAction(
           open
           onCancel={() => setOpen(false)}
           onOk={() => {
+            if (!multiple) {
+              if (url.trim()) {
+                setFileUrls([url]);
+              }
+              setOpen(false);
+              return;
+            }
+
             if (filesMaxCount && value?.files && value.files.length >= filesMaxCount) {
               message.warning(
                 t('@fe-free/ai.sender.exceedMaxUploadCount', '超过最大上传数量{count}', {
@@ -100,7 +108,7 @@ function FileUpload(
   },
 ) {
   const { allowUpload, refUpload, fileList, setFileList, uploadMaxCount } = props;
-  const { uploadAction, uploadHeaders, filesMaxCount, accept } = allowUpload || {};
+  const { uploadAction, uploadHeaders, filesMaxCount, accept, multiple = true } = allowUpload || {};
 
   const { message } = App.useApp();
   const { t } = useTranslation();
@@ -111,10 +119,15 @@ function FileUpload(
       headers={uploadHeaders}
       accept={accept}
       fileList={fileList}
-      multiple
+      multiple={multiple}
       pastable
       maxCount={uploadMaxCount ? uploadMaxCount + 1 : undefined}
       onChange={(info) => {
+        if (!multiple) {
+          setFileList(info.fileList.slice(-1));
+          return;
+        }
+
         if (uploadMaxCount && info.fileList.length > uploadMaxCount) {
           message.warning(
             t('@fe-free/ai.sender.exceedMaxUploadCount', '超过最大上传数量{count}', {

@@ -26,6 +26,8 @@ interface SenderProps {
     uploadHeaders?: UploadProps['headers'];
     /** 限制可上传文件类型，语法同 input.accept，如 image/*,.pdf */
     accept?: string;
+    /** 是否支持多文件上传，默认 true */
+    multiple?: boolean;
     /** files 最大数量 */
     filesMaxCount?: number;
     /** 自定义上传按钮 */

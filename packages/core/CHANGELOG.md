@@ -1,5 +1,12 @@
 # @fe-free/core
 
+## 6.0.29
+
+### Patch Changes
+
+- @fe-free/icons@6.0.29
+- @fe-free/tool@6.0.29
+
 ## 6.0.28
 
 ### Patch Changes

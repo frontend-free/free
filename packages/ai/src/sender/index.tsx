@@ -66,7 +66,7 @@ function Sender(originProps: SenderProps) {
   const refText = useRef<TextAreaRef | null>(null);
 
   const { value, onChange, allowUpload, onSubmit, loading, allowSpeech } = props;
-  const { filesMaxCount } = allowUpload || {};
+  const { filesMaxCount, multiple = true } = allowUpload || {};
 
   const refContainer = useRef<HTMLDivElement>(null);
   const refUpload = useRef<HTMLDivElement>(null);
@@ -196,7 +196,9 @@ function Sender(originProps: SenderProps) {
             refUpload={refUpload}
             fileList={fileList}
             setFileList={setFileList}
-            uploadMaxCount={filesMaxCount ? filesMaxCount - fileUrls.length : undefined}
+            uploadMaxCount={
+              !multiple ? 1 : filesMaxCount ? filesMaxCount - fileUrls.length : undefined
+            }
           />
         )}
       </div>

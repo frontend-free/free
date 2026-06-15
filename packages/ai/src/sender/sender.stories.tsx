@@ -103,6 +103,16 @@ export const RenderUpload: Story = {
   render: (props) => <Component {...props} />,
 };
 
+export const SingleUpload: Story = {
+  args: {
+    allowUpload: {
+      uploadAction: '/api/ai-service/v1/file_upload/upload',
+      multiple: false,
+    },
+  },
+  render: (props) => <Component {...props} />,
+};
+
 export const AllowSpeech: Story = {
   render: (props) => {
     const [recording, setRecording] = useState(true);
